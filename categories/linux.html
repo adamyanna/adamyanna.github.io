@@ -1,0 +1,5 @@
+---
+layout: category
+title: Linux
+category: Linux
+---
