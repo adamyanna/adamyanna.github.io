@@ -14,7 +14,7 @@ tags: [MacOS]
 
 #### 1.1.1 zshrc
 
-[.zshrc]({{ "/assets/files/zsh" | relative_url }})
+* [.zshrc]({{ "/assets/files/zsh" | relative_url }})
 
 #### 1.1.2 Oh My Zsh
 
