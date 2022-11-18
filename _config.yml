@@ -25,14 +25,13 @@ github:
   username: TeddyGoodman             # change to your github username
 
 twitter: 
-  username: teddygoodman24            # change to your twitter username
+  username:             # change to your twitter username
 
 social:
   name: TeddyGoodman                 # it will shows as the copyright owner in Footer
   email: teddyynagoodman@gmail.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/teddygoodman24     # change to your twitter homepage
     - https://github.com/TeddyGoodman       # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
