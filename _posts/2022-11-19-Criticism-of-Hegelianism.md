@@ -1,13 +1,14 @@
 ---
-title: Criticism-of-Hegelianism
+title: criticism-of-hegelianism 
 author: Teddy
-date: 2022-11-19 08:39:21 +0800
-categories: [哲学思辨, 马克思主义哲学]
+date: 2022-11-19 10:00:43 +0800
+categories: [Philosophy, Marxism]
 tags: [Criticism, Marxism]
 ---
 
 # Criticism of Hegelianism: “All that is real isrational; and all that is rational is real.”
-# 对于 “存在即合理” 的黑格尔主义的批判
+
+## 对于 “存在即合理” 的黑格尔主义的批判
 
 序：
 似乎在历史的发展过程中，哪一个哲学命题都没有像黑格尔的命题可以让其成为很大一部分人脱口而出的对现实问题的最终解，与所谓“现代社会”将一切与人相关的矛盾都归一到“人性论”相似，“存在即合理” 成为了人们对待社会现象及个人经历具体事件的最终答复，似乎人们也必须对自己的经历给出一个合理的解释，这就给黑格尔这个著名的哲学命题以生存空间。
