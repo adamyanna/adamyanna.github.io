@@ -1,0 +1,12 @@
+{
+	"version": 3,
+	"file": "categories.css",
+	"sources": [
+		"categories.scss"
+	],
+	"sourcesContent": [
+		"/*!\n  Style for Tab Categories\n  v2.0\n  https://github.com/cotes2020/jekyll-theme-chirpy\n  © 2019 Cotes Chung\n  MIT License\n*/\n\n%category-icon-color {\n  color: gray;\n}\n\n.categories {\n  margin-bottom: 2rem;\n  .card-header {\n    padding-right: 12px;\n  }\n  .list-group-item {\n    border-left: none;\n    border-right: none;\n    padding-left: 2rem;\n    >i {\n      @extend %category-icon-color;\n    }\n    &:first-child {\n      border-top-left-radius: 0;\n      border-top-right-radius: 0;\n    }\n\n  }\n\n  .card-header>span>i:first-child {\n    @extend %category-icon-color;\n  }\n\n  i {\n    &.far, &.fas {\n      font-size: 86%; // fontawesome icons\n    }\n  }\n\n} // .categories\n\n.category-trigger {\n  width: 1.7rem;\n  height: 1.7rem;\n  border-radius: 50%;\n  text-align: center;\n  color: #6c757d!important;\n  >i.fas {\n    position: relative;\n    height: .7rem;\n    width: 1rem;\n    transition: 300ms ease all;\n  }\n}\n\n@media (hover: hover) { // only works on desktop\n  .category-trigger:hover {\n    background-color: var(--categories-hover-bg);\n  }\n}\n\n.rotate {\n  -ms-transform: rotate(-90deg); /* IE 9 */\n  -webkit-transform: rotate(-90deg); /* Safari 3-8 */\n  transform: rotate(-90deg);\n}"
+	],
+	"names": [],
+	"mappings": "AAAA;;;;;;EAME,AAMF,AAJA,WAIW,CAmBT,YAAY,CAAC,IAAI,CAAC,CAAC,CAAC,WAAW,CAnBjC,WAAW,CAKT,gBAAgB,CAIb,CAAC,AAbe,CACnB,KAAK,CAAE,IAAI,CACZ,AAED,AAAA,WAAW,AAAC,CACV,aAAa,CAAE,IAAI,CA4BpB,AA7BD,AAEE,WAFS,CAET,YAAY,AAAC,CACX,aAAa,CAAE,IAAI,CACpB,AAJH,AAKE,WALS,CAKT,gBAAgB,AAAC,CACf,WAAW,CAAE,IAAI,CACjB,YAAY,CAAE,IAAI,CAClB,YAAY,CAAE,IAAI,CASnB,AAjBH,AAYI,WAZO,CAKT,gBAAgB,CAOZ,WAAW,AAAC,CACZ,sBAAsB,CAAE,CAAC,CACzB,uBAAuB,CAAE,CAAC,CAC3B,AAfL,AAwBI,WAxBO,CAuBT,CAAC,AACE,IAAI,CAxBT,WAAW,CAuBT,CAAC,AACS,IAAI,AAAC,CACX,SAAS,CAAE,GAAG,CACf,AAKL,AAAA,iBAAiB,AAAC,CAChB,KAAK,CAAE,MAAM,CACb,MAAM,CAAE,MAAM,CACd,aAAa,CAAE,GAAG,CAClB,UAAU,CAAE,MAAM,CAClB,KAAK,CAAE,OAAO,CAAA,UAAU,CAOzB,AAZD,AAME,iBANe,CAMd,CAAC,AAAA,IAAI,AAAC,CACL,QAAQ,CAAE,QAAQ,CAClB,MAAM,CAAE,KAAK,CACb,KAAK,CAAE,IAAI,CACX,UAAU,CAAE,cAAc,CAC3B,AAGH,MAAM,eACJ,CAAA,AAAA,iBAAiB,CAAC,KAAK,AAAC,CACtB,gBAAgB,CAAE,0BAA0B,CAC7C,CAAA,AAGH,AAAA,OAAO,AAAC,CACN,aAAa,CAAE,cAAc,CAC7B,iBAAiB,CAAE,cAAc,CACjC,SAAS,CAAE,cAAc,CAC1B"
+}
