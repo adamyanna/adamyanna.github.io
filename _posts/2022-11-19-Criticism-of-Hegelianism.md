@@ -1,12 +1,12 @@
 ---
-title: Criticism of "Existence is Reason" Hegelianism
+title: Criticism-of-Hegelianism
 author: Teddy
 date: 2022-11-19 08:39:21 +0800
 categories: [哲学思辨, 马克思主义哲学]
 tags: [Criticism, Marxism]
 ---
 
-# Criticism of "Existence is Reason" Hegelianism
+# Criticism of Hegelianism: “All that is real isrational; and all that is rational is real.”
 # 对于 “存在即合理” 的黑格尔主义的批判
 
 序：
