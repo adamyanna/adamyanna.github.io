@@ -81,34 +81,34 @@ tags: [live_migration, qemu, libvirt, kvm, precopy]
 
 * HPA -Host物理地址
 
-```C
+```c
 typedef struct KVMSlot
 {
-     hwaddr start_addr;               Guest物理地址块的起始地址
-     ram_addr_t memory_size;          大小
-     void *ram;                       QUMU用户空间地址 
-     int slot;                        slot id
+     hwaddr start_addr;               //Guest物理地址块的起始地址
+     ram_addr_t memory_size;          //大小
+     void *ram;                       //QUMU用户空间地址 
+     int slot;                        //slot id
      int flags;
 } KVMSlot;
 
 
 struct kvm_memslots {
-	int nmemslots;                      slot number
+	int nmemslots;                      //slot number
 	struct kvm_memory_slot memslots[KVM_MEMORY_SLOTS + KVM_PRIVATE_MEM_SLOTS];
 };
 
 
 struct kvm_memory_slot {
-	gfn_t base_gfn;                     该块物理内存块所在guest 物理页帧号
-	unsigned long npages;               该块物理内存块占用的page数
+	gfn_t base_gfn;                     //该块物理内存块所在guest 物理页帧号
+	unsigned long npages;               //该块物理内存块占用的page数
 	unsigned long flags;
-	unsigned long *rmap;                分配该块物理内存对应的host内核虚拟地址（vmalloc分配）
+	unsigned long *rmap;                //分配该块物理内存对应的host内核虚拟地址（vmalloc分配）
 	unsigned long *dirty_bitmap;
 	struct {
 		unsigned long rmap_pde;
 		int write_count;
 	} *lpage_info[KVM_NR_PAGE_SIZES - 1];
-	unsigned long userspace_addr;       用户空间地址（QEMU)
+	unsigned long userspace_addr;       //用户空间地址（QEMU)
 	int user_alloc;
 };
 ```
@@ -129,7 +129,7 @@ struct kvm_memory_slot {
 	* FlatRange 树形结构查询，查询时间复杂度 O(n) 优化到 O(log(N))
 * 例如：kvm 处理 io 端口的操作键盘输入，只要给出 AddressSpace 以及地址，最后就可以找到最后的 handler 为 kbd_read_data
 
-```
+```c
 // 调用栈
 /*
 #2  kbd_read_data (opaque=0x555556844d98, addr=<optimized out>, size=<optimized out>) at ../hw/input/pckbd.c:387
@@ -150,13 +150,13 @@ struct kvm_memory_slot {
 */
 ```
 
-```
-┌──────────► 这是一个 AddressSpace，AddressSpace 用于描述整个地址空间的映射关系。
- │                                        ┌───────────────────────► MemoryRegion 的优先级，如果一个范围两个 MemoryRegion 出现重叠，优先级高的压制优先级低的
- │                                        │
- │                                        │   ┌───────────────────► 表示这个空间的类型，一般划分为 io 和 RAM
- │                                        │   │    ┌──────────────► 这是一个 MemoryRegion，这是 Address Space 中最核心的概念，MemoryRegion 用于描述一个范围内的映射规则
-address-space: memory                     │   │    │
+```c
+//┌──────────► 这是一个 AddressSpace，AddressSpace 用于描述整个地址空间的映射关系。
+// │                                        ┌───────────────────────► MemoryRegion 的优先级，如果一个范围两个 MemoryRegion 出现重叠，优先级高的压制优先级低的
+// │                                        │
+// │                                        │   ┌───────────────────► 表示这个空间的类型，一般划分为 io 和 RAM
+// │                                        │   │    ┌──────────────► 这是一个 MemoryRegion，这是 Address Space 中最核心的概念，MemoryRegion 用于描述一个范围内的映射规则
+//address-space: memory                     │   │    │
   0000000000000000-ffffffffffffffff (prio 0, i/o): system
   0000000000000000-ffffffffffffffff (prio 0, i/o): system
     0000000000000000-00000000bfffffff (prio 0, ram): alias ram-below-4g @pc.ram 0000000000000000-00000000bfffffff ──────────────┐
