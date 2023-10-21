@@ -71,6 +71,4 @@
 │   │   ├── 思辨
 ```
 
-[![Devices Mockup](https://raw.githubusercontent.com/cotes2020/jekyll-theme-chirpy/master/assets/img/sample/devices-mockup.png)](https://chirpy.cotes.info)
-
 ---
