@@ -1,9 +1,9 @@
 ---
+layout: post
 title: Algorithm Everything
 author: Teddy
-date: 2020-02-18 10:00:00 +0800
-categories: [实践, 算法训练]
-tags: [Algorithm]
+categories: 实践 算法训练
+tags: Algorithm
 ---
 
 # 经验

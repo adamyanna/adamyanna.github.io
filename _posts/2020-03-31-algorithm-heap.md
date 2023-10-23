@@ -1,9 +1,9 @@
 ---
+layout: post
 title: algorithm-heap 堆排序的实现
 author: Teddy
-date: 2020-03-29 10:00:00 +0800
-categories: [体系结构-基础, 算法导论]
-tags: [Algorithm, Heap]
+categories: 体系结构-基础 算法导论
+tags: Algorithm Heap
 ---
 
 # algorithm-heap 堆排序的实现

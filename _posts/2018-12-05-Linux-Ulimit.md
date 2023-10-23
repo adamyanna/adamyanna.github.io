@@ -1,9 +1,9 @@
 ---
+layout: post
 title: 通过 ulimit 改善系统性能
 author: Teddy
-date: 2018-10-22 12:00:00 +0800
-categories: [实践, 实践记录]
-tags: [Linux]
+categories: 实践 实践记录
+tags: Linux
 ---
 
 # 通过 ulimit 改善系统性能

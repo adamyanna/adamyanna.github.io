@@ -1,9 +1,9 @@
 ---
+layout: post
 title: 红黑树&B树应用及索引原理
 author: Teddy
-date: 2020-04-02 10:00:00 +0800
-categories: [体系结构-基础, 算法导论]
-tags: [B+Tree, B-Tree, Red-Black-Tree, MySQL, Algorithm]
+categories: 体系结构-基础 算法导论
+tags: B+Tree, B-Tree, Red-Black-Tree, MySQL Algorithm
 ---
 
 

@@ -1,9 +1,10 @@
 ---
-title: cloud-qualification 
+layout: post
+title: Cloud Qualification
+subtitle: cloud-qualification 
 author: Teddy
-date: 2020-07-26 13:30:07 +0800
-categories: [体系结构-应用, 云计算]
-tags: [CloudComputing]
+categories: 体系结构-应用 云计算
+tags: CloudComputing
 ---
 
 # 云认证

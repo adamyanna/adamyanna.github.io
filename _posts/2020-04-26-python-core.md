@@ -1,9 +1,10 @@
 ---
+layout: post
 title: Python&CPython核心
+subtitle: 
 author: Teddy
-date: 2020-04-26 10:00:00 +0800
-categories: [体系结构-语言, Python]
-tags: [CPython, Python]
+categories: 体系结构-语言 Python
+tags: CPython Python
 ---
 
 # Python&CPython核心

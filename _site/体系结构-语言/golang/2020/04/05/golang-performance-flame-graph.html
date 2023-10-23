@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Golang性能分析和监控 | Adam Yan Na Blog</title>
+<meta name="generator" content="Jekyll v4.3.2">
+<meta property="og:title" content="Golang性能分析和监控">
+<meta name="author" content="Teddy">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Golang性能分析和监控">
+<meta property="og:description" content="Golang性能分析和监控">
+<link rel="canonical" href="http://localhost:4000/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E8%AF%AD%E8%A8%80/golang/2020/04/05/golang-performance-flame-graph.html">
+<meta property="og:url" content="http://localhost:4000/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E8%AF%AD%E8%A8%80/golang/2020/04/05/golang-performance-flame-graph.html">
+<meta property="og:site_name" content="Adam Yan Na Blog">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-04-05T00:00:00+08:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Golang性能分析和监控">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Teddy"},"dateModified":"2020-04-05T00:00:00+08:00","datePublished":"2020-04-05T00:00:00+08:00","description":"Golang性能分析和监控","headline":"Golang性能分析和监控","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E8%AF%AD%E8%A8%80/golang/2020/04/05/golang-performance-flame-graph.html"},"url":"http://localhost:4000/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E8%AF%AD%E8%A8%80/golang/2020/04/05/golang-performance-flame-graph.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="">
+  <link rel="canonical" href="http://localhost:4000">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Adam Yan Na Blog">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js" async></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe-lightbox.umd.min.js" async></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe.umd.min.js" async></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/photoswipe.min.css" rel="stylesheet">
+<style>
+  .pswp .pswp__container .pswp__img {
+    background-color: white;
+  }
+</style>
+
+<script>
+  function initPhotoSwipe() {
+    let customOptions = {};
+
+    try {
+      const data = ``.replaceAll("=>", ":");
+      customOptions = JSON.parse(data);
+    } catch (e) {
+      console.info("Invalid custom photo previewer options! " + e.message);
+    }
+
+    // Define object and gallery options
+    const options = Object.assign(
+      {
+        gallery: "section.main",
+        children: "a.photo-swipe",
+        photo_scale: 2,
+        // dynamic import is not supported in UMD version
+        pswpModule: PhotoSwipe,
+      },
+      customOptions
+    );
+
+    const galleryEl = document.querySelector(options.gallery);
+    if (!galleryEl) {
+      return;
+    }
+
+    const imgEls = [];
+    const els = galleryEl.querySelectorAll("img:not(.emoji)");
+    els.forEach((el) => {
+      if (el.src.trim() == "") {
+        return;
+      }
+      if (!imgEls.includes(el)) {
+        imgEls.push(el);
+      }
+    });
+
+    if (imgEls.length === 0) {
+      return;
+    }
+
+    imgEls.forEach((imgEl) => {
+      imgEl.outerHTML = `
+      <a class="photo-swipe"
+        href="${imgEl.src}"
+        data-pswp-width="${
+          Math.max(imgEl.naturalWidth, imgEl.width) * options.photo_scale
+        }"
+        data-pswp-height="${
+          Math.max(imgEl.naturalHeight, imgEl.height) * options.photo_scale
+        }"
+        data-pswp-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
+        target="_blank">
+        ${imgEl.outerHTML}
+      </a>`;
+    });
+
+    // Initialize PhotoSwipe 5
+    var lightbox = new PhotoSwipeLightbox(options);
+
+    lightbox.init();
+  }
+
+  window.addEventListener("load", initPhotoSwipe);
+</script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="Adam Yan Na Blog" src="" onerror="this.style.display='none'">
+  Adam Yan Na Blog
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a><a class="page-link" href="/tags.html">TAGS</a>
+
+
+
+
+
+
+
+
+
+<span class="page-link">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<span class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="fr">
+          
+          <img src="https://cdn.countryflags.com/thumbs/france/flag-400.png" title="French">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="zh-CN">
+          
+          <img src="https://cdn.countryflags.com/thumbs/china/flag-400.png" title="Chinese(Simple)">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ja">
+          
+          <img src="https://cdn.countryflags.com/thumbs/japan/flag-400.png" title="Japanese">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ko">
+          
+          <img src="https://cdn.countryflags.com/thumbs/south-korea/flag-400.png" title="Korean">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ru">
+          
+          <img src="https://cdn.countryflags.com/thumbs/russia/flag-400.png" title="Russian">
+          
+        </a>
+      </li>
+    
+  </ul>
+</span>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+</span>
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">Golang性能分析和监控</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <div class="post-meta">
+    <time class="dt-published" datetime="2020-04-05T00:00:00+08:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Apr 05, 2020
+    </time><span class="post-author left-vsplit"><i class="fa fa-pencil"></i> Teddy</span>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+  </div>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#Go,">#Go,</a><a class="post-tag" href="/tags.html#Go-pprof">#Go-pprof</a><a class="post-tag" href="/tags.html#Flamegraph">#Flamegraph</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h1 id="golang性能分析和监控">Golang性能分析和监控</h1>
+
+<h2 id="tool-pprof-和-package-pprof">tool pprof 和 package pprof</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* [pprof](https://golang.org/pkg/runtime/pprof/)
+* 通过HTTP服务提供运行时的性能分析数据（统计数据）
+* 通过使用go tool pprof可以对数据进行特殊的格式化，以满足分析需求
+* 包导入的方式
+    * `import "net/http/pprof"`
+* http定位器访问方式
+    * `/debug/pprof`
+</code></pre></div></div>
+
+<h2 id="实践过程">实践过程</h2>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+
+ <span class="c">//c := make(chan os.Signal)</span>
+ <span class="c">//signal.Notify(c)</span>
+
+ <span class="n">binaryAbsPath</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">filepath</span><span class="o">.</span><span class="n">Abs</span><span class="p">(</span><span class="n">filepath</span><span class="o">.</span><span class="n">Dir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">Args</span><span class="p">[</span><span class="m">0</span><span class="p">]))</span>
+
+ <span class="c">// @ golang performance test</span>
+ <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"[monitor-patrol] Performance CPU, %s/cpu_monitor.prof...</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">filepath</span><span class="o">.</span><span class="n">Dir</span><span class="p">(</span><span class="n">binaryAbsPath</span><span class="p">))</span>
+ <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"[monitor-patrol] Performance MEM, %s/mem_monitor.prof...</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">filepath</span><span class="o">.</span><span class="n">Dir</span><span class="p">(</span><span class="n">binaryAbsPath</span><span class="p">))</span>
+ <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"[monitor-patrol] Performance monitor, contect to 127.0.0.1:8080 to check...</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+
+ <span class="n">cpuProFile</span> <span class="o">:=</span> <span class="n">filepath</span><span class="o">.</span><span class="n">Dir</span><span class="p">(</span><span class="n">binaryAbsPath</span><span class="p">)</span> <span class="o">+</span> <span class="s">"/cpu_monitor.prof"</span>
+ <span class="n">memProFile</span> <span class="o">:=</span> <span class="n">filepath</span><span class="o">.</span><span class="n">Dir</span><span class="p">(</span><span class="n">binaryAbsPath</span><span class="p">)</span> <span class="o">+</span> <span class="s">"/mem_monitor.prof"</span>
+
+ <span class="c">// @ Windows debug</span>
+ <span class="c">//cpuProFile := "./cpu_monitor.prof"</span>
+ <span class="c">//memProFile := "./mem_monitor.prof"</span>
+
+ <span class="n">f</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">os</span><span class="o">.</span><span class="n">Create</span><span class="p">(</span><span class="n">cpuProFile</span><span class="p">)</span>
+ <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+  <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"could not create CPU profile: %s"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+ <span class="p">}</span>
+ <span class="k">if</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">pprof</span><span class="o">.</span><span class="n">StartCPUProfile</span><span class="p">(</span><span class="n">f</span><span class="p">);</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>  <span class="c">//监控cpu</span>
+  <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"could not start CPU profile: %s"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+ <span class="p">}</span>
+
+ <span class="n">runtime</span><span class="o">.</span><span class="n">GOMAXPROCS</span><span class="p">(</span><span class="n">runtime</span><span class="o">.</span><span class="n">NumCPU</span><span class="p">())</span>
+
+
+ <span class="k">go</span> <span class="k">func</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">http</span><span class="o">.</span><span class="n">ListenAndServe</span><span class="p">(</span><span class="s">"0.0.0.0:8080"</span><span class="p">,</span> <span class="no">nil</span><span class="p">)</span>
+ <span class="p">}()</span>
+
+ <span class="n">pg</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">program</span><span class="p">{}</span>
+ <span class="k">if</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">svc</span><span class="o">.</span><span class="n">Run</span><span class="p">(</span><span class="n">pg</span><span class="p">,</span> <span class="n">syscall</span><span class="o">.</span><span class="n">SIGINT</span><span class="p">,</span> <span class="n">syscall</span><span class="o">.</span><span class="n">SIGTERM</span><span class="p">,</span> <span class="n">syscall</span><span class="o">.</span><span class="n">SIGKILL</span><span class="p">,</span> <span class="n">syscall</span><span class="o">.</span><span class="n">SIGQUIT</span><span class="p">);</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+  <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"run exit with err:%s"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+  <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Main END</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+  <span class="c">//</span>
+  <span class="n">pprof</span><span class="o">.</span><span class="n">StopCPUProfile</span><span class="p">()</span>
+  <span class="c">//</span>
+  <span class="n">f</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">os</span><span class="o">.</span><span class="n">Create</span><span class="p">(</span><span class="n">memProFile</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+   <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"could not create memory profile: %s"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="n">runtime</span><span class="o">.</span><span class="n">GC</span><span class="p">()</span> <span class="c">// GC，获取最新的数据信息</span>
+  <span class="k">if</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">pprof</span><span class="o">.</span><span class="n">WriteHeapProfile</span><span class="p">(</span><span class="n">f</span><span class="p">);</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>  <span class="c">// 写入内存信息</span>
+   <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"could not write memory profile: %s"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="n">f</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+  <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Main END</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+  <span class="c">//</span>
+  <span class="n">os</span><span class="o">.</span><span class="n">Exit</span><span class="p">(</span><span class="m">2</span><span class="p">)</span>
+ <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="n">log</span><span class="o">.</span><span class="n">Logger</span><span class="o">.</span><span class="n">Info</span><span class="p">(</span><span class="s">"bye :-)"</span><span class="p">)</span>
+ <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h3 id="方式一">方式一</h3>
+<ul>
+  <li>使用方式是通过import直接导入 <code class="language-plaintext highlighter-rouge">_ "net/http/pprof"</code>
+</li>
+  <li>然后通过http的package直接启动监听服务 <code class="language-plaintext highlighter-rouge">http.ListenAndServe()</code>
+</li>
+  <li>通过浏览器可以直接访问 <code class="language-plaintext highlighter-rouge">http://ip:port/debug/pprof</code> 来查看当前的性能采样情况</li>
+</ul>
+
+<h3 id="方式二">方式二</h3>
+<ul>
+  <li>通过 io package的writer，创建并调用i/o写入性能采样数据
+  <code class="language-plaintext highlighter-rouge">pprof.StartCPUProfile(f)</code>
+  <code class="language-plaintext highlighter-rouge">pprof.WriteHeapProfile(f)</code>
+</li>
+  <li>程序结束退出后，可以直接访问生成的cpu和heap文件</li>
+</ul>
+
+<h5 id="debugpprof-内容">debug/pprof 内容</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/debug/pprof/
+
+Types of profiles available:
+Count Profile
+4 allocs
+0 block
+0 cmdline
+1054 goroutine
+4 heap
+0 mutex
+0 profile
+13 threadcreate
+0 trace
+full goroutine stack dump 
+Profile Descriptions:
+
+allocs: A sampling of all past memory allocations
+block: Stack traces that led to blocking on synchronization primitives
+cmdline: The command line invocation of the current program
+goroutine: Stack traces of all current goroutines
+heap: A sampling of memory allocations of live objects. You can specify the gc GET parameter to run GC before taking the heap sample.
+mutex: Stack traces of holders of contended mutexes
+profile: CPU profile. You can specify the duration in the seconds GET parameter. After you get the profile file, use the go tool pprof command to investigate the profile.
+threadcreate: Stack traces that led to the creation of new OS threads
+trace: A trace of execution of the current program. You can specify the duration in the seconds GET parameter. After you get the trace file, use the go tool trace command to investigate the trace.
+</code></pre></div></div>
+
+<ul>
+  <li>allocs
+    <ul>
+      <li>对程序声明周期内所有分配的内存的抽样</li>
+    </ul>
+  </li>
+  <li>block
+    <ul>
+      <li>因为堆栈跟踪导致对“同步原语”的阻塞</li>
+    </ul>
+  </li>
+  <li>cmdline
+    <ul>
+      <li>当前程序的命令行调用</li>
+    </ul>
+  </li>
+  <li>goroutine
+    <ul>
+      <li>当前所有的go协程的堆栈追踪</li>
+    </ul>
+  </li>
+  <li>heap
+    <ul>
+      <li>当前堆内存中处于“存活”状态的对象的抽样，可以在运行抽样，特别的指定想要垃圾回收的对象</li>
+    </ul>
+  </li>
+  <li>mutex
+    <ul>
+      <li>对“互斥锁”的持有对象的堆栈跟踪</li>
+    </ul>
+  </li>
+  <li>profile
+    <ul>
+      <li>CPU 的性能描述数据</li>
+      <li>如果使用了StartCPUProfile写入文件的方式，在http服务中无法下载该文件，对该文件的查看方式</li>
+      <li>使用 <code class="language-plaintext highlighter-rouge">go tool pprof</code> 命令进入交互式环境，使用top命令查看调用时长等；
+        <ul>
+          <li>典型的命令
+            <ul>
+              <li>top              Outputs top entries in text form</li>
+              <li>web              Visualize graph through web browser</li>
+              <li>call_tree        Create a context-sensitive call tree</li>
+              <li>list             Output annotated source for functions matching regexp</li>
+            </ul>
+          </li>
+          <li>使用<code class="language-plaintext highlighter-rouge">help</code>命令查看详情</li>
+          <li>使用<code class="language-plaintext highlighter-rouge">web</code>命令生成可视化的svg调用树，也可以使用<code class="language-plaintext highlighter-rouge">web Func</code>来过滤执行函数相关的调用树；
+            <blockquote>
+              <p>CentOS下必须安装 xdg-utils 和 graphviz</p>
+            </blockquote>
+          </li>
+          <li>top+[数量值]，可以查看占用CPU采样时间的函数的行数，例如默认top为top10，就只看占用CPU采样时间最长的10个函数调用；</li>
+          <li>组合使用：
+            <ol>
+              <li>使用top命令找到占据CPU采样时间最多的函数调用</li>
+              <li>再通过 web 函数名 生成该函数的调用树的图谱，查看调用关系，找到调用该函数的父级函数</li>
+              <li>使用 list 父级函数 查看该函数的具体代码实现，通过对函数内部使用的数据结构和处理判断对CPU发生大量占用的点；</li>
+              <li>思路：通过结合top和web命令找到导致占用大量抽样的关键函数，分析函数内部实现，和其涉及到的数据结构和算法；对该函数的优化可以结合go test benchmark的基准测试来测试优化后的性能；
+                <pre><code class="language-Bash">  [root@CNSZ049589 /]# go tool pprof optcpu_monitor.prof 
+  File: libc-2.17.so
+  Build ID: 8b2c421716985b927aa0caf2a05d0b1f452367f7
+  Type: cpu
+  Time: Nov 11, 2019 at 6:07pm (CST)
+  Duration: 3.89s, Total samples = 22.57s (580.86%)
+  Entering interactive mode (type "help" for commands, "o" for options)
+  (pprof) top
+  Showing nodes accounting for 12980ms, 57.51% of 22570ms total
+  Dropped 254 nodes (cum &lt;= 112.85ms)
+  Showing top 10 nodes out of 132
+flat  flat%   sum%        cum   cum%
+  4470ms 19.81% 19.81%     4500ms 19.94%  runtime.chanrecv
+  2260ms 10.01% 29.82%     6730ms 29.82%  runtime.selectnbrecv
+  1290ms  5.72% 35.53%     1330ms  5.89%  encoding/json.stateInString
+  1060ms  4.70% 40.23%     2190ms  9.70%  encoding/json.(*decodeState).scanWhile
+   930ms  4.12% 44.35%     2020ms  8.95%  encoding/json.checkValid
+   620ms  2.75% 47.10%     7100ms 31.46%  encoding/json.(*decodeState).object
+   600ms  2.66% 49.76%     3810ms 16.88%  code.test.com.cn/test-monitor/monitor/monitor-patrol/handler/analyzer.UploadEventToDB
+   600ms  2.66% 52.41%     1630ms  7.22%  runtime.scanobject
+   580ms  2.57% 54.98%      580ms  2.57%  runtime.memmove
+   570ms  2.53% 57.51%     4090ms 18.12%  code.test.com.cn/test-monitor/monitor/monitor-patrol/handler/analyzer.UploadMonitorCoverageData
+</code></pre>
+              </li>
+            </ol>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>threadcreate
+    <ul>
+      <li>对于从操作系统创建的新的线程的堆栈堆栈跟踪</li>
+    </ul>
+  </li>
+  <li>
+    <p>当前程序执行的跟踪。 您可以在秒GET参数中指定持续时间。 获取跟踪文件后，使用go工具trace命令调查跟踪。</p>
+  </li>
+  <li>内存分析
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>[root@CNSZ049589 /]# go tool pprof optmem_monitor.prof 
+File: libc-2.17.so
+Build ID: 8b2c421716985b927aa0caf2a05d0b1f452367f7
+Type: inuse_space
+Time: Nov 11, 2019 at 6:07pm (CST)
+Entering interactive mode (type "help" for commands, "o" for options)
+(pprof) top
+Showing nodes accounting for 573.38MB, 98.95% of 579.46MB total
+Dropped 32 nodes (cum &lt;= 2.90MB)
+Showing top 10 nodes out of 27
+    flat  flat%   sum%        cum   cum%
+173.51MB 29.94% 29.94%   184.01MB 31.76%  encoding/json.(*decodeState).literalStore
+158.42MB 27.34% 57.28%   158.42MB 27.34%  reflect.unsafe_NewArray
+105.63MB 18.23% 75.51%   105.63MB 18.23%  code.test.com.cn/test-monitor/monitor/monitor-patrol/handler/analyzer.(*DataContainer).AppendMetricList
+    64MB 11.05% 86.56%   201.35MB 34.75%  code.test.com.cn/test-monitor/monitor/monitor-patrol/handler/analyzer.(*Analyzer).DataDistribution
+ 23.72MB  4.09% 90.65%    29.72MB  5.13%  sync.(*Map).Store
+ 20.76MB  3.58% 94.23%    20.76MB  3.58%  code.test.com.cn/test-monitor/monitor/monitor-patrol/vendor/github.com/streadway/amqp.(*Channel).recvContent
+ 10.50MB  1.81% 96.04%    10.50MB  1.81%  encoding/json.(*decodeState).convertNumber
+  8.34MB  1.44% 97.48%     8.34MB  1.44%  code.test.com.cn/test-monitor/monitor/monitor-patrol/vendor/github.com/streadway/amqp.(*reader).parseBodyFrame
+  5.50MB  0.95% 98.43%     5.50MB  0.95%  sync.newEntry (inline)
+     3MB  0.52% 98.95%        3MB  0.52%  runtime.malg
+</code></pre></div>    </div>
+  </li>
+  <li>memprofile 就是堆采样数据，使用参数结合 go tool pprof 来查看内存情况
+    <ul>
+      <li>–inuse_objects 来显示使用的堆的对象的个数</li>
+      <li>–alloc_objects 分配的堆对象个数</li>
+      <li>–alloc_space   分配的堆内存大小</li>
+    </ul>
+  </li>
+  <li>使用web 生成可视化文件，查看内存分配；</li>
+</ul>
+
+<h3 id="prometheus">Prometheus</h3>
+<ul>
+  <li>Prometheus client内置了golang metrics暴露的handler，只需要简单调用即可实现</li>
+  <li>使用metrics即可定位metrics指标的采集数据</li>
+  <li>使用模块<strong>“github.com/zsais/go-gin-prometheus”</strong>
+```golang
+package main</li>
+</ul>
+
+<p>import (
+    “github.com/prometheus/client_golang/prometheus/promhttp”
+    “net/http”
+)</p>
+
+<p>func main() {
+    http.Handle(“/metrics”, promhttp.Handler())
+    panic(http.ListenAndServe(“:9090”, nil))
+}
+```</p>
+<ul>
+  <li>访问http://localhost:9090/metrics 即可。</li>
+  <li>同时可以通过Prometheus来采集此Endpoint暴露出来的数据，也可以进行自定义数据的采集
+    <ul>
+      <li>prometheus修改yaml配置文件，增加新的job和job指标静态描述</li>
+      <li>进行配置重载 <code class="language-plaintext highlighter-rouge">curl -X POST http://ip:port/-/reload</code>
+</li>
+    </ul>
+  </li>
+  <li>参考文档
+    <ul>
+      <li>https://blog.pvincent.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/</li>
+    </ul>
+  </li>
+</ul>
+
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%BA%94%E7%94%A8/%E5%AE%B9%E5%99%A8/2020/04/03/kubernetes-curve.html" title="Kubernetes &amp; Docker">Kubernetes &amp; Docker</a><a class="next" href="/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E8%AF%AD%E8%A8%80/python/2020/04/05/python-performance-flame-graph.html" title="Python性能分析和火焰图">Python性能分析和火焰图</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li class="">
+          <a class="post-link" href="/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%9F%BA%E7%A1%80/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/2020/03/27/csapp.html" title="深入理解计算机系统 [Computer-Systems-A-Programmer's-Perspective]">
+            深入理解计算机系统 [Computer-Systems-A-Programmer's-Perspective]<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/%E5%AE%9E%E8%B7%B5/%E7%A2%8E%E7%89%87%E8%83%B6%E5%9B%8A/2020/03/07/capsule.html" title="知识碎片">
+            知识碎片<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%BA%95%E5%B1%82/python%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/2020/04/13/cpython-implementation.html" title="CPython源代码分析&amp;虚拟机原理">
+            CPython源代码分析&amp;虚拟机原理<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%9F%BA%E7%A1%80/linux/2020/04/09/man-signal.html" title="linux signal">
+            linux signal<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2023 Adam Yan Na</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

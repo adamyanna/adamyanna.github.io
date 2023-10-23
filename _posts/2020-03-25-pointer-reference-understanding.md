@@ -1,9 +1,9 @@
 ---
+layout: post
 title: 理解C/C++中的指针和引用
 author: Teddy
-date: 2020-03-25 10:00:00 +0800
-categories: [体系结构-语言, C&C++]
-tags: [C&C++, Pointer]
+categories: 体系结构-语言 C&C++
+tags: C&C++ Pointer
 ---
 
 # C的指针

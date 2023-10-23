@@ -1,9 +1,10 @@
 ---
-title: live_migration_precopy 
+layout: post
+title: Live Migration Precopy Analyze
+subtitle: live_migration_precopy
 author: Teddy
-date: 2023-01-02 23:15:43 +0800
-categories: [体系结构-应用, 云计算]
-tags: [live_migration, qemu, libvirt, kvm, precopy]
+categories: CloudComputing
+tags: live_migration qemu libvirt kvm precopy
 ---
 
 # 热迁移原理

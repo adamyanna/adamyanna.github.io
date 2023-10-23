@@ -1,9 +1,9 @@
 ---
+layout: post
 title: CPython源代码分析&虚拟机原理
 author: Teddy
-date: 2020-04-13 10:00:00 +0800
-categories: [体系结构-底层, Python虚拟机底层实现]
-tags: [CPython]
+categories: 体系结构-底层 Python虚拟机底层实现
+tags: CPython
 ---
 
 # CPython源代码分析&虚拟机原理

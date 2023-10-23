@@ -1,9 +1,10 @@
 ---
-title: pg数据库过程事务执行的锁竞争导致锁表
+layout: post
+title: PG数据库过程事务执行的锁竞争导致锁表
+subtitle: 
 author: Teddy
-date: 2020-05-13 15:43:29 +0800
-categories: [实践, 需求实现]
-tags: [PostgreSQL]
+categories: 实践 需求实现
+tags: PostgreSQL
 ---
 
 # pg数据库过程事务执行的锁竞争导致锁表
@@ -36,6 +37,6 @@ select client_addr,client_port,query,backend_start,xact_start,query_start,state_
 
 锁表连接数
 
-![]({{ "/assets/img/posts/pg-dead-lock_1.png" | relative_url }})
+![]({{ "/assets/images/posts/pg-dead-lock_1.png" | relative_url }})
 
-![]({{ "/assets/img/posts/pg-dead-lock_2.png" | relative_url }})
+![]({{ "/assets/images/posts/pg-dead-lock_2.png" | relative_url }})

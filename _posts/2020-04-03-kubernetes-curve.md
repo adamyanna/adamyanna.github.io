@@ -1,9 +1,9 @@
 ---
+layout: post
 title: Kubernetes & Docker
 author: Teddy
-date: 2020-04-10 10:00:00 +0800
-categories: [体系结构-应用, 容器]
-tags: [TODO, Kubernetes, Docker]
+categories: 体系结构-应用 容器
+tags: TODO, Kubernetes Docker
 ---
 
 

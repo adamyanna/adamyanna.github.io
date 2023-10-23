@@ -1,9 +1,10 @@
 ---
+layout: post
 title: Git进阶
+subtitle: git
 author: Teddy
-date: 2020-07-12 12:30:48 +0800
-categories: [实践, 开发工具]
-tags: [Git]
+categories: 实践 开发工具
+tags: Git
 ---
 
 # Git 进阶用法

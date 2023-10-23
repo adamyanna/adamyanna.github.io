@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>CPython源代码分析&amp;虚拟机原理 | Adam Yan Na Blog</title>
+<meta name="generator" content="Jekyll v4.3.2">
+<meta property="og:title" content="CPython源代码分析&amp;虚拟机原理">
+<meta name="author" content="Teddy">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="CPython源代码分析&amp;虚拟机原理">
+<meta property="og:description" content="CPython源代码分析&amp;虚拟机原理">
+<link rel="canonical" href="http://localhost:4000/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%BA%95%E5%B1%82/python%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/2020/04/13/cpython-implementation.html">
+<meta property="og:url" content="http://localhost:4000/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%BA%95%E5%B1%82/python%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/2020/04/13/cpython-implementation.html">
+<meta property="og:site_name" content="Adam Yan Na Blog">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-04-13T00:00:00+08:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="CPython源代码分析&amp;虚拟机原理">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Teddy"},"dateModified":"2020-04-13T00:00:00+08:00","datePublished":"2020-04-13T00:00:00+08:00","description":"CPython源代码分析&amp;虚拟机原理","headline":"CPython源代码分析&amp;虚拟机原理","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%BA%95%E5%B1%82/python%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/2020/04/13/cpython-implementation.html"},"url":"http://localhost:4000/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%BA%95%E5%B1%82/python%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/2020/04/13/cpython-implementation.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="">
+  <link rel="canonical" href="http://localhost:4000">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Adam Yan Na Blog">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js" async></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe-lightbox.umd.min.js" async></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe.umd.min.js" async></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/photoswipe.min.css" rel="stylesheet">
+<style>
+  .pswp .pswp__container .pswp__img {
+    background-color: white;
+  }
+</style>
+
+<script>
+  function initPhotoSwipe() {
+    let customOptions = {};
+
+    try {
+      const data = ``.replaceAll("=>", ":");
+      customOptions = JSON.parse(data);
+    } catch (e) {
+      console.info("Invalid custom photo previewer options! " + e.message);
+    }
+
+    // Define object and gallery options
+    const options = Object.assign(
+      {
+        gallery: "section.main",
+        children: "a.photo-swipe",
+        photo_scale: 2,
+        // dynamic import is not supported in UMD version
+        pswpModule: PhotoSwipe,
+      },
+      customOptions
+    );
+
+    const galleryEl = document.querySelector(options.gallery);
+    if (!galleryEl) {
+      return;
+    }
+
+    const imgEls = [];
+    const els = galleryEl.querySelectorAll("img:not(.emoji)");
+    els.forEach((el) => {
+      if (el.src.trim() == "") {
+        return;
+      }
+      if (!imgEls.includes(el)) {
+        imgEls.push(el);
+      }
+    });
+
+    if (imgEls.length === 0) {
+      return;
+    }
+
+    imgEls.forEach((imgEl) => {
+      imgEl.outerHTML = `
+      <a class="photo-swipe"
+        href="${imgEl.src}"
+        data-pswp-width="${
+          Math.max(imgEl.naturalWidth, imgEl.width) * options.photo_scale
+        }"
+        data-pswp-height="${
+          Math.max(imgEl.naturalHeight, imgEl.height) * options.photo_scale
+        }"
+        data-pswp-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
+        target="_blank">
+        ${imgEl.outerHTML}
+      </a>`;
+    });
+
+    // Initialize PhotoSwipe 5
+    var lightbox = new PhotoSwipeLightbox(options);
+
+    lightbox.init();
+  }
+
+  window.addEventListener("load", initPhotoSwipe);
+</script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="Adam Yan Na Blog" src="" onerror="this.style.display='none'">
+  Adam Yan Na Blog
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a><a class="page-link" href="/tags.html">TAGS</a>
+
+
+
+
+
+
+
+
+
+<span class="page-link">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<span class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="fr">
+          
+          <img src="https://cdn.countryflags.com/thumbs/france/flag-400.png" title="French">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="zh-CN">
+          
+          <img src="https://cdn.countryflags.com/thumbs/china/flag-400.png" title="Chinese(Simple)">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ja">
+          
+          <img src="https://cdn.countryflags.com/thumbs/japan/flag-400.png" title="Japanese">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ko">
+          
+          <img src="https://cdn.countryflags.com/thumbs/south-korea/flag-400.png" title="Korean">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ru">
+          
+          <img src="https://cdn.countryflags.com/thumbs/russia/flag-400.png" title="Russian">
+          
+        </a>
+      </li>
+    
+  </ul>
+</span>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+</span>
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">CPython源代码分析&amp;虚拟机原理</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <div class="post-meta">
+    <time class="dt-published" datetime="2020-04-13T00:00:00+08:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Apr 13, 2020
+    </time><span class="post-author left-vsplit"><i class="fa fa-pencil"></i> Teddy</span>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+  </div>
+<div class="post-tags"><a class="post-tag" href="/tags.html#CPython">#CPython</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h1 id="cpython源代码分析虚拟机原理">CPython源代码分析&amp;虚拟机原理</h1>
+
+<h2 id="结合编译原理csapp理解cpython底层实现分支v38及v27">结合编译原理&amp;CSAPP理解CPython底层实现，分支v3.8及v2.7</h2>
+
+<h6 id="本地追踪分支-master--27--28">本地追踪分支 master / 2.7 / 2.8</h6>
+
+<h2 id="进入源代码分析之前">进入源代码分析之前</h2>
+
+<ul>
+  <li>CPython是python的解释器实现之一</li>
+  <li>CPython在广义上讲，就是<strong>”执行程序的程序“</strong>
+</li>
+  <li>但是与传统静态语言（C）编译驱动程序不同的是
+    <ul>
+      <li>C程序声明周期简介（简单介绍，核心知识点在此处不展开）
+        <ul>
+          <li>C源代码经过预处理、编译、汇编、链接，最终生成可执行二进制，该二进制包含一系列的节，对应机器代码段、格式串、开关语句跳转表、全局变量、静态变量、符号表、调试信息等；</li>
+          <li>可执行二进制经过fork和execve函数调用后，被加载进内存，并在操作系统栈的进程管理数据结构中创建一个 task_struck 任务结构来管理进程的基本信息；execve最终会指向.init初始化函数，也就是该程序的入口点；</li>
+          <li>这样一个传统的可执行二进制就从源代码文件成为了一个由操作管理的正在执行的进程；</li>
+        </ul>
+      </li>
+      <li>概括来说，Python程序的执行包括3个阶段
+        <ul>
+          <li>初始化（initialization）
+            <ul>
+              <li>进行对python进程所需要的一系列数据结构的初始化，交互模式下不会进行这些数据的初始化</li>
+            </ul>
+          </li>
+          <li>编译（compling）
+            <ul>
+              <li>将py源文件中ASCII代码，生成抽象语法树 AST（Abstract syntax tree），创建AST对象，创建符号表 symbol table以及生成 code objects；</li>
+            </ul>
+          </li>
+          <li>解释运行（interpreting）
+            <ul>
+              <li>对栈中的字节码指令（Python Byte Code Instruction）上下文进行执行（code object）；</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>解释器如果管理堆栈，如何创建和回收python源代码中的数据结构；</p>
+
+        <ul>
+          <li>https://nanguage.gitbook.io/inside-python-vm-cn/untitled</li>
+          <li>https://tech.blog.aknin.name/2010/04/02/pythons-innards-introduction/</li>
+        </ul>
+      </li>
+      <li>
+        <p>解释器的本质</p>
+
+        <ul>
+          <li>
+        </li>
+</ul>
+      </li>
+      <li>
+        <p>解释器的堆内存段管理</p>
+      </li>
+      <li>
+        <p>字节码指令、字节码指令的执行过程</p>
+      </li>
+      <li>
+        <p>CPython本质</p>
+
+        <ul>
+          <li>
+            <p>不讨论处理细节，只考虑核心过程，本质上，<em>CPython是一个</em></p>
+          </li>
+          <li>
+            <p>CPython执行过程的高度概括：</p>
+
+            <ul>
+              <li>
+                <p>读取和检查py文件，并进行解释器和线程状态的初始化；</p>
+
+                <ul>
+                  <li>
+                    <p>解释器</p>
+
+                    <ul>
+                      <li>解释器状态是一个简单的结构体，结构体中的字段</li>
+                      <li>*next 引用进程中的另一个解释器状态结构体；</li>
+                      <li>*tstate_head 引用正在执行的线程状态，多线程下引用全局解释器锁；</li>
+                      <li>其余字段有解释器状态所有合作线程共享；</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <p>线程</p>
+
+                    <ul>
+                      <li>
+                        <p>线程结构体包括 next 和 previous 指针，指向该线程之前和之后创建的线程状态；</p>
+                      </li>
+                      <li>
+                        <p>interp字段指向线程状态所属于的解释器状态</p>
+                      </li>
+                      <li>
+                        <p>frame字段为当前执行的栈帧</p>
+                      </li>
+                      <li>
+                        <p><strong>本质</strong>：</p>
+
+                        <ul>
+                          <li>
+                            <p>线程状态只是一个数据结构，封装了正在执行的线程的某些状态；</p>
+                          </li>
+                          <li>
+                            <p>每个线程都与正在执行的python进程内的操作系统线程关联；</p>
+                          </li>
+                          <li>
+                            <p>关系</p>
+
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th>*</th>
+                                  <th>Python进程</th>
+                                  <th>单进程</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td> </td>
+                                  <td>解释器状态</td>
+                                  <td>单进程包含一个或者多个解释器状态</td>
+                                </tr>
+                                <tr>
+                                  <td> </td>
+                                  <td>线程状态</td>
+                                  <td>每个解释器状态包含一个或多个线程状态</td>
+                                </tr>
+                                <tr>
+                                  <td> </td>
+                                  <td>操作系统管理的线程（控制流）</td>
+                                  <td>每个线程状态的数据结构映射到操作系统的执行线程上</td>
+                                </tr>
+                              </tbody>
+                            </table>
+
+                            <ul>
+                              <li>
+                                <p>线程状态和OS线程如何映射：OS线程和线程状态在python的threading模块被实例化时创建</p>
+                              </li>
+                              <li>
+                                <p>所有线程中，同一时间内持有全局解释器锁的线程才能执行虚拟机中的代码对象；</p>
+
+                                <ul>
+                                  <li>
+                                    <p>线程由操作系统的<strong>线程控制块</strong>进行调度和资源分派，但是即使系统调度当前没有持有GIL的线程运行，该线程也必须等待获取GIL；</p>
+                                  </li>
+                                  <li>
+                                    <p>全局解释器锁GIL：</p>
+
+                                    <ul>
+                                      <li>
+                                        <p>为了不在虚拟机内实现细颗粒度的各种锁，更明确精细的互斥锁会一定程序降低线程执行效率，简化了虚拟机的实现而存在；</p>
+                                      </li>
+                                      <li>
+                                        <p>由于引用计数，GIL提供了堆中对象的线程安全，并且CPython链接的部分共享库并非线程安全；</p>
+                                      </li>
+                                      <li>
+                                        <p>CPython中GIL的实际工作过程：</p>
+
+                                        <blockquote>
+                                          <p>GIL 只是一个布尔变量（<code class="language-plaintext highlighter-rouge">gil_locked</code>），其访问受到互斥锁（<code class="language-plaintext highlighter-rouge">gil_mutex</code>）的保护，并且其更改由条件变量（<code class="language-plaintext highlighter-rouge">gil_cond</code>）发出信号。 <code class="language-plaintext highlighter-rouge">gil_mutex</code> 的使用时间很短，因此几乎没有竞争。在 GIL 保持线程中，主循环（<code class="language-plaintext highlighter-rouge">PyEval_EvalFrameEx</code>）必须能够根据另一个线程的需要释放 GIL。为此使用了一个临时的布尔变量（<code class="language-plaintext highlighter-rouge">gil_drop_request</code>），该变量在每次 eval 循环时都会检查。在 <code class="language-plaintext highlighter-rouge">gil_cond</code> 上等待间隔微秒后，将设置该变量。 【 实际上，使用了另一个临时的布尔变量（<code class="language-plaintext highlighter-rouge">eval_breaker</code>），该变量将多个条件进行或运算。由于 Python 仅在高速缓存相关的体系结构上运行，因此，可变布尔值就足以作为线程间信号传递的手段。】这鼓励了定义的周期性切换，但由于操作码可能需要花费任意时间来执行，因此不强制执行。用户可以使用Python API  <code class="language-plaintext highlighter-rouge">sys.{get,set}switchinterval()</code> 读取和修改时间间隔值。当一个线程释放 GIL 并设置了 <code class="language-plaintext highlighter-rouge">gil_drop_request</code> 时，该线程将确保安排另一个等待 GIL 的线程。它通过等待条件变量（<code class="language-plaintext highlighter-rouge">switch_cond</code>）直到 <code class="language-plaintext highlighter-rouge">gil_last_holder</code> 的值更改为其自己的线程状态指针以外的值来进行操作，这表明另一个线程能够使用 GIL。这是为了禁止多核计算机上的延迟潜伏行为，在多核计算机上，一个线程会推测性地释放 GIL，但仍然运行并最终成为第一个重新获取 GIL 的对象，这使得“时间片”比预期的长得多。</p>
+                                        </blockquote>
+                                      </li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <p>将一系列python文件中的代码块进行<strong>”编译“</strong>，生成虚拟机字节码文件（pyc）</p>
+              </li>
+              <li>
+                <p>其中CPython有一套自己的指令集，这些指令不同于x86指令集这样的直接面向x86架构的CPU的指令集合，这些指令面对CPython内部实现的指令处理过程，这个过程的集合就可以看作为一个虚拟的”机器（机器是泛指其实就是机器处理单元）“</p>
+              </li>
+              <li>
+                <p>这些指令和参数共同组成了字节码文件，可以将这个字节码文件称为Python虚拟机上的<em>”经过汇编器汇编后的可重定向目标文件“</em></p>
+
+                <ul>
+                  <li>从python源文件到字节码文件的过程包括
+                    <ul>
+                      <li>生成parse tree</li>
+                      <li>parse tree转化为AST抽象语法树</li>
+                      <li>生成符号表</li>
+                      <li>AST转化为control flow graph</li>
+                      <li>从control flow graph生成code object</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <p>Python每个文件中的程序代码由代码块构成，如模块、函数、类定义，CPython的整个编译过程就是从代码块生成<strong>“代码对象的过程”</strong>；</p>
+              </li>
+              <li>
+                <p>代码对象PyCodeObject在CPython中也是一个和PyObject类似也是一个复杂的结构体，结构体中包含co_stacksize，co_flags，co_zombieframe等字段，被初始化的代码对象的结构体被存储在堆中（在PyMem_NEW(type, n)函数中调用PyMem_MALLOC函数在堆中分配内存空间）；</p>
+              </li>
+              <li>
+                <p>此时，完成了PyCodeObject的创建之后，解释器启动，创建单个执行主线程(在python虚拟机的过程调用中如果创建新的线程和线程状态，就会堆GIL产生竞争)；</p>
+              </li>
+              <li>
+                <p>堆中的代码对象的引用被传入解释器循环模块，在执行代码之前，解释器获取到当前代码对象后，会创建一个frame对象</p>
+
+                <ul>
+                  <li>frame 对象包含执行代码对象（局部，全局和内置）所需的所有名称空间，对当前执行线程的引用，用于求值字节码的堆栈以及其他对于执行字节码的内部信息；</li>
+                  <li>frame对象的概念类似与C中的过程调用无法全部装载到寄存器中的时候，会在运行时栈中修改rsp指针分配栈帧；</li>
+                  <li>frame对象在运行时栈中创建并保留部分成员的值，保留其他成员的栈空间，局部变量为空；</li>
+                </ul>
+              </li>
+              <li>
+                <p>类似与C的栈中的rip指针执行栈中的指令，Python虚拟机也在栈中进行过程的执行和返回，相应的指令有相应的过程进行处理（如指令：<strong><code class="language-plaintext highlighter-rouge">BUILD_LIST</code></strong>， <strong><code class="language-plaintext highlighter-rouge">BUILD_MAP</code></strong>， <strong><code class="language-plaintext highlighter-rouge">BUILD_CLASS</code></strong>），每个过程执行完成后，会从栈中弹出；</p>
+
+                <blockquote>
+                  <p>C中的过程：程序开始阶段，运行时栈的rip（程序计数器指针）指针指向入口函数，然后开始执行，例如执行主函数Q的指令，该指令指向主函数内的过程调用的函数P，这是新的函数P在栈中分配了新的栈帧，该栈帧中的过程返回后，rip指针又指向Q中调用P的那条指令，此时这条指令指向P函数的返回值；</p>
+                </blockquote>
+              </li>
+              <li>
+                <p>在指令执行过程中创建的全局变量等PyObject也会在堆中初始化，每个数据结构的底层实现都有与之对应的C代码，如dict底层是一个使用<strong>开放寻址法</strong>解决冲突的散列表，并且有特殊的因子进行扩容；</p>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p>至此，CPython底层虚拟机的运行已经完成了<strong>非常简洁的概括式讨论</strong>，实际上每个部分的实现都有细节和复杂的思想在其中；</p>
+          </li>
+        </ul>
+
+        <blockquote>
+          <p>程序的静态和动态存储空间分配：</p>
+
+          <ol>
+            <li>静态：编译器在编译阶段基于源代码就可以确定的数据大小</li>
+            <li>动态：只有在运行时才能确定的数据对象的大小</li>
+          </ol>
+
+          <p>C语言的编译过程中，对于全局或者静态变量这些在编译阶段确定大小的数据结构或为0值的数据结构，会被放入在编译和汇编完成后生成的可重定向目标文件中的.data节和.bss节，链接器会基于符号表中的重定位条目来将这两个节定位到可执行文件的相应的段中；最总装载程序会将这部分数据装载到该程序虚拟内存的读写段（静态区）；</p>
+
+          <p>对于一个被调用的过程，在寄存器无法满足参数存储的情况下，会在运行时栈中分配栈帧；</p>
+
+          <p>而对于调用malloc进行内存分配的变量会在运行时在堆中创建；</p>
+
+          <p>对于CPython程序而言，无法预知将要读取的python文件中的代码段的数量和大小，怎么才能将这些数据读入栈中；</p>
+
+          <p>编译器对栈空间分配的要求是：一个数据对象局限于某个过程，且当过程结束后这个对象不可访问；</p>
+
+          <p>C++利用<strong>”变长数组“</strong>，大小依赖与被调用过程的一个或者多个参数值的数组来将未知大小的对象；</p>
+
+          <p>程序的执行过程在生命周期中讨论</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="python-底层原理">python 底层原理</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Doc
+    The official documentation. This is what https://docs.python.org/ uses. See also Building the documentation.
+Grammar
+    Contains the EBNF grammar file for Python.
+Include
+    Contains all interpreter-wide header files.
+Lib
+    The part of the standard library implemented in pure Python.
+Mac
+    Mac-specific code (e.g., using IDLE as an OS X application).
+Misc
+    Things that do not belong elsewhere. Typically this is varying kinds of developer-specific documentation.
+Modules
+    The part of the standard library (plus some other code) that is implemented in C.
+Objects
+    Code for all built-in types.
+PC
+    Windows-specific code.
+PCbuild
+    Build files for the version of MSVC currently used for the Windows installers provided on python.org.
+Parser
+    Code related to the parser. The definition of the AST nodes is also kept here.
+Programs
+    Source code for C executables, including the main function for the CPython interpreter (in versions prior to Python 3.5, these files are in the Modules directory).
+Python
+    The code that makes up the core CPython runtime. This includes the compiler, eval loop and various built-in modules.
+Tools
+    Various tools that are (or have been) used to maintain Python. 
+</code></pre></div></div>
+
+<h3 id="python脚本启动分析">python脚本启动分析</h3>
+<h4 id="cpython启动流程">CPython启动流程</h4>
+<ul>
+  <li>CPython的.init节包含的entry point为 Programs/python.c main函数，对于不同的平台win和unix/linux会调用不同的Py_Main函数
+    <ul>
+      <li>以python3为例
+```C
+/* Minimal main program – everything is loaded from the library */</li>
+    </ul>
+  </li>
+</ul>
+
+<p>#include “Python.h”
+#include “pycore_pylifecycle.h”</p>
+
+<p>#ifdef MS_WINDOWS
+int
+wmain(int argc, wchar_t **argv)
+{
+    return Py_Main(argc, argv);
+}
+#else
+int
+main(int argc, char **argv)
+{
+    return Py_BytesMain(argc, argv);
+}
+#endif</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* 对当前操作系统环境进行判断后，Linux上调用Py_BytesMain函数
+* Py_BytesMain 函数将输入文件的结构体引用传入pymain_main(&amp;args)
+* pymain_main 函数主要会执行一个 pymain_init 和 Py_RunMain
+    * pymain_init主要负责
+        * _PyRuntime_Initialize(); 初始化python的运行时环境
+        * Py_InitializeFromConfig(&amp;config); 初始化python配置文件
+        * _PyStatus_OK(); 返回成功后
+            * PyConfig_Clear(&amp;config); 清楚配置文件引用
+            * 返回status状态
+    * 初始化完成后，运行Py_RunMain函数
+        * pymain_run_python(int *exitcode), 该函数中比较核心的部分，创建解释器，并获取其结构体指针，配置输入文件路径等；
+        * 运行函数分为5种不同的情况
+            * pymain_run_command(config-&gt;run_command, &amp;cf);
+            * pymain_run_module(config-&gt;run_module, 1);
+            * pymain_run_module(L"__main__", 0);
+            * pymain_run_file(config, &amp;cf);
+            * pymain_run_stdin(config, &amp;cf);
+        * 其中pymain_run_file为运行python文件，对文件进行解释。
+            * PySys_Audit 检查文件是否有错误，如果有直接输出并打印
+            * _Py_wfopen fp 打开文件，将文件进行编码，这里会判断文件是否能打开
+            * PyUnicode_FromWideChar PyUnicode_EncodeFSDefault 将行unicode编码
+            * 最终对文件的所有检查和格式化完成后
+                * 调用 int run = PyRun_AnyFileExFlags(fp, filename_str, 1, cf); 对文件进行解释执行
+                    * PyRun_InteractiveLoopFlags(fp, filename, flags); 此处为执行交互模式
+                    * PyRun_SimpleFileExFlags(fp, filename, closeit, flags);  此处为直接开始执行脚本文件
+                        * PyObject *m, *d, *v; 创建模块，字典，执行返回值
+                        * 判断pyc文件是否存在
+                            * v = run_pyc_file(pyc_fp, filename, d, d, flags); 执行pyc文件
+                            * v = PyRun_FileExFlags(fp, filename, Py_file_input, d, d, closeit, flags); 执行当前文件
+                            * 核心代码
+                                * mod = PyParser_ASTFromFileObject(fp, filename, NULL, start, 0, 0,flags, NULL, arena); 将python脚本文件解析为AST文件格式
+                                * ret = run_mod(mod, filename, globals, locals, flags, arena); 将AST编译成字节码然后启动字节码解释器执行编译结果
+                                * 
+```C
+    PyInterpreterState *interp = _PyInterpreterState_GET_UNSAFE();
+        /* pymain_run_stdin() modify the config */
+    PyConfig *config = &amp;interp-&gt;config;
+
+    if (config-&gt;run_command) {
+        *exitcode = pymain_run_command(config-&gt;run_command, &amp;cf);
+    }
+    else if (config-&gt;run_module) {
+        *exitcode = pymain_run_module(config-&gt;run_module, 1);
+    }
+    else if (main_importer_path != NULL) {
+        *exitcode = pymain_run_module(L"__main__", 0);
+    }
+    else if (config-&gt;run_filename != NULL) {
+        *exitcode = pymain_run_file(config, &amp;cf);
+    }
+    else {
+        *exitcode = pymain_run_stdin(config, &amp;cf);
+    }
+
+    pymain_repl(config, &amp;cf, exitcode);
+goto done;
+</code></pre></div></div>
+
+<p><a href="https://devguide.python.org/setup/">devguide.python</a>
+<a href="https://devguide.python.org/exploring/">devguide.python/exploring</a>
+<a href="https://github.com/python/cpython">cpython-source</a></p>
+
+<pre><code class="language-Source">
+</code></pre>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%9F%BA%E7%A1%80/%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86/2020/04/12/core-knowledge.html" title="核心知识库">核心知识库</a><a class="next" href="/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%9F%BA%E7%A1%80/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/2020/04/13/hello-world-life-cycle.html" title="论C/C++ HelloWorld 从代码到执行结束的生命周期">论C/C++ HelloWorld 从代码到执行结束的生命周期</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li class="">
+          <a class="post-link" href="/%E5%AE%9E%E8%B7%B5/%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/2020/04/16/tcp-network-analysis.html" title="生产环境TCP网络问题分析">
+            生产环境TCP网络问题分析<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/%E8%A7%84%E5%88%92/%E5%B7%A5%E4%BD%9C%E6%B5%81/2021/02/15/mac-reset-smc-nvram.html" title="Mac Reset Smc nvram">
+            Mac Reset Smc nvram<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/%E5%AE%9E%E8%B7%B5/%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83/2018/10/26/Algorithm-matrix.html" title="Algorithm Matrix">
+            Algorithm Matrix<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/blogging/demo/2019/08/08/text-and-typography.html" title="Text and Typography">
+            Text and Typography<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2023 Adam Yan Na</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

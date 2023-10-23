@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Ansible自动化 | Adam Yan Na Blog</title>
+<meta name="generator" content="Jekyll v4.3.2">
+<meta property="og:title" content="Ansible自动化">
+<meta name="author" content="Teddy">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Ansible自动化">
+<meta property="og:description" content="Ansible自动化">
+<link rel="canonical" href="http://localhost:4000/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%BA%94%E7%94%A8/%E8%87%AA%E5%8A%A8%E5%8C%96/2020/05/14/ansible-automation.html">
+<meta property="og:url" content="http://localhost:4000/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%BA%94%E7%94%A8/%E8%87%AA%E5%8A%A8%E5%8C%96/2020/05/14/ansible-automation.html">
+<meta property="og:site_name" content="Adam Yan Na Blog">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-05-14T00:00:00+08:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Ansible自动化">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Teddy"},"dateModified":"2020-05-14T00:00:00+08:00","datePublished":"2020-05-14T00:00:00+08:00","description":"Ansible自动化","headline":"Ansible自动化","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%BA%94%E7%94%A8/%E8%87%AA%E5%8A%A8%E5%8C%96/2020/05/14/ansible-automation.html"},"url":"http://localhost:4000/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%BA%94%E7%94%A8/%E8%87%AA%E5%8A%A8%E5%8C%96/2020/05/14/ansible-automation.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="">
+  <link rel="canonical" href="http://localhost:4000">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Adam Yan Na Blog">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js" async></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe-lightbox.umd.min.js" async></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe.umd.min.js" async></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/photoswipe.min.css" rel="stylesheet">
+<style>
+  .pswp .pswp__container .pswp__img {
+    background-color: white;
+  }
+</style>
+
+<script>
+  function initPhotoSwipe() {
+    let customOptions = {};
+
+    try {
+      const data = ``.replaceAll("=>", ":");
+      customOptions = JSON.parse(data);
+    } catch (e) {
+      console.info("Invalid custom photo previewer options! " + e.message);
+    }
+
+    // Define object and gallery options
+    const options = Object.assign(
+      {
+        gallery: "section.main",
+        children: "a.photo-swipe",
+        photo_scale: 2,
+        // dynamic import is not supported in UMD version
+        pswpModule: PhotoSwipe,
+      },
+      customOptions
+    );
+
+    const galleryEl = document.querySelector(options.gallery);
+    if (!galleryEl) {
+      return;
+    }
+
+    const imgEls = [];
+    const els = galleryEl.querySelectorAll("img:not(.emoji)");
+    els.forEach((el) => {
+      if (el.src.trim() == "") {
+        return;
+      }
+      if (!imgEls.includes(el)) {
+        imgEls.push(el);
+      }
+    });
+
+    if (imgEls.length === 0) {
+      return;
+    }
+
+    imgEls.forEach((imgEl) => {
+      imgEl.outerHTML = `
+      <a class="photo-swipe"
+        href="${imgEl.src}"
+        data-pswp-width="${
+          Math.max(imgEl.naturalWidth, imgEl.width) * options.photo_scale
+        }"
+        data-pswp-height="${
+          Math.max(imgEl.naturalHeight, imgEl.height) * options.photo_scale
+        }"
+        data-pswp-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
+        target="_blank">
+        ${imgEl.outerHTML}
+      </a>`;
+    });
+
+    // Initialize PhotoSwipe 5
+    var lightbox = new PhotoSwipeLightbox(options);
+
+    lightbox.init();
+  }
+
+  window.addEventListener("load", initPhotoSwipe);
+</script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="Adam Yan Na Blog" src="" onerror="this.style.display='none'">
+  Adam Yan Na Blog
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a><a class="page-link" href="/tags.html">TAGS</a>
+
+
+
+
+
+
+
+
+
+<span class="page-link">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<span class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="fr">
+          
+          <img src="https://cdn.countryflags.com/thumbs/france/flag-400.png" title="French">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="zh-CN">
+          
+          <img src="https://cdn.countryflags.com/thumbs/china/flag-400.png" title="Chinese(Simple)">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ja">
+          
+          <img src="https://cdn.countryflags.com/thumbs/japan/flag-400.png" title="Japanese">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ko">
+          
+          <img src="https://cdn.countryflags.com/thumbs/south-korea/flag-400.png" title="Korean">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ru">
+          
+          <img src="https://cdn.countryflags.com/thumbs/russia/flag-400.png" title="Russian">
+          
+        </a>
+      </li>
+    
+  </ul>
+</span>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+</span>
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">Ansible自动化</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <div class="post-meta">
+    <time class="dt-published" datetime="2020-05-14T00:00:00+08:00" itemprop="datePublished"><i class="fa fa-calendar"></i> May 14, 2020
+    </time><span class="post-author left-vsplit"><i class="fa fa-pencil"></i> Teddy</span>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+  </div>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#Ansible">#Ansible</a><a class="post-tag" href="/tags.html#Yaml">#Yaml</a><a class="post-tag" href="/tags.html#Python">#Python</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h1 id="ansible自动化">Ansible自动化</h1>
+
+<h2 id="学习路径">学习路径</h2>
+
+<ul>
+  <li>理解Ansible架构</li>
+  <li>安装配置Ansible, Inventory</li>
+  <li>理解playbook的原理</li>
+  <li>Ansible Ad-Hoc Commands</li>
+  <li>Ansible 强大的模块</li>
+  <li>Ansible playbook编写</li>
+  <li>掌握编写自己的 Roles</li>
+  <li>使用Ansible管理集群</li>
+</ul>
+
+<h2 id="ansible-architecture">Ansible Architecture</h2>
+
+<p><img src="/assets/images/posts/ansible-architecture.png" alt=""></p>
+
+<ul>
+  <li>核心：ansible</li>
+  <li>核心模块（Core Modules）：这些都是ansible自带的模块 </li>
+  <li>扩展模块（Custom Modules）：如果核心模块不足以完成某种功能，可以添加扩展模块</li>
+  <li>插件（Plugins）：完成模块功能的补充</li>
+  <li>剧本（Playbooks）：ansible的任务配置文件，将多个任务定义在剧本中，由ansible自动执行</li>
+  <li>连接插件（Connection Plugins）：ansible基于连接插件连接到各个主机上，虽然ansible是使用ssh连接到各个主机的，但是它还支持其他的连接方法，所以需要有连接插件（centos下必须要安装sshpass）</li>
+  <li>主机群（Host Inventory）：定义ansible管理的主机</li>
+</ul>
+
+<h2 id="installation">Installation</h2>
+
+<h3 id="ansible安装">Ansible安装</h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum <span class="nt">-y</span> <span class="nb">install </span>ansible
+
+pip <span class="nb">install </span>ansible
+</code></pre></div></div>
+
+<h3 id="ansible配置">Ansible配置</h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>inventory      <span class="o">=</span> /etc/ansible/hosts
+roles_path    <span class="o">=</span> /etc/ansible/roles
+log_path  <span class="o">=</span> /var/log/ansible.log
+remote_tmp     <span class="o">=</span> ~/.ansible/tmp
+local_tmp      <span class="o">=</span> ~/.ansible/tmp
+
+forks          <span class="o">=</span> 5
+sudo_user      <span class="o">=</span> root
+remote_port    <span class="o">=</span> 22
+<span class="nb">timeout</span> <span class="o">=</span> 10
+remote_user <span class="o">=</span> root
+</code></pre></div></div>
+
+<h2 id="ansible-usage">Ansible Usage</h2>
+
+<h3 id="ansible命令">Ansible命令</h3>
+
+<p>ansible一共为我们提供了七个指令：ansible、ansible-doc、ansible-galaxy、ansible-lint、ansible-playbook、ansible-pull、ansible-vault</p>
+
+<ol>
+  <li>
+    <p>ansible 
+ansible是指令核心部分，其主要用于执行ad-hoc命令，即单条命令。默认后面需要跟主机和选项部分，默认不指定模块时，使用的是command模块。</p>
+  </li>
+  <li>
+    <p>ansible-doc
+该指令用于查看模块文档信息，常用参数有两个-l 和 -s</p>
+  </li>
+  <li>
+    <p>ansible-galaxy
+ansible-galaxy 指令用于方便的从https://galaxy.ansible.com/ 站点下载第三方扩展模块</p>
+  </li>
+  <li>
+    <p>ansible-lint
+ansible-lint是对playbook的语法进行检查的一个工具。用法是ansible-lintplaybook.yml</p>
+  </li>
+  <li>
+    <p>ansible-playbook
+调用playbook，通过读取playbook 文件后，执行相应的动作，最常用最核心的命令</p>
+  </li>
+  <li>
+    <p>ansible-pull
+通过ansible-pull结合Git和crontab一并实现对大批量机器配置，其原理是通过crontab定期拉取指定的Git版本到本地，并以指定模式自动运行预先制订好的指令。</p>
+  </li>
+  <li>
+    <p>ansible-vault
+ansible-vault主要应用于配置文件中含有敏感信息，又不希望他能被人看到，vault可以帮你加密/解密这个配置文件。主要对于playbooks里比如涉及到配置密码或其他变量时，可以通过该指令加密，这样我们通过cat看到的会是一个密码串类的文件，编辑的时候需要输入事先设定的密码才能打开。这种playbook文件在执行时，需要加上 –ask-vault-pass参数，同样需要输入密码后才能正常执行。</p>
+  </li>
+</ol>
+
+<h2 id="usage--ad-hoc">Usage &amp; Ad-Hoc</h2>
+
+<p><img src="/assets/images/posts/ansible-usage.png" alt=""></p>
+
+<h3 id="ad-hoc命令集-由-usrbinansible实现其命令用法如下">Ad-Hoc命令集, 由 /usr/bin/ansible实现，其命令用法如下：</h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible &lt;host-parttern&gt; <span class="o">[</span>options]
+
+<span class="c"># 查看可用选项： ansible -h</span>
+</code></pre></div></div>
+
+<h3 id="常用选项">常用选项：</h3>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-f</span> forks：启动的并发线程数（默认值为5）
+<span class="nt">-m</span> module_name: 指定要使用的模块
+<span class="nt">-a</span> –args module_args: 模块特有的参数
+<span class="nt">-v</span> verbose: 详情模式，显示所有debug信息
+</code></pre></div></div>
+
+<h3 id="ad-hoc-commands">Ad-Hoc Commands</h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible host <span class="nt">-m</span> service <span class="nt">-a</span> “name<span class="o">=</span>pacemaker.service <span class="nv">state</span><span class="o">=</span>restarted
+
+ansible host <span class="nt">-m</span> shell <span class="nt">-a</span> “systemctl status  pacemaker.service”
+</code></pre></div></div>
+
+<h2 id="working-with-module">Working with module</h2>
+
+<h3 id="ansible内置模块">ansible内置模块</h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-doc <span class="nt">--list</span>  <span class="c">#列出所有可用模块</span>
+
+ansible-doc shell   <span class="c">#查看模块说明</span>
+</code></pre></div></div>
+
+<h4 id="常用模块">常用模块</h4>
+<ul>
+  <li>command</li>
+  <li>shell</li>
+  <li>ping</li>
+  <li>yum</li>
+  <li>pip</li>
+  <li>service</li>
+  <li>template</li>
+  <li>copy</li>
+  <li>fetch</li>
+  <li>file</li>
+  <li>cron</li>
+  <li>synchronize</li>
+  <li>unarchive</li>
+</ul>
+
+<p><img src="/assets/images/posts/ansible-doc-shell.png" alt=""></p>
+
+<p><img src="/assets/images/posts/ansible-doc.png" alt=""></p>
+
+<h2 id="module">Module</h2>
+
+<h3 id="module调用方式">Module调用方式</h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>root@controller]# ansible <span class="o">[</span>group_name] <span class="nt">-m</span> service <span class="nt">-a</span> <span class="s2">"name=httpd state=started“
+[root@controller]# ansible [group_name] -m ping
+
+- name: reboot the servers
+  command: /sbin/reboot -t now
+</span></code></pre></div></div>
+<ul>
+  <li>
+    <p>模块是在 Ansible 中实际在执行的.它们就是在每个 playbook 任务中被调用执行的.你也可以仅仅通过 ‘ansible’ 命令来运行它们.</p>
+  </li>
+  <li>
+    <p>每个模块都能接收参数. 几乎所有的模块都接受键值对(key=value)参数,空格分隔.一些模块不接收参数,只需在命令行输入相关的命令就能调用.</p>
+  </li>
+  <li>
+    <p>用ansible-doc [module]命令来查看你要使用的模块的文档</p>
+  </li>
+</ul>
+
+<h2 id="woking-with-inventory">Woking with Inventory</h2>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>group names]
+ip_1 <span class="nv">ansible_ssh_user</span><span class="o">=</span>‘’ <span class="nv">ansible_ssh_pass</span><span class="o">=</span>‘’
+ip_2 <span class="nv">ansible_ssh_user</span><span class="o">=</span>‘’ <span class="nv">ansible_ssh_pass</span><span class="o">=</span>‘’
+
+Hostname_1 <span class="nv">ansible_ssh_host</span><span class="o">=</span><span class="k">${</span><span class="nv">ip</span><span class="k">}</span> <span class="nv">ansible_ssh_user</span><span class="o">=</span>‘’ <span class="nv">ansible_ssh_pass</span><span class="o">=</span>‘’
+Hostname_2 <span class="nv">ansible_ssh_host</span><span class="o">=</span><span class="k">${</span><span class="nv">ip</span><span class="k">}</span> <span class="nv">ansible_ssh_user</span><span class="o">=</span>‘’ <span class="nv">ansible_ssh_pass</span><span class="o">=</span>‘’
+
+Example: 
+<span class="o">[</span>nsp]
+szd-l0100875 <span class="nv">ansible_ssh_host</span><span class="o">=</span>127.0.0.1 <span class="nv">ansible_ssh_user</span><span class="o">=</span>root <span class="nv">ansible_ssh_pass</span><span class="o">=</span>‘root<span class="s1">'
+</span></code></pre></div></div>
+
+<ul>
+  <li>
+    <p>Ansible 可同时操作属于一个组的多台主机,组和主机之间的关系通过 inventory 文件配置, 默认的文件路径为 /etc/ansible/hosts.</p>
+  </li>
+  <li>
+    <p>除默认文件外,你还可以同时使用多个 inventory 文件(-i 选项), 也可以从动态源, 或云上拉取 inventory 配置信息.</p>
+  </li>
+</ul>
+
+<h2 id="playbooks">playbooks</h2>
+
+<p><img src="/assets/images/posts/ansible-playbooks.png" alt=""></p>
+
+<h3 id="调用命令">调用命令</h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook playbook.yml <span class="nt">-f</span> 10   （-f参数表示ansible主机并非进程数）
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>简单来说,playbooks 是一种简单的配置管理系统与多机器部署系统的基础.与现有的其他系统有不同之处,且非常适合于复杂应用的部署.</p>
+  </li>
+  <li>
+    <p>Playbooks 可用于声明配置,更强大的地方在于,在 playbooks 中可以编排有序的执行过程,甚至于做到在多组机器间,来回有序的执行特别指定的步骤.并且可以同步或异步的发起任务.</p>
+  </li>
+  <li>
+    <p>Playbooks 的格式是YAML, 语法做到最小化, 避免 playbooks 成为一种编程语言或是脚本,但它也并不是一个配置模型或过程的模型.</p>
+  </li>
+</ul>
+
+<h2 id="yaml--jinja2">YAML &amp; Jinja2</h2>
+
+<h3 id="yaml-像-xml-或-json-是一种利于读写的数据格式ansible使用yaml-语法来描述一个-playbooks">YAML 像 XML 或 JSON 是一种利于读写的数据格式，Ansible使用YAML 语法来描述一个 playbooks</h3>
+
+<ul>
+  <li>所有的 YAML 文件(无论和 Ansible 有没有关系)开始行都应该是 —. 这是 YAML 格式的一部分, 表明一个文件的开始.</li>
+  <li>对于 Ansible, 每一个 YAML 文件都是从一个列表开始. 列表中的每一项都是一个键值对, 通常它们被称为一个 “哈希” 或 “字典”.</li>
+  <li>列表中的所有成员都开始于相同的缩进级别, 并且使用一个 “- “ 作为开头(一个横杠和一个空格)</li>
+  <li>个字典是由一个简单的 键: 值 的形式组成(这个冒号后面必须是一个空格)</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">webservers</span>
+  <span class="na">vars</span><span class="pi">:</span>
+    <span class="na">http_port</span><span class="pi">:</span> <span class="m">80</span>
+    <span class="na">max_clients</span><span class="pi">:</span> <span class="m">200</span>
+  <span class="na">remote_user</span><span class="pi">:</span> <span class="s">root</span>
+  <span class="na">tasks</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">ensure apache is at the latest version</span>
+    <span class="na">yum</span><span class="pi">:</span> <span class="s">pkg=httpd state=latest</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">write the apache config file</span>
+    <span class="na">template</span><span class="pi">:</span> <span class="s">src=/srv/httpd.j2 dest=/etc/httpd.conf</span>
+    <span class="na">notify</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">restart apache</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">ensure apache is running</span>
+    <span class="na">service</span><span class="pi">:</span> <span class="s">name=httpd state=started</span>
+  <span class="na">handlers</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">restart apache</span>
+      <span class="na">service</span><span class="pi">:</span> <span class="s">name=httpd state=restarted</span>
+</code></pre></div></div>
+
+<h3 id="jinja2是flask作者开发的一个模板系统起初是仿django模板的一个模板引擎为flask提供模板支持由于其灵活快速和安全等优点被广泛使用">jinja2是Flask作者开发的一个模板系统，起初是仿django模板的一个模板引擎，为Flask提供模板支持，由于其灵活，快速和安全等优点被广泛使用。</h3>
+
+<h4 id="作为一个模板系统它还提供了特殊的语法在jinja2中存在三种语法">作为一个模板系统，它还提供了特殊的语法，在jinja2中，存在三种语法：</h4>
+
+<ul>
+  <li>控制结构</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">\{\% \%\}</span> <span class="c1">#\用于markdown表示的转义</span>
+</code></pre></div></div>
+
+<ul>
+  <li>变量取值</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">\{\{ \}\}</span> <span class="c1">#\用于markdown表示的转义 </span>
+</code></pre></div></div>
+
+<ul>
+  <li>注释</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">\{\# \#\}</span> <span class="c1">#\用于markdown表示的转义</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[keystone_authtoken]
+auth_uri = http://keystone.mgt.domain:\{\{ keystone_mgt_port1 \}\}
+auth_url = http://keystone.mgt.domain:\{\{ keystone_mgt_port2 \}\}
+auth_plugin = password
+project_domain_id = default
+user_domain_id = default
+project_name = service
+username = neutron
+password = neutron
+identity_uri = http://127.0.0.1:5000
+</code></pre></div></div>
+
+<h2 id="rolesinclude">Roles&amp;Include</h2>
+
+<p><img src="/assets/images/posts/ansible-roles.png" alt=""></p>
+
+<ul>
+  <li>
+    <p>使用 include 语句引用 task 文件的方法，可允许你将一个配置策略分解到更小的文件中，方便文件复用.</p>
+  </li>
+  <li>
+    <p>Role：通过 include 包含文件并将它们组合在一起，组织成一个简洁、可重用的抽象的对象.</p>
+  </li>
+  <li>
+    <p>在playbook中通过 roles: 来包含多个角色，然后顺序执行.</p>
+  </li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>foo.yml
+roles/
+   role_foo/
+     files/
+     templates/
+     tasks/
+     handlers/
+     vars/
+     defaults/
+     meta/
+</code></pre></div></div>
+
+<ul>
+  <li>如果 roles/x/tasks/main.yml 存在, 其中列出的 tasks 将被添加到 play 中</li>
+  <li>如果 roles/x/handlers/main.yml 存在, 其中列出的 handlers 将被添加到 play 中</li>
+  <li>如果 roles/x/vars/main.yml 存在, 其中列出的 variables 将被添加到 play 中</li>
+  <li>如果 roles/x/meta/main.yml 存在, 其中列出的 “角色依赖” 将被添加到 roles 列表中</li>
+  <li>所有 copy tasks 可以引用 roles/x/files/ 中的文件，不需要指明文件的路径。</li>
+  <li>所有 script tasks 可以引用 roles/x/files/ 中的脚本，不需要指明文件的路径。</li>
+  <li>所有 template tasks 可以引用 roles/x/templates/ 中的文件，不需要指明文件的路径。</li>
+  <li>所有 include tasks 可以引用 roles/x/tasks/ 中的文件，不需要指明文件的路径。</li>
+</ul>
+
+<h2 id="tags">Tags</h2>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>root@controller]# ansible-playbook example.yml <span class="nt">--tags</span> <span class="s2">"step_1,step_2"</span>
+
+<span class="o">[</span>root@controller]# ansible-playbook example.yml <span class="nt">--skip-tags</span> <span class="s2">"step_11,step_12"</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Ansible 允许给playbook里面的资源通过自定义的关键字打上标签，然后只运行与标签部分的代码。</li>
+  <li>Tags允许用户在一个playbook中，只运行部分task或跳过部分task。</li>
+  <li>always, never, 是两个特殊的tag，always表示task总会执行，除非–skip-tags always；never表示总会跳过never下的task执行，如果此task还有其他tag，并且在—tags中包含，才会执行never的task。</li>
+  <li>tags: tagged, untagged, all 这三个tag在执行命令中可以使用，默认情况下ansible是默认运行 –tags all</li>
+</ul>
+
+<h2 id="varconditionloop">Var&amp;Condition&amp;Loop</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">tasks</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">shutdown</span><span class="nv"> </span><span class="s">Debian</span><span class="nv"> </span><span class="s">systems"</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">/sbin/shutdown -t now</span>
+    <span class="na">when</span><span class="pi">:</span> <span class="s">ansible_os_family == "Debian"</span>
+
+<span class="nn">---</span>
+<span class="na">tasks</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">run script</span>
+    <span class="na">shell</span><span class="pi">:</span> <span class="s">python script.py</span>
+    <span class="na">when</span><span class="pi">:</span> <span class="s2">"</span><span class="s">'</span><span class="err">\</span><span class="s">{</span><span class="err">\</span><span class="s">{</span><span class="nv"> </span><span class="s">node1_ip</span><span class="nv"> </span><span class="err">\</span><span class="s">}</span><span class="err">\</span><span class="s">}'</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">ansible_all_ipv4_addresses</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">'</span><span class="err">\</span><span class="s">{</span><span class="err">\</span><span class="s">{</span><span class="nv"> </span><span class="s">node2_ip</span><span class="nv"> </span><span class="err">\</span><span class="s">}</span><span class="err">\</span><span class="s">}'</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">ansible_all_ipv4_addresses"</span>        
+    <span class="na">register</span><span class="pi">:</span> <span class="s">output</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">print output</span>
+    <span class="na">debug</span><span class="pi">:</span> <span class="s">msg="\{\{ output.stdout \}\}"</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Ansible使用 When 语句来控制执行流.</li>
+  <li>When 语句也可以应用于role 或 task 中的incloud语句</li>
+  <li>变量文件在playbook中指定，变量用“{{ }}”的形式导入，并且括号外要加引号</li>
+  <li>使用resigter将执行动作的输出，赋值给定义的变量</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">add several users</span>
+  <span class="na">user</span><span class="pi">:</span> <span class="s">name=\{\{ item \}\} state=present groups=wheel</span>
+  <span class="na">with_items</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="s">testuser1</span>
+     <span class="pi">-</span> <span class="s">testuser2</span>
+
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">enable services</span>
+  <span class="na">service</span><span class="pi">:</span> <span class="s">name=\{\{ item.name \}\} state=\{\{ item.state \}\} enabled=\{\{ item.enabled \}\}</span>
+  <span class="na">with_items</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">\{name</span><span class="err">:</span> <span class="s">ntpd, state</span><span class="err">:</span> <span class="s">restarted, enabled</span><span class="err">:</span> <span class="s">yes\}</span>
+  <span class="pi">-</span> <span class="s">\{name</span><span class="err">:</span> <span class="s">httpd, state</span><span class="err">:</span> <span class="s">restarted, enabled</span><span class="err">:</span> <span class="s">yes\}</span>
+
+<span class="s">Loop：</span>
+<span class="s">with_list</span>
+<span class="s">with_items</span>
+<span class="s">with_indexed_items</span>
+<span class="s">with_flattened</span>
+<span class="s">with_together</span>
+<span class="s">with_dict</span>
+<span class="s">with_sequence</span>
+<span class="s">with_subelements</span>
+<span class="s">with_nested/with_cartesian</span>
+<span class="s">with_random_choice</span>
+</code></pre></div></div>
+
+<hr>
+
+<h1 id="end">END</h1>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/%E5%AE%9E%E8%B7%B5/%E9%9C%80%E6%B1%82%E5%AE%9E%E7%8E%B0/2020/05/13/redis_data_sampling.html" title="Data Sampling">Data Sampling</a><a class="next" href="/%E5%AE%9E%E8%B7%B5/%E9%9C%80%E6%B1%82%E5%AE%9E%E7%8E%B0/2020/05/14/monitor_system_restructure.html" title="监控系统1.5版本项目重组">监控系统1.5版本项目重组</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li class="">
+          <a class="post-link" href="/blogging/demo/2019/08/08/text-and-typography.html" title="Text and Typography">
+            Text and Typography<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/%E5%AE%9E%E8%B7%B5/%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/2020/09/22/roles-of-agile-team.html" title="Agile">
+            Agile<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%9F%BA%E7%A1%80/linux/2020/05/13/linux-command-tools.html" title="Linux常用工具&amp;内置命令">
+            Linux常用工具&amp;内置命令<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%9F%BA%E7%A1%80/%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AF%BC%E8%AE%BA/2020/03/02/deterministic-finite-automaton.html" title="确定有限状态自动机或确定有限自动机 [deterministic finite automaton, DFA]">
+            确定有限状态自动机或确定有限自动机 [deterministic finite automaton, DFA]<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2023 Adam Yan Na</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

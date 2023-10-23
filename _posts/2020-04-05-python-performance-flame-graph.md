@@ -1,9 +1,9 @@
 ---
+layout: post
 title: Python性能分析和火焰图
 author: Teddy
-date: 2020-04-05 10:00:00 +0800
-categories: [体系结构-语言, Python]
-tags: [Python, Flamegraph]
+categories: 体系结构-语言 Python
+tags: Python Flamegraph
 ---
 
 # Python性能分析和火焰图

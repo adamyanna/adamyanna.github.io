@@ -1,9 +1,10 @@
 ---
+layout: post
 title: Ansible自动化
+subtitle: 
 author: Teddy
-date: 2020-05-14 15:24:57 +0800
-categories: [体系结构-应用, 自动化]
-tags: [Ansible, Yaml, Python]
+categories: 体系结构-应用 自动化
+tags: Ansible Yaml Python
 ---
 
 # Ansible自动化
@@ -21,7 +22,7 @@ tags: [Ansible, Yaml, Python]
 
 ## Ansible Architecture
 
-![]({{ "/assets/img/posts/ansible-architecture.png" | relative_url }})
+![]({{ "/assets/images/posts/ansible-architecture.png" | relative_url }})
 
 * 核心：ansible
 * 核心模块（Core Modules）：这些都是ansible自带的模块 
@@ -87,7 +88,7 @@ ansible-vault主要应用于配置文件中含有敏感信息，又不希望他�
 
 ## Usage & Ad-Hoc
 
-![]({{ "/assets/img/posts/ansible-usage.png" | relative_url }})
+![]({{ "/assets/images/posts/ansible-usage.png" | relative_url }})
 
 
 ### Ad-Hoc命令集, 由 /usr/bin/ansible实现，其命令用法如下：
@@ -139,9 +140,9 @@ ansible-doc shell   #查看模块说明
 * synchronize
 * unarchive
 
-![]({{ "/assets/img/posts/ansible-doc-shell.png" | relative_url }})
+![]({{ "/assets/images/posts/ansible-doc-shell.png" | relative_url }})
 
-![]({{ "/assets/img/posts/ansible-doc.png" | relative_url }})
+![]({{ "/assets/images/posts/ansible-doc.png" | relative_url }})
 
 ## Module
 
@@ -182,7 +183,7 @@ szd-l0100875 ansible_ssh_host=127.0.0.1 ansible_ssh_user=root ansible_ssh_pass=�
 
 ## playbooks
 
-![]({{ "/assets/img/posts/ansible-playbooks.png" | relative_url }})
+![]({{ "/assets/images/posts/ansible-playbooks.png" | relative_url }})
 
 ### 调用命令
 
@@ -265,7 +266,7 @@ identity_uri = http://127.0.0.1:5000
 
 ## Roles&Include
 
-![]({{ "/assets/img/posts/ansible-roles.png" | relative_url }})
+![]({{ "/assets/images/posts/ansible-roles.png" | relative_url }})
 
 
 * 使用 include 语句引用 task 文件的方法，可允许你将一个配置策略分解到更小的文件中，方便文件复用.
@@ -309,7 +310,7 @@ roles/
 * Ansible 允许给playbook里面的资源通过自定义的关键字打上标签，然后只运行与标签部分的代码。
 * Tags允许用户在一个playbook中，只运行部分task或跳过部分task。
 * always, never, 是两个特殊的tag，always表示task总会执行，除非--skip-tags always；never表示总会跳过never下的task执行，如果此task还有其他tag，并且在—tags中包含，才会执行never的task。
-* tags: tagged, untagged, all, 这三个tag在执行命令中可以使用，默认情况下ansible是默认运行 --tags all
+* tags: tagged, untagged, all 这三个tag在执行命令中可以使用，默认情况下ansible是默认运行 --tags all
 
 ## Var&Condition&Loop
 

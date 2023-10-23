@@ -1,9 +1,10 @@
 ---
-title: 敏捷开发-Agile 
+layout: post
+title: Agile
+subtitle: 敏捷开发
 author: Teddy
-date: 2020-09-22 20:05:23 +0800
-categories: [实践, 敏捷开发]
-tags: [Agile]
+categories: 实践 敏捷开发
+tags: Agile
 ---
 
 # 敏捷开发

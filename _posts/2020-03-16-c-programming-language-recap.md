@@ -1,9 +1,9 @@
 ---
+layout: post
 title: C programming language recap
 author: Teddy
-date: 2020-03-16 10:00:00 +0800
-categories: [体系结构-语言, C&C++]
-tags: [C&C++]
+categories: 体系结构-语言 C&C++
+tags: C&C++
 ---
 
 # C recap

@@ -1,9 +1,10 @@
 ---
-title: research-of-ergonomics 
+layout: post
+title: Research Of Ergonomics
+subtitle: research-of-ergonomics
 author: Teddy
-date: 2021-02-15 16:09:45 +0800
-categories: [规划, 问题研究]
-tags: [ergonomics]
+categories: 规划 问题研究
+tags: ergonomics
 ---
 
 # 健康的办公坐姿研究

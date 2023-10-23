@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>理解C/C++中的指针和引用 | Adam Yan Na Blog</title>
+<meta name="generator" content="Jekyll v4.3.2">
+<meta property="og:title" content="理解C/C++中的指针和引用">
+<meta name="author" content="Teddy">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="C的指针 Pointer_C指针_C++指针_Golang指针">
+<meta property="og:description" content="C的指针 Pointer_C指针_C++指针_Golang指针">
+<link rel="canonical" href="http://localhost:4000/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E8%AF%AD%E8%A8%80/c&amp;c++/2020/03/25/pointer-reference-understanding.html">
+<meta property="og:url" content="http://localhost:4000/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E8%AF%AD%E8%A8%80/c&amp;c++/2020/03/25/pointer-reference-understanding.html">
+<meta property="og:site_name" content="Adam Yan Na Blog">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-03-25T00:00:00+08:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="理解C/C++中的指针和引用">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Teddy"},"dateModified":"2020-03-25T00:00:00+08:00","datePublished":"2020-03-25T00:00:00+08:00","description":"C的指针 Pointer_C指针_C++指针_Golang指针","headline":"理解C/C++中的指针和引用","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E8%AF%AD%E8%A8%80/c&c++/2020/03/25/pointer-reference-understanding.html"},"url":"http://localhost:4000/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E8%AF%AD%E8%A8%80/c&c++/2020/03/25/pointer-reference-understanding.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="">
+  <link rel="canonical" href="http://localhost:4000">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Adam Yan Na Blog">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js" async></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe-lightbox.umd.min.js" async></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe.umd.min.js" async></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/photoswipe.min.css" rel="stylesheet">
+<style>
+  .pswp .pswp__container .pswp__img {
+    background-color: white;
+  }
+</style>
+
+<script>
+  function initPhotoSwipe() {
+    let customOptions = {};
+
+    try {
+      const data = ``.replaceAll("=>", ":");
+      customOptions = JSON.parse(data);
+    } catch (e) {
+      console.info("Invalid custom photo previewer options! " + e.message);
+    }
+
+    // Define object and gallery options
+    const options = Object.assign(
+      {
+        gallery: "section.main",
+        children: "a.photo-swipe",
+        photo_scale: 2,
+        // dynamic import is not supported in UMD version
+        pswpModule: PhotoSwipe,
+      },
+      customOptions
+    );
+
+    const galleryEl = document.querySelector(options.gallery);
+    if (!galleryEl) {
+      return;
+    }
+
+    const imgEls = [];
+    const els = galleryEl.querySelectorAll("img:not(.emoji)");
+    els.forEach((el) => {
+      if (el.src.trim() == "") {
+        return;
+      }
+      if (!imgEls.includes(el)) {
+        imgEls.push(el);
+      }
+    });
+
+    if (imgEls.length === 0) {
+      return;
+    }
+
+    imgEls.forEach((imgEl) => {
+      imgEl.outerHTML = `
+      <a class="photo-swipe"
+        href="${imgEl.src}"
+        data-pswp-width="${
+          Math.max(imgEl.naturalWidth, imgEl.width) * options.photo_scale
+        }"
+        data-pswp-height="${
+          Math.max(imgEl.naturalHeight, imgEl.height) * options.photo_scale
+        }"
+        data-pswp-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
+        target="_blank">
+        ${imgEl.outerHTML}
+      </a>`;
+    });
+
+    // Initialize PhotoSwipe 5
+    var lightbox = new PhotoSwipeLightbox(options);
+
+    lightbox.init();
+  }
+
+  window.addEventListener("load", initPhotoSwipe);
+</script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="Adam Yan Na Blog" src="" onerror="this.style.display='none'">
+  Adam Yan Na Blog
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a><a class="page-link" href="/tags.html">TAGS</a>
+
+
+
+
+
+
+
+
+
+<span class="page-link">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<span class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="fr">
+          
+          <img src="https://cdn.countryflags.com/thumbs/france/flag-400.png" title="French">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="zh-CN">
+          
+          <img src="https://cdn.countryflags.com/thumbs/china/flag-400.png" title="Chinese(Simple)">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ja">
+          
+          <img src="https://cdn.countryflags.com/thumbs/japan/flag-400.png" title="Japanese">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ko">
+          
+          <img src="https://cdn.countryflags.com/thumbs/south-korea/flag-400.png" title="Korean">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ru">
+          
+          <img src="https://cdn.countryflags.com/thumbs/russia/flag-400.png" title="Russian">
+          
+        </a>
+      </li>
+    
+  </ul>
+</span>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+</span>
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">理解C/C++中的指针和引用</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <div class="post-meta">
+    <time class="dt-published" datetime="2020-03-25T00:00:00+08:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Mar 25, 2020
+    </time><span class="post-author left-vsplit"><i class="fa fa-pencil"></i> Teddy</span>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+  </div>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#C&amp;C++">#C&amp;C++</a><a class="post-tag" href="/tags.html#Pointer">#Pointer</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h1 id="c的指针">C的指针</h1>
+<blockquote>
+  <p>Pointer_C指针_C++指针_Golang指针</p>
+</blockquote>
+
+<ul>
+  <li>内存的硬件在软件层面的抽象
+    <ul>
+      <li>一维线性，M个连续的1个字节大小的单元组成的数组，每个字节有连续且唯一的物理地址 Physical Address</li>
+      <li>CPU访问内存最自然的方式就是物理寻址（physical addressing）</li>
+      <li>大于一个字节的数据类型会被连续的存储在多个内存地址中，任然只用一个地址来寻址</li>
+      <li>每个位置有独一无二的地址用来寻址</li>
+      <li>每个地址都存放了一个值
+        <blockquote>
+          <p>体系结构，深入理解计算机操作系统，第九章，虚拟内存</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+  <li>指针
+    <blockquote>
+      <p>编译原理</p>
+    </blockquote>
+    <ul>
+      <li>指针：存储了另一个“内存地址”的变量
+        <ul>
+          <li>首先，指针是一个变量，同样可以使用变量类型修饰符，（变量在编程语言的层面表示：程序可以操作的内存地址空间的“名称”，名称只在编程语言中有实际意义，在编译器中会进行相应的分析和链接处理，最终转为机器码；）</li>
+          <li>指针存放了，另一个段内存地址的“地址编号”</li>
+          <li>指向：表示指针存储的“内存地址”，经过寻址后找到的存储在该“内存地址中的” 值</li>
+        </ul>
+      </li>
+      <li>&amp; 取地址运算符 *间接访问运算符/解引用运算符
+        <ul>
+          <li>&amp; 用来取得任何变量当前的地址</li>
+          <li>对一个指针变量取地址后，得到的是该指针变量自己的地址</li>
+          <li>* 的第一个作用是，声明，表示声明的变量类型为“某种指针类型”，如int指针类型，char指针类型，等（指针基类type）</li>
+          <li>* 的第二个作用是，间接访问，可以通过在变量前面加* 表示，获取该指针指向的“值”</li>
+          <li>指针变量自己的值同样为一个 无符号整数（内存地址的16进程表示）</li>
+        </ul>
+      </li>
+      <li>声明、定义、赋值
+        <ul>
+          <li>使用 类型 + * + 变量名称 进行声明</li>
+          <li>变量名称 = &lt;某个地址&gt; 来进行定义，指针的类型会被绑定到指向的值的类型某个地址&gt;</li>
+          <li>只有同样的类型的地址才能赋值</li>
+          <li>创建指针对象的过程中，并不会在内存上开辟空间来进行初始化，指针变量初始地址为一个随机地址；</li>
+          <li>声明指针对象的同时不能直接赋值，对于未分配内存空间的指针变量，值无处存放；</li>
+          <li>声明指针对象的同时定义，必须赋值一个内存地址；
+            <blockquote>
+              <p>warning: initialization makes pointer from integer without a cast</p>
+            </blockquote>
+          </li>
+        </ul>
+      </li>
+      <li>解引用，脱去解引用
+        <blockquote>
+          <p>&amp; 在C/C++中具体 3种语义， 按位与，取地址 和 声明一个引用。</p>
+        </blockquote>
+        <ul>
+          <li>
+<code class="language-plaintext highlighter-rouge">int a = 999; int * b = &amp;a; * b = 0;</code> 解引用，解释引用，表示将指针变量保存的内存地址中存储的999修改为了0</li>
+          <li>
+<code class="language-plaintext highlighter-rouge">&amp;*b</code> 获取a的地址，脱去了解引用</li>
+        </ul>
+      </li>
+      <li>指针运算
+        <blockquote>
+          <p>算数运算和关系运算</p>
+        </blockquote>
+      </li>
+      <li>NULL指针
+        <ul>
+          <li>直接给指针赋值0或者NULL <code class="language-plaintext highlighter-rouge">int * p = 0; int * p = NULL;</code>
+</li>
+          <li>NULL指针不指向任何地方，所以无法解引用</li>
+        </ul>
+      </li>
+      <li>指针的指针
+        <ul>
+          <li>指向指针变量的指针变量（指向指针对象的指针对象）</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+
+
+int main() {
+
+	int a = 100;
+	int * b = &amp;a; //声明了一个变量类型为type的类型（因为指针的基类型就是type)
+	//b = &amp;a;  // 这里对已经声明的指针类型b，进行了定义，将其定义为了 整型指针类型
+
+	printf("%p\n", &amp;a);		// 取地址，取地存放a内存地址，也就是存放整数100的地址段
+	printf("%p\n", b);		// 取地址，由于指针变量本身就存储了它指向的地址段，所以使用取地址符打印指针变量的值，就会打印出它存放的指针地址
+	printf("%p\n", &amp;b);		// 取该指针变量自己的地址
+
+	printf("%d\n", a);
+	printf("%d\n", *b);		// * 为间接访问运算符，通过在指针便变量前面加*，可以间接的访问该指针指向的值
+
+
+	// char * c = (char *)&amp;a;
+
+	// printf("%d\n", *b);
+
+	// printf("%d\n", *c);
+
+	char s = 'f';
+	char * p1 = &amp;s;
+	char ** p2 = &amp;p1;
+
+	printf("%c\n", s);
+	printf("%c\n", * p1);
+	printf("%p\n", * p2);
+	printf("%c\n", ** p2);
+
+
+	printf("%p\n", &amp;s);
+	printf("%p\n", p1);
+	printf("%p\n", &amp;p1);
+	printf("%p\n", p2);
+	printf("%p\n", &amp;p2);
+
+	return 0;
+}
+</code></pre>
+
+<h1 id="c-指针引用">C++ 指针、引用&amp;</h1>
+
+<ul>
+  <li>指针
+    <ul>
+      <li>空指针 nullptr <code class="language-plaintext highlighter-rouge">int * p = nullptr</code>
+        <blockquote>
+          <p>解引用没有初始化的指针发送错误
+定义了对象之后再定义指向这个对象的指针,对于不清楚的指向哪里的指针,一律初始化为nullptr(C++11)或者NULL(0).之后再判断是否指向对象再进行相应的操作.</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="c-中的-">C 中的 &amp;</h2>
+
+<ul>
+  <li>C的标准中对于运算符 &amp; 出现在变量前，表示的是取地址符</li>
+  <li>取地址符，可以取得任何变量当前在虚拟内存中的地址</li>
+</ul>
+
+<h2 id="c-引入的新特性引用">C++ 引入的新特性“引用”</h2>
+<ul>
+  <li>引用，对于目标一个变量的一个别名，使用引用对变量的操作和对变量的直接操作是完全一样的；</li>
+  <li>引用使用 &amp; 进行声明
+    <ul>
+      <li>类型标示符 &amp;引用名 = 目标变量名</li>
+      <li>在这个声明中，使用&amp;符号对目标变量声明了一个新的名字，而这个名字代表的就是目标变量的值；</li>
+      <li>【&amp;】在这个变量声明中不是一个取地址符，而是起到标示作用，用来声明当前是一个引用声明，类似于指针类型的声明，需要加<em>，</em> 也是在当前声明中来声明这是个指针相关的类型声明；</li>
+      <li>【类型标示符】是目标变量的类型；</li>
+      <li>声明引用的同时，必须完成其初始化；</li>
+      <li>完成了引用声明之后，相当于该变量有两个名称，用这两名称都可以直接访问变量，即该变量的原名和引用名，这时候该引用名属于该变量，不能再将该引用名作为其他变量名的别名（不能再做其他变量的引用）；</li>
+    </ul>
+
+    <p>https://blog.csdn.net/weixin_44023607/article/details/104235331</p>
+    <h3 id="todo">TODO</h3>
+  </li>
+</ul>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E8%AF%AD%E8%A8%80/python/2020/03/24/understanding-of-tornado.html" title="tornado框架学习及源码分析">tornado框架学习及源码分析</a><a class="next" href="/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%BA%95%E5%B1%82/python%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/2020/03/25/python-memory-management-implementation.html" title="Python内存管理的底层实现&amp;程序内存分析">Python内存管理的底层实现&amp;程序内存分析</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li class="">
+          <a class="post-link" href="/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%BA%94%E7%94%A8/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/2019/02/20/RabbitMQ-pub-sub.html" title="RabbitMQ &amp; AMQP">
+            RabbitMQ &amp; AMQP<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%BA%95%E5%B1%82/python%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/2020/04/13/cpython-implementation.html" title="CPython源代码分析&amp;虚拟机原理">
+            CPython源代码分析&amp;虚拟机原理<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%BA%94%E7%94%A8/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/2020/01/08/Sum-of-2019-RabbitMQ.html" title="SumOf2019 - RabbitMQ">
+            SumOf2019 - RabbitMQ<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/%E5%AE%9E%E8%B7%B5/%E9%9C%80%E6%B1%82%E5%AE%9E%E7%8E%B0/2020/05/13/data-patrol.html" title="时序数据完整性的方法巡检工具">
+            时序数据完整性的方法巡检工具<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2023 Adam Yan Na</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

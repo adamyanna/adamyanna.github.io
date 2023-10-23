@@ -1,9 +1,10 @@
 ---
+layout: post
 title: MacOS配置
+subtitle: mac
 author: Teddy
-date: 2020-08-05 08:40:51 +0800
-categories: [规划, 工作流]
-tags: [MacOS]
+categories: 规划 工作流
+tags: MacOS
 ---
 
 # MacOS 配置

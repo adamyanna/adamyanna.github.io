@@ -1,9 +1,10 @@
 ---
+layout: post
 title: 生产环境TCP网络问题分析
+subtitle: 
 author: Teddy
-date: 2020-04-16 10:00:00 +0800
-categories: [实践, 问题分析]
-tags: [TCP&IP, Network, Socket]
+categories: 实践 问题分析
+tags: TCP&IP Network Socket
 ---
 
 # 生产环境TCP网络问题分析
@@ -12,7 +13,7 @@ tags: [TCP&IP, Network, Socket]
 
 # 网络监控系统集群模型架构图
 
-![]({{ "/assets/img/posts/network-monitoring-system-architecture.png" | relative_url }})
+![]({{ "/assets/images/posts/network-monitoring-system-architecture.png" | relative_url }})
 
 
 4月9日突发问题原因分析

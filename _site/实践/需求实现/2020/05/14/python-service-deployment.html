@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Python服务容器化部署 | Adam Yan Na Blog</title>
+<meta name="generator" content="Jekyll v4.3.2">
+<meta property="og:title" content="Python服务容器化部署">
+<meta name="author" content="Teddy">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="监控容器微服务部署">
+<meta property="og:description" content="监控容器微服务部署">
+<link rel="canonical" href="http://localhost:4000/%E5%AE%9E%E8%B7%B5/%E9%9C%80%E6%B1%82%E5%AE%9E%E7%8E%B0/2020/05/14/python-service-deployment.html">
+<meta property="og:url" content="http://localhost:4000/%E5%AE%9E%E8%B7%B5/%E9%9C%80%E6%B1%82%E5%AE%9E%E7%8E%B0/2020/05/14/python-service-deployment.html">
+<meta property="og:site_name" content="Adam Yan Na Blog">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-05-14T00:00:00+08:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Python服务容器化部署">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Teddy"},"dateModified":"2020-05-14T00:00:00+08:00","datePublished":"2020-05-14T00:00:00+08:00","description":"监控容器微服务部署","headline":"Python服务容器化部署","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/%E5%AE%9E%E8%B7%B5/%E9%9C%80%E6%B1%82%E5%AE%9E%E7%8E%B0/2020/05/14/python-service-deployment.html"},"url":"http://localhost:4000/%E5%AE%9E%E8%B7%B5/%E9%9C%80%E6%B1%82%E5%AE%9E%E7%8E%B0/2020/05/14/python-service-deployment.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="">
+  <link rel="canonical" href="http://localhost:4000">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Adam Yan Na Blog">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js" async></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe-lightbox.umd.min.js" async></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe.umd.min.js" async></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/photoswipe.min.css" rel="stylesheet">
+<style>
+  .pswp .pswp__container .pswp__img {
+    background-color: white;
+  }
+</style>
+
+<script>
+  function initPhotoSwipe() {
+    let customOptions = {};
+
+    try {
+      const data = ``.replaceAll("=>", ":");
+      customOptions = JSON.parse(data);
+    } catch (e) {
+      console.info("Invalid custom photo previewer options! " + e.message);
+    }
+
+    // Define object and gallery options
+    const options = Object.assign(
+      {
+        gallery: "section.main",
+        children: "a.photo-swipe",
+        photo_scale: 2,
+        // dynamic import is not supported in UMD version
+        pswpModule: PhotoSwipe,
+      },
+      customOptions
+    );
+
+    const galleryEl = document.querySelector(options.gallery);
+    if (!galleryEl) {
+      return;
+    }
+
+    const imgEls = [];
+    const els = galleryEl.querySelectorAll("img:not(.emoji)");
+    els.forEach((el) => {
+      if (el.src.trim() == "") {
+        return;
+      }
+      if (!imgEls.includes(el)) {
+        imgEls.push(el);
+      }
+    });
+
+    if (imgEls.length === 0) {
+      return;
+    }
+
+    imgEls.forEach((imgEl) => {
+      imgEl.outerHTML = `
+      <a class="photo-swipe"
+        href="${imgEl.src}"
+        data-pswp-width="${
+          Math.max(imgEl.naturalWidth, imgEl.width) * options.photo_scale
+        }"
+        data-pswp-height="${
+          Math.max(imgEl.naturalHeight, imgEl.height) * options.photo_scale
+        }"
+        data-pswp-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
+        target="_blank">
+        ${imgEl.outerHTML}
+      </a>`;
+    });
+
+    // Initialize PhotoSwipe 5
+    var lightbox = new PhotoSwipeLightbox(options);
+
+    lightbox.init();
+  }
+
+  window.addEventListener("load", initPhotoSwipe);
+</script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="Adam Yan Na Blog" src="" onerror="this.style.display='none'">
+  Adam Yan Na Blog
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a><a class="page-link" href="/tags.html">TAGS</a>
+
+
+
+
+
+
+
+
+
+<span class="page-link">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<span class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="fr">
+          
+          <img src="https://cdn.countryflags.com/thumbs/france/flag-400.png" title="French">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="zh-CN">
+          
+          <img src="https://cdn.countryflags.com/thumbs/china/flag-400.png" title="Chinese(Simple)">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ja">
+          
+          <img src="https://cdn.countryflags.com/thumbs/japan/flag-400.png" title="Japanese">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ko">
+          
+          <img src="https://cdn.countryflags.com/thumbs/south-korea/flag-400.png" title="Korean">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ru">
+          
+          <img src="https://cdn.countryflags.com/thumbs/russia/flag-400.png" title="Russian">
+          
+        </a>
+      </li>
+    
+  </ul>
+</span>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+</span>
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">Python服务容器化部署</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <div class="post-meta">
+    <time class="dt-published" datetime="2020-05-14T00:00:00+08:00" itemprop="datePublished"><i class="fa fa-calendar"></i> May 14, 2020
+    </time><span class="post-author left-vsplit"><i class="fa fa-pencil"></i> Teddy</span>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+  </div>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#Python">#Python</a><a class="post-tag" href="/tags.html#Docker">#Docker</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h1 id="监控容器微服务部署">监控容器微服务部署</h1>
+
+<h6 id="新增节点初始化操作">新增节点初始化操作</h6>
+
+<ul>
+  <li>
+    <ol>
+      <li>下载Docker环境部署文件，上传到物理机</li>
+    </ol>
+  </li>
+  <li>将以上文件上传至同一目录下，执行如下：</li>
+  <li>
+    <ol>
+      <li>准备日志</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>准备应用文件</li>
+    </ol>
+  </li>
+  <li>Step0：获取监控物理机信息</li>
+  <li>Step1：初始化配置监控主机</li>
+  <li>Step2：部署+验证</li>
+</ul>
+
+<h6 id="nmsagent镜像部署">nmsagent镜像部署</h6>
+
+<ul>
+  <li>
+    <ol>
+      <li>下载Docker环境部署文件，上传到物理机</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>安装docker</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>导入镜像, 必须在两台物理机上都执行</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>准备日志</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>准备应用文件</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>部署nspmonitor-xxx.tar.gz,准备docker服务所需文件及虚环境安装lvxmonitor-engine到nginx物理机,以EFA为例子</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>部署服务 - 部署nspmonitor和lvxmonitor-porxy的Docker服务</li>
+    </ol>
+  </li>
+  <li>更新yunzhi环境信息</li>
+  <li>Debug</li>
+  <li>采用docker三节点HA部署</li>
+</ul>
+
+<h6 id="新增节点初始化操作-1">新增节点初始化操作</h6>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#允许root ssh登录修改：</span>
+vi /etc/ssh/sshd_config 
+PermitRootLogin no修改为：PermitRootLogin <span class="nb">yes</span>
+<span class="c">#重启sshd服务</span>
+service sshd restart
+</code></pre></div></div>
+
+<ol>
+  <li>nspmonitor验证配置文件所有IP:PORT是否能够访问,alphaops验证hillstone防火墙snmpwalk和22端口</li>
+</ol>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> snmp安装：
+yum <span class="nb">install</span> <span class="nt">-y</span> net-snmp net-snmp-utils
+ alphaops验证
+</code></pre></div></div>
+
+<ol>
+  <li>执行以下步骤：Step1</li>
+  <li>
+    <p>上传镜像文件，初始化docker环境</p>
+  </li>
+  <li>下载Docker环境部署文件，上传到物理机</li>
+</ol>
+
+<p><a href="http://code.test.com.cn/#/repo/test-monitor/docker-images/master/blob/docker_ce_18%2Fdocker-centos7.2-install_scripts%2Finit_docker_node.sh">init_docker_node.sh</a>
+<a href="http://code.test.com.cn/#/repo/test-monitor/docker-images/master/blob/netmonitor_image%2Fnet_monitor_add_ssh.tar">镜像包net_monitor_add_ssh.tar.tar</a>
+<a href="http://127.0.0.1/network_group/nspmonitor/origin/release/">下载最新版本的nspmonitor-xxx.tar.gz</a>
+<a href="http://code.test.com.cn/#/repo/test-monitor/docker-images/master/blob/docker_ce_18%2Fdocker-package.tar.gz">docker-package.tar.gz</a></p>
+
+<p>将以上文件上传至同一目录下，执行如下：</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash init_docker_node.sh
+
+注意：如果执行以上脚本出错，把内容复制出来，命令逐行执行
+<span class="c">#检查镜像是否导入</span>
+docker images
+</code></pre></div></div>
+
+<ol>
+  <li>准备日志</li>
+</ol>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> /var/log/nspmonitor
+vim /etc/logrotate.d/nspmonitor
+<span class="c"># 将下面的文本粘贴到 /etc/logrotate.d/nspmonitor 该文件中</span>
+/var/log/nspmonitor/<span class="k">*</span>.log <span class="o">{</span>
+    rotate 10
+    size 50M
+    missingok
+    compress
+    copytruncate
+<span class="o">}</span>
+<span class="nb">mkdir</span> <span class="nt">-p</span> /var/log/lvxmonitor
+vim /etc/logrotate.d/lvxmonitor
+<span class="c"># 将下面的文本粘贴到 /etc/logrotate.d/lvxmonitor 该文件中</span>
+/var/log/lvxmonitor/<span class="k">*</span>.log <span class="o">{</span>
+    rotate 10
+    size 50M
+    missingok
+    compress
+    copytruncate
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>准备应用文件
+    <ul>
+      <li>创建目录</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> /opt/netmon/agent
+</code></pre></div></div>
+
+<ul>
+  <li>解压agent_updater文件并移动到agent下</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tar</span> <span class="nt">-zxvf</span> nspmonitor-xxx.tar.gz <span class="nt">-C</span> /opt/netmon/agent
+<span class="nb">cp</span> /opt/netmon/agentnspmonitor-xxx/nspmonitor /opt/netmon/agent <span class="nt">-r</span>
+</code></pre></div></div>
+
+<h6 id="step0获取监控物理机信息">Step0：获取监控物理机信息</h6>
+
+<ul>
+  <li>监控主机为双机高可用模式</li>
+</ul>
+
+<h6 id="step1初始化配置监控主机">Step1：初始化配置监控主机</h6>
+
+<ul>
+  <li>修改ulimit linux系统对用户态程序限制</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 查看 open files 的限制数量</span>
+<span class="nb">ulimit</span> <span class="nt">-a</span>
+<span class="c"># 永久修改：</span>
+vim /etc/security/limits.conf
+<span class="k">*</span> - <span class="nb">nproc </span>102400
+<span class="k">*</span> - nofile 102400
+<span class="c"># 修改max-file</span>
+vim /etc/sysctl.conf
+fs.file-max <span class="o">=</span> 6815744
+<span class="c"># 最好对系统进行reboot</span>
+reboot
+</code></pre></div></div>
+
+<ul>
+  <li>配置NTP服务器，并启动NTP时间同步服务，检查时间是否为UTC+8（不同地域可用区不同）</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl status ntpd
+ntptime
+<span class="c"># 参考AZ NSP的 /etc/ntp.conf ntp配置，拷贝到监控物理机</span>
+systemctl restart ntpd
+ntptime <span class="c">#检查时间是否同步UTC+8（不同地域可用区不同）</span>
+<span class="c"># 如果服务没有启动或者时间不对，需要修改/etc/ntp.conf 配置文件，将server修改为该区域可用的ntp server，并启动服务</span>
+</code></pre></div></div>
+
+<ul>
+  <li>配置域名解析服务</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /etc/resolv.conf
+search cloud.pub
+nameserver 127.0.0.1
+nameserver 127.0.0.1
+ 
+<span class="c"># 检查域名是否解析，网络是否可达</span>
+ping gateway-OpenFalcon.cloud.pub
+telnet gateway-OpenFalcon.cloud.pub 12057
+</code></pre></div></div>
+
+<ul>
+  <li>检查Open-Falcon的agent是否安装，端口是否监听</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 检查端口是否监听</span>
+netstat <span class="nt">-antl</span> | <span class="nb">grep </span>12050
+<span class="c"># 检查应用是否部署并启动</span>
+ps <span class="nt">-aux</span> | <span class="nb">grep </span>falcon
+ps <span class="nt">-aux</span> | <span class="nb">grep </span>ops_updater
+<span class="c"># falcon-agent进程不存在，或目录/opt/pamon/不存在</span>
+<span class="c"># 进入 http://fcloud.test.com.cn/d/9a0876f347/ 联系文件提供人，下载并安装</span>
+<span class="c"># 若OpenFalcon-agent未安装，请根据主机类型（传统环境/内部云/公有云）按照以下流程安装：</span>
+<span class="c"># http://yunzhi.test.com.cn/pages/viewpage.action?pageId=24564124</span>
+</code></pre></div></div>
+
+<ul>
+  <li>YUM配置</li>
+  <li>yum clean all &amp;&amp; yum makecache  # 如果不发生报错，则YUM配置可用，报错请继续</li>
+  <li>配置路径：/etc/yum.repos.d/ 对应.repo文件可以到AZ NSP物理机相同路径复制到本机目录</li>
+  <li>完成/etc/yum.repos.d/*.repo 文件配置后 yum clean all &amp;&amp; yum makecache 进行验证</li>
+  <li>修改主机密码</li>
+  <li>passwd root 改为网络组新密码</li>
+</ul>
+
+<h6 id="step2部署验证">Step2：部署+验证</h6>
+
+<p>nmsagent镜像部署
+说明：
+下面的安装步骤中 0,1,2,3 必须在两台物理机都进行操作
+下面的安装步骤中 4,5,6 只需要在一台物理机都进行操作</p>
+<ol>
+  <li>下载Docker环境部署文件，上传到物理机</li>
+</ol>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>add_manager.sh
+install.sh
+docker-package.tar.gz
+net_monitor_add_ssh.tar
+</code></pre></div></div>
+
+<p>下载最新版本的nspmonitor-xxx.tar.gz
+下载最新版本的agent_updater-xxx.tar.gz</p>
+
+<ol>
+  <li>安装docker
+    <ul>
+      <li>将下面三个文件放置在同一级目录下</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>add_manager.sh
+install.sh
+docker-package.tar.gz
+</code></pre></div></div>
+
+<ul>
+  <li>安装主节点</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash install.sh &lt;ip&gt; <span class="c">#此ip为两台物理机中任意一台, 安装完成后会显示 --token xxxx ip:port, 复制--token后面的内容</span>
+</code></pre></div></div>
+
+<ul>
+  <li>添加管理节点</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash add_manager.sh xxxx ip:port <span class="c">#将复制的--token之后的内容加在add_manager.sh后</span>
+</code></pre></div></div>
+
+<ul>
+  <li>检查集群状态</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker node <span class="nb">ls</span>
+</code></pre></div></div>
+
+<ol>
+  <li>导入镜像, 必须在两台物理机上都执行
+    <ul>
+      <li>将上传的net_monitor_add_ssh.tar文件导入为docker image, 命名为netmonitor，版本为1.0</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker import net_monitor_add_ssh.tar netmonitor:v1.0
+</code></pre></div></div>
+
+<ol>
+  <li>准备日志</li>
+</ol>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> /var/log/nspmonitor
+vim /etc/logrotate.d/nspmonitor
+<span class="c"># 将下面的文本粘贴到 /etc/logrotate.d/nspmonitor 该文件中</span>
+/var/log/nspmonitor/<span class="k">*</span>.log <span class="o">{</span>
+    rotate 10
+    size 50M
+    missingok
+    compress
+    copytruncate
+<span class="o">}</span>
+<span class="nb">mkdir</span> <span class="nt">-p</span> /var/log/lvxmonitor
+vim /etc/logrotate.d/lvxmonitor
+<span class="c"># 将下面的文本粘贴到 /etc/logrotate.d/lvxmonitor 该文件中</span>
+/var/log/lvxmonitor/<span class="k">*</span>.log <span class="o">{</span>
+    rotate 10
+    size 50M
+    missingok
+    compress
+    copytruncate
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>准备应用文件</li>
+</ol>
+
+<ul>
+  <li>创建目录</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> /opt/netmon/agent
+</code></pre></div></div>
+
+<ul>
+  <li>解压agent_updater文件并移动到agent下</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tar</span> <span class="nt">-zxvf</span> agent_updater-xxx.tar.gz <span class="nt">-C</span> /opt/netmon/agent
+</code></pre></div></div>
+
+<ul>
+  <li>到agent_updater内创建新的{可用区名称}配置文件夹, 以EFA为例子</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> /opt/netmon/agent/agent_updater/updater/config/EFA/
+<span class="nb">cp</span> /opt/netmon/agent/agent_updater/updater/config/SCA/config.json /opt/netmon/agent/agent_updater/updater/config/EFA/  <span class="c">#拷贝SCA的配置文件为模版</span>
+vim /opt/netmon/agent/agent_updater/updater/config/EFA/config.json <span class="c"># 修改监控物理机ip，nginx物理机ip，密码也需要统一</span>
+</code></pre></div></div>
+
+<ol>
+  <li>部署nspmonitor-xxx.tar.gz,准备docker服务所需文件及虚环境安装lvxmonitor-engine到nginx物理机,以EFA为例子</li>
+</ol>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp</span> &lt;上传路径&gt;/nspmonitor-xxx.tar.gz /opt/netmon/agent/agent_updater/package
+<span class="nb">cd</span> /opt/netmon/agent/agent_updater/updater
+
+<span class="c"># ansible command not found 的情况下，需要安装ansible</span>
+<span class="nb">cd</span> /opt/netmon/agent/agent_updater/ansible/playbooks/init
+python init.py
+
+python updater.py EFA ansible <span class="c"># 以EFA为例子,检查部署结果</span>
+</code></pre></div></div>
+
+<ol>
+  <li>部署服务 - 部署nspmonitor和lvxmonitor-porxy的Docker服务
+    <ul>
+      <li>修改服务compose文件, 修改文件中的可用区名称，例如：把所有的”SCA”替换为”EFA”</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /opt/netmon/agent/agent_updater/package/nspmonitor-<span class="o">{</span>1.2.5.dev57<span class="o">}</span>/docker-compose/
+<span class="c"># File use vim 修改可用区 line：20</span>
+<span class="nt">-rwxr-xr-x</span> 1 root root 691 Jul 31 00:59 lvxmonitor-proxy-compose.yml
+<span class="nt">-rwxr-xr-x</span> 1 root root 687 Jul 31 01:07 nspmonitor-compose.yml
+<span class="nt">-rwxr-xr-x</span> 1 root root 689 Jul 31 01:08 pagwmonitor-compose.yml
+</code></pre></div></div>
+
+<ul>
+  <li>config 文件配置，如果不存在下面两个配置文件或路径，请联系监控开发在代码仓库中添加，并提供最新的nspmonitor的包</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/opt/netmon/agent/nspmonitor/etc/&lt;可用区&gt;/nspmonitor.ini
+<span class="c"># 参考TEMPLATE中做修改</span>
+/opt/netmon/agent/nspmonitor/etc/&lt;可用区&gt;/lvxmonitor_proxy.conf
+<span class="c"># 找到scan_ips， 将scan_ips后的ip改为Nginx物理机ip，以逗号分隔；</span>
+</code></pre></div></div>
+
+<ul>
+  <li>配置修改完成，重新同步代码</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /opt/netmon/agent/
+scp <span class="nt">-r</span> nspmonitor &lt;agent_ip&gt;:/opt/netmon/agent  <span class="c"># 以EFA为例子,检查部署结果,这里的agentip为另一台没有进行操作的主机ip</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Deploy</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /opt/netmon/agent/agent_updater/package/nspmonitor-<span class="o">{</span>1.2.5.dev57<span class="o">}</span>/docker-compose/
+docker stack deploy <span class="nt">-c</span> &lt;compose_file&gt;.yml &lt;service_name&gt;
+<span class="c">#　对应名称</span>
+<span class="c"># compose_file: lvxmonitor-proxy-compose.yml service_name: lvxmonitor_proxy_EFA</span>
+<span class="c"># compose_file: nspmonitor-compose.yml service_name: nspmonitor_EFA</span>
+<span class="c"># compose_file: pagwmonitor-compose.yml service_name: pagwmonitor_EFA  # 对于没有PAGW（vpp）产品的可用区请不要部署该微服务</span>
+</code></pre></div></div>
+
+<ul>
+  <li>检查服务情况，查看当前服务是否成功启动，是否处于running状态</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible lvx_monitor_engine <span class="nt">-m</span> shell <span class="nt">-a</span> <span class="s2">"systemctl status lvxmonitor-engine.service"</span> <span class="nt">--inventory-file</span><span class="o">=</span>/opt/netmon/agent/agent_updater/ansible/hosts
+docker service <span class="nb">ls
+</span>docker service ps &lt;service_name&gt;
+</code></pre></div></div>
+
+<ul>
+  <li>检查日志</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/var/log/nspmonitor <span class="c"># 在此目录下tail -f和tail -f | grep ERROR 检查日志是否有打印，检查是否有大量报错</span>
+更新yunzhi环境信息
+NFV环境信息
+Debug
+<span class="c"># run a test container as TESTPOD</span>
+docker run <span class="nt">-i</span> <span class="nt">-t</span> <span class="nt">-d</span> <span class="nt">--network</span><span class="o">=</span>host <span class="nt">-v</span> /opt/netmon/:/app <span class="nt">-v</span> /var/log/:/var/log/ <span class="nt">-v</span> /etc/localtime:/etc/localtime <span class="nt">--name</span> TESTPOD netmonitor:v1.0 /bin/bash
+
+<span class="c"># start debug process</span>
+<span class="c"># removing --log-file config app will output log directly to console</span>
+<span class="c"># add the '&amp;' to the end of execute command will run this process as linux deamon</span>
+/usr/bin/python /app/agent/nspmonitor/agent/nginx/proxy.py <span class="nt">--config-file</span><span class="o">=</span>/app/agent/nspmonitor/etc/SCA/lvxmonitor_proxy.conf <span class="nt">--log-file</span><span class="o">=</span>/var/log/nspmonitor/proxy.log
+/usr/bin/python /app/agent/nspmonitor/agent/nsp/entry.py <span class="nt">--config-file</span><span class="o">=</span>/app/agent/nspmonitor/etc/SCA/nspmonitor.ini <span class="nt">--log-file</span><span class="o">=</span>/var/log/nspmonitor/nspmonitor.log
+/usr/bin/python /app/agent/nspmonitor/agent/pagw/entry.py <span class="nt">--config-file</span><span class="o">=</span>/app/agent/nspmonitor/etc/EFA/nspmonitor.ini <span class="nt">--log-file</span><span class="o">=</span>/var/log/nspmonitor/pagwmonitor.log
+</code></pre></div></div>
+
+<h5 id="nspmonitor版本更新操作">nspmonitor版本更新操作</h5>
+<ol>
+  <li>将nspmonitor_xxxx.tar.gz 拷贝至 /opt/netmon/agent/下</li>
+  <li>解压：tar -xvf nspmonitor_xxxx.tar.gz ,cp nspmonitor_xxxx/nspmonitor /opt/netmon/agent/ -r</li>
+  <li>重启服务 docker service update nspmonitor_agent –force</li>
+  <li>验证进程是否拉起 docker service ps nspmonitor_agent –no-trunc
+以及查看日志：tail /var/log/nspmonitor/nspmonitor.log
+采用docker三节点HA部署</li>
+  <li>新节点环境配置</li>
+</ol>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#根据以上step 0，1，2步骤将新节点配置好</span>
+<span class="c"># step0 全部执行</span>
+<span class="c"># step1 全部执行</span>
+<span class="c"># step2 执行1，2，3步骤</span>
+</code></pre></div></div>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 准备应用文件</span>
+ 
+<span class="c">## 创建目录</span>
+ 
+<span class="nb">mkdir</span> <span class="nt">-p</span> /opt/netmon/agent
+ 
+<span class="c">## 解压nspmonitor-xxx.tar.gz 文件并移动到agent下</span>
+ 
+<span class="nb">tar</span> <span class="nt">-zxvf</span> nspmonitor-xxx.tar.gz <span class="nt">-C</span> /opt/netmon/agent
+<span class="nb">cp</span> /opt/netmon/agent/nspmonitor-xxx/nspmonitor /opt/netmon/agent
+2.删除原二节点集群
+
+<span class="c"># 删除服务，其中一个节点执行即可</span>
+dockers service <span class="nb">ls
+</span>docker service <span class="nb">rm</span> （服务名称） <span class="nt">--force</span>
+ 
+ 
+<span class="c"># 删除集群，两个节点</span>
+docker node <span class="nb">ls
+</span>docker node <span class="nb">rm</span> <span class="nt">--force</span> （节点名称）
+3.创建三节点新集群
+
+<span class="c">#找其中一个节点先作为manager</span>
+docker swarm init <span class="nt">--advertise-addr</span> <span class="o">(</span>ip<span class="o">)</span>
+ 
+ 
+<span class="c">#另外两个节点加入集群</span>
+docker swarm <span class="nb">join</span> <span class="nt">--token</span> <span class="o">(</span>token<span class="o">)</span> ip:port
+<span class="c">#manager节点上执行，将两个worker节点升级为manager</span>
+docker node <span class="nb">ls
+</span>docker promode <span class="o">(</span>节点名称<span class="o">)</span>
+变更文档
+<span class="c">#原节点执行，复制token</span>
+docker swarm join-token manager
+<span class="c">#新加节点执行复制token内容</span>
+docker swarm <span class="nb">join</span> <span class="nt">--token</span> （token str）ip:port
+ 
+ 
+ 
+ 
+其它方案
+ 
+ 
+<span class="c"># 1.1 删除服务，其中一个节点执行即可</span>
+dockers service <span class="nb">ls
+</span>docker service <span class="nb">rm</span> （服务名称） <span class="nt">--force</span>
+ 
+ 
+<span class="c"># 1.2 删除集群，两个节点</span>
+docker node <span class="nb">ls
+</span>docker node demote （节点名称）
+docker node <span class="nb">rm</span> <span class="nt">--force</span> （节点名称）
+ 
+ 
+<span class="c"># 2.1 找其中一个节点先作为manager</span>
+docker swarm init <span class="nt">--advertise-addr</span> <span class="o">(</span>ip<span class="o">)</span>
+ 
+ 
+<span class="c"># 2.2另外两个节点加入集群</span>
+docker swarm <span class="nb">join</span> <span class="nt">--token</span> <span class="o">(</span>token<span class="o">)</span> ip:port
+<span class="c"># 2.3manager节点上执行，将两个worker节点升级为manager</span>
+docker node <span class="nb">ls
+</span>docker promode <span class="o">(</span>节点名称<span class="o">)</span>
+ 
+ 
+<span class="c"># 回滚</span>
+docker node <span class="nb">ls
+</span>docker node <span class="nb">rm</span> <span class="nt">--force</span> （节点名称）
+docker swarm init <span class="nt">--advertise-addr</span> <span class="o">(</span>ip<span class="o">)</span>
+docker swarm <span class="nb">join</span> <span class="nt">--token</span> <span class="o">(</span>token<span class="o">)</span> ip:port
+docker stack deploy <span class="nt">-c</span> nspmonitor-compose.yml  nspmonitor
+</code></pre></div></div>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/%E5%AE%9E%E8%B7%B5/%E9%9C%80%E6%B1%82%E5%AE%9E%E7%8E%B0/2020/05/14/monitor_system_restructure.html" title="监控系统1.5版本项目重组">监控系统1.5版本项目重组</a><a class="next" href="/%E5%AE%9E%E8%B7%B5/%E9%9C%80%E6%B1%82%E5%AE%9E%E7%8E%B0/2020/05/14/redhat-6.5-python-dependency.html" title="Red Hat Enterprise Linux Kernel Version 2.6.32 3.8.13 python依赖环境手动部署">Red Hat Enterprise Linux Kernel Version...</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li class="">
+          <a class="post-link" href="/%E5%AE%9E%E8%B7%B5/%E9%9C%80%E6%B1%82%E5%AE%9E%E7%8E%B0/2020/01/08/Sum-of-2019-DataInfluxPatrol-Golang.html" title="SumOf2019 - DataInfluxPatrol">
+            SumOf2019 - DataInfluxPatrol<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/blogging/tutorial/2019/08/11/customize-the-favicon.html" title="Customize the Favicon">
+            Customize the Favicon<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E8%AF%AD%E8%A8%80/c&amp;c++/2020/03/16/c-programming-language-recap.html" title="C programming language recap">
+            C programming language recap<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%9F%BA%E7%A1%80/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/2020/03/27/csapp.html" title="深入理解计算机系统 [Computer-Systems-A-Programmer's-Perspective]">
+            深入理解计算机系统 [Computer-Systems-A-Programmer's-Perspective]<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2023 Adam Yan Na</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

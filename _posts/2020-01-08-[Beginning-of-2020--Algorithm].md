@@ -1,9 +1,9 @@
 ---
+layout: post
 title: BeginningOf2020 - Algorithm
 author: Teddy
-date: 2020-01-20 10:00:00 +0800
-categories: [实践, 算法训练]
-tags: [BeginningOf2020, Algorithm]
+categories: 实践 算法训练
+tags: BeginningOf2020 Algorithm
 ---
 
 

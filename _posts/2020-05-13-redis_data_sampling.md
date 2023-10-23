@@ -1,9 +1,10 @@
 ---
-title: Data Sampling [Redis]
+layout: post
+title: Data Sampling
+subtitle: Redis
 author: Teddy
-date: 2020-05-13 14:54:35 +0800
-categories: [实践, 需求实现]
-tags: [Go, Redis, Data-Sampling]
+categories: 实践 需求实现
+tags: Go Redis Data-Sampling
 ---
 
 # 监控覆盖率检查和数据完整性检查【2020-4】
@@ -12,7 +13,7 @@ tags: [Go, Redis, Data-Sampling]
 
 ## 方案二，可横向扩展集群
 
-![]({{ "/assets/img/posts/redis_data_sampling_1.png" | relative_url }})
+![]({{ "/assets/images/posts/redis_data_sampling_1.png" | relative_url }})
 
 ### 方案：
 monitor-torrent负责与redis保持连接，对应key更新当前数据value和最新的timestamp及count进行++，数据模型为
@@ -68,7 +69,7 @@ ii.	key新建通知
 * timer结束后，将该map全量写入redis集群
 * redis批量写入测试
 
-![]({{ "/assets/img/posts/redis_data_sampling_2.png" | relative_url }})
+![]({{ "/assets/images/posts/redis_data_sampling_2.png" | relative_url }})
 
 * benchmark结果
   * 一百四十万个数据对象完全的传输和写入耗时为6 ~12秒

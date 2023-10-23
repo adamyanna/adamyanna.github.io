@@ -1,9 +1,10 @@
 ---
+layout: post
 title: Python服务容器化部署
+subtitle: 
 author: Teddy
-date: 2020-05-14 15:03:28 +0800
-categories: [实践, 需求实现]
-tags: [Python, Docker]
+categories: 实践 需求实现
+tags: Python Docker
 ---
 
 

@@ -1,9 +1,9 @@
 ---
+layout: post
 title: Python实现动态生成类的http接口-monitor动态监控项
 author: Teddy
-date: 2020-03-24 10:00:00 +0800
-categories: [实践, 需求实现]
-tags: [Python]
+categories: 实践 需求实现
+tags: Python
 ---
 
 # 项目背景

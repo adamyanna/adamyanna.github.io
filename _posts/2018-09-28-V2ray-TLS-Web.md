@@ -1,9 +1,9 @@
 ---
+layout: post
 title: V2ray TLS WebSocket HTTPS + Nginx 内网转发
 author: Teddy
-date: 2018-09-28 10:00:00 +0800
-categories: [实践, 实践记录]
-tags: [V2ray, Nginx]
+categories: 实践 实践记录
+tags: V2ray Nginx
 ---
 
 
