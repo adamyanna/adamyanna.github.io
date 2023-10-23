@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Live Migration Precopy Analyze | Adam Yan Na Blog</title>
+<meta name="generator" content="Jekyll v4.3.2">
+<meta property="og:title" content="Live Migration Precopy Analyze">
+<meta name="author" content="Teddy">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="热迁移原理">
+<meta property="og:description" content="热迁移原理">
+<link rel="canonical" href="http://localhost:4000/cloudcomputing/2023/01/02/live_migration_precopy.html">
+<meta property="og:url" content="http://localhost:4000/cloudcomputing/2023/01/02/live_migration_precopy.html">
+<meta property="og:site_name" content="Adam Yan Na Blog">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2023-01-02T00:00:00+08:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Live Migration Precopy Analyze">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Teddy"},"dateModified":"2023-01-02T00:00:00+08:00","datePublished":"2023-01-02T00:00:00+08:00","description":"热迁移原理","headline":"Live Migration Precopy Analyze","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/cloudcomputing/2023/01/02/live_migration_precopy.html"},"url":"http://localhost:4000/cloudcomputing/2023/01/02/live_migration_precopy.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="">
+  <link rel="canonical" href="http://localhost:4000">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Adam Yan Na Blog">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js" async></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe-lightbox.umd.min.js" async></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe.umd.min.js" async></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/photoswipe.min.css" rel="stylesheet">
+<style>
+  .pswp .pswp__container .pswp__img {
+    background-color: white;
+  }
+</style>
+
+<script>
+  function initPhotoSwipe() {
+    let customOptions = {};
+
+    try {
+      const data = ``.replaceAll("=>", ":");
+      customOptions = JSON.parse(data);
+    } catch (e) {
+      console.info("Invalid custom photo previewer options! " + e.message);
+    }
+
+    // Define object and gallery options
+    const options = Object.assign(
+      {
+        gallery: "section.main",
+        children: "a.photo-swipe",
+        photo_scale: 2,
+        // dynamic import is not supported in UMD version
+        pswpModule: PhotoSwipe,
+      },
+      customOptions
+    );
+
+    const galleryEl = document.querySelector(options.gallery);
+    if (!galleryEl) {
+      return;
+    }
+
+    const imgEls = [];
+    const els = galleryEl.querySelectorAll("img:not(.emoji)");
+    els.forEach((el) => {
+      if (el.src.trim() == "") {
+        return;
+      }
+      if (!imgEls.includes(el)) {
+        imgEls.push(el);
+      }
+    });
+
+    if (imgEls.length === 0) {
+      return;
+    }
+
+    imgEls.forEach((imgEl) => {
+      imgEl.outerHTML = `
+      <a class="photo-swipe"
+        href="${imgEl.src}"
+        data-pswp-width="${
+          Math.max(imgEl.naturalWidth, imgEl.width) * options.photo_scale
+        }"
+        data-pswp-height="${
+          Math.max(imgEl.naturalHeight, imgEl.height) * options.photo_scale
+        }"
+        data-pswp-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
+        target="_blank">
+        ${imgEl.outerHTML}
+      </a>`;
+    });
+
+    // Initialize PhotoSwipe 5
+    var lightbox = new PhotoSwipeLightbox(options);
+
+    lightbox.init();
+  }
+
+  window.addEventListener("load", initPhotoSwipe);
+</script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="Adam Yan Na Blog" src="" onerror="this.style.display='none'">
+  Adam Yan Na Blog
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a><a class="page-link" href="/tags.html">TAGS</a>
+
+
+
+
+
+
+
+
+
+<span class="page-link">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<span class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="fr">
+          
+          <img src="https://cdn.countryflags.com/thumbs/france/flag-400.png" title="French">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="zh-CN">
+          
+          <img src="https://cdn.countryflags.com/thumbs/china/flag-400.png" title="Chinese(Simple)">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ja">
+          
+          <img src="https://cdn.countryflags.com/thumbs/japan/flag-400.png" title="Japanese">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ko">
+          
+          <img src="https://cdn.countryflags.com/thumbs/south-korea/flag-400.png" title="Korean">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ru">
+          
+          <img src="https://cdn.countryflags.com/thumbs/russia/flag-400.png" title="Russian">
+          
+        </a>
+      </li>
+    
+  </ul>
+</span>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+</span>
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">Live Migration Precopy Analyze</h1>
+  <h2 class="post-subtitle">live_migration_precopy</h2>
+
+  <div class="post-meta">
+    <time class="dt-published" datetime="2023-01-02T00:00:00+08:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Jan 02, 2023
+    </time><span class="post-author left-vsplit"><i class="fa fa-pencil"></i> Teddy</span>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 16 mins</span>
+  </div>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#live_migration">#live_migration</a><a class="post-tag" href="/tags.html#qemu">#qemu</a><a class="post-tag" href="/tags.html#libvirt">#libvirt</a><a class="post-tag" href="/tags.html#kvm">#kvm</a><a class="post-tag" href="/tags.html#precopy">#precopy</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h1 id="热迁移原理">热迁移原理</h1>
+
+<h2 id="热迁移核心步骤">热迁移核心步骤</h2>
+
+<h3 id="虚拟化层面实现流程和通信方式">虚拟化层面实现流程和通信方式</h3>
+
+<ol>
+  <li>通过 python libvirt 接口启动 libvirt 迁移流程</li>
+  <li>client（agent compute）连接源端 libvirtd 进程</li>
+  <li>client 连接目的端 libvirt 进程</li>
+  <li>调用源端 domainMigrateBegin3</li>
+  <li>调用目的端 domainMigratePrapare3</li>
+  <li>调用源端 domainMigratePerform3
+ domainMigratePerform3函数主要是执行迁移操作，将源端的数据迁移到目的端。然后等待迁移完成的信号
+ 大致的调用流程：
+     1. qemuDomainMigratePerform3 → 
+         qemuMigrationPerform → 
+         qemuMigrationPerformPhase → 
+         doNativeMigrate → 
+         qemuMigrationRun → 
+         qemuMonitorSetMigrationSpeed →
+         qemuMigrationConnect →<br>
+         qemuMonitorMigrateToHost → 
+         qemuMonitorJSONMigrate 
+     2. 终会调用到 QEMU中的qmp_migrate
+     3. setup iterature complete</li>
+  <li>源端 libvirtd 进程调用 源端 qemu qmp_migrate 
+ tcp_start_outgoing_migration
+ migrate_fd_connect
+ migrate_compress_thread_create
+ migration_thread
+ qemu_savevm_state_begin
+ qemu_savevm_state_pending
+ qemu_savevm_state_iterate
+ migration_completion
+ vm_stop</li>
+  <li>目的端
+ qemu_start_incoming_migration
+ tcp_start_incoming_migration
+ process_incoming_migration_co
+ migrate_decompress_threads_create
+ qemu_loadvm_state
+ cpu_synchronize_all_post_init
+ process_incoming_migration_bin
+ vm_start</li>
+</ol>
+
+<h3 id="源端调用流程分析">源端调用流程分析</h3>
+<ul>
+  <li>TODO</li>
+</ul>
+
+<h3 id="目的端调用流程分析">目的端调用流程分析</h3>
+<ul>
+  <li>TODO</li>
+</ul>
+
+<h3 id="qmp_migrate">qmp_migrate</h3>
+<ul>
+  <li>tcp_start_outgoing_migration
+    <ul>
+      <li>创建和目的端 libvirt 的 tcp 连接</li>
+    </ul>
+  </li>
+  <li>migrate_fd_connect
+    <ul>
+      <li>qemu接收来自 libvirt 传入的fd (tcp socket)，准备写入数据</li>
+    </ul>
+  </li>
+  <li>迁移主函数 migration_thread
+    <ul>
+      <li>发送header</li>
+      <li>建立迁移的准备</li>
+      <li>迭代传输</li>
+      <li>完成迁移</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="qemu-内存迁移---标脏所有的内存页">qemu 内存迁移 - 标脏所有的内存页</h3>
+
+<h4 id="kvm-内存管理简介">kvm 内存管理简介</h4>
+
+<ul>
+  <li>
+    <p>GVA - Guest虚拟地址</p>
+  </li>
+  <li>
+    <p>GPA - Guest物理地址</p>
+  </li>
+  <li>
+    <p>HVA - Host虚拟地址</p>
+  </li>
+  <li>
+    <p>HPA -Host物理地址</p>
+  </li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="n">KVMSlot</span>
+<span class="p">{</span>
+     <span class="n">hwaddr</span> <span class="n">start_addr</span><span class="p">;</span>               <span class="c1">//Guest物理地址块的起始地址</span>
+     <span class="n">ram_addr_t</span> <span class="n">memory_size</span><span class="p">;</span>          <span class="c1">//大小</span>
+     <span class="kt">void</span> <span class="o">*</span><span class="n">ram</span><span class="p">;</span>                       <span class="c1">//QUMU用户空间地址 </span>
+     <span class="kt">int</span> <span class="n">slot</span><span class="p">;</span>                        <span class="c1">//slot id</span>
+     <span class="kt">int</span> <span class="n">flags</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">KVMSlot</span><span class="p">;</span>
+
+
+<span class="k">struct</span> <span class="n">kvm_memslots</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">nmemslots</span><span class="p">;</span>                      <span class="c1">//slot number</span>
+	<span class="k">struct</span> <span class="n">kvm_memory_slot</span> <span class="n">memslots</span><span class="p">[</span><span class="n">KVM_MEMORY_SLOTS</span> <span class="o">+</span> <span class="n">KVM_PRIVATE_MEM_SLOTS</span><span class="p">];</span>
+<span class="p">};</span>
+
+
+<span class="k">struct</span> <span class="n">kvm_memory_slot</span> <span class="p">{</span>
+	<span class="n">gfn_t</span> <span class="n">base_gfn</span><span class="p">;</span>                     <span class="c1">//该块物理内存块所在guest 物理页帧号</span>
+	<span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">npages</span><span class="p">;</span>               <span class="c1">//该块物理内存块占用的page数</span>
+	<span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">flags</span><span class="p">;</span>
+	<span class="kt">unsigned</span> <span class="kt">long</span> <span class="o">*</span><span class="n">rmap</span><span class="p">;</span>                <span class="c1">//分配该块物理内存对应的host内核虚拟地址（vmalloc分配）</span>
+	<span class="kt">unsigned</span> <span class="kt">long</span> <span class="o">*</span><span class="n">dirty_bitmap</span><span class="p">;</span>
+	<span class="k">struct</span> <span class="p">{</span>
+		<span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">rmap_pde</span><span class="p">;</span>
+		<span class="kt">int</span> <span class="n">write_count</span><span class="p">;</span>
+	<span class="p">}</span> <span class="o">*</span><span class="n">lpage_info</span><span class="p">[</span><span class="n">KVM_NR_PAGE_SIZES</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+	<span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">userspace_addr</span><span class="p">;</span>       <span class="c1">//用户空间地址（QEMU)</span>
+	<span class="kt">int</span> <span class="n">user_alloc</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<ol>
+  <li>KVM的虚拟机实际上运行在Qemu的进程上下文中</li>
+  <li>虚拟机的物理内存实际上是Qemu进程的虚拟地址</li>
+  <li>KVMSlot 定义了GPA到HVA的映射关系，也就是虚拟机物理地址和宿主机OS虚拟地址之间的关系</li>
+  <li>Guest运行过程中，内存访问的过程，根据其所在memslot区域获得其对应的HVA 宿主机os虚拟地址，交给宿主机OS将HVA转化为HPA，得到宿主页帧号，对于缺页有缺页处理函数负责完成GPA-&gt;HPA转化</li>
+</ol>
+
+<ul>
+  <li>memory model (info mtree from QEMU monitor console of guest vm)</li>
+  <li>MemoryRegion 用于描述一个范围内的映射规则</li>
+  <li>AddressSpace 用于描述整个地址空间的映射关系</li>
+  <li>guest 通过映射关系访问到这些地址
+    <ul>
+      <li>从顶层 MemoryRegion 逐个找其 child MemoryRegion，其中还需要处理 alias 和 priority 的问题</li>
+      <li>QEMU 在 MemoryRegion 的属性发生修改</li>
+      <li>MemoryRegion 生成 FlatRange，避免逐级查询 MemoryRegion</li>
+      <li>FlatRange 树形结构查询，查询时间复杂度 O(n) 优化到 O(log(N))</li>
+    </ul>
+  </li>
+  <li>例如：kvm 处理 io 端口的操作键盘输入，只要给出 AddressSpace 以及地址，最后就可以找到最后的 handler 为 kbd_read_data</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 调用栈</span>
+<span class="cm">/*
+#2  kbd_read_data (opaque=0x555556844d98, addr=&lt;optimized out&gt;, size=&lt;optimized out&gt;) at ../hw/input/pckbd.c:387
+#3  0x0000555555cd2092 in memory_region_read_accessor (mr=mr@entry=0x555556844df0, addr=0, value=value@entry=0x7fffd9ff9130, size=size@entry=1, shift=0, mask=mask@entry=255, attrs=...) at ../softmmu/memory.c:440
+#4  0x0000555555cceb1e in access_with_adjusted_size (addr=addr@entry=0, value=value@entry=0x7fffd9ff9130, size=size@entry=1, access_size_min=&lt;optimized out&gt;, access_size_max=&lt;optimized out&gt;, access_fn=0x555555cd2050 &lt;memory_region_read_accessor&gt;, mr=0x555556844df0, attrs=...) at ../softmmu/memory.c:554
+#5  0x0000555555cd1ac1 in memory_region_dispatch_read1 (attrs=..., size=&lt;optimized out&gt;, pval=0x7fffd9ff9130, addr=0, mr=0x555556844df0) at ../softmmu/memory.c:1424
+#6  memory_region_dispatch_read (mr=mr@entry=0x555556844df0, addr=0, pval=pval@entry=0x7fffd9ff9130, op=MO_8, attrs=attrs@entry=...) at ../softmmu/memory.c:1452
+#7  0x0000555555c9eb89 in flatview_read_continue (fv=fv@entry=0x7ffe4402d230, addr=addr@entry=96, attrs=..., ptr=ptr@entry=0x7fffeb17d000, len=len@entry=1, addr1=&lt;optimized out&gt;, l=&lt;optimized out&gt;, mr=0x555556844df0) at /home/maritns3/core/kvmqemu/include/qemu/host-utils.h:165
+#8  0x0000555555c9ed43 in flatview_read (fv=0x7ffe4402d230, addr=addr@entry=96, attrs=attrs@entry=..., buf=buf@entry=0x7fffeb17d000, len=len@entry=1) at ../softmmu/physmem.c:2881
+#9  0x0000555555c9ee96 in address_space_read_full (as=0x555556606880 &lt;address_space_io&gt;, addr=96, attrs=..., buf=0x7fffeb17d000, len=1) at ../softmmu/physmem.c:2894
+#10 0x0000555555c9f015 in address_space_rw (as=&lt;optimized out&gt;, addr=addr@entry=96, attrs=..., attrs@entry=..., buf=&lt;optimized out&gt;, len=len@entry=1, is_write=is_write@entry=false) at ../softmmu/physmem.c:2922
+#11 0x0000555555c8ece9 in kvm_handle_io (count=1, size=1, direction=&lt;optimized out&gt;, data=&lt;optimized out&gt;, attrs=..., port=96) at ../accel/kvm/kvm-all.c:2635
+#12 kvm_cpu_exec (cpu=cpu@entry=0x555556af4410) at ../accel/kvm/kvm-all.c:2886
+#13 0x0000555555cf1825 in kvm_vcpu_thread_fn (arg=arg@entry=0x555556af4410) at ../accel/kvm/kvm-accel-ops.c:49
+#14 0x0000555555e55983 in qemu_thread_start (args=&lt;optimized out&gt;) at ../util/qemu-thread-posix.c:541
+#15 0x00007ffff628d609 in start_thread (arg=&lt;optimized out&gt;) at pthread_create.c:477
+#16 0x00007ffff61b4293 in clone () at ../sysdeps/unix/sysv/linux/x86_64/clone.S:95
+*/</span>
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//┌──────────► 这是一个 AddressSpace，AddressSpace 用于描述整个地址空间的映射关系。</span>
+<span class="c1">// │                                        ┌───────────────────────► MemoryRegion 的优先级，如果一个范围两个 MemoryRegion 出现重叠，优先级高的压制优先级低的</span>
+<span class="c1">// │                                        │</span>
+<span class="c1">// │                                        │   ┌───────────────────► 表示这个空间的类型，一般划分为 io 和 RAM</span>
+<span class="c1">// │                                        │   │    ┌──────────────► 这是一个 MemoryRegion，这是 Address Space 中最核心的概念，MemoryRegion 用于描述一个范围内的映射规则</span>
+<span class="c1">//address-space: memory                     │   │    │</span>
+  <span class="mo">0000000000000000</span><span class="o">-</span><span class="n">ffffffffffffffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">system</span>
+  <span class="mo">0000000000000000</span><span class="o">-</span><span class="n">ffffffffffffffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">system</span>
+    <span class="mo">0000000000000000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">bfffffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">ram</span><span class="o">-</span><span class="n">below</span><span class="o">-</span><span class="mi">4</span><span class="n">g</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">0000000000000000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">bfffffff</span> <span class="err">──────────────┐</span>
+    <span class="mo">0000000000000000</span><span class="o">-</span><span class="n">ffffffffffffffff</span> <span class="p">(</span><span class="n">prio</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">pci</span>                                                                       <span class="err">│</span>
+      <span class="mo">00000000000</span><span class="n">a0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">bffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">vga</span><span class="o">-</span><span class="n">lowmem</span>                                                               <span class="err">│</span>
+      <span class="mo">00000000000</span><span class="n">c0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">dffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">rom</span><span class="p">)</span><span class="o">:</span> <span class="n">pc</span><span class="p">.</span><span class="n">rom</span>                                                                   <span class="err">│</span>
+      <span class="mf">00000000000e0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">fffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">rom</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">isa</span><span class="o">-</span><span class="n">bios</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">bios</span> <span class="mo">0000000000020000</span><span class="o">-</span><span class="mo">000000000003</span><span class="n">ffff</span>                <span class="err">│</span>
+      <span class="mo">00000000</span><span class="n">fd000000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">fdffffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">vga</span><span class="p">.</span><span class="n">vram</span>                                                                 <span class="err">│</span>
+      <span class="mo">00000000</span><span class="n">fe000000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">fe003fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">virtio</span><span class="o">-</span><span class="n">pci</span>                                                               <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">fe000000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">fe000fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">virtio</span><span class="o">-</span><span class="n">pci</span><span class="o">-</span><span class="n">common</span><span class="o">-</span><span class="n">virtio</span><span class="o">-</span><span class="mi">9</span><span class="n">p</span>                                            <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">fe001000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">fe001fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">virtio</span><span class="o">-</span><span class="n">pci</span><span class="o">-</span><span class="n">isr</span><span class="o">-</span><span class="n">virtio</span><span class="o">-</span><span class="mi">9</span><span class="n">p</span>                                               <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">fe002000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">fe002fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">virtio</span><span class="o">-</span><span class="n">pci</span><span class="o">-</span><span class="n">device</span><span class="o">-</span><span class="n">virtio</span><span class="o">-</span><span class="mi">9</span><span class="n">p</span>                                            <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">fe003000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">fe003fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">virtio</span><span class="o">-</span><span class="n">pci</span><span class="o">-</span><span class="n">notify</span><span class="o">-</span><span class="n">virtio</span><span class="o">-</span><span class="mi">9</span><span class="n">p</span>                                            <span class="err">│</span>
+      <span class="mo">00000000</span><span class="n">febc0000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febdffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">e1000</span><span class="o">-</span><span class="n">mmio</span>                                                               <span class="err">│</span>
+      <span class="mo">00000000</span><span class="n">febf0000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf3fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">nvme</span><span class="o">-</span><span class="n">bar0</span>                                                                <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">febf0000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf1fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">nvme</span>                                                                   <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">febf2000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf240f</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">msix</span><span class="o">-</span><span class="n">table</span>                                                             <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">febf3000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf300f</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">msix</span><span class="o">-</span><span class="n">pba</span>                                                               <span class="err">│</span>
+      <span class="mo">00000000</span><span class="n">febf4000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf7fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">nvme</span><span class="o">-</span><span class="n">bar0</span>                                                                <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">febf4000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf5fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">nvme</span>                                                                   <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">febf6000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf640f</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">msix</span><span class="o">-</span><span class="n">table</span>                                                             <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">febf7000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf700f</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">msix</span><span class="o">-</span><span class="n">pba</span>                                                               <span class="err">│</span>
+      <span class="mo">00000000</span><span class="n">febf8000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf8fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">vga</span><span class="p">.</span><span class="n">mmio</span>                                                                 <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">febf8000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf817f</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">edid</span>                                                                   <span class="err">└──</span> <span class="n">ram</span><span class="o">-</span><span class="n">below</span><span class="o">-</span><span class="mi">4</span><span class="n">g</span> <span class="err">是</span> <span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="err">的一个</span> <span class="n">alias</span>
+        <span class="mo">00000000</span><span class="n">febf8400</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf841f</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">vga</span> <span class="n">ioports</span> <span class="n">remapped</span>
+        <span class="mo">00000000</span><span class="n">febf8500</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf8515</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">bochs</span> <span class="n">dispi</span> <span class="n">interface</span>                                                  <span class="err">┌──</span> <span class="n">ram</span><span class="o">-</span><span class="n">above</span><span class="o">-</span><span class="mi">4</span><span class="n">g</span> <span class="err">也是</span> <span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="err">的一个</span> <span class="n">alias</span><span class="p">,</span> <span class="err">两者都被放到</span> <span class="n">system</span> <span class="err">这个</span> <span class="n">MemoryRegion</span> <span class="err">上</span>
+        <span class="mo">00000000</span><span class="n">febf8600</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf8607</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">qemu</span> <span class="n">extended</span> <span class="n">regs</span>                                                     <span class="err">│</span>
+      <span class="mo">00000000</span><span class="n">febf9000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf9fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">virtio</span><span class="o">-</span><span class="mi">9</span><span class="n">p</span><span class="o">-</span><span class="n">pci</span><span class="o">-</span><span class="n">msix</span>                                                       <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">febf9000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf901f</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">msix</span><span class="o">-</span><span class="n">table</span>                                                             <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">febf9800</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf9807</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">msix</span><span class="o">-</span><span class="n">pba</span>                                                               <span class="err">│</span>
+      <span class="mo">00000000</span><span class="n">fffc0000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">ffffffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rom</span><span class="p">)</span><span class="o">:</span> <span class="n">pc</span><span class="p">.</span><span class="n">bios</span>                                                                  <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">a0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">bffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">smram</span><span class="o">-</span><span class="n">region</span> <span class="err">@</span><span class="n">pci</span> <span class="mo">00000000000</span><span class="n">a0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">bffff</span>                  <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">c0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">c3fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">c0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">c3fff</span>                    <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">c4000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">c7fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">c4000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">c7fff</span>                    <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">c8000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">cbfff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">c8000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">cbfff</span>                    <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">cb000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">cdfff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">kvmvapic</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">cb000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">cdfff</span>            <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">cc000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">cffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">cc000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">cffff</span>                    <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">d0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">d3fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">d0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">d3fff</span>                    <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">d4000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">d7fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">d4000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">d7fff</span>                    <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">d8000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">dbfff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">d8000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">dbfff</span>                    <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">dc000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">dffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">dc000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">dffff</span>                    <span class="err">│</span>
+    <span class="mf">00000000000e0000</span><span class="o">-</span><span class="mf">00000000000e3</span><span class="n">fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mf">00000000000e0000</span><span class="o">-</span><span class="mf">00000000000e3</span><span class="n">fff</span>                    <span class="err">│</span>
+    <span class="mf">00000000000e4000</span><span class="o">-</span><span class="mf">00000000000e7</span><span class="n">fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">ram</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mf">00000000000e4000</span><span class="o">-</span><span class="mf">00000000000e7</span><span class="n">fff</span>                    <span class="err">│</span>
+    <span class="mf">00000000000e8000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">ebfff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">ram</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mf">00000000000e8000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">ebfff</span>                    <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">ec000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">effff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">ram</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">ec000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">effff</span>                    <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">f0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">fffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">f0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">fffff</span>                    <span class="err">│</span>
+    <span class="mo">00000000</span><span class="n">fec00000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">fec00fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">ioapic</span>                                                                     <span class="err">│</span>
+    <span class="mo">00000000</span><span class="n">fed00000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">fed003ff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">hpet</span>                                                                       <span class="err">│</span>
+    <span class="mo">00000000</span><span class="n">fee00000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">feefffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">4096</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">apic</span><span class="o">-</span><span class="n">msi</span>                                                                <span class="err">│</span>
+    <span class="mo">0000000100000000</span><span class="o">-</span><span class="mo">00000001</span><span class="n">bfffffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">ram</span><span class="o">-</span><span class="n">above</span><span class="o">-</span><span class="mi">4</span><span class="n">g</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000</span><span class="n">c0000000</span><span class="o">-</span><span class="mo">000000017</span><span class="n">fffffff</span> <span class="err">──────────────┘</span>
+</code></pre></div></div>
+
+<h4 id="dirty-page-tracking-脏页标记">dirty page tracking 脏页标记</h4>
+<h5 id="dirty-bitmap">dirty bitmap</h5>
+<ul>
+  <li>bitmap是将原本需要占用1个字节或者多个字节的整数，转化成对一个字节单位中的一个确定位置的比特的占用</li>
+  <li>Bitmaps are bit vectors where each ‘1’ bit in the vector indicates a modified (“dirty”) segment of the corresponding block device. The size of the segment that is tracked is the granularity of the bitmap. If the granularity of a bitmap is 64K, each ‘1’ bit means that a 64K region as a whole may have changed in some way, possibly by as little as one byte.、</li>
+  <li>将向量上的每个“1”表示为对应块的脏页，bitmap的增量每增加“1”，就是每个内存脏页大小（4kByte）变更了</li>
+  <li>
+    <p>核心：使用 bitmap 上每一个 solt 槽位来表示一个固定大小的脏页是否变更</p>
+  </li>
+  <li>https://qemu-project.gitlab.io/qemu/interop/bitmaps.html</li>
+</ul>
+
+<h5 id="dirty-ring">dirty ring</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* https://blog.csdn.net/huang987246510/article/details/112293303
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+-------------+          +----------+       +--------------+          +---------------------+
+|             |          | ram_list +-----&gt; | dirty_memory +--------&gt; | migration_bitmap_rcu|
+|             |          +----------+       +------+-------+          +---------------------+
+| Guest       |                                    ^
+|             |                                    |
+|             |                                    |
+|             |                                    |用户态
+|             +--------------------------------+   |-----
+|             |                                |   |内核态
+|             |                                |   |
+|             |                                |   |
+|             |                                v   |
+|             |                                    |
+|             |          +---------+       +-------+--------+
+|             |          | memslot +-----&gt; | dirty_bitmap   |
++-------------+          +---------+       +----------------+
+</code></pre></div></div>
+
+<h5 id="用户态">用户态</h5>
+<ul>
+  <li>用户态与脏页统计有关的数据结构：RAMList和RAMBlock</li>
+  <li>RAMList用在从内核获取脏页的时候，它表示脏页的粒度是kvm中的一个slot
+    <ul>
+      <li>如前所述：KVMSlot 定义了GPA到HVA的映射关系，也就是虚拟机物理地址和宿主机OS虚拟地址之间的关系</li>
+    </ul>
+  </li>
+  <li>RAMBlock中的位图用来描述一个RAMBlock的脏页使用情况，它表示的脏页粒度是Qemu中的一个RAMBlock</li>
+  <li>在内存迁移统计脏页过程中，会依次使用这两个数据结构统计剩余内存的脏页数量</li>
+</ul>
+
+<h5 id="内核态">内核态</h5>
+<ul>
+  <li>kvm_userspace_memory_region</li>
+  <li>kvm_dirty_log</li>
+  <li>kvm_memory_slot</li>
+  <li>为了让用于态统计虚机的脏页，内核提供了两个接口，分别是KVM_SET_USER_MEMORY_REGION、KVM_GET_DIRTY_LOG，这两个接口</li>
+  <li>内核提供了两个命令供用户态统计虚机的脏页，KVM_SET_USER_MEMORY_REGION、KVM_GET_DIRTY_LOG，KVM_SET_USER_MEMORY_REGION命令字作用在vm的fd，用来通知kvm开启对某段内存区域的脏页跟踪，结构体kvm_userspace_memory_region 是用户态传入的参数，用来描述kvm应该跟踪的内存区域</li>
+  <li>KVM_GET_DIRTY_LOG命令字作用在vm的fd，用来获取内核跟踪的脏页信息，结构体kvm_dirty_log作为参数用来指定要查询的内存slot，同时保存内核的脏页查询结果</li>
+</ul>
+
+<h5 id="交互过程简介">交互过程简介</h5>
+<ul>
+  <li>根据PML的硬件特性，每当CPU在Guest态根据EPT转换地址后，写数据到物理页，这时如果PML特性开启，在设置EPT页表项的Dirty位之后，还会将GPA地址写入PML Buffer。</li>
+</ul>
+
+<h5 id="清零dirty位">清零Dirty位</h5>
+
+<ul>
+  <li>KVM的实现中，在创建slot时，如果不想记录某个slot包含的所有物理页的是否为脏，需要默认将这些物理页对应的页表项的Dirty页置位，因为如果Dirty位是0，Guest态CPU写物理页时会将其置1并且填充GPA到PML Buffer，如果PML Buffer满了，就会触发VMExit，增加不必要的开销。反之，要记录脏页，首先需要将指向slot包含的所有物理页的spte的Dirty位清零，这里需要根据gfn找到指向该gfn对应页的spte，反向映射数组rmap就派上了用场。
+物理页开启写保护：除了清零页表项的Dirty位，记录脏页还需要开启页的写保护，在脏页记录的过程中，所有slot包含的物理页变成只读，当CPU写访问这个页时，发生缺页异常，kvm会重新分配一个新的页给CPU。在脏页记录关闭后，才能将写保护去掉，slot包含的所有页变成可读写。</li>
+</ul>
+
+<h5 id="步骤">步骤</h5>
+<ol>
+  <li>qemu 初始化一个 bitmap 结构体 <code class="language-plaintext highlighter-rouge">migration_bitmap_rcu</code> 并set所有的solt 为1</li>
+  <li>qemu 将对内存页的标脏提交给 kvm 并调用 address_space_update_topology_pass</li>
+  <li>address_space_update_topology_pass 调用 log_start 将已经定义的 memory slot 增加 KVM_MEM_LOG_DIRTY_PAGES 的 flag，这一步就是内核标脏</li>
+  <li>kvm_create_dirty_bitmap kvm 初始化内存脏页 bitmap kvm_create_dirty_bitmap</li>
+  <li>qemu kvm 通过 migration_bitmap_sync 将内核脏页的 usersSpace 同步到 ram_list 结构体中</li>
+  <li>migration_bitmap_sync 将当前 ram_list 中的脏页 bitmap 拷贝到 migration_bitmap_rcu，这一步主要就是将kernal中的脏页同步回 qemu bitmap 结构体中</li>
+  <li>通过对 migration_bitmap_rcu-&gt;bmap 的迭代，qemu将通过调用 ram_find_and_save_block 找到脏页并将脏页写入初始化的 fd</li>
+</ol>
+
+<h5 id="简化步骤">简化步骤</h5>
+<ol>
+  <li>qemu 初始化一个处于用户态的 bitmap 用于记录脏页，并set所有的solt 为1</li>
+  <li>qemu 初始化 RAMList 和 RAMBlock，分别用于存储虚拟机整个地址空间 kvmslot 和 用于表示单个脏页的 RAMBlock</li>
+  <li>qemu 将对内存页的标脏提交给 kvm</li>
+  <li>kvm 将已经定义的 memory slot 增加标脏的 flag，这一步就是内核标脏</li>
+  <li>qemu kvm中通过 kvm_vm_ioctl 获取内存脏页并同步到 RAMList和RAMBlock</li>
+  <li>将当前 ram_list 中的脏页 bitmap 拷贝到 migration_bitmap_rcu，这一步主要就是将kernal中的脏页同步回 qemu bitmap 结构体中</li>
+  <li>通过对 migration_bitmap_rcu-&gt;bmap 的迭代，qemu将通过调用 ram_find_and_save_block 找到脏页并将脏页写入初始化的 fd</li>
+  <li>对已经完成拷贝的 block 进行清脏 KVM_CLEAR_DIRTY_LOG（一次拷贝完成，对端返回脏页数量）</li>
+  <li>计算内存脏页率</li>
+  <li>进行第二次拷贝</li>
+</ol>
+
+<ul>
+  <li>执行栈帧
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>(gdb) bt
+#0  kvm_set_user_memory_region (kml=0x55ab8fc502c0, slot=0x55ab8fc50500) at /home/liqiang02/qemu0711/qemu-2.8/kvm-all.c:236
+#1  0x000055ab8df10a92 in kvm_slot_update_flags (kml=0x55ab8fc502c0, mem=0x55ab8fc50500, mr=0x55ab8fd36f70)
+  at /home/liqiang02/qemu0711/qemu-2.8/kvm-all.c:376
+#2  0x000055ab8df10b1f in kvm_section_update_flags (kml=0x55ab8fc502c0, section=0x7f0ab37fb4c0)
+  at /home/liqiang02/qemu0711/qemu-2.8/kvm-all.c:389
+#3  0x000055ab8df10b65 in kvm_log_start (listener=0x55ab8fc502c0, section=0x7f0ab37fb4c0, old=0, new=4)
+  at /home/liqiang02/qemu0711/qemu-2.8/kvm-all.c:404
+#4  0x000055ab8df18b33 in address_space_update_topology_pass (as=0x55ab8ea21880 &lt;address_space_memory&gt;, old_view=0x7f0cc4118ca0, 
+  new_view=0x7f0aa804d380, adding=true) at /home/liqiang02/qemu0711/qemu-2.8/memory.c:854
+#5  0x000055ab8df18d9b in address_space_update_topology (as=0x55ab8ea21880 &lt;address_space_memory&gt;)
+  at /home/liqiang02/qemu0711/qemu-2.8/memory.c:886
+#6  0x000055ab8df18ed6 in memory_region_transaction_commit () at /home/liqiang02/qemu0711/qemu-2.8/memory.c:926
+#7  0x000055ab8df1c9ef in memory_global_dirty_log_start () at /home/liqiang02/qemu0711/qemu-2.8/memory.c:2276
+#8  0x000055ab8df30ce6 in ram_save_init_globals () at /home/liqiang02/qemu0711/qemu-2.8/migration/ram.c:1939
+#9  0x000055ab8df30d36 in ram_save_setup (f=0x55ab90d874c0, opaque=0x0) at /home/liqiang02/qemu0711/qemu-2.8/migration/ram.c:1960
+#10 0x000055ab8df3609a in qemu_savevm_state_begin (f=0x55ab90d874c0, params=0x55ab8ea0178c &lt;current_migration+204&gt;)
+  at /home/liqiang02/qemu0711/qemu-2.8/migration/savevm.c:956
+#11 0x000055ab8e25d9b8 in migration_thread (opaque=0x55ab8ea016c0 &lt;current_migration&gt;) at migration/migration.c:1829
+#12 0x00007f0cda1fd494 in start_thread () from /lib/x86_64-linux-gnu/libpthread.so.0
+#13 0x00007f0cd9f3facf in clone () from /lib/x86_64-linux-gnu/libc.so.6
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="4---qemu-向-tcp-sockets-中写入内存数据迁移的控制层和实现层完全分开">4 - qemu 向 tcp sockets 中写入内存数据（迁移的控制层和实现层完全分开）</h3>
+<ul>
+  <li>开始迁移内存，将内存数据拷贝到目的端（defaultpage size 4k）</li>
+  <li>发送内存数据到目的端，返回发送的内存页个数</li>
+  <li>qemu每拷贝一次内存之前，会统计一次剩余的脏页数量，对比域值后决定是否一次性迁移
+    <ul>
+      <li>脏页统计方法：dirtyrate = increased_memory / meaurement_time</li>
+      <li>脏页速率越大，虚机内存变化越快，迁移时花费的时间就越多</li>
+      <li>脏页统计率的统计过程和 dirty page tracking 类似，也是通过对内核中的脏页和qemu bitmap 之间的同步来计算增量</li>
+      <li>https://blog.csdn.net/huang987246510/article/details/118424717</li>
+    </ul>
+  </li>
+  <li>内存发送和接收</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   source                                destination
+
+            +------------------------+             +-------------------------+
+            |                        |             |                         |
+  SETUP     | ram_save_setup         |             |  ram_load_setup         |
+            |                        |             |                         |
+            +------------------------+             +-------------------------+
+
+            sync dirty bit to                      Setup RAMBlock-&gt;receivedmap
+        RAMBlock-&gt;bmap
+
+
+            +------------------------+             +-------------------------+
+            |                        |             |                         |
+  ITER      | ram_save_pending       |             |  ram_load               |
+            | ram_save_iterate       |             |                         |
+            |                        |             |                         |
+            +------------------------+             +-------------------------+
+
+            sync dirty bit                         Receive page
+        and send page
+
+
+            +------------------------+             +-------------------------+
+            |                        |             |                         |
+  COMP      | ram_save_pending       |             |  ram_load               |
+            | ram_save_complete      |             |                         |
+            |                        |             |                         |
+            +------------------------+             +-------------------------+
+
+            sync dirty bit                         Receive page
+              and send page
+</code></pre></div></div>
+
+<h3 id="5---迭代所有脏页脏页达到一定的水平线">5 - 迭代所有脏页，脏页达到一定的水平线</h3>
+<ul>
+  <li>TODO</li>
+</ul>
+
+<h3 id="6---暂停虚拟机默认值30ms一次性迁移剩余脏页">6 - 暂停虚拟机（默认值30ms），一次性迁移剩余脏页</h3>
+<h3 id="7---启动目的端vm">7 - 启动目的端vm</h3>
+
+<h1 id="热迁移-downtime">热迁移 downtime</h1>
+
+<h2 id="什么是-downtime">什么是 downtime</h2>
+<ul>
+  <li>脏页率达到指定阈值之后，暂停虚拟机，一次性迁移剩余脏页，并启动目的虚拟机的过程耗时</li>
+  <li>热迁移的停机时间（downtime）不是简单设置一个数字</li>
+  <li>迁移过程中的停机时间是变化的</li>
+  <li>不断增加，在一段时间后停机时间达到最终的最大值（用户态给定的最大值），这个值就是 live_migration_downtime</li>
+</ul>
+
+<h2 id="影响参数">影响参数</h2>
+<ul>
+  <li>CONF.libvirt.live_migration_downtime
+    <ul>
+      <li>最大值，手动配置、配置读取</li>
+      <li>downtime_steps 每个 Step 的 max downtime 都在递增直到真正用户设定的最大可容忍 downtime，
+这是因为 Nova 在不断的试探实际最小的 max downtime，尽可能早的进入退出状态。</li>
+    </ul>
+  </li>
+  <li>CONF.libvirt.live_migration_downtime_steps
+    <ul>
+      <li>最大值，手动配置、配置读取</li>
+      <li>一个元组表示一个 Step，分 Steps 次给 libvirtd 传输</li>
+    </ul>
+  </li>
+  <li>CONF.libvirt.live_migration_downtime_delay
+    <ul>
+      <li>最大值，手动配置、配置读取</li>
+      <li>下一次传递时间间隔</li>
+    </ul>
+  </li>
+  <li>downtime 通过上面一个算法得出：每次迭代都会重新计算虚拟机新的脏内存以及每次迭代所花掉的时间来估算带宽，再根据带宽和当前迭代的脏页数计算出传输剩余数据的时间</li>
+  <li>如果最后一次 libvirtd 迭代计算出来的 downtime 在传递的 downtime 范围内，则满足退出条件</li>
+  <li>自动收敛模式：如果虚拟机持续处于高业务状态，那么 libvirtd 会自动调整 vCPU 参数以减轻负载，达到降低脏内存的增长速度，从而保证 downtime 进入退出范围</li>
+  <li>compute 中通过 migrateSetMaxDowntime 实现</li>
+</ul>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/philosophy/marxism/2022/11/19/Criticism-of-Hegelianism.html" title="Criticism Of Hegelianism">Criticism Of Hegelianism</a><span></span>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li class="">
+          <a class="post-link" href="/%E5%AE%9E%E8%B7%B5/%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/2020/04/16/tcp-network-analysis.html" title="生产环境TCP网络问题分析">
+            生产环境TCP网络问题分析<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E8%AF%AD%E8%A8%80/python/2020/04/26/python-core.html" title="Python&amp;CPython核心">
+            Python&amp;CPython核心<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%9F%BA%E7%A1%80/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/2020/03/27/csapp.html" title="深入理解计算机系统 [Computer-Systems-A-Programmer's-Perspective]">
+            深入理解计算机系统 [Computer-Systems-A-Programmer's-Perspective]<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/2020/03/16/network-curve.html" title="计算机网络">
+            计算机网络<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2023 Adam Yan Na</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

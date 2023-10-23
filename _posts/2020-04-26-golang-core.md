@@ -1,9 +1,10 @@
 ---
+layout: post
 title: Golang核心
+subtitle: 
 author: Teddy
-date: 2020-04-26 10:00:00 +0800
-categories: [体系结构-语言, Golang]
-tags: [Go]
+categories: 体系结构-语言 Golang
+tags: Go
 ---
 
 # Golang核心

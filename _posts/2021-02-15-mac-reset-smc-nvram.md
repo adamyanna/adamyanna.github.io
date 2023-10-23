@@ -1,9 +1,10 @@
 ---
-title: mac-reset-smc-nvram 
+layout: post
+title: Mac Reset Smc nvram
+subtitle: mac-reset-smc-nvram
 author: Teddy
-date: 2021-02-15 16:15:52 +0800
-categories: [规划, 工作流]
-tags: [mac]
+categories: 规划 工作流
+tags: mac
 ---
 
 # Mac 重置 SMC 和 NVRAM

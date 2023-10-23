@@ -1,9 +1,9 @@
 ---
+layout: post
 title: V2ray Nginx 配置
 author: Teddy
-date: 2018-12-05 12:00:00 +0800
-categories: [实践, 实践记录]
-tags: [V2ray]
+categories: 实践 实践记录
+tags: V2ray
 ---
 
 # V2ray Nginx 配置

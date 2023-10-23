@@ -1,9 +1,9 @@
 ---
+layout: post
 title: linux signal
 author: Teddy
-date: 2020-04-09 10:00:00 +0800
-categories: [体系结构-基础, Linux]
-tags: [TODO, Man-Signal]
+categories: 体系结构-基础 Linux
+tags: TODO Man-Signal
 ---
 
 # linux signal

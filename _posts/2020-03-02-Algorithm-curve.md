@@ -1,9 +1,9 @@
 ---
+layout: post
 title: My Algorithm Curve
 author: Teddy
-date: 2020-03-02 10:00:00 +0800
-categories: [实践, 算法训练]
-tags: [Algorithm]
+categories: 实践 算法训练
+tags: Algorithm
 ---
 
 # 做题路径-重要算法思想

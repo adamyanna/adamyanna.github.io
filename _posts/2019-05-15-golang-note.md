@@ -1,9 +1,9 @@
 ---
+layout: post
 title: Learning Golang
 author: Teddy
-date: 2019-02-20 10:00:00 +0800
-categories: [体系结构-语言, Go]
-tags: [Go]
+categories: 体系结构-语言 Go
+tags: Go
 ---
 
 # 1. Basic syntax

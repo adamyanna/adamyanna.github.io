@@ -1,9 +1,9 @@
 ---
+layout: post
 title: Algorithm Matrix
 author: Teddy
-date: 2018-10-26 18:00:00 +0800
-categories: [实践, 算法训练]
-tags: [Algorithm]
+categories: 实践 算法训练
+tags: Algorithm
 ---
 
 

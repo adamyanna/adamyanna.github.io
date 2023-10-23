@@ -1,9 +1,9 @@
 ---
+layout: post
 title: SumOf2019 - DataInfluxPatrol
 author: Teddy
-date: 2019-12-01 10:00:00 +0800
-categories: [实践, 需求实现]
-tags: [SumOf2019, DataInfluxPatrol-Golang]
+categories: 实践 需求实现
+tags: SumOf2019 DataInfluxPatrol-Golang
 ---
 
 # DataInfluxPatrol-Golang

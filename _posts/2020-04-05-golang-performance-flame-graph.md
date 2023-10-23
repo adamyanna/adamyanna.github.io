@@ -1,9 +1,9 @@
 ---
+layout: post
 title: Golang性能分析和监控
 author: Teddy
-date: 2020-04-05 10:00:00 +0800
-categories: [体系结构-语言, Golang]
-tags: [Go, Go-pprof, Flamegraph]
+categories: 体系结构-语言 Golang
+tags: Go, Go-pprof Flamegraph
 ---
 
 # Golang性能分析和监控

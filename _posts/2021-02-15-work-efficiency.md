@@ -1,9 +1,10 @@
 ---
-title: work-efficiency 
+layout: post
+title: Work Efficiency
+subtitle: work-efficiency 
 author: Teddy
-date: 2021-02-15 16:17:50 +0800
-categories: [规划, 工作流]
-tags: [efficiency]
+categories: 规划 工作流
+tags: efficiency
 ---
 
 # 如何行之有效的提高工作效率，避免完美主义，为自己保留更多可支配时间

@@ -1,9 +1,10 @@
 ---
+layout: post
 title: 现代操作系统
+subtitle: 
 author: Teddy
-date: 2020-04-20 10:00:00 +0800
-categories: [体系结构-基础, 现代操作系统]
-tags: [Operating-System, Linux]
+categories: 体系结构-基础 现代操作系统
+tags: Operating-System Linux
 ---
 
 # 现代操作系统

@@ -1,9 +1,9 @@
 ---
+layout: post
 title: Prometheus
 author: Teddy
-date: 2020-04-06 10:00:00 +0800
-categories: [体系结构-应用, 监控系统]
-tags: [TODO, Prometheus, OpenSource, Go]
+categories: 体系结构-应用 监控系统
+tags: TODO, Prometheus, OpenSource Go
 ---
 
 

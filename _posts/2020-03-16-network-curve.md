@@ -1,9 +1,9 @@
 ---
+layout: post
 title: 计算机网络
 author: Teddy
-date: 2020-03-16 10:00:00 +0800
-categories: [体系结构-基础, 计算机网络]
-tags: [Network]
+categories: 体系结构-基础 计算机网络
+tags: Network
 ---
 
 

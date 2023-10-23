@@ -1,9 +1,9 @@
 ---
+layout: post
 title: Python进程内存分析&大量内存占用的优化方案
 author: Teddy
-date: 2020-03-29 10:00:00 +0800
-categories: [体系结构-语言, Python]
-tags: [GDB-gcc-debug, jemalloc, ptmalloc2, TCMalloc]
+categories: 体系结构-语言 Python
+tags: GDB-gcc-debug jemalloc ptmalloc2 TCMalloc
 ---
 
 # Python进程内存分析&大量内存占用的优化方案

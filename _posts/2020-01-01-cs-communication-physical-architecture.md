@@ -1,9 +1,9 @@
 ---
+layout: post
 title: 体系结构-树
 author: Teddy
-date: 2020-01-01 00:00:00 +0800
-categories: [规划, 体系结构]
-tags: [体系结构]
+categories: 规划 体系结构
+tags: 体系结构
 ---
 
 # 体系结构-树

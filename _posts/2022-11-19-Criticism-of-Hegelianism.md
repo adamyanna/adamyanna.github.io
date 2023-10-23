@@ -1,9 +1,10 @@
 ---
-title: criticism-of-hegelianism 
+layout: post
+title: Criticism Of Hegelianism
+subtitle: criticism-of-hegelianism
 author: Teddy
-date: 2022-11-19 10:00:43 +0800
-categories: [Philosophy, Marxism]
-tags: [Criticism, Marxism]
+categories: Philosophy Marxism
+tags: Criticism
 ---
 
 # Criticism of Hegelianism: “All that is real isrational; and all that is rational is real.”

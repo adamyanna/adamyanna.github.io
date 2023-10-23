@@ -1,9 +1,10 @@
 ---
+layout: post
 title: 监控系统1.5版本项目重组
+subtitle: 
 author: Teddy
-date: 2020-05-14 14:52:45 +0800
-categories: [实践, 需求实现]
-tags: [Monitor-System]
+categories: 实践 需求实现
+tags: Monitor-System
 ---
 
 # 监控系统1.5版本项目重组

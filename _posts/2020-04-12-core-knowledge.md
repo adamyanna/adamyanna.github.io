@@ -1,9 +1,9 @@
 ---
+layout: post
 title: 核心知识库
 author: Teddy
-date: 2020-04-12 10:00:00 +0800
-categories: [体系结构-基础, 核心知识]
-tags: [Core-Knowledge]
+categories: 体系结构-基础 核心知识
+tags: Core-Knowledge
 ---
 
 # 核心知识库

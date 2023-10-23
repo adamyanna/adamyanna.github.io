@@ -1,1 +1,2948 @@
-<feed xmlns="http://www.w3.org/2005/Atom"> <id>http://localhost:4000</id><title>TeddyGoodman</title><subtitle></subtitle> <updated>2022-11-19T10:46:33+08:00</updated> <author> <name>TeddyGoodman</name> <uri>http://localhost:4000</uri> </author><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000" rel="alternate" type="text/html" /> <generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator> <rights> © 2022 TeddyGoodman </rights> <icon>/assets/img/favicons/favicon.ico</icon> <logo>/assets/img/favicons/favicon-96x96.png</logo> <entry><title>criticism-of-hegelianism</title><link href="http://localhost:4000/posts/criticism-of-hegelianism/" rel="alternate" type="text/html" title="criticism-of-hegelianism" /><published>2022-11-19T10:00:43+08:00</published> <updated>2022-11-19T10:46:33+08:00</updated> <id>http://localhost:4000/posts/criticism-of-hegelianism/</id> <content src="http://localhost:4000/posts/criticism-of-hegelianism/" /> <author> <name>TeddyGoodman</name> </author> <category term="Philosophy" /> <category term="Marxism" /> <summary>Criticism of Hegelianism: “All that is real isrational; and all that is rational is real.” 对于 “存在即合理” 的黑格尔主义的批判 序： 似乎在历史的发展过程中，哪一个哲学命题都没有像黑格尔的命题可以让其成为很大一部分人脱口而出的对现实问题的最终解，与所谓“现代社会”将一切与人相关的矛盾都归一到“...</summary> </entry> <entry><title>work-efficiency</title><link href="http://localhost:4000/posts/work-efficiency/" rel="alternate" type="text/html" title="work-efficiency" /><published>2021-02-15T16:17:50+08:00</published> <updated>2022-11-19T10:46:33+08:00</updated> <id>http://localhost:4000/posts/work-efficiency/</id> <content src="http://localhost:4000/posts/work-efficiency/" /> <author> <name>TeddyGoodman</name> </author> <category term="规划" /> <category term="工作流" /> <summary>如何行之有效的提高工作效率，避免完美主义，为自己保留更多可支配时间 避免完美主义，对于已经能够达成目标的任务，不再花过多时间将其 ”完美化“； 重新建立时间观念，对于工作过程中任务进度的变化尽早感知并修改当日计划，越早延期任务效果越好； 建立严格的节奏和规律，确定好抽离出工作任务的时间结点，不能因为”过于投入“而再次透支当日精力； 合理规划睡眠、起床、运动时间，尽最大可能...</summary> </entry> <entry><title>mac-reset-smc-nvram</title><link href="http://localhost:4000/posts/mac-reset-smc-nvram/" rel="alternate" type="text/html" title="mac-reset-smc-nvram" /><published>2021-02-15T16:15:52+08:00</published> <updated>2022-11-19T10:46:33+08:00</updated> <id>http://localhost:4000/posts/mac-reset-smc-nvram/</id> <content src="http://localhost:4000/posts/mac-reset-smc-nvram/" /> <author> <name>TeddyGoodman</name> </author> <category term="规划" /> <category term="工作流" /> <summary>Mac 重置 SMC 和 NVRAM 第一步 重置系统管理控制器(SMC) 将 Mac 关机。 将 MagSafe 或 USB-C 电源适配器连接到电源和 Mac。 在内建键盘上，按下键盘左侧的 Shift-Control-Option 键，然后同时按下电源按钮。 松开所有按键，然后再次按下电源按钮以开启 Mac...</summary> </entry> <entry><title>research-of-ergonomics</title><link href="http://localhost:4000/posts/research-of-ergonomics/" rel="alternate" type="text/html" title="research-of-ergonomics" /><published>2021-02-15T16:09:45+08:00</published> <updated>2022-11-19T10:46:33+08:00</updated> <id>http://localhost:4000/posts/research-of-ergonomics/</id> <content src="http://localhost:4000/posts/research-of-ergonomics/" /> <author> <name>TeddyGoodman</name> </author> <category term="规划" /> <category term="问题研究" /> <summary>健康的办公坐姿研究 正确坐姿 脚面轻松接触地面，完全平放地面 check 小腿与大腿之间夹角大于等于90度 check 大腿超出椅面3公分到5公分 check 腰部下背部有支撑 cehck 颈椎有头枕支撑 check 身体与大腿角度 90~110度之间，越大腰部颈部压力越小 check 平视显示器，视线处于显示器中上段 手托不能太高，让大臂和小臂自然成9...</summary> </entry> <entry><title>敏捷开发-Agile</title><link href="http://localhost:4000/posts/roles-of-agile-team/" rel="alternate" type="text/html" title="敏捷开发-Agile" /><published>2020-09-22T20:05:23+08:00</published> <updated>2022-11-19T10:46:33+08:00</updated> <id>http://localhost:4000/posts/roles-of-agile-team/</id> <content src="http://localhost:4000/posts/roles-of-agile-team/" /> <author> <name>TeddyGoodman</name> </author> <category term="实践" /> <category term="敏捷开发" /> <summary>敏捷开发 敏捷团队中的角色 Business owner 行业客户，需求提出方 Developer 开发工程师，开发需求并交付产品 End user 端用户，产品面向用户 BA Business Analyst - 业务分析员 负责理解并挖掘客户的需求，然后将需求转化为具体的 AC（Acceptance criteria, 验收标准） ...</summary> </entry> </feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-10-23T23:11:26+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Adam Yan Na Blog</title><subtitle>I am a Senior Cloud Computing ECS/EC2 Engineer specializing in IaaS R&amp;D.</subtitle><author><name>Adam Yan Na</name></author><entry><title type="html">Live Migration Precopy Analyze</title><link href="http://localhost:4000/cloudcomputing/2023/01/02/live_migration_precopy.html" rel="alternate" type="text/html" title="Live Migration Precopy Analyze" /><published>2023-01-02T00:00:00+08:00</published><updated>2023-01-02T00:00:00+08:00</updated><id>http://localhost:4000/cloudcomputing/2023/01/02/live_migration_precopy</id><content type="html" xml:base="http://localhost:4000/cloudcomputing/2023/01/02/live_migration_precopy.html"><![CDATA[<h1 id="热迁移原理">热迁移原理</h1>
+
+<h2 id="热迁移核心步骤">热迁移核心步骤</h2>
+
+<h3 id="虚拟化层面实现流程和通信方式">虚拟化层面实现流程和通信方式</h3>
+
+<ol>
+  <li>通过 python libvirt 接口启动 libvirt 迁移流程</li>
+  <li>client（agent compute）连接源端 libvirtd 进程</li>
+  <li>client 连接目的端 libvirt 进程</li>
+  <li>调用源端 domainMigrateBegin3</li>
+  <li>调用目的端 domainMigratePrapare3</li>
+  <li>调用源端 domainMigratePerform3
+ domainMigratePerform3函数主要是执行迁移操作，将源端的数据迁移到目的端。然后等待迁移完成的信号
+ 大致的调用流程：
+     1. qemuDomainMigratePerform3 → 
+         qemuMigrationPerform → 
+         qemuMigrationPerformPhase → 
+         doNativeMigrate → 
+         qemuMigrationRun → 
+         qemuMonitorSetMigrationSpeed →
+         qemuMigrationConnect →<br />
+         qemuMonitorMigrateToHost → 
+         qemuMonitorJSONMigrate 
+     2. 终会调用到 QEMU中的qmp_migrate
+     3. setup iterature complete</li>
+  <li>源端 libvirtd 进程调用 源端 qemu qmp_migrate 
+ tcp_start_outgoing_migration
+ migrate_fd_connect
+ migrate_compress_thread_create
+ migration_thread
+ qemu_savevm_state_begin
+ qemu_savevm_state_pending
+ qemu_savevm_state_iterate
+ migration_completion
+ vm_stop</li>
+  <li>目的端
+ qemu_start_incoming_migration
+ tcp_start_incoming_migration
+ process_incoming_migration_co
+ migrate_decompress_threads_create
+ qemu_loadvm_state
+ cpu_synchronize_all_post_init
+ process_incoming_migration_bin
+ vm_start</li>
+</ol>
+
+<h3 id="源端调用流程分析">源端调用流程分析</h3>
+<ul>
+  <li>TODO</li>
+</ul>
+
+<h3 id="目的端调用流程分析">目的端调用流程分析</h3>
+<ul>
+  <li>TODO</li>
+</ul>
+
+<h3 id="qmp_migrate">qmp_migrate</h3>
+<ul>
+  <li>tcp_start_outgoing_migration
+    <ul>
+      <li>创建和目的端 libvirt 的 tcp 连接</li>
+    </ul>
+  </li>
+  <li>migrate_fd_connect
+    <ul>
+      <li>qemu接收来自 libvirt 传入的fd (tcp socket)，准备写入数据</li>
+    </ul>
+  </li>
+  <li>迁移主函数 migration_thread
+    <ul>
+      <li>发送header</li>
+      <li>建立迁移的准备</li>
+      <li>迭代传输</li>
+      <li>完成迁移</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="qemu-内存迁移---标脏所有的内存页">qemu 内存迁移 - 标脏所有的内存页</h3>
+
+<h4 id="kvm-内存管理简介">kvm 内存管理简介</h4>
+
+<ul>
+  <li>
+    <p>GVA - Guest虚拟地址</p>
+  </li>
+  <li>
+    <p>GPA - Guest物理地址</p>
+  </li>
+  <li>
+    <p>HVA - Host虚拟地址</p>
+  </li>
+  <li>
+    <p>HPA -Host物理地址</p>
+  </li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="n">KVMSlot</span>
+<span class="p">{</span>
+     <span class="n">hwaddr</span> <span class="n">start_addr</span><span class="p">;</span>               <span class="c1">//Guest物理地址块的起始地址</span>
+     <span class="n">ram_addr_t</span> <span class="n">memory_size</span><span class="p">;</span>          <span class="c1">//大小</span>
+     <span class="kt">void</span> <span class="o">*</span><span class="n">ram</span><span class="p">;</span>                       <span class="c1">//QUMU用户空间地址 </span>
+     <span class="kt">int</span> <span class="n">slot</span><span class="p">;</span>                        <span class="c1">//slot id</span>
+     <span class="kt">int</span> <span class="n">flags</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">KVMSlot</span><span class="p">;</span>
+
+
+<span class="k">struct</span> <span class="n">kvm_memslots</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">nmemslots</span><span class="p">;</span>                      <span class="c1">//slot number</span>
+	<span class="k">struct</span> <span class="n">kvm_memory_slot</span> <span class="n">memslots</span><span class="p">[</span><span class="n">KVM_MEMORY_SLOTS</span> <span class="o">+</span> <span class="n">KVM_PRIVATE_MEM_SLOTS</span><span class="p">];</span>
+<span class="p">};</span>
+
+
+<span class="k">struct</span> <span class="n">kvm_memory_slot</span> <span class="p">{</span>
+	<span class="n">gfn_t</span> <span class="n">base_gfn</span><span class="p">;</span>                     <span class="c1">//该块物理内存块所在guest 物理页帧号</span>
+	<span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">npages</span><span class="p">;</span>               <span class="c1">//该块物理内存块占用的page数</span>
+	<span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">flags</span><span class="p">;</span>
+	<span class="kt">unsigned</span> <span class="kt">long</span> <span class="o">*</span><span class="n">rmap</span><span class="p">;</span>                <span class="c1">//分配该块物理内存对应的host内核虚拟地址（vmalloc分配）</span>
+	<span class="kt">unsigned</span> <span class="kt">long</span> <span class="o">*</span><span class="n">dirty_bitmap</span><span class="p">;</span>
+	<span class="k">struct</span> <span class="p">{</span>
+		<span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">rmap_pde</span><span class="p">;</span>
+		<span class="kt">int</span> <span class="n">write_count</span><span class="p">;</span>
+	<span class="p">}</span> <span class="o">*</span><span class="n">lpage_info</span><span class="p">[</span><span class="n">KVM_NR_PAGE_SIZES</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+	<span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">userspace_addr</span><span class="p">;</span>       <span class="c1">//用户空间地址（QEMU)</span>
+	<span class="kt">int</span> <span class="n">user_alloc</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<ol>
+  <li>KVM的虚拟机实际上运行在Qemu的进程上下文中</li>
+  <li>虚拟机的物理内存实际上是Qemu进程的虚拟地址</li>
+  <li>KVMSlot 定义了GPA到HVA的映射关系，也就是虚拟机物理地址和宿主机OS虚拟地址之间的关系</li>
+  <li>Guest运行过程中，内存访问的过程，根据其所在memslot区域获得其对应的HVA 宿主机os虚拟地址，交给宿主机OS将HVA转化为HPA，得到宿主页帧号，对于缺页有缺页处理函数负责完成GPA-&gt;HPA转化</li>
+</ol>
+
+<ul>
+  <li>memory model (info mtree from QEMU monitor console of guest vm)</li>
+  <li>MemoryRegion 用于描述一个范围内的映射规则</li>
+  <li>AddressSpace 用于描述整个地址空间的映射关系</li>
+  <li>guest 通过映射关系访问到这些地址
+    <ul>
+      <li>从顶层 MemoryRegion 逐个找其 child MemoryRegion，其中还需要处理 alias 和 priority 的问题</li>
+      <li>QEMU 在 MemoryRegion 的属性发生修改</li>
+      <li>MemoryRegion 生成 FlatRange，避免逐级查询 MemoryRegion</li>
+      <li>FlatRange 树形结构查询，查询时间复杂度 O(n) 优化到 O(log(N))</li>
+    </ul>
+  </li>
+  <li>例如：kvm 处理 io 端口的操作键盘输入，只要给出 AddressSpace 以及地址，最后就可以找到最后的 handler 为 kbd_read_data</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 调用栈</span>
+<span class="cm">/*
+#2  kbd_read_data (opaque=0x555556844d98, addr=&lt;optimized out&gt;, size=&lt;optimized out&gt;) at ../hw/input/pckbd.c:387
+#3  0x0000555555cd2092 in memory_region_read_accessor (mr=mr@entry=0x555556844df0, addr=0, value=value@entry=0x7fffd9ff9130, size=size@entry=1, shift=0, mask=mask@entry=255, attrs=...) at ../softmmu/memory.c:440
+#4  0x0000555555cceb1e in access_with_adjusted_size (addr=addr@entry=0, value=value@entry=0x7fffd9ff9130, size=size@entry=1, access_size_min=&lt;optimized out&gt;, access_size_max=&lt;optimized out&gt;, access_fn=0x555555cd2050 &lt;memory_region_read_accessor&gt;, mr=0x555556844df0, attrs=...) at ../softmmu/memory.c:554
+#5  0x0000555555cd1ac1 in memory_region_dispatch_read1 (attrs=..., size=&lt;optimized out&gt;, pval=0x7fffd9ff9130, addr=0, mr=0x555556844df0) at ../softmmu/memory.c:1424
+#6  memory_region_dispatch_read (mr=mr@entry=0x555556844df0, addr=0, pval=pval@entry=0x7fffd9ff9130, op=MO_8, attrs=attrs@entry=...) at ../softmmu/memory.c:1452
+#7  0x0000555555c9eb89 in flatview_read_continue (fv=fv@entry=0x7ffe4402d230, addr=addr@entry=96, attrs=..., ptr=ptr@entry=0x7fffeb17d000, len=len@entry=1, addr1=&lt;optimized out&gt;, l=&lt;optimized out&gt;, mr=0x555556844df0) at /home/maritns3/core/kvmqemu/include/qemu/host-utils.h:165
+#8  0x0000555555c9ed43 in flatview_read (fv=0x7ffe4402d230, addr=addr@entry=96, attrs=attrs@entry=..., buf=buf@entry=0x7fffeb17d000, len=len@entry=1) at ../softmmu/physmem.c:2881
+#9  0x0000555555c9ee96 in address_space_read_full (as=0x555556606880 &lt;address_space_io&gt;, addr=96, attrs=..., buf=0x7fffeb17d000, len=1) at ../softmmu/physmem.c:2894
+#10 0x0000555555c9f015 in address_space_rw (as=&lt;optimized out&gt;, addr=addr@entry=96, attrs=..., attrs@entry=..., buf=&lt;optimized out&gt;, len=len@entry=1, is_write=is_write@entry=false) at ../softmmu/physmem.c:2922
+#11 0x0000555555c8ece9 in kvm_handle_io (count=1, size=1, direction=&lt;optimized out&gt;, data=&lt;optimized out&gt;, attrs=..., port=96) at ../accel/kvm/kvm-all.c:2635
+#12 kvm_cpu_exec (cpu=cpu@entry=0x555556af4410) at ../accel/kvm/kvm-all.c:2886
+#13 0x0000555555cf1825 in kvm_vcpu_thread_fn (arg=arg@entry=0x555556af4410) at ../accel/kvm/kvm-accel-ops.c:49
+#14 0x0000555555e55983 in qemu_thread_start (args=&lt;optimized out&gt;) at ../util/qemu-thread-posix.c:541
+#15 0x00007ffff628d609 in start_thread (arg=&lt;optimized out&gt;) at pthread_create.c:477
+#16 0x00007ffff61b4293 in clone () at ../sysdeps/unix/sysv/linux/x86_64/clone.S:95
+*/</span>
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//┌──────────► 这是一个 AddressSpace，AddressSpace 用于描述整个地址空间的映射关系。</span>
+<span class="c1">// │                                        ┌───────────────────────► MemoryRegion 的优先级，如果一个范围两个 MemoryRegion 出现重叠，优先级高的压制优先级低的</span>
+<span class="c1">// │                                        │</span>
+<span class="c1">// │                                        │   ┌───────────────────► 表示这个空间的类型，一般划分为 io 和 RAM</span>
+<span class="c1">// │                                        │   │    ┌──────────────► 这是一个 MemoryRegion，这是 Address Space 中最核心的概念，MemoryRegion 用于描述一个范围内的映射规则</span>
+<span class="c1">//address-space: memory                     │   │    │</span>
+  <span class="mo">0000000000000000</span><span class="o">-</span><span class="n">ffffffffffffffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">system</span>
+  <span class="mo">0000000000000000</span><span class="o">-</span><span class="n">ffffffffffffffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">system</span>
+    <span class="mo">0000000000000000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">bfffffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">ram</span><span class="o">-</span><span class="n">below</span><span class="o">-</span><span class="mi">4</span><span class="n">g</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">0000000000000000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">bfffffff</span> <span class="err">──────────────┐</span>
+    <span class="mo">0000000000000000</span><span class="o">-</span><span class="n">ffffffffffffffff</span> <span class="p">(</span><span class="n">prio</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">pci</span>                                                                       <span class="err">│</span>
+      <span class="mo">00000000000</span><span class="n">a0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">bffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">vga</span><span class="o">-</span><span class="n">lowmem</span>                                                               <span class="err">│</span>
+      <span class="mo">00000000000</span><span class="n">c0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">dffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">rom</span><span class="p">)</span><span class="o">:</span> <span class="n">pc</span><span class="p">.</span><span class="n">rom</span>                                                                   <span class="err">│</span>
+      <span class="mf">00000000000e0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">fffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">rom</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">isa</span><span class="o">-</span><span class="n">bios</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">bios</span> <span class="mo">0000000000020000</span><span class="o">-</span><span class="mo">000000000003</span><span class="n">ffff</span>                <span class="err">│</span>
+      <span class="mo">00000000</span><span class="n">fd000000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">fdffffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">vga</span><span class="p">.</span><span class="n">vram</span>                                                                 <span class="err">│</span>
+      <span class="mo">00000000</span><span class="n">fe000000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">fe003fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">virtio</span><span class="o">-</span><span class="n">pci</span>                                                               <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">fe000000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">fe000fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">virtio</span><span class="o">-</span><span class="n">pci</span><span class="o">-</span><span class="n">common</span><span class="o">-</span><span class="n">virtio</span><span class="o">-</span><span class="mi">9</span><span class="n">p</span>                                            <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">fe001000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">fe001fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">virtio</span><span class="o">-</span><span class="n">pci</span><span class="o">-</span><span class="n">isr</span><span class="o">-</span><span class="n">virtio</span><span class="o">-</span><span class="mi">9</span><span class="n">p</span>                                               <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">fe002000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">fe002fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">virtio</span><span class="o">-</span><span class="n">pci</span><span class="o">-</span><span class="n">device</span><span class="o">-</span><span class="n">virtio</span><span class="o">-</span><span class="mi">9</span><span class="n">p</span>                                            <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">fe003000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">fe003fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">virtio</span><span class="o">-</span><span class="n">pci</span><span class="o">-</span><span class="n">notify</span><span class="o">-</span><span class="n">virtio</span><span class="o">-</span><span class="mi">9</span><span class="n">p</span>                                            <span class="err">│</span>
+      <span class="mo">00000000</span><span class="n">febc0000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febdffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">e1000</span><span class="o">-</span><span class="n">mmio</span>                                                               <span class="err">│</span>
+      <span class="mo">00000000</span><span class="n">febf0000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf3fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">nvme</span><span class="o">-</span><span class="n">bar0</span>                                                                <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">febf0000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf1fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">nvme</span>                                                                   <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">febf2000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf240f</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">msix</span><span class="o">-</span><span class="n">table</span>                                                             <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">febf3000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf300f</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">msix</span><span class="o">-</span><span class="n">pba</span>                                                               <span class="err">│</span>
+      <span class="mo">00000000</span><span class="n">febf4000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf7fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">nvme</span><span class="o">-</span><span class="n">bar0</span>                                                                <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">febf4000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf5fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">nvme</span>                                                                   <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">febf6000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf640f</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">msix</span><span class="o">-</span><span class="n">table</span>                                                             <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">febf7000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf700f</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">msix</span><span class="o">-</span><span class="n">pba</span>                                                               <span class="err">│</span>
+      <span class="mo">00000000</span><span class="n">febf8000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf8fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">vga</span><span class="p">.</span><span class="n">mmio</span>                                                                 <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">febf8000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf817f</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">edid</span>                                                                   <span class="err">└──</span> <span class="n">ram</span><span class="o">-</span><span class="n">below</span><span class="o">-</span><span class="mi">4</span><span class="n">g</span> <span class="err">是</span> <span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="err">的一个</span> <span class="n">alias</span>
+        <span class="mo">00000000</span><span class="n">febf8400</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf841f</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">vga</span> <span class="n">ioports</span> <span class="n">remapped</span>
+        <span class="mo">00000000</span><span class="n">febf8500</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf8515</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">bochs</span> <span class="n">dispi</span> <span class="n">interface</span>                                                  <span class="err">┌──</span> <span class="n">ram</span><span class="o">-</span><span class="n">above</span><span class="o">-</span><span class="mi">4</span><span class="n">g</span> <span class="err">也是</span> <span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="err">的一个</span> <span class="n">alias</span><span class="p">,</span> <span class="err">两者都被放到</span> <span class="n">system</span> <span class="err">这个</span> <span class="n">MemoryRegion</span> <span class="err">上</span>
+        <span class="mo">00000000</span><span class="n">febf8600</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf8607</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">qemu</span> <span class="n">extended</span> <span class="n">regs</span>                                                     <span class="err">│</span>
+      <span class="mo">00000000</span><span class="n">febf9000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf9fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">virtio</span><span class="o">-</span><span class="mi">9</span><span class="n">p</span><span class="o">-</span><span class="n">pci</span><span class="o">-</span><span class="n">msix</span>                                                       <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">febf9000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf901f</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">msix</span><span class="o">-</span><span class="n">table</span>                                                             <span class="err">│</span>
+        <span class="mo">00000000</span><span class="n">febf9800</span><span class="o">-</span><span class="mo">00000000</span><span class="n">febf9807</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">msix</span><span class="o">-</span><span class="n">pba</span>                                                               <span class="err">│</span>
+      <span class="mo">00000000</span><span class="n">fffc0000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">ffffffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rom</span><span class="p">)</span><span class="o">:</span> <span class="n">pc</span><span class="p">.</span><span class="n">bios</span>                                                                  <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">a0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">bffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">smram</span><span class="o">-</span><span class="n">region</span> <span class="err">@</span><span class="n">pci</span> <span class="mo">00000000000</span><span class="n">a0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">bffff</span>                  <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">c0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">c3fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">c0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">c3fff</span>                    <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">c4000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">c7fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">c4000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">c7fff</span>                    <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">c8000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">cbfff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">c8000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">cbfff</span>                    <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">cb000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">cdfff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">kvmvapic</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">cb000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">cdfff</span>            <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">cc000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">cffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">cc000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">cffff</span>                    <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">d0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">d3fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">d0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">d3fff</span>                    <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">d4000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">d7fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">d4000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">d7fff</span>                    <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">d8000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">dbfff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">d8000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">dbfff</span>                    <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">dc000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">dffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">dc000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">dffff</span>                    <span class="err">│</span>
+    <span class="mf">00000000000e0000</span><span class="o">-</span><span class="mf">00000000000e3</span><span class="n">fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mf">00000000000e0000</span><span class="o">-</span><span class="mf">00000000000e3</span><span class="n">fff</span>                    <span class="err">│</span>
+    <span class="mf">00000000000e4000</span><span class="o">-</span><span class="mf">00000000000e7</span><span class="n">fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">ram</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mf">00000000000e4000</span><span class="o">-</span><span class="mf">00000000000e7</span><span class="n">fff</span>                    <span class="err">│</span>
+    <span class="mf">00000000000e8000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">ebfff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">ram</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mf">00000000000e8000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">ebfff</span>                    <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">ec000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">effff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">ram</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">ec000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">effff</span>                    <span class="err">│</span>
+    <span class="mo">00000000000</span><span class="n">f0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">fffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">pam</span><span class="o">-</span><span class="n">rom</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000000</span><span class="n">f0000</span><span class="o">-</span><span class="mo">00000000000</span><span class="n">fffff</span>                    <span class="err">│</span>
+    <span class="mo">00000000</span><span class="n">fec00000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">fec00fff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">ioapic</span>                                                                     <span class="err">│</span>
+    <span class="mo">00000000</span><span class="n">fed00000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">fed003ff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">hpet</span>                                                                       <span class="err">│</span>
+    <span class="mo">00000000</span><span class="n">fee00000</span><span class="o">-</span><span class="mo">00000000</span><span class="n">feefffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">4096</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span><span class="p">)</span><span class="o">:</span> <span class="n">apic</span><span class="o">-</span><span class="n">msi</span>                                                                <span class="err">│</span>
+    <span class="mo">0000000100000000</span><span class="o">-</span><span class="mo">00000001</span><span class="n">bfffffff</span> <span class="p">(</span><span class="n">prio</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ram</span><span class="p">)</span><span class="o">:</span> <span class="n">alias</span> <span class="n">ram</span><span class="o">-</span><span class="n">above</span><span class="o">-</span><span class="mi">4</span><span class="n">g</span> <span class="err">@</span><span class="n">pc</span><span class="p">.</span><span class="n">ram</span> <span class="mo">00000000</span><span class="n">c0000000</span><span class="o">-</span><span class="mo">000000017</span><span class="n">fffffff</span> <span class="err">──────────────┘</span>
+</code></pre></div></div>
+
+<h4 id="dirty-page-tracking-脏页标记">dirty page tracking 脏页标记</h4>
+<h5 id="dirty-bitmap">dirty bitmap</h5>
+<ul>
+  <li>bitmap是将原本需要占用1个字节或者多个字节的整数，转化成对一个字节单位中的一个确定位置的比特的占用</li>
+  <li>Bitmaps are bit vectors where each ‘1’ bit in the vector indicates a modified (“dirty”) segment of the corresponding block device. The size of the segment that is tracked is the granularity of the bitmap. If the granularity of a bitmap is 64K, each ‘1’ bit means that a 64K region as a whole may have changed in some way, possibly by as little as one byte.、</li>
+  <li>将向量上的每个“1”表示为对应块的脏页，bitmap的增量每增加“1”，就是每个内存脏页大小（4kByte）变更了</li>
+  <li>
+    <p>核心：使用 bitmap 上每一个 solt 槽位来表示一个固定大小的脏页是否变更</p>
+  </li>
+  <li>https://qemu-project.gitlab.io/qemu/interop/bitmaps.html</li>
+</ul>
+
+<h5 id="dirty-ring">dirty ring</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* https://blog.csdn.net/huang987246510/article/details/112293303
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+-------------+          +----------+       +--------------+          +---------------------+
+|             |          | ram_list +-----&gt; | dirty_memory +--------&gt; | migration_bitmap_rcu|
+|             |          +----------+       +------+-------+          +---------------------+
+| Guest       |                                    ^
+|             |                                    |
+|             |                                    |
+|             |                                    |用户态
+|             +--------------------------------+   |-----
+|             |                                |   |内核态
+|             |                                |   |
+|             |                                |   |
+|             |                                v   |
+|             |                                    |
+|             |          +---------+       +-------+--------+
+|             |          | memslot +-----&gt; | dirty_bitmap   |
++-------------+          +---------+       +----------------+
+</code></pre></div></div>
+
+<h5 id="用户态">用户态</h5>
+<ul>
+  <li>用户态与脏页统计有关的数据结构：RAMList和RAMBlock</li>
+  <li>RAMList用在从内核获取脏页的时候，它表示脏页的粒度是kvm中的一个slot
+    <ul>
+      <li>如前所述：KVMSlot 定义了GPA到HVA的映射关系，也就是虚拟机物理地址和宿主机OS虚拟地址之间的关系</li>
+    </ul>
+  </li>
+  <li>RAMBlock中的位图用来描述一个RAMBlock的脏页使用情况，它表示的脏页粒度是Qemu中的一个RAMBlock</li>
+  <li>在内存迁移统计脏页过程中，会依次使用这两个数据结构统计剩余内存的脏页数量</li>
+</ul>
+
+<h5 id="内核态">内核态</h5>
+<ul>
+  <li>kvm_userspace_memory_region</li>
+  <li>kvm_dirty_log</li>
+  <li>kvm_memory_slot</li>
+  <li>为了让用于态统计虚机的脏页，内核提供了两个接口，分别是KVM_SET_USER_MEMORY_REGION、KVM_GET_DIRTY_LOG，这两个接口</li>
+  <li>内核提供了两个命令供用户态统计虚机的脏页，KVM_SET_USER_MEMORY_REGION、KVM_GET_DIRTY_LOG，KVM_SET_USER_MEMORY_REGION命令字作用在vm的fd，用来通知kvm开启对某段内存区域的脏页跟踪，结构体kvm_userspace_memory_region 是用户态传入的参数，用来描述kvm应该跟踪的内存区域</li>
+  <li>KVM_GET_DIRTY_LOG命令字作用在vm的fd，用来获取内核跟踪的脏页信息，结构体kvm_dirty_log作为参数用来指定要查询的内存slot，同时保存内核的脏页查询结果</li>
+</ul>
+
+<h5 id="交互过程简介">交互过程简介</h5>
+<ul>
+  <li>根据PML的硬件特性，每当CPU在Guest态根据EPT转换地址后，写数据到物理页，这时如果PML特性开启，在设置EPT页表项的Dirty位之后，还会将GPA地址写入PML Buffer。</li>
+</ul>
+
+<h5 id="清零dirty位">清零Dirty位</h5>
+
+<ul>
+  <li>KVM的实现中，在创建slot时，如果不想记录某个slot包含的所有物理页的是否为脏，需要默认将这些物理页对应的页表项的Dirty页置位，因为如果Dirty位是0，Guest态CPU写物理页时会将其置1并且填充GPA到PML Buffer，如果PML Buffer满了，就会触发VMExit，增加不必要的开销。反之，要记录脏页，首先需要将指向slot包含的所有物理页的spte的Dirty位清零，这里需要根据gfn找到指向该gfn对应页的spte，反向映射数组rmap就派上了用场。
+物理页开启写保护：除了清零页表项的Dirty位，记录脏页还需要开启页的写保护，在脏页记录的过程中，所有slot包含的物理页变成只读，当CPU写访问这个页时，发生缺页异常，kvm会重新分配一个新的页给CPU。在脏页记录关闭后，才能将写保护去掉，slot包含的所有页变成可读写。</li>
+</ul>
+
+<h5 id="步骤">步骤</h5>
+<ol>
+  <li>qemu 初始化一个 bitmap 结构体 <code class="language-plaintext highlighter-rouge">migration_bitmap_rcu</code> 并set所有的solt 为1</li>
+  <li>qemu 将对内存页的标脏提交给 kvm 并调用 address_space_update_topology_pass</li>
+  <li>address_space_update_topology_pass 调用 log_start 将已经定义的 memory slot 增加 KVM_MEM_LOG_DIRTY_PAGES 的 flag，这一步就是内核标脏</li>
+  <li>kvm_create_dirty_bitmap kvm 初始化内存脏页 bitmap kvm_create_dirty_bitmap</li>
+  <li>qemu kvm 通过 migration_bitmap_sync 将内核脏页的 usersSpace 同步到 ram_list 结构体中</li>
+  <li>migration_bitmap_sync 将当前 ram_list 中的脏页 bitmap 拷贝到 migration_bitmap_rcu，这一步主要就是将kernal中的脏页同步回 qemu bitmap 结构体中</li>
+  <li>通过对 migration_bitmap_rcu-&gt;bmap 的迭代，qemu将通过调用 ram_find_and_save_block 找到脏页并将脏页写入初始化的 fd</li>
+</ol>
+
+<h5 id="简化步骤">简化步骤</h5>
+<ol>
+  <li>qemu 初始化一个处于用户态的 bitmap 用于记录脏页，并set所有的solt 为1</li>
+  <li>qemu 初始化 RAMList 和 RAMBlock，分别用于存储虚拟机整个地址空间 kvmslot 和 用于表示单个脏页的 RAMBlock</li>
+  <li>qemu 将对内存页的标脏提交给 kvm</li>
+  <li>kvm 将已经定义的 memory slot 增加标脏的 flag，这一步就是内核标脏</li>
+  <li>qemu kvm中通过 kvm_vm_ioctl 获取内存脏页并同步到 RAMList和RAMBlock</li>
+  <li>将当前 ram_list 中的脏页 bitmap 拷贝到 migration_bitmap_rcu，这一步主要就是将kernal中的脏页同步回 qemu bitmap 结构体中</li>
+  <li>通过对 migration_bitmap_rcu-&gt;bmap 的迭代，qemu将通过调用 ram_find_and_save_block 找到脏页并将脏页写入初始化的 fd</li>
+  <li>对已经完成拷贝的 block 进行清脏 KVM_CLEAR_DIRTY_LOG（一次拷贝完成，对端返回脏页数量）</li>
+  <li>计算内存脏页率</li>
+  <li>进行第二次拷贝</li>
+</ol>
+
+<ul>
+  <li>执行栈帧
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) bt
+#0  kvm_set_user_memory_region (kml=0x55ab8fc502c0, slot=0x55ab8fc50500) at /home/liqiang02/qemu0711/qemu-2.8/kvm-all.c:236
+#1  0x000055ab8df10a92 in kvm_slot_update_flags (kml=0x55ab8fc502c0, mem=0x55ab8fc50500, mr=0x55ab8fd36f70)
+  at /home/liqiang02/qemu0711/qemu-2.8/kvm-all.c:376
+#2  0x000055ab8df10b1f in kvm_section_update_flags (kml=0x55ab8fc502c0, section=0x7f0ab37fb4c0)
+  at /home/liqiang02/qemu0711/qemu-2.8/kvm-all.c:389
+#3  0x000055ab8df10b65 in kvm_log_start (listener=0x55ab8fc502c0, section=0x7f0ab37fb4c0, old=0, new=4)
+  at /home/liqiang02/qemu0711/qemu-2.8/kvm-all.c:404
+#4  0x000055ab8df18b33 in address_space_update_topology_pass (as=0x55ab8ea21880 &lt;address_space_memory&gt;, old_view=0x7f0cc4118ca0, 
+  new_view=0x7f0aa804d380, adding=true) at /home/liqiang02/qemu0711/qemu-2.8/memory.c:854
+#5  0x000055ab8df18d9b in address_space_update_topology (as=0x55ab8ea21880 &lt;address_space_memory&gt;)
+  at /home/liqiang02/qemu0711/qemu-2.8/memory.c:886
+#6  0x000055ab8df18ed6 in memory_region_transaction_commit () at /home/liqiang02/qemu0711/qemu-2.8/memory.c:926
+#7  0x000055ab8df1c9ef in memory_global_dirty_log_start () at /home/liqiang02/qemu0711/qemu-2.8/memory.c:2276
+#8  0x000055ab8df30ce6 in ram_save_init_globals () at /home/liqiang02/qemu0711/qemu-2.8/migration/ram.c:1939
+#9  0x000055ab8df30d36 in ram_save_setup (f=0x55ab90d874c0, opaque=0x0) at /home/liqiang02/qemu0711/qemu-2.8/migration/ram.c:1960
+#10 0x000055ab8df3609a in qemu_savevm_state_begin (f=0x55ab90d874c0, params=0x55ab8ea0178c &lt;current_migration+204&gt;)
+  at /home/liqiang02/qemu0711/qemu-2.8/migration/savevm.c:956
+#11 0x000055ab8e25d9b8 in migration_thread (opaque=0x55ab8ea016c0 &lt;current_migration&gt;) at migration/migration.c:1829
+#12 0x00007f0cda1fd494 in start_thread () from /lib/x86_64-linux-gnu/libpthread.so.0
+#13 0x00007f0cd9f3facf in clone () from /lib/x86_64-linux-gnu/libc.so.6
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="4---qemu-向-tcp-sockets-中写入内存数据迁移的控制层和实现层完全分开">4 - qemu 向 tcp sockets 中写入内存数据（迁移的控制层和实现层完全分开）</h3>
+<ul>
+  <li>开始迁移内存，将内存数据拷贝到目的端（defaultpage size 4k）</li>
+  <li>发送内存数据到目的端，返回发送的内存页个数</li>
+  <li>qemu每拷贝一次内存之前，会统计一次剩余的脏页数量，对比域值后决定是否一次性迁移
+    <ul>
+      <li>脏页统计方法：dirtyrate = increased_memory / meaurement_time</li>
+      <li>脏页速率越大，虚机内存变化越快，迁移时花费的时间就越多</li>
+      <li>脏页统计率的统计过程和 dirty page tracking 类似，也是通过对内核中的脏页和qemu bitmap 之间的同步来计算增量</li>
+      <li>https://blog.csdn.net/huang987246510/article/details/118424717</li>
+    </ul>
+  </li>
+  <li>内存发送和接收</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   source                                destination
+
+            +------------------------+             +-------------------------+
+            |                        |             |                         |
+  SETUP     | ram_save_setup         |             |  ram_load_setup         |
+            |                        |             |                         |
+            +------------------------+             +-------------------------+
+
+            sync dirty bit to                      Setup RAMBlock-&gt;receivedmap
+        RAMBlock-&gt;bmap
+
+
+            +------------------------+             +-------------------------+
+            |                        |             |                         |
+  ITER      | ram_save_pending       |             |  ram_load               |
+            | ram_save_iterate       |             |                         |
+            |                        |             |                         |
+            +------------------------+             +-------------------------+
+
+            sync dirty bit                         Receive page
+        and send page
+
+
+            +------------------------+             +-------------------------+
+            |                        |             |                         |
+  COMP      | ram_save_pending       |             |  ram_load               |
+            | ram_save_complete      |             |                         |
+            |                        |             |                         |
+            +------------------------+             +-------------------------+
+
+            sync dirty bit                         Receive page
+              and send page
+</code></pre></div></div>
+
+<h3 id="5---迭代所有脏页脏页达到一定的水平线">5 - 迭代所有脏页，脏页达到一定的水平线</h3>
+<ul>
+  <li>TODO</li>
+</ul>
+
+<h3 id="6---暂停虚拟机默认值30ms一次性迁移剩余脏页">6 - 暂停虚拟机（默认值30ms），一次性迁移剩余脏页</h3>
+<h3 id="7---启动目的端vm">7 - 启动目的端vm</h3>
+
+<h1 id="热迁移-downtime">热迁移 downtime</h1>
+
+<h2 id="什么是-downtime">什么是 downtime</h2>
+<ul>
+  <li>脏页率达到指定阈值之后，暂停虚拟机，一次性迁移剩余脏页，并启动目的虚拟机的过程耗时</li>
+  <li>热迁移的停机时间（downtime）不是简单设置一个数字</li>
+  <li>迁移过程中的停机时间是变化的</li>
+  <li>不断增加，在一段时间后停机时间达到最终的最大值（用户态给定的最大值），这个值就是 live_migration_downtime</li>
+</ul>
+
+<h2 id="影响参数">影响参数</h2>
+<ul>
+  <li>CONF.libvirt.live_migration_downtime
+    <ul>
+      <li>最大值，手动配置、配置读取</li>
+      <li>downtime_steps 每个 Step 的 max downtime 都在递增直到真正用户设定的最大可容忍 downtime，
+这是因为 Nova 在不断的试探实际最小的 max downtime，尽可能早的进入退出状态。</li>
+    </ul>
+  </li>
+  <li>CONF.libvirt.live_migration_downtime_steps
+    <ul>
+      <li>最大值，手动配置、配置读取</li>
+      <li>一个元组表示一个 Step，分 Steps 次给 libvirtd 传输</li>
+    </ul>
+  </li>
+  <li>CONF.libvirt.live_migration_downtime_delay
+    <ul>
+      <li>最大值，手动配置、配置读取</li>
+      <li>下一次传递时间间隔</li>
+    </ul>
+  </li>
+  <li>downtime 通过上面一个算法得出：每次迭代都会重新计算虚拟机新的脏内存以及每次迭代所花掉的时间来估算带宽，再根据带宽和当前迭代的脏页数计算出传输剩余数据的时间</li>
+  <li>如果最后一次 libvirtd 迭代计算出来的 downtime 在传递的 downtime 范围内，则满足退出条件</li>
+  <li>自动收敛模式：如果虚拟机持续处于高业务状态，那么 libvirtd 会自动调整 vCPU 参数以减轻负载，达到降低脏内存的增长速度，从而保证 downtime 进入退出范围</li>
+  <li>compute 中通过 migrateSetMaxDowntime 实现</li>
+</ul>]]></content><author><name>Teddy</name></author><category term="CloudComputing" /><category term="live_migration" /><category term="qemu" /><category term="libvirt" /><category term="kvm" /><category term="precopy" /><summary type="html"><![CDATA[热迁移原理]]></summary></entry><entry><title type="html">Criticism Of Hegelianism</title><link href="http://localhost:4000/philosophy/marxism/2022/11/19/Criticism-of-Hegelianism.html" rel="alternate" type="text/html" title="Criticism Of Hegelianism" /><published>2022-11-19T00:00:00+08:00</published><updated>2022-11-19T00:00:00+08:00</updated><id>http://localhost:4000/philosophy/marxism/2022/11/19/Criticism-of-Hegelianism</id><content type="html" xml:base="http://localhost:4000/philosophy/marxism/2022/11/19/Criticism-of-Hegelianism.html"><![CDATA[<h1 id="criticism-of-hegelianism-all-that-is-real-isrational-and-all-that-is-rational-is-real">Criticism of Hegelianism: “All that is real isrational; and all that is rational is real.”</h1>
+
+<h2 id="对于-存在即合理-的黑格尔主义的批判">对于 “存在即合理” 的黑格尔主义的批判</h2>
+
+<p>序：
+似乎在历史的发展过程中，哪一个哲学命题都没有像黑格尔的命题可以让其成为很大一部分人脱口而出的对现实问题的最终解，与所谓“现代社会”将一切与人相关的矛盾都归一到“人性论”相似，“存在即合理” 成为了人们对待社会现象及个人经历具体事件的最终答复，似乎人们也必须对自己的经历给出一个合理的解释，这就给黑格尔这个著名的哲学命题以生存空间。</p>
+
+<ul>
+  <li><strong>“凡是存在的都是合理的，凡是合理的都是存在的”</strong></li>
+</ul>
+
+<blockquote>
+  <p>引用：《费尔巴哈和德国古典哲学的终结》 费尔德里西-恩格斯
+这样一来，黑格尔的这个命题，由于黑格尔辩证法本身，就转化为自己的反面：凡在人类历史领域中是现实的，随着时间的推移，都会成为不合理的，因而按其本性来说已经是不合理的，一开始就包含着不合理性；凡在人们头脑中是合理的，都注定要成为现实的，不管他的现存的、表面的现实多么矛盾；
+按照黑格尔的思维方法的一切规则，凡是现实的都是合理的这个命题，就变成另一个命题：凡是现存的，都是应当灭亡的。</p>
+</blockquote>
+
+<p>个人理解：
+现实性在其展开的过程中表现为必然性，不能证明其在该过程中的合理性。这个百年前由 费尔德里西-恩格斯 已经批判并且证明是错误的观点，在今天任然具有讨论的必要性。在如今21世纪现代化在人类社会的展开过程中，还存在不少信奉黑格尔主义的人，其中一部分人是彻底的相信黑格尔的观点，另一部分人则是耳濡目染的接受了来自他人灌输的黑格尔主义。这部分人中的一些人稍加思考就会产生对黑格尔主义的怀疑，这种怀疑显然是思辨的产物，是思想上对黑格尔主义排斥；</p>
+
+<p>历史上的封建等级制度被资本主义制度代替，封建等级制度在其发展的过程中，必然的产生了一股力量推翻了这种社会制度，彻底的否定它，让它成为过去。那么这就证明对于整个人类社会而言封建等级制度并不合理。按照黑格尔主义的提法，封建等级制度的现实性因为其在展开的过程中的必然性，即证明了它的合理性，如果是对于人类社会合理的制度，那么就应该在历史上永存，但是通过对现实情况的考察，并不能证明黑格尔主义的观点；</p>
+
+<p>存在即合理，凡在人类历史领域中是现实的，其合理性即证明了其在人类社会中不会被新的事物代替，会永远存在，这就意味着发展的停滞，但是事物总是在矛盾中不断变化和发展的，那么黑格尔主义的观点“存在即合理”就变成了某种废话文学： 存在即存在，因为现实性在其展开的过程中表现为必然性仍然可以证明其现实性；那么黑格尔主义的观点“存在即合理”就变成了它自身的反面：存在即灭亡；</p>
+
+<p><strong>让我们再次引用恩格斯的批判性观点：凡是现存的，都是应当灭亡的。</strong></p>]]></content><author><name>Teddy</name></author><category term="Philosophy" /><category term="Marxism" /><category term="Criticism" /><summary type="html"><![CDATA[Criticism of Hegelianism: “All that is real isrational; and all that is rational is real.”]]></summary></entry><entry><title type="html">Work Efficiency</title><link href="http://localhost:4000/%E8%A7%84%E5%88%92/%E5%B7%A5%E4%BD%9C%E6%B5%81/2021/02/15/work-efficiency.html" rel="alternate" type="text/html" title="Work Efficiency" /><published>2021-02-15T00:00:00+08:00</published><updated>2021-02-15T00:00:00+08:00</updated><id>http://localhost:4000/%E8%A7%84%E5%88%92/%E5%B7%A5%E4%BD%9C%E6%B5%81/2021/02/15/work-efficiency</id><content type="html" xml:base="http://localhost:4000/%E8%A7%84%E5%88%92/%E5%B7%A5%E4%BD%9C%E6%B5%81/2021/02/15/work-efficiency.html"><![CDATA[<h1 id="如何行之有效的提高工作效率避免完美主义为自己保留更多可支配时间">如何行之有效的提高工作效率，避免完美主义，为自己保留更多可支配时间</h1>
+
+<ol>
+  <li>避免完美主义，对于已经能够达成目标的任务，不再花过多时间将其 ”完美化“；</li>
+  <li>重新建立时间观念，对于工作过程中任务进度的变化尽早感知并修改当日计划，越早延期任务效果越好；</li>
+  <li>建立严格的节奏和规律，确定好抽离出工作任务的时间结点，不能因为”过于投入“而再次透支当日精力；</li>
+  <li>合理规划睡眠、起床、运动时间，尽最大可能保持长期规律性的时间节律；</li>
+  <li>使用番茄工作法，合理规划 ”投入时间“ 和 ”休息时间“，尽最大可能避免碎片化的时间分布，达到”一个时间片内“就做一件事的单线程的效果；</li>
+</ol>
+
+<h1 id="三个避免">三个避免</h1>
+
+<ol>
+  <li>避免为了达到短期目的而消耗长期精力以及长期的积极性和主观能动性，以可持续发展的态度，保持长期性的，健康高效的精力输出，长期维持一个较高的精力状态，需要每天必须规定合理的休息和睡眠时间，且需要到达确定时间后及时抽离精力的耗费；</li>
+  <li>避免将自我生产的时间大量碎片化，例如在一段高质量的精力集中期间，毫无目的性的频繁解锁手机查阅消息或者主动处理其他琐碎问题，等。将 “时间片” 集中化，高质量的时间集中在 “惟一的一个任务” 上；</li>
+  <li>避免 “过度投入”，解决问题的过程中经常会出现一个难以定位的问题点导致联锁反应，既影响原本的工作计划又大量耗费精力和注意力，一定要避免在精力和注意力较低迷的情况下 “过度投入” 这样的任务，例如每日18点之后精力较为低迷的时段；应该采取跳过该任务的方式，先去处理同等优先级但是思维优先精力耗费次之的任务，将该任务安排在第二日精力和注意力的峰值时段；</li>
+</ol>
+
+<h1 id="总结">总结</h1>
+
+<h2 id="方法论">方法论</h2>
+
+<ol>
+  <li>避免完美主义</li>
+  <li>尽早修改当日计划</li>
+  <li>严格节律，及时抽离</li>
+  <li>合理规划睡眠、运动</li>
+  <li>番茄工作法，集中 “时间片”</li>
+</ol>
+
+<h2 id="三个避免-1">三个避免</h2>
+
+<ol>
+  <li>避免为短期任务消耗长期精力</li>
+  <li>避免将自我生产的时间大量碎片化</li>
+  <li>避免低迷期 “过度投入”</li>
+</ol>]]></content><author><name>Teddy</name></author><category term="规划" /><category term="工作流" /><category term="efficiency" /><summary type="html"><![CDATA[如何行之有效的提高工作效率，避免完美主义，为自己保留更多可支配时间]]></summary></entry><entry><title type="html">Mac Reset Smc nvram</title><link href="http://localhost:4000/%E8%A7%84%E5%88%92/%E5%B7%A5%E4%BD%9C%E6%B5%81/2021/02/15/mac-reset-smc-nvram.html" rel="alternate" type="text/html" title="Mac Reset Smc nvram" /><published>2021-02-15T00:00:00+08:00</published><updated>2021-02-15T00:00:00+08:00</updated><id>http://localhost:4000/%E8%A7%84%E5%88%92/%E5%B7%A5%E4%BD%9C%E6%B5%81/2021/02/15/mac-reset-smc-nvram</id><content type="html" xml:base="http://localhost:4000/%E8%A7%84%E5%88%92/%E5%B7%A5%E4%BD%9C%E6%B5%81/2021/02/15/mac-reset-smc-nvram.html"><![CDATA[<h1 id="mac-重置-smc-和-nvram">Mac 重置 SMC 和 NVRAM</h1>
+
+<h2 id="第一步-重置系统管理控制器smc">第一步 重置系统管理控制器(SMC)</h2>
+
+<ol>
+  <li>
+    <p>将 Mac 关机。</p>
+  </li>
+  <li>
+    <p>将 MagSafe 或 USB-C 电源适配器连接到电源和 Mac。</p>
+  </li>
+  <li>
+    <p>在内建键盘上，按下键盘左侧的 Shift-Control-Option 键，然后同时按下电源按钮。</p>
+  </li>
+  <li>
+    <p>松开所有按键，然后再次按下电源按钮以开启 Mac。</p>
+  </li>
+</ol>
+
+<h3 id="第二步-重置非易失的随机访问存储器nvram">第二步 重置非易失的随机访问存储器(NVRAM)</h3>
+
+<ol>
+  <li>
+    <p>关闭 Mac。</p>
+  </li>
+  <li>
+    <p>在键盘上找到以下按键：Command (⌘)、Option、P 和 R。</p>
+  </li>
+  <li>
+    <p>打开 Mac。</p>
+  </li>
+  <li>
+    <p>听到启动声后立即按住 Command-Option-P-R 键。</p>
+  </li>
+  <li>
+    <p>按住这些按键直到电脑重新启动，然后您会再次听到启动声。</p>
+  </li>
+</ol>
+
+<p><strong>（如果使用 MacBook Pro 2016，您将不会听到启动声，请按住这些按键至少 20 秒钟，确保 Mac 正确完成该过程。）</strong></p>
+
+<ol>
+  <li>松开这些按键。</li>
+</ol>]]></content><author><name>Teddy</name></author><category term="规划" /><category term="工作流" /><category term="mac" /><summary type="html"><![CDATA[Mac 重置 SMC 和 NVRAM]]></summary></entry><entry><title type="html">Research Of Ergonomics</title><link href="http://localhost:4000/%E8%A7%84%E5%88%92/%E9%97%AE%E9%A2%98%E7%A0%94%E7%A9%B6/2021/02/15/research-of-ergonomics.html" rel="alternate" type="text/html" title="Research Of Ergonomics" /><published>2021-02-15T00:00:00+08:00</published><updated>2021-02-15T00:00:00+08:00</updated><id>http://localhost:4000/%E8%A7%84%E5%88%92/%E9%97%AE%E9%A2%98%E7%A0%94%E7%A9%B6/2021/02/15/research-of-ergonomics</id><content type="html" xml:base="http://localhost:4000/%E8%A7%84%E5%88%92/%E9%97%AE%E9%A2%98%E7%A0%94%E7%A9%B6/2021/02/15/research-of-ergonomics.html"><![CDATA[<h1 id="健康的办公坐姿研究">健康的办公坐姿研究</h1>
+
+<h2 id="正确坐姿">正确坐姿</h2>
+
+<ol>
+  <li>脚面轻松接触地面，完全平放地面 check</li>
+  <li>小腿与大腿之间夹角大于等于90度 check</li>
+  <li>大腿超出椅面3公分到5公分 check</li>
+  <li>腰部下背部有支撑 cehck</li>
+  <li>颈椎有头枕支撑 check</li>
+  <li>身体与大腿角度 90~110度之间，越大腰部颈部压力越小 check</li>
+  <li>平视显示器，视线处于显示器中上段</li>
+  <li>手托不能太高，让大臂和小臂自然成90 ~ 110度之间的夹角，使肩部不要感受到压力和酸胀感</li>
+  <li>适当倾斜键盘托盘，让鼠标手和键盘更容易控制</li>
+</ol>
+
+<h2 id="久坐有害健康">久坐有害健康</h2>
+
+<ul>
+  <li>保持健康正确的坐姿，每次如果发现身体不自觉的改变为不健康的姿势，那么就证明需要其他活动，没40分钟坐姿办公，活动5min或交替站立办公20min，对身体更加有益；</li>
+</ul>
+
+<h2 id="办公室解决方案">办公室解决方案</h2>
+
+<h3 id="问题">问题</h3>
+
+<h4 id="未添加辅助品的工学椅">未添加辅助品的工学椅</h4>
+
+<ol>
+  <li>座椅面面积较大，导致大腿压迫；</li>
+  <li>腰部支撑完全不够；</li>
+  <li>扶手调节问题导致肩膀不适；</li>
+  <li>扶手高度没有调整到最佳，加之鼠标过平，导致右臂和右肩压迫较大；</li>
+  <li>右边肩膀不适主要来自于健身房锻炼时，大重量深蹲压迫了肩部神经，长期积累导致右肩神经痛，改进方法为，不再用深蹲的方式进行腿部肌肉锻炼，换用其他器材，并且要注意休息，长期健康的锻炼和休息有助于肩部恢复；</li>
+  <li>鼠标，当坐姿靠后时，鼠标无法垫高导致，小臂和大臂之间的角度超过了一个舒适的角度，所以鼠标控制移动的距离越大，对右边肩部有越大的损伤，解决方案是垫高鼠标，让鼠标和桌面成一定的夹角，或者更换直立的人体工学鼠标；</li>
+</ol>
+
+<h3 id="试错">试错</h3>
+
+<ul>
+  <li>升降台，缺陷，升降台升高了桌子高度导致椅子升高扶手升高，导致肩膀受力，一天办公下来，肩膀发生异常酸痛，站立时间并不多；</li>
+  <li>硬质座椅靠背，缺陷，办公椅椅面有限，导致大腿离开椅面面积过大，5~10cm，硬质靠背无法躺靠坐姿，长时间导致肩颈眼里过大，躺靠坐姿下，硬质靠背对后背肌肉有挤压，导致疼痛；</li>
+</ul>
+
+<h3 id="改进">改进</h3>
+
+<ul>
+  <li>选用建议便携笔记本升降支架，即可以坐姿下调至笔记本高度到最佳，又可以站立使用，通常一次站立办公只有15~20分，期间可以还会有一些拉升动作，使用笔记本完全满足需求；</li>
+  <li>选用12cm左右的乳胶靠背，第一保证大腿离开椅面的距离控制在3到5厘米，第二保证不接触头枕的坐姿和接触头枕的坐姿，腰部等能有足够多且舒适的支撑；</li>
+  <li>键盘垫高，键盘与桌面有一定夹角，硬质鼠标垫 + 小角度垫高</li>
+  <li>新增座椅头枕，垫高头部，以用来防止由于背部支撑后，颈部支撑太过靠后导致的不适</li>
+</ul>
+
+<h3 id="办公室必备">办公室必备</h3>
+
+<ol>
+  <li>笔记本电脑升级支架，便携易用</li>
+  <li>显示器升高支架，升高台</li>
+  <li>客制化键盘+手托</li>
+  <li>人体工学鼠标</li>
+  <li>增强工学椅贴合度的乳胶靠背</li>
+  <li>颈枕+折叠床</li>
+  <li>拖鞋+水杯+茶”
+    <h3 id="遵循">遵循</h3>
+  </li>
+  <li>便携</li>
+  <li>易用</li>
+  <li>低成本</li>
+</ol>
+
+<h2 id="不适">不适</h2>
+
+<h3 id="后肩神经痛">后肩神经痛</h3>
+
+<p>第二次发作，初步怀疑原因为深蹲姿势非百分之百正确，导致颈部受到压迫，最终导致右肩传递的神经痛</p>
+
+<h3 id="解决方案">解决方案</h3>
+
+<ol>
+  <li>停止练腿方式中会给颈部肩颈压力的动作，不再进行深蹲训练，换用其他的器械训练</li>
+  <li>药物和物理治疗，使颈部压迫恢复，神经恢复</li>
+  <li>继续观察，是否与坐姿，使用鼠标等条件有必然联系，如果有关系就再次进行调整，观察并记录情况，最终进行分析</li>
+</ol>
+
+<h3 id="初步判断">初步判断</h3>
+
+<ol>
+  <li>之前第一次右肩下神经痛时，遇到的情况是多次的硬拉和深蹲，不舒适的工学座椅和办公姿势，包括用鼠标的姿势，不自觉抬手等</li>
+  <li>第二次右肩下神经痛，又一次是多次的硬拉和深蹲以及更换工位后，新的办公座椅和办公姿势，包括使用鼠标的姿势和使用鼠标的重量</li>
+  <li>经过第一次物理治疗时，医师建议原因是颈部问题，由于颈部受到的压力和长时间压迫，导致了右肩的神经性疼痛，根因还是颈部的压力，此次分析情况为第一次出现较为明显的不适大概时间就是上一次深蹲，颈部受到锻炼杠铃的压力，回家前又练过一次腿，在家中，右边肩膀也有不适，回到工作环境后，每次用键盘和鼠标都会有明显的不适，分析原因大概率是因为颈部问题，所以颈部不能再承受压力，包括长期低头看手机，懒人坐姿压迫颈部，大重量深蹲，杠铃压迫颈部，需要后期养成良好的坐姿+良好的使用电子产品的习惯和少低头的习惯，良好的健身习惯，其他练腿的动作还很多，有很多可以替代深蹲的，1. 深蹲给肩颈和腰部带来巨大的压力，2 深蹲给长期酸胀的脚踝带来的巨大压力，放弃深蹲，使用其他练腿器械</li>
+</ol>]]></content><author><name>Teddy</name></author><category term="规划" /><category term="问题研究" /><category term="ergonomics" /><summary type="html"><![CDATA[健康的办公坐姿研究]]></summary></entry><entry><title type="html">Agile</title><link href="http://localhost:4000/%E5%AE%9E%E8%B7%B5/%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/2020/09/22/roles-of-agile-team.html" rel="alternate" type="text/html" title="Agile" /><published>2020-09-22T00:00:00+08:00</published><updated>2020-09-22T00:00:00+08:00</updated><id>http://localhost:4000/%E5%AE%9E%E8%B7%B5/%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/2020/09/22/roles-of-agile-team</id><content type="html" xml:base="http://localhost:4000/%E5%AE%9E%E8%B7%B5/%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/2020/09/22/roles-of-agile-team.html"><![CDATA[<h1 id="敏捷开发">敏捷开发</h1>
+
+<h2 id="敏捷团队中的角色">敏捷团队中的角色</h2>
+
+<p><strong>Business owner</strong></p>
+
+<ul>
+  <li>行业客户，需求提出方</li>
+</ul>
+
+<p><strong>Developer</strong></p>
+
+<ul>
+  <li>开发工程师，开发需求并交付产品</li>
+</ul>
+
+<p><strong>End user</strong></p>
+
+<ul>
+  <li>端用户，产品面向用户</li>
+</ul>
+
+<p><strong>BA</strong></p>
+
+<ul>
+  <li><em>Business Analyst</em> - 业务分析员</li>
+  <li>负责理解并挖掘客户的需求，然后将需求转化为具体的 <em>AC</em>（<em>Acceptance criteria</em>, 验收标准）</li>
+  <li>作为 <em>Business owner</em> 和 <em>Developer</em> 直接的桥梁，将业务知识最大化的传递给 <em>Developer</em> ，保证工程师对业务准确的理解</li>
+</ul>
+
+<p><strong>QA</strong></p>
+
+<ul>
+  <li><em>Quality Analyst</em> - 质量分析师</li>
+  <li><em>Quality Assurance</em> - 质量保证</li>
+  <li><em>tester</em> 的职责是按照 <em>AC</em> ，对系统功能进行测试，包括功能性、安全性、性能等维度保证系统的健壮性及所开发功能符合 <em>AC</em></li>
+  <li><em>QA</em> 的职责不仅仅只是一个 <em>tester</em>， <em>QA</em> 的职责不是单纯的在开发完成后，接收 <em>AC</em> 并测试。为了解决开发过程中参与度不足导致的需求衰减问题，<em>QA</em> 应尽早接入用户故事的前期工作，在BA分析 <em>user story</em> 及细分任务时就应该准备开发环境、测试策略、测试数据。</li>
+  <li>tester可以从测试的角度给开发人员提供一些建议。而在开发人员开发卡的时候，tester可以和开发人员一起pair编写自动化的测试用例。开发人员开发完毕后，tester可以在开发人员的本地环境中快速验证其是否满足所有验收条件，必要的自动化测试是否已经完成等。在UAT环节，tester又可以帮助business owner进行sign off</li>
+  <li><em>QA</em> 作为连接器把需求过程中的每个环节的参与者串联起来，他的职责已经超出了开发所理解的单纯的 <em>tester</em>，所以将这个角色定义为<strong>质量分析师</strong>，在整个产品的生命周期中保证产品的质量，最终高质量交付</li>
+</ul>
+
+<h2 id="敏捷开发中的重要概念">敏捷开发中的重要概念</h2>
+
+<ul>
+  <li>TODO</li>
+</ul>]]></content><author><name>Teddy</name></author><category term="实践" /><category term="敏捷开发" /><category term="Agile" /><summary type="html"><![CDATA[敏捷开发]]></summary></entry><entry><title type="html">MacOS配置</title><link href="http://localhost:4000/%E8%A7%84%E5%88%92/%E5%B7%A5%E4%BD%9C%E6%B5%81/2020/08/05/macos-configuration.html" rel="alternate" type="text/html" title="MacOS配置" /><published>2020-08-05T00:00:00+08:00</published><updated>2020-08-05T00:00:00+08:00</updated><id>http://localhost:4000/%E8%A7%84%E5%88%92/%E5%B7%A5%E4%BD%9C%E6%B5%81/2020/08/05/macos-configuration</id><content type="html" xml:base="http://localhost:4000/%E8%A7%84%E5%88%92/%E5%B7%A5%E4%BD%9C%E6%B5%81/2020/08/05/macos-configuration.html"><![CDATA[<h1 id="macos-配置">MacOS 配置</h1>
+
+<h2 id="i-自动化组件部署">I. 自动化组件部署</h2>
+
+<h3 id="11-zsh">1.1 ZSH</h3>
+
+<h4 id="111-zshrc">1.1.1 zshrc</h4>
+
+<ul>
+  <li><a href="/assets/files/zsh">.zshrc</a></li>
+</ul>
+
+<h4 id="112-oh-my-zsh">1.1.2 Oh My Zsh</h4>
+
+<h5 id="download">download</h5>
+
+<ul>
+  <li><a href="https://github.com/ohmyzsh/ohmyzsh">Oh My Zsh</a></li>
+</ul>
+
+<h5 id="via-curl">via curl</h5>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sh <span class="nt">-c</span> <span class="s2">"</span><span class="si">$(</span>curl <span class="nt">-fsSL</span> https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh<span class="si">)</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<h5 id="via-wget">via wget</h5>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sh <span class="nt">-c</span> <span class="s2">"</span><span class="si">$(</span>wget <span class="nt">-O-</span> https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh<span class="si">)</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<h5 id="manual-inspection">Manual inspection</h5>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-Lo</span> install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+sh install.sh
+</code></pre></div></div>
+
+<h4 id="113-font">1.1.3 Font</h4>
+
+<ul>
+  <li>
+    <p><a href="https://github.com/ryanoasis/nerd-fonts">nerd-fonts</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete.ttf">Hack Regular Nerd Font Complete</a></p>
+  </li>
+</ul>
+
+<h4 id="114-color">1.1.4 Color</h4>
+
+<ul>
+  <li><a href="https://github.com/mbadolato/iTerm2-Color-Schemes">iTerm2-Color-Schemes</a></li>
+</ul>
+
+<h3 id="12-brew">1.2 Brew</h3>
+
+<h5 id="download-1">download</h5>
+
+<ul>
+  <li><a href="https://brew.sh/">Homebrew</a></li>
+</ul>
+
+<h5 id="install">install</h5>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/bin/bash <span class="nt">-c</span> <span class="s2">"</span><span class="si">$(</span>curl <span class="nt">-fsSL</span> https://raw.githubusercontent.com/Homebrew/install/master/install.sh<span class="si">)</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<h2 id="ii-应用程序">II. 应用程序</h2>
+
+<h3 id="21-开发">2.1 开发</h3>
+
+<ul>
+  <li>Beyond Compare</li>
+  <li>CLion</li>
+  <li>Dash</li>
+  <li>Docker</li>
+  <li>GoLand</li>
+  <li>iTerm</li>
+  <li>MacDown</li>
+  <li>MindNode</li>
+  <li>Office</li>
+  <li>Navicat Premium</li>
+  <li>OmniGraffle</li>
+  <li>PhpStorm</li>
+  <li>Postman</li>
+  <li>PyCharm</li>
+  <li>Sublime Text</li>
+  <li>Typora</li>
+  <li>Visual Studio Code</li>
+  <li>XMind ZEN</li>
+</ul>
+
+<h3 id="22-网络">2.2 网络</h3>
+
+<ul>
+  <li>OneDrive</li>
+  <li>Proxifier</li>
+  <li>ShadowsocksX-NG-R8</li>
+</ul>
+
+<h3 id="23-工具">2.3 工具</h3>
+
+<ul>
+  <li>Blackmagic Disk Speed Test</li>
+  <li>Alfred 3</li>
+  <li>Android File Transfer</li>
+  <li>CleanMyMac X</li>
+  <li>DaisyDisk</li>
+  <li>Firefox</li>
+  <li>gfxCardStatus - video card switcher</li>
+  <li>Google Chrome</li>
+  <li>HandShaker</li>
+  <li>iHosts</li>
+  <li>IINA</li>
+  <li>iStat Menus</li>
+  <li>Karabiner-Elements</li>
+  <li>Karabiner-EventViewer</li>
+  <li>Kindle</li>
+  <li>Magnet</li>
+  <li>NightOwl</li>
+  <li>Parallels Desktop</li>
+  <li>Speedtest</li>
+  <li>TG Pro</li>
+  <li>Typeeto</li>
+  <li>VLC</li>
+</ul>
+
+<h3 id="24-开源">2.4 开源</h3>
+
+<ul>
+  <li>AirBar</li>
+</ul>
+
+<h3 id="25-墙内">2.5 墙内</h3>
+
+<ul>
+  <li>QQ</li>
+  <li>WeChat</li>
+  <li>WeChat Work</li>
+</ul>
+
+<h3 id="26-试用软件下载站点">2.6 试用软件下载站点</h3>
+
+<ul>
+  <li><a href="nmac.to">nmac.to</a></li>
+  <li><a href="xclient.info">xclient.info</a></li>
+</ul>
+
+<h2 id="iii-高级配置">III. 高级配置</h2>
+
+<h3 id="31-关闭不明身份开发者检查">3.1 关闭”不明身份开发者”检查</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>spctl <span class="nt">--master-disable</span>
+</code></pre></div></div>
+
+<h3 id="32-dock中增加空格图标做分隔符">3.2 Dock中增加空格图标做分隔符</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>defaults write com.apple.dock persistent-apps <span class="nt">-array-add</span> <span class="s1">'{"tile-type"="spacer-tile";}'</span>
+killall Dock
+</code></pre></div></div>
+
+<h3 id="33-cli启动sublime">3.3 CLI启动sublime</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo ln</span> <span class="nt">-s</span> /Applications/Sublime<span class="se">\ </span>Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
+<span class="nb">cd</span> /usr/local/bin
+<span class="nb">echo</span> <span class="nv">$PATH</span>
+</code></pre></div></div>
+
+<h3 id="34-高效的中文输入法">3.4 高效的中文输入法</h3>
+
+<ul>
+  <li>【鼠鬚管】輸入法</li>
+</ul>
+
+<h2 id="iv-问题修复">IV. 问题修复</h2>
+
+<h3 id="41-修复macos音频无声音的问题">4.1 修复MacOS音频无声音的问题</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>launchctl stop com.apple.audio.coreaudiod <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>launchctl start com.apple.audio.coreaudiod
+</code></pre></div></div>
+
+<h3 id="42-清除当前dns缓存">4.2 清除当前dns缓存</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>killall <span class="nt">-HUP</span> mDNSResponder
+<span class="nb">sudo </span>killall mDNSResponderHelper
+<span class="nb">sudo </span>dscacheutil <span class="nt">-flushcache</span>
+</code></pre></div></div>
+
+<h3 id="43-蓝牙信道优化连接修复">4.3 蓝牙信道优化、连接修复</h3>
+<ul>
+  <li>下载 Additional_Tools_for_Xcode <a href="https://developer.apple.com/download/more/?=for%20Xcode">Tools_for_Xcode</a></li>
+  <li>打开 <code class="language-plaintext highlighter-rouge">Additional_Tools_for_Xcode.dmg</code> 选择 <code class="language-plaintext highlighter-rouge">Hardware</code> &gt; <code class="language-plaintext highlighter-rouge">Bluetooth Explorer</code> ，进入 <code class="language-plaintext highlighter-rouge">Bluetooth Explorer</code> 的 <code class="language-plaintext highlighter-rouge">menu bar</code> 选择 <code class="language-plaintext highlighter-rouge">Tools &gt; RSSI Sweeper</code></li>
+  <li><code class="language-plaintext highlighter-rouge">start</code> 后蓝牙会暂时端口，蓝牙模块在扫描到其他蓝牙连接的信道后，会优化当前连接的信道，保证最优质的连接</li>
+</ul>]]></content><author><name>Teddy</name></author><category term="规划" /><category term="工作流" /><category term="MacOS" /><summary type="html"><![CDATA[MacOS 配置]]></summary></entry><entry><title type="html">Cloud Qualification</title><link href="http://localhost:4000/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%BA%94%E7%94%A8/%E4%BA%91%E8%AE%A1%E7%AE%97/2020/07/26/cloud-qualification.html" rel="alternate" type="text/html" title="Cloud Qualification" /><published>2020-07-26T00:00:00+08:00</published><updated>2020-07-26T00:00:00+08:00</updated><id>http://localhost:4000/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%BA%94%E7%94%A8/%E4%BA%91%E8%AE%A1%E7%AE%97/2020/07/26/cloud-qualification</id><content type="html" xml:base="http://localhost:4000/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84-%E5%BA%94%E7%94%A8/%E4%BA%91%E8%AE%A1%E7%AE%97/2020/07/26/cloud-qualification.html"><![CDATA[<h1 id="云认证">云认证</h1>
+
+<blockquote>
+  <p>学习&amp;考试准备</p>
+</blockquote>
+
+<ul>
+  <li>学习路径
+    <ol>
+      <li>云计算基础</li>
+      <li><strong>云服务器产品</strong></li>
+      <li><strong>云网络产品</strong></li>
+      <li>CDN加速产品</li>
+      <li>云存储产品</li>
+      <li>数据库产品</li>
+      <li>安全产品</li>
+      <li>视频与通信服务</li>
+    </ol>
+  </li>
+</ul>
+
+<h1 id="i-云计算基础">I. 云计算基础</h1>
+
+<h2 id="11-数据中心">1.1 数据中心</h2>
+
+<h3 id="111-edc">1.1.1 EDC</h3>
+
+<ul>
+  <li>TCO = CapEx + OpeEx + OppCost</li>
+  <li>TVO = IT带来的业务价值与收益</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>L4</th>
+      <th>业务应用层 *各种应用系统*</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>L3</td>
+      <td>应用支撑层 *中间件、消息、开发环境、API* / 数据分析层 *数据库*</td>
+    </tr>
+    <tr>
+      <td>L2</td>
+      <td>IT基础设施 *服务器、网络、存储、安全*</td>
+    </tr>
+    <tr>
+      <td>L1</td>
+      <td>机房设施层 *电源、机柜*</td>
+    </tr>
+    <tr>
+      <td>L0</td>
+      <td>楼宇系统层 *机房、传输*</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>
+    <p>中心等级、云DC在T3级以上，并行维护+99.982%+1.6H年宕机时间</p>
+  </li>
+  <li>
+    <p>IDC资源出租，托管型、租用型，成本低，上线块，标准化，电信级可靠、运维管理；</p>
+    <ul>
+      <li>托管，企业要购买硬件+管理维护+业务</li>
+      <li>租用，运营商要硬件投入、电力公园、管理维护</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="112-云计算">1.1.2 云计算</h3>
+
+<ul>
+  <li><strong>按需服务，按量付费的服务模式，按需可配置的计算资源共享池</strong></li>
+  <li>
+    <p>2006 Google CEO提出云计算 Cloud Computing</p>
+  </li>
+  <li>独立自建 &gt; 部分租用 &gt; 按需使用</li>
+  <li>成本低，上线时间很快，运维管理简单、弹性扩展、范围L0-L4，自主公有云、私有云</li>
+</ul>
+
+<h2 id="12-核心特征">1.2 核心特征</h2>
+
+<h3 id="121-模型">1.2.1 模型</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>公有云</th>
+      <th>私有云</th>
+      <th>混合云</th>
+      <th>行业云</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>服务目录</td>
+      <td> </td>
+      <td>服务生命周期管理</td>
+      <td>运维管理系统</td>
+    </tr>
+    <tr>
+      <td>SaaS 软件即服务</td>
+      <td>服务编排调度</td>
+      <td>服务生命周期管理</td>
+      <td>运维管理系统</td>
+    </tr>
+    <tr>
+      <td>PaaS 平台即服务</td>
+      <td>服务编排调度</td>
+      <td>服务生命周期管理</td>
+      <td>运维管理系统</td>
+    </tr>
+    <tr>
+      <td>IaaS  基础设施即服务</td>
+      <td>服务编排调度</td>
+      <td>服务生命周期管理</td>
+      <td>运维管理系统</td>
+    </tr>
+    <tr>
+      <td>虚拟基础设施</td>
+      <td> </td>
+      <td> </td>
+      <td>运维管理系统</td>
+    </tr>
+    <tr>
+      <td>物理基础设施</td>
+      <td> </td>
+      <td> </td>
+      <td>运维管理系统</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>资源池化  <em>提升利用率/可用性</em></li>
+  <li>弹性扩展  <em>业务需求/成本均衡</em></li>
+  <li>按需服务  <em>资源/时间</em></li>
+  <li>泛网络访问  <em>随时随地/高质量</em></li>
+  <li>服务可度量 <em>服务计费/精细化运营</em></li>
+</ul>
+
+<hr />
+
+<h3 id="122-服务模式">1.2.2 服务模式</h3>
+
+<ul>
+  <li>服务使用/应用层/中间层/基础设施</li>
+  <li>租户维护如下</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Iaas</th>
+      <th>PaaS</th>
+      <th>SaaS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>服务使用/应用层/中间层</td>
+      <td>服务使用/应用层</td>
+      <td>服务使用</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="技术架构">技术架构</h4>
+
+<ul>
+  <li>SaaS</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>应用层</th>
+      <th> </th>
+      <th> </th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Portal</td>
+      <td>CRM</td>
+      <td>ERP</td>
+      <td>OA</td>
+      <td>其他</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>PaaS</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>中间层</th>
+      <th> </th>
+      <th> </th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> </td>
+      <td>访问控制</td>
+      <td>负载均衡</td>
+      <td>开发工具</td>
+      <td>服务总线</td>
+    </tr>
+    <tr>
+      <td>**中间件**</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>**数据库**</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>IaaS</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>基础架构层</th>
+      <th> </th>
+      <th> </th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> </td>
+      <td>计算资源池</td>
+      <td>存储资源池</td>
+      <td>网络资源池</td>
+      <td>其他资源池</td>
+    </tr>
+    <tr>
+      <td>**虚拟化**</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>主机</td>
+      <td>存储</td>
+      <td>网络</td>
+      <td>其他基础设施</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><strong>管理层</strong></li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>云计算管理</th>
+      <th> </th>
+      <th> </th>
+      <th> </th>
+      <th> </th>
+      <th> </th>
+      <th> </th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> </td>
+      <td>帐号管理</td>
+      <td>配置管理</td>
+      <td>计费管理</td>
+      <td>安全管理</td>
+      <td>流程管理</td>
+      <td>运维管理</td>
+      <td>SLA监控</td>
+      <td>API</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="123-部署方式">1.2.3 部署方式</h3>
+
+<ul>
+  <li>
+    <p>公、私、混、行业</p>
+  </li>
+  <li>公、私区别
+    <ul>
+      <li>多租户、不同组织；同组织、单租户</li>
+      <li>使用权属于客户、所有权属于服务商；使用权、所有权都属于客户</li>
+      <li>成本低；成本高</li>
+      <li>运维较简单；较为复杂</li>
+      <li>较低的自主可控；较高的自主可控</li>
+    </ul>
+  </li>
+  <li>混合
+    <ul>
+      <li>公+私，核心为私，非核心为公</li>
+      <li>多云统一，多云网关统一管理多个服务商的云服务，高质量议价权、多灾备</li>
+    </ul>
+  </li>
+  <li>行业
+    <ul>
+      <li>针对行业或者互联网产品深度优化；</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="13-关键技术">1.3 关键技术</h2>
+
+<h3 id="131-计算虚拟化">1.3.1 计算虚拟化</h3>
+
+<ul>
+  <li>虚拟化前，单一OS，软件和硬件强耦合，利用率低，扩展性和容错性差</li>
+  <li>裸金属架构，虚拟化层运行在硬件上，提供CPU和内存资源池、VM、软硬解耦，故障迁移、弹性扩展</li>
+  <li>分类
+    <ul>
+      <li>全虚拟化，OS直接运行在虚拟化层上
+        <ul>
+          <li>ESXi
+            <ul>
+              <li>User App</li>
+              <li>GuestOS</li>
+              <li>虚拟化层，OS特权指令通过BT转换执行</li>
+              <li>硬件</li>
+            </ul>
+          </li>
+          <li>KVM
+            <ul>
+              <li>User App</li>
+              <li>GusetOS</li>
+              <li>虚拟化层，OS特权指令切换到根模式执行</li>
+              <li>硬件</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>半虚拟化，OS需要修改安装额外的驱动
+        <ul>
+          <li>Xen
+            <ul>
+              <li>User APP</li>
+              <li>PV GuestOS</li>
+              <li>虚拟化，OS特权指令超级调用Hypercall</li>
+              <li>硬件</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>对比
+    <ul>
+      <li>KVM
+        <ul>
+          <li>全虚拟化</li>
+          <li>KVM内核完成CPU和内存虚拟化</li>
+          <li>QEMU完成磁盘和网络的虚拟化</li>
+          <li>Linux进程进行虚拟化调度和管理</li>
+        </ul>
+      </li>
+      <li>Xen
+        <ul>
+          <li>全/半</li>
+          <li>Xen内核完成CPU、内存</li>
+          <li>Dom0完成磁盘和网络</li>
+          <li>Dom0完成虚拟化调度和管理</li>
+        </ul>
+      </li>
+      <li>ESXi
+        <ul>
+          <li>全</li>
+          <li>ESXi内核完成CPU、内存</li>
+          <li>虚拟化内核完成磁盘和网络IO</li>
+          <li>虚拟化内核完成虚拟化调度和管理</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>KVM
+    <ul>
+      <li>VM是Linux进程，有进程管理模块进行管理</li>
+      <li>KVM内核负责CPU和内存虚拟化，QEMU负责I/O虚拟化</li>
+      <li>硬件支持Intel-VT，AMD-V</li>
+    </ul>
+  </li>
+  <li>KVM优势
+    <ul>
+      <li>高性能</li>
+      <li>易扩展</li>
+      <li>易管理</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="132-分布式数据存储-serversan">1.3.2 分布式数据存储 ServerSAN</h3>
+
+<ul>
+  <li>原理
+    <ul>
+      <li>将server上分散的本地盘整合为资源池</li>
+      <li>读写元
+        <ul>
+          <li>承接应用IO</li>
+        </ul>
+      </li>
+      <li>控制元
+        <ul>
+          <li>Hash算法确保I/O分布到各个节点</li>
+        </ul>
+      </li>
+      <li>存储元
+        <ul>
+          <li>负责写入数据到存储块</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>优势
+    <ul>
+      <li>高性价比，普通盘高性能</li>
+      <li>易扩展，线性增删节点</li>
+      <li>高可靠：保存3副本，快速修改和迁移</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="133-网络虚拟化-sdn">1.3.3 网络虚拟化 SDN</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>应用层</th>
+      <th> </th>
+      <th> </th>
+      <th>业务应用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>控制层</td>
+      <td>SDN控制软件</td>
+      <td>网络服务</td>
+      <td>^API</td>
+    </tr>
+    <tr>
+      <td>基础设施</td>
+      <td>网络设备</td>
+      <td>路由器、交换机、防火墙</td>
+      <td>^控制数据接口（OpenFlow）</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>DSN/NFV
+    <ul>
+      <li>SDN software define network
+        <ul>
+          <li>核心
+            <ul>
+              <li>控制面和数据面分离</li>
+              <li>通用路由器和交换机</li>
+              <li>控制面可编程</li>
+            </ul>
+          </li>
+          <li>场景
+            <ul>
+              <li>数据中心网络</li>
+            </ul>
+          </li>
+          <li>优点
+            <ul>
+              <li>处理OSI 2-3层（链路，网络），优化交换机、路由器、无线</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>NFV network function virtulization
+        <ul>
+          <li>核心
+            <ul>
+              <li>功能和硬件解耦</li>
+              <li>商业化硬件替代专用</li>
+              <li>数据面可编程</li>
+            </ul>
+          </li>
+          <li>场景
+            <ul>
+              <li>运营商基础网络</li>
+            </ul>
+          </li>
+          <li>优点
+            <ul>
+              <li>处理4-7层（传输、会话、表示、应用），优化网络功能、LB、FW、WAN</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="134-openstack">1.3.4 OpenStack</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>SERVICE</th>
+      <th>DESC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Nova</td>
+      <td>计算</td>
+    </tr>
+    <tr>
+      <td>Neutron</td>
+      <td>网络</td>
+    </tr>
+    <tr>
+      <td>Keystone</td>
+      <td>认证和授权</td>
+    </tr>
+    <tr>
+      <td>Glance</td>
+      <td>镜像</td>
+    </tr>
+    <tr>
+      <td>Swift</td>
+      <td>对象存储服务</td>
+    </tr>
+    <tr>
+      <td>Cinder</td>
+      <td>块存储服务</td>
+    </tr>
+    <tr>
+      <td>Horizon</td>
+      <td>图形化管理界面</td>
+    </tr>
+    <tr>
+      <td>Ceilometer</td>
+      <td>监控</td>
+    </tr>
+    <tr>
+      <td>Heat</td>
+      <td>编排调度</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>开源</li>
+  <li>标准</li>
+  <li>部署、运维、升级复杂</li>
+  <li>性能和扩展性差</li>
+  <li>容灾能力不足</li>
+</ul>
+
+<h3 id="134-vstation">1.3.4 VStation</h3>
+
+<ul>
+  <li>自主研发的云计算管理平台</li>
+  <li>设计原则
+    <ul>
+      <li>平行扩展、简洁高效、异步</li>
+      <li>Fail-fast、无状态、高可用</li>
+      <li>共享信道（以太网）</li>
+      <li>事务处理（SQL）</li>
+      <li>逻辑抽离（CGI）</li>
+      <li>易于追溯（git）</li>
+    </ul>
+  </li>
+  <li>架构
+    <ul>
+      <li>[dispatcher] &lt;==&gt; <strong>API</strong> =&gt;
+        <ul>
+          <li>[TaskCmen] <strong>MQ</strong>  &lt;==&gt;
+            <ul>
+              <li>&lt;==&gt;
+                <ul>
+                  <li>[Volume / cbs]</li>
+                  <li>[dfw]</li>
+                </ul>
+              </li>
+              <li><strong>Compute Access</strong> &lt;==&gt;
+                <ul>
+                  <li><strong>Compute</strong></li>
+                </ul>
+              </li>
+              <li><strong>Image Access</strong> &lt;==&gt;
+                <ul>
+                  <li><strong>Image</strong></li>
+                </ul>
+              </li>
+              <li><strong>NetWork</strong> &lt;==&gt;
+                <ul>
+                  <li><strong>IP</strong></li>
+                  <li><strong>VPC</strong></li>
+                </ul>
+              </li>
+              <li><strong>Scheduler</strong></li>
+              <li><strong>Resource</strong></li>
+              <li><strong>Error</strong></li>
+              <li><strong>Debug</strong></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>OpenStack vs VStation
+    <ul>
+      <li>集群：千台 / 十万</li>
+      <li>容灾：需开源组件支持 / 任一模块跨机房容灾</li>
+      <li>运维：需开发 / 监控、可视化运维</li>
+      <li>人员：百 / 十</li>
+      <li>性能：不支持100台同时创建 / 支持数万台同时创建</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="135-容器">1.3.5 容器</h3>
+
+<ul>
+  <li>
+    <p>轻量级虚拟化，进程隔离，应用和依赖环境、配置共同打包封装，提供独立可移植的运行环境</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">*</th>
+          <th>虚拟化</th>
+          <th>容器化</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left"> </td>
+          <td>APP1 | APP2</td>
+          <td>APP1 | APP2</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"> </td>
+          <td>Bins/Libs | Bins/Libs</td>
+          <td>Bins/Libs | Bins/Libs</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"> </td>
+          <td>GuestOS | GuestOS</td>
+          <td>容器引擎</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"> </td>
+          <td>虚拟化层</td>
+          <td>虚拟化层/操作系统</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"> </td>
+          <td>硬件</td>
+          <td>硬件</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h4 id="docker">Docker</h4>
+
+<ul>
+  <li>标准化，移植性强，<strong>Build, Ship and Run Anywhere</strong></li>
+  <li>管理
+    <ul>
+      <li>K8S（Kubernetes）开源容器编排管理调度</li>
+    </ul>
+  </li>
+  <li>优势
+    <ul>
+      <li>轻量</li>
+      <li>秒级部署</li>
+      <li>易于移植</li>
+      <li>弹性伸缩</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="136-大数据--ai">1.3.6 大数据 &amp; AI</h3>
+
+<ul>
+  <li>未来互联网就是利用人工智能在云端处理大数据。—Pony Ma</li>
+  <li>大数据
+    <ul>
+      <li>数据量大</li>
+      <li>价值密度低</li>
+      <li>多样化</li>
+      <li>高速产生</li>
+    </ul>
+  </li>
+  <li>AI
+    <ul>
+      <li>大数据</li>
+      <li>算法</li>
+      <li>算力</li>
+      <li>边界清晰</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="14-行业">1.4 行业</h2>
+
+<ul>
+  <li>互联网：C2C / B2C</li>
+  <li>互联网+：B2B2C</li>
+  <li>产业互联网：C2B2B2C</li>
+</ul>
+
+<h1 id="ii-云服务器v20">II. 云服务器V2.0</h1>
+
+<h2 id="21-基础">2.1 基础</h2>
+
+<h3 id="211-地域和可用区">2.1.1 地域和可用区</h3>
+
+<ul>
+  <li><strong>可用区 Zone</strong>
+    <ul>
+      <li>统一地域内电力和网络互相独立的物理数据中心，命名=城市 + 编号</li>
+    </ul>
+  </li>
+  <li><strong>地域 region</strong>
+    <ul>
+      <li>一个独立的地理去域名，命名=覆盖范围+机房所在城市</li>
+    </ul>
+  </li>
+  <li>云：25个地域+53个可用区</li>
+  <li>部署多地域多可用区
+    <ul>
+      <li>就近接入</li>
+      <li>隔离故障</li>
+      <li>LB</li>
+      <li>HA</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="212-实例">2.1.2 实例</h3>
+
+<ul>
+  <li>
+    <p>实例</p>
+
+    <ul>
+      <li>完整的云服务器（VM），CPU、内存、磁盘、网络、OS</li>
+      <li>命名=系列.机型.规格（vCPU核心数和内存大小）</li>
+      <li>S4.MEDIUM4</li>
+    </ul>
+  </li>
+  <li>
+    <p>管理</p>
+
+    <ul>
+      <li>控制台或者API管理</li>
+      <li>在线调整实例配置，重启生效</li>
+    </ul>
+  </li>
+  <li>
+    <p>安全</p>
+
+    <ul>
+      <li>策略</li>
+      <li>安全组</li>
+      <li>登录控制</li>
+    </ul>
+  </li>
+  <li>
+    <p>规格</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>*</th>
+          <th>标准型</th>
+          <th>S1</th>
+          <th>S2</th>
+          <th>S3</th>
+          <th>S4</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td> </td>
+          <td>CPU</td>
+          <td>Intel Xeon</td>
+          <td>Xeon Broadwell V4</td>
+          <td>Skylake 6133</td>
+          <td>Skylake 6148</td>
+        </tr>
+        <tr>
+          <td> </td>
+          <td>内存</td>
+          <td>DDR3</td>
+          <td>DDR4</td>
+          <td>最新DDR4</td>
+          <td>最新DDR4</td>
+        </tr>
+        <tr>
+          <td> </td>
+          <td>内网带宽</td>
+          <td>10Gbps</td>
+          <td>10Gbps</td>
+          <td>10Gbps</td>
+          <td>25Gbps</td>
+        </tr>
+        <tr>
+          <td> </td>
+          <td>Max规格</td>
+          <td>48C96G</td>
+          <td>56C224G</td>
+          <td>80C320G</td>
+          <td>72C228G</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>实例类型</p>
+
+    <ul>
+      <li>不同配置实现不同的IO、计算、网络、存储能力</li>
+      <li>选择CVM实例</li>
+    </ul>
+  </li>
+  <li>
+    <p>实例族</p>
+
+    <ul>
+      <li>某一类实例类型集合</li>
+    </ul>
+  </li>
+  <li>
+    <p>实例类型</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>*</th>
+          <th>类型</th>
+          <th>特点</th>
+          <th>场景</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td> </td>
+          <td>标准</td>
+          <td>均衡计算、内存和网络</td>
+          <td>中小Web应用、数据库、企业官网</td>
+        </tr>
+        <tr>
+          <td> </td>
+          <td>内存</td>
+          <td>大内存</td>
+          <td>大量的内存操作、查找和计算、分布式内存缓存</td>
+        </tr>
+        <tr>
+          <td> </td>
+          <td>高IO</td>
+          <td>高IO、高吞吐量、低时延</td>
+          <td>NoSQL、集群化数据库、OLTP系统</td>
+        </tr>
+        <tr>
+          <td> </td>
+          <td>计算</td>
+          <td>高主频CPU、最高性价比</td>
+          <td>高流量Web、MMO游戏、HPC</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h3 id="213-云服务器镜像">2.1.3 云服务器镜像</h3>
+
+<ul>
+  <li>定义
+    <ul>
+      <li>创建云服务器的模板，提供操作系统和软件配置</li>
+    </ul>
+  </li>
+  <li>作用
+    <ul>
+      <li>批量部署</li>
+      <li>特定软件部署</li>
+      <li>运行环境备份</li>
+    </ul>
+  </li>
+  <li>镜像类型
+    <ul>
+      <li>公有</li>
+      <li>服务市场</li>
+      <li>自定义</li>
+      <li>共享</li>
+    </ul>
+  </li>
+  <li>镜像优势
+    <ul>
+      <li>部署时长： 3 -5 min</li>
+      <li>过程：快速创建合适和云服务器</li>
+      <li>安全性：测试审核、安全加固</li>
+      <li>适用情况：四种镜像</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="214-云服务器存储">2.1.4 云服务器存储</h3>
+
+<ul>
+  <li>介质
+    <ul>
+      <li>普通云硬盘</li>
+      <li>高性能云硬盘</li>
+      <li>SSD云硬盘</li>
+    </ul>
+  </li>
+  <li>场景
+    <ul>
+      <li>系统盘</li>
+      <li>数据盘</li>
+    </ul>
+  </li>
+  <li>架构
+    <ul>
+      <li>本地盘</li>
+      <li>云硬盘</li>
+      <li>对象存储</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="215">2.1.5</h3>
+
+<ul>
+  <li>虚拟主机 &gt; 独立主机 &gt; VPS &gt; 云服务器</li>
+</ul>
+
+<h3 id="221-cvm-cloud-virtual-machine">2.2.1 CVM (Cloud Virtual Machine)</h3>
+
+<ul>
+  <li>弹性伸缩的计算服务
+    <ul>
+      <li>弹性伸缩，分钟</li>
+      <li>灵活配置，CPU、内存、带宽</li>
+      <li>稳定可靠，3副本</li>
+      <li>管理简单，API/CLI/控制台</li>
+      <li>安全网络，VPC/ACL/安全组</li>
+      <li>全面防护，木马/漏洞/破解</li>
+    </ul>
+  </li>
+  <li>业务，电商
+    <ul>
+      <li>需求
+        <ul>
+          <li>突发流量井喷</li>
+          <li>业务保障、成本控制</li>
+        </ul>
+      </li>
+      <li>方案
+        <ul>
+          <li>标准CVM、镜像，S2 1C1G</li>
+          <li>弹性伸缩组：闲时减实例，忙时增实例</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="222-gpu">2.2.2 GPU</h3>
+
+<ul>
+  <li>高速并行计算和浮点计算</li>
+  <li>高并行、高吞吐、低时延，科学计算性能比传统架构高50倍</li>
+  <li>CPU：几十个核心、复杂逻辑控制单元、强大的算术逻辑单元、逻辑控制、串行运算</li>
+  <li>
+    <p>GPU：数千个加速核心，众多ALU、多线程超大并行，计算密集，并行计算</p>
+  </li>
+  <li>计算型GPU
+    <ul>
+      <li>深度学习：训练和推理、图像、语音识别</li>
+      <li>科学计算：建模、基因组、金融</li>
+      <li>视频编码：高清视频编码</li>
+    </ul>
+  </li>
+  <li>渲染型GPU
+    <ul>
+      <li>图形工作站：动画、游戏、建模</li>
+      <li>非线性编辑：电源特效</li>
+    </ul>
+  </li>
+  <li>需求
+    <ul>
+      <li>AI算法建模</li>
+      <li>高计算能力</li>
+    </ul>
+  </li>
+  <li>方案
+    <ul>
+      <li>GPU实例 Tesla M40 GDDR5 24GB</li>
+      <li>缩短深度学习和训练时间</li>
+      <li>避免采购昂贵硬件</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="223-fpga-field-programmable-gate-array">2.2.3 FPGA (Field Programmable Gate Array)</h3>
+
+<ul>
+  <li><strong>现场可编程阵列</strong>的计算服务</li>
+  <li>FPGA 镜像在几min内部署实例，实现硬件加速</li>
+  <li>3种类型
+    <ul>
+      <li>FX2.7xlarge60  		1 14C60GB</li>
+      <li>FX2.14xlarge120      2 28C120GB</li>
+      <li>FX2.28xlarge240      4 56C240GB</li>
+    </ul>
+  </li>
+  <li>优势
+    <ul>
+      <li>硬件加速，协同执行，运行速度比CPU快20倍</li>
+      <li>硬件可编程，FPGA可重复编程，自定义硬件加速</li>
+      <li>产权交易平台，统一规范和安全可靠的FPGA硬件平台和服务市场</li>
+    </ul>
+  </li>
+  <li>场景
+    <ul>
+      <li>深度学习</li>
+      <li>实时图像压缩处理</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="224-专用宿主机cdh-cvm-dedicated-host">2.2.4 专用宿主机CDH CVM Dedicated Host</h3>
+
+<ul>
+  <li>独享主机资源、搭建平台、创建主机</li>
+  <li>优势
+    <ul>
+      <li>物理隔离</li>
+      <li>资源独享</li>
+      <li>安全合规</li>
+      <li>灵活配置</li>
+    </ul>
+  </li>
+  <li>场景
+    <ul>
+      <li>金融业务：安全合规</li>
+      <li>高性能业务：资源独享</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="225-黑石-cpm">2.2.5 黑石 CPM</h3>
+
+<ul>
+  <li>黑石物理服务器 Cloud Physical Machine
+    <ul>
+      <li>按需购买、按量付费的物理服务器租赁服务</li>
+      <li>云端专用、高性能、安全隔离的物理集群</li>
+    </ul>
+  </li>
+  <li>黑石 Stack-V，深度整合VMware
+    <ul>
+      <li>混合云</li>
+      <li>深度整合VMware套件，包括vSphere6.5、vSAN6.6、NSX6.3等，VMware许可</li>
+      <li>通过互联网，整合云产品</li>
+    </ul>
+  </li>
+  <li>黑石 ARM，CPM for ARM
+    <ul>
+      <li>需求：移动端游戏真机测试</li>
+      <li>方案：黑石ARM实例，运行android模拟器，测试</li>
+    </ul>
+  </li>
+  <li>黑石 OpenPOWER，CPM for OpenPOWER
+    <ul>
+      <li>需求：大数据处理、高并发IO，大内存、高速传输</li>
+      <li>黑石OpenOPWER，高主频、并发线程多、内存带宽大、缓存大</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="231-云服务计费模式">2.3.1 云服务计费模式</h3>
+
+<ul>
+  <li>购买渠道
+    <ul>
+      <li>官网Portal购买，控制台</li>
+      <li>API购买</li>
+    </ul>
+  </li>
+  <li>模式
+    <ul>
+      <li>包年包月 PrePaid</li>
+      <li>按量付费 PostPaid</li>
+      <li>阶梯计价、越多越省，量越大、时间越长、单价越低</li>
+    </ul>
+  </li>
+  <li>价格计算器
+    <ul>
+      <li>产品选型配置，价格计算，直接购买，导出清单</li>
+    </ul>
+  </li>
+  <li>包年包月
+    <ul>
+      <li>一次支付一个月或多月、多年的费用</li>
+      <li>退款，五天无理由</li>
+      <li>场景，低成本、长期、稳定</li>
+      <li>流程
+        <ul>
+          <li>选购 - 订单 - 账单 - 到期处理 - 续费</li>
+        </ul>
+      </li>
+      <li>停服回收
+        <ul>
+          <li>到期预警，前7-前1天，续费通知，自动续费不足通知</li>
+          <li>欠费预警，到期当天，断网关机保留数据，系统通知</li>
+          <li>资源停服，当期当天-后7天，联系客服续费恢复</li>
+          <li>资源销毁，到期后8天，清除数据销毁资源，不可恢复</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>按量付费
+    <ul>
+      <li>后付费，一定结算周期</li>
+      <li>业务波动大，资源使用临时性、突发性</li>
+      <li>流程
+        <ul>
+          <li>充值 - 开通 - 冻结 - 解冻 - 账单 - 欠费 &lt;</li>
+        </ul>
+      </li>
+      <li>冻结机制
+        <ul>
+          <li>系统根据结算周期和历史使用情况，预估冻结一定的余额，下次结算或资源释放时解冻</li>
+          <li>月结
+            <ul>
+              <li>每月计算日，解冻之前的费用，并扣费</li>
+              <li>再次计算冻结费用
+                <ul>
+                  <li>设备资源：上月底Last day实际使用云服务量 X 30 X 单价</li>
+                  <li>流量类资源：上月费用的X1或X1.2</li>
+                </ul>
+              </li>
+              <li>调整配置，先解冻，在按照新配置冻结</li>
+              <li>资源释放，下月结算日3号，解冻</li>
+            </ul>
+          </li>
+          <li>时结/日结
+            <ul>
+              <li>购买，冻结1~2个结算周期的费用</li>
+              <li>调整配置，先解冻，在按照新配置单价冻结</li>
+              <li>资源释放，下月结算日3号，解冻</li>
+            </ul>
+          </li>
+          <li>回收机制
+            <ul>
+              <li>生成账单，结算周期，生成账单进行扣费，余额不足进入欠费状态；</li>
+              <li>欠费保护，时：2小时，天：1天，推送欠费提醒，继续使用；冲正前，不能新开通服务</li>
+              <li>欠费停服，时：24小时，天：30天，系统推送停服通知，资源被强制关停；充值后，控制台重新启动；冲正前，不能新开通服务</li>
+              <li>欠费回收，超过欠费停服期，销毁回收，不可恢复；冲正前，不能新开通服务</li>
+            </ul>
+          </li>
+          <li>限制
+            <ul>
+              <li>不支持代理商代父</li>
+              <li>不支持代金券</li>
+              <li>不支持5天无理由</li>
+              <li>不支持切换包年包月</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="234-计费方案">2.3.4 计费方案</h3>
+
+<ul>
+  <li>CVM 费用 = 实例费用（CPU+Mem）+ 存储费用 + 带宽费用</li>
+  <li>模式
+    <ul>
+      <li>包年包月
+        <ul>
+          <li>预付</li>
+        </ul>
+      </li>
+      <li>按量计费
+        <ul>
+          <li>后付费，按秒，按小时</li>
+          <li>阶梯：0 &lt; T1 &lt;= 96H &lt;= T2 &lt;= 360H &lt; T3</li>
+          <li>部分不支持关机不收费</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>方案
+    <ul>
+      <li>包年包月
+        <ul>
+          <li>元/月</li>
+          <li>单价低</li>
+          <li>使用一个月</li>
+          <li>升配无限制，降配5次</li>
+        </ul>
+      </li>
+      <li>按量计费
+        <ul>
+          <li>元/秒</li>
+          <li>初始单价高，阶梯降价，96小时，360小时，使用15天后，单价基本接近包年包月</li>
+          <li>按秒计费，按小时结算</li>
+          <li>随时升降配置，无限制</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>实例购买限额
+    <ul>
+      <li>包年包月150，100（新加坡1，多伦多1，硅谷1）</li>
+      <li>按量付费30，20（香港1，多伦多1，硅谷1）</li>
+    </ul>
+  </li>
+  <li>云服务器计费方案
+    <ul>
+      <li>CVM，包年包月、按秒、按时</li>
+      <li>GPU，包年包月、按秒、按时</li>
+      <li>FPGA，内测</li>
+      <li>CDH，包年包月</li>
+      <li>CPM黑石，包年包月、按秒、按时</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="iii-网络产品">III. 网络产品</h1>
+
+<h3 id="311-私有网络vpc">3.1.1 私有网络VPC</h3>
+
+<ul>
+  <li><strong>Virtual Private Cloud</strong>, 是用户自定义的，逻辑隔离的专属云上网络空间
+    <ul>
+      <li>不同VPC完全逻辑隔离</li>
+      <li>SDN的方式管理VPC、实现IP地址，子网、路由表、网络ACL、流日志</li>
+      <li>多种连接，弹性IP，NAT网关，VPN</li>
+    </ul>
+  </li>
+  <li>私有网络连接
+    <ul>
+      <li>每个私有网络内的服务资源内网互通</li>
+      <li>不同VPC之间内网默认不通</li>
+      <li>用 ”对等连接“ 和 ”云联网“ 实现同一个账户下的VPC子网互通</li>
+    </ul>
+  </li>
+  <li>VPC内部
+    <ul>
+      <li>自有定义网段划分、IP、路由策略，部署云服务器、LB、云数据库</li>
+      <li><strong>对等连接和基础网络互通功能</strong>，连接内网资源，实现同服和两地三中心容灾</li>
+      <li>ACL和安全组，保证网络安全性</li>
+    </ul>
+  </li>
+  <li>VPC
+    <ul>
+      <li>自定义网络
+        <ul>
+          <li>自定义 <strong>网段、子网、路由策略</strong>，部署服务</li>
+        </ul>
+      </li>
+      <li>灵活、高性能访问
+        <ul>
+          <li><strong>性IP、NAT网关和公网网关</strong> 访问Internet</li>
+        </ul>
+      </li>
+      <li>稳定可靠的数据中心连接
+        <ul>
+          <li>混合云，连接云上计算资源和本地数据中心，使用 <strong>公网VPN</strong> or <strong>专线</strong> 接入</li>
+        </ul>
+      </li>
+      <li>灵活互通
+        <ul>
+          <li><strong>对等连接和基础网络互通</strong> 实现私有网络的资源互通</li>
+        </ul>
+      </li>
+      <li>多维度安全
+        <ul>
+          <li><strong>网络ACL和安全组</strong> 实现端口和实例维度的资源访问控制</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="312-vpc网段">3.1.2 VPC网段</h3>
+
+<ul>
+  <li>
+    <p>私有网段</p>
+
+    <ul>
+      <li>10.0.0.0 - 10.255.255.255 [掩码16-28]</li>
+      <li>172.16.0.0 - 172.31.255.255 [掩码16-28]</li>
+      <li>192.168.0.0 - 192.168.255.255 [掩码16-28]</li>
+    </ul>
+  </li>
+  <li>
+    <p>子网</p>
+
+    <ul>
+      <li>云资源部署在子网内，CVM和CDB</li>
+      <li>通过DHCP获取私有IP，不能在公网路由</li>
+      <li>每个子网可用IP数量，2^n - 3 （n为主机位的位数）</li>
+    </ul>
+  </li>
+  <li>
+    <p>CIDR (Classless Inter-Domain Routing)</p>
+
+    <ul>
+      <li>支持「私有网段」中的任意一个</li>
+    </ul>
+  </li>
+  <li>
+    <p>子网</p>
+
+    <ul>
+      <li>一个VPC至少有一个子网组成，子网的CIDR必须在VPC的CIDR内，VPC的所有云资源必须部署在子网内</li>
+      <li>VPC具有地域（Region）属性</li>
+      <li>子网具有可用区（Zone）属性</li>
+      <li>一个私有网络下的子网属于该地域的不同可用区</li>
+      <li>同一VPC下各子网内资源默认互通</li>
+    </ul>
+  </li>
+  <li>
+    <p>默认私有网络和子网</p>
+
+    <ul>
+      <li>默认私有网络和自行创建的私有网络功能完全一致</li>
+      <li>默认VPC不会占用某个地域下的VPC配额，不需要默认VPC和子网可自行删除</li>
+    </ul>
+  </li>
+  <li>
+    <p>子网划分</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>*</th>
+          <th><u>xxxx xxxx.</u></th>
+          <th><u>xxxx xxxx.</u></th>
+          <th><u>xxxx xxxx.</u></th>
+          <th><u>xxxx xxxx.</u></th>
+          <th>xxxx xxxx.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td> </td>
+          <td>子</td>
+          <td>网</td>
+          <td>掩</td>
+          <td>码 **[24]**</td>
+          <td>主机位</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ul>
+      <li>
+        <p>子网划分</p>
+
+        <ul>
+          <li>通过设置子网的位数，来决定可用的子网数和主机IP数
+            <ul>
+              <li>子网位数为m，主机位数为2^(32-m) - 3</li>
+              <li>10.3.5.7/24
+                <ul>
+                  <li>主机数量=2^(32-24) - 3</li>
+                  <li>网络地址10.3.5.0，广播10.3.5.255</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="313-vpc路由表">3.1.3 VPC路由表</h3>
+
+<ul>
+  <li>VPC内互通，不同VPC内网不通，通过路由表实现子网间、子网与外部的路由通信</li>
+  <li>路由表
+    <ul>
+      <li>每个私有网络有一个默认路由，用户可以创建自定义路由表；</li>
+      <li>由多条路由策略组成</li>
+      <li>用于控制VPC内子网的出流量方向</li>
+      <li>每个子网只能关联一个路由表，一个路由表可以关联多个子网</li>
+      <li>分类
+        <ul>
+          <li>默认路由表
+            <ul>
+              <li>创建VPC自动生成</li>
+              <li>新建子网自动关联默认路由表</li>
+              <li>添加删除修改路由策略，无法删除默认路由</li>
+            </ul>
+          </li>
+          <li>自定义路由表
+            <ul>
+              <li>可以删除</li>
+              <li>为相同策略的子网，创建一个路由表，将路由协议与所有子网关联</li>
+              <li>创建时关联、创建后关联</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>路由策略
+    <ul>
+      <li>目的端
+        <ul>
+          <li>目的网段</li>
+          <li>不能为路由表所在VPC的IP段，Local路由已经表示过此VPC内网默认互通</li>
+        </ul>
+      </li>
+      <li>下一跳类型
+        <ul>
+          <li>数据包出口，支持类型：NAT网关、云服务器等</li>
+        </ul>
+      </li>
+      <li>下一跳
+        <ul>
+          <li>指定具体跳转的下一跳实例，ID标识</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>路由策略优先级
+    <ul>
+      <li>多条策略，由高到低
+        <ul>
+          <li>私有网络内流量</li>
+          <li>最精确路由（最长前缀匹配，优先匹配掩码最长的路由策略并确定下一跳）</li>
+          <li>公网IP</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="314-vpc-访问控制">3.1.4 VPC 访问控制</h3>
+
+<ul>
+  <li>
+    <p>ACL <strong>(Access Control List)</strong></p>
+
+    <ul>
+      <li>控制进出子网的数据流</li>
+      <li>子网级别无状态的可选安全层</li>
+      <li>协议和端口</li>
+    </ul>
+  </li>
+  <li>
+    <p>安全组</p>
+
+    <ul>
+      <li>配置放通和拒绝的端口/协议</li>
+      <li>有状态的包过滤功能的虚拟防火墙，用于设置云服务器的实例级别的网络访问控制</li>
+      <li>安全隔离手段</li>
+    </ul>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>*</th>
+      <th>安全组</th>
+      <th>ACL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> </td>
+      <td>CVM实例级别的流量控制 【第一层】</td>
+      <td>子网级别的流量控制 【第二层】</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>放通和拒绝的端口/协议</td>
+      <td>放通和拒绝的端口/协议</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>有状态：返回数据被自动允许</td>
+      <td>无状态：返回数据必须明确规则</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>启动CVM，指定安全组，关联实例</td>
+      <td>自动应用到子网内的所有CVM实例，可以做备份安全层</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="315-弹性网卡">3.1.5 弹性网卡</h3>
+
+<ul>
+  <li><strong>ENI [Elastic Network Interface]</strong></li>
+  <li>绑定私有网络云服务器的弹性网络接口，可以自有迁移</li>
+  <li>优势
+    <ul>
+      <li>多网卡</li>
+      <li>网络隔离</li>
+      <li>灵活迁移</li>
+    </ul>
+  </li>
+  <li>绑定多个ENI，实现HA</li>
+  <li>单个ENI绑定多个IP，实现单机多IP</li>
+  <li>多网卡
+    <ul>
+      <li>创建时自动生成的网卡</li>
+      <li>主持绑定多个辅助弹性网卡</li>
+      <li>弹性网卡可以属于同一个VPC下的不同子网</li>
+      <li>支持独立的安全组</li>
+      <li>配置独立的路由和转发策略</li>
+    </ul>
+  </li>
+  <li>灵活迁移
+    <ul>
+      <li>自由地在同VPC和同可用区下的云服务器之间自由迁移</li>
+      <li>绑定，保留内网IP、弹性公网IP，安全组策略</li>
+      <li>迁移后无需重新配置关联关系</li>
+    </ul>
+  </li>
+  <li>网络隔离
+    <ul>
+      <li>绑定同VPC可可用区的不同子网的弹性网卡，设定独立的路由转发策略，实现隔离</li>
+      <li>云服务器内设定策略，失信特定目的端的流量指向不同的网卡</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="321-网络连接">3.2.1 网络连接</h3>
+
+<ul>
+  <li>对等连接
+    <ul>
+      <li>不同VPC之间内网互通</li>
+    </ul>
+  </li>
+  <li>云联网
+    <ul>
+      <li>不同VPC之间内网互通</li>
+      <li>私有网络接入私有数据中心</li>
+    </ul>
+  </li>
+  <li>弹性IP、NAT网关、公网网关
+    <ul>
+      <li>访问公网</li>
+    </ul>
+  </li>
+  <li>VPN
+    <ul>
+      <li>私有网络接入私有数据中心</li>
+    </ul>
+  </li>
+  <li>专线
+    <ul>
+      <li>私有网络接入私有数据中心</li>
+    </ul>
+  </li>
+  <li>基础网络互通
+    <ul>
+      <li>基础网络和私有网络内网通信</li>
+    </ul>
+  </li>
+  <li>安全组和ACL
+    <ul>
+      <li>多维度网络安全</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="322-公网接入">3.2.2 公网接入</h3>
+
+<ul>
+  <li>
+    <p>VPC里的服务器，绑定公网IP来实现</p>
+
+    <ul>
+      <li>普通公网IP，CVM上申请绑定，解绑后释放，无法找回</li>
+      <li>弹性公网IP，EIP
+        <ul>
+          <li>关联帐号，解绑保留，重新绑定</li>
+          <li>提供外网访问能力</li>
+          <li>EIP，独立申请，支持CVM/NAT网关实例动态绑定和解绑</li>
+          <li>释放
+            <ul>
+              <li>用户控制台/API释放</li>
+              <li>欠费释放，余额小于0且超过2小时，免费保留24H，24+2H后释放</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>公网网关</p>
+
+    <ul>
+      <li>是开启了转发功能的主机</li>
+      <li>通过不同子网的公网网关访问Internet</li>
+      <li>做源地址转换</li>
+      <li>购买是没有勾选，则购买后无法切换</li>
+      <li>有公网流量转发功能，为其他云主机转发，公网IP的主机没有转发能力</li>
+    </ul>
+  </li>
+  <li>
+    <p>公网网关所在子网</p>
+
+    <ul>
+      <li>只能转发 <strong>非所在子网</strong> 的路由转发请求，不能与使用网关的服务在一个子网下</li>
+    </ul>
+  </li>
+  <li>
+    <p>NAT网关</p>
+
+    <ul>
+      <li>通过IP地址转换提供Internet访问</li>
+      <li>SNAT，源地址转换</li>
+      <li>DNAT，目的地址转换</li>
+      <li>网关流量、流量高级、共享带宽包</li>
+    </ul>
+  </li>
+  <li>
+    <p>NAT [NAT Gateway]</p>
+
+    <ul>
+      <li>IP地址转换的网络云服务</li>
+      <li>访问Internet</li>
+      <li>不暴露公网</li>
+      <li>IP流量管理，异常流量定位</li>
+      <li>海量并发</li>
+      <li>SNAT [Source Network Address Translation]
+        <ul>
+          <li>同一公网IP访问，支持5GB</li>
+        </ul>
+      </li>
+      <li>DNAT [Destination Network Address Translation]
+        <ul>
+          <li>将内网IP、协议、端口映射成外网IP、协议、端口，是云服务器能被外网访问</li>
+        </ul>
+      </li>
+      <li>网关监控
+        <ul>
+          <li>限制内IP和NAT带宽</li>
+        </ul>
+      </li>
+      <li>流量告警
+        <ul>
+          <li>阈值告警</li>
+        </ul>
+      </li>
+      <li>共享带宽包
+        <ul>
+          <li>多个IP共享公网带宽，不同流量错峰</li>
+        </ul>
+      </li>
+      <li>安全高仿
+        <ul>
+          <li>BGP做DDoS和CC防护，最高310Gbps防护</li>
+        </ul>
+      </li>
+      <li>自动容灾
+        <ul>
+          <li>双机热备、自动容灾</li>
+          <li>单机故障自动切换，业务无感知</li>
+          <li>可用性高达99.99%</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>公网接入的对比</p>
+
+    <ul>
+      <li>
+        <p>NAT vs 公网网关 的优势</p>
+
+        <ul>
+          <li>大容量</li>
+          <li>双机热备高可用</li>
+          <li>省成本</li>
+          <li>使用约束
+            <ul>
+              <li>公网网关最大100Mbps，可以购买形成出口集群</li>
+              <li>通过路由表汇总配置目的端路由，转发流量可以在网关间LB</li>
+              <li>公网网关不支持NAT接入</li>
+              <li>专线网关、VPN网关不支持NAT接入</li>
+              <li>网关子网和普通子网不能关联到同一张路由表，需要新建</li>
+            </ul>
+          </li>
+        </ul>
+
+        <table>
+          <thead>
+            <tr>
+              <th>NAT</th>
+              <th>公网网关</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>双机热备、自动热切换</td>
+              <td>手动故障切换</td>
+            </tr>
+            <tr>
+              <td>带宽最大5G</td>
+              <td>取决于与服务器带宽</td>
+            </tr>
+            <tr>
+              <td>最多绑定10个弹性IP</td>
+              <td>1个弹性IP或普通公网IP</td>
+            </tr>
+            <tr>
+              <td>无限速</td>
+              <td>云服务器限速</td>
+            </tr>
+            <tr>
+              <td>最大1000万连接</td>
+              <td>50万</td>
+            </tr>
+            <tr>
+              <td>不占VPC内网IP</td>
+              <td>内用内网IP</td>
+            </tr>
+            <tr>
+              <td>不支持安全组</td>
+              <td>支持安全组</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="323-dc连接">3.2.3 DC连接</h3>
+
+<ul>
+  <li><strong>Direct Connect</strong> 专线
+    <ul>
+      <li>物理专线</li>
+      <li>专用通道</li>
+      <li>专线网关</li>
+      <li>多地域</li>
+      <li>多端口协议，100Base-T,1000Base-T, 1000Base-LX, 10GBase-LR 四种端口，MSTP，SDH，OTN，DWDM多种协议</li>
+      <li>双线接入</li>
+      <li>NAT</li>
+    </ul>
+  </li>
+  <li>VPN
+    <ul>
+      <li>安全加密网络隧道</li>
+      <li>IKE，IPsec数据加密</li>
+      <li>监控告警
+        <ul>
+          <li>无需额外收费</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="324-对等连接">3.2.4 对等连接</h3>
+
+<ul>
+  <li>大带宽、高质量互通服务
+    <ul>
+      <li>多VPC，多地域，多账户异构</li>
+      <li>5GB以上</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="325-云联网">3.2.5 云联网</h3>
+
+<ul>
+  <li>内网互联、全网互联、学习调度、路由自动下发</li>
+</ul>
+
+<h3 id="331-clb">3.3.1 CLB</h3>
+
+<ul>
+  <li>Cloud Load Balancer</li>
+</ul>
+
+<h3 id="332-流量分发算法">3.3.2 流量分发算法</h3>
+
+<ul>
+  <li>四层负载均衡
+    <ul>
+      <li>TCP、UDP，端口+VIP转发</li>
+    </ul>
+  </li>
+  <li>七层
+    <ul>
+      <li>HTTP和HTTPS，基于内容转发</li>
+    </ul>
+  </li>
+  <li>算法
+    <ul>
+      <li>加权轮训算法</li>
+      <li>加权最小连接数算法</li>
+      <li>源地址散列算法</li>
+    </ul>
+  </li>
+  <li>公网负载均衡</li>
+  <li>内网负载均衡</li>
+  <li>流量分发
+    <ul>
+      <li>接入层服务器，配置一致的Docker容器承载</li>
+    </ul>
+  </li>
+  <li>横向扩展，Autoscaling动态伸缩组</li>
+</ul>
+
+<h3 id="334-clbcdn">3.3.4 CLB+CDN</h3>
+
+<ul>
+  <li>通过CLB+CDN将不同的流量分发到对应集群</li>
+  <li>业务分离</li>
+</ul>
+
+<h2 id="34-网络计费">3.4 网络计费</h2>
+
+<ul>
+  <li>免费
+    <ul>
+      <li>内网同地域免费，不同子网通信，同地域连接免费；</li>
+      <li>普通公网IP免费</li>
+      <li>帮定CVM或NAT的弹性IP</li>
+    </ul>
+  </li>
+  <li>收费
+    <ul>
+      <li>为绑定CVM和NAT的弹性IP</li>
+      <li>闲置的EIP，计算到S，闲置费用 0.2 * (xs/3600)</li>
+    </ul>
+  </li>
+  <li>公网网关本质是云服务器实例</li>
+  <li>NAT
+    <ul>
+      <li>网关费用+Internet流量费用</li>
+      <li>共享带宽包，按照整体结算，出带宽产生高额费用</li>
+      <li>BGP线路</li>
+      <li>带宽计费
+        <ul>
+          <li>公网传输速率 Mbps 计费</li>
+          <li>包年包月、按带宽使用时长计费</li>
+        </ul>
+      </li>
+      <li>流量计费，总流量GB</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>Teddy</name></author><category term="体系结构-应用" /><category term="云计算" /><category term="CloudComputing" /><summary type="html"><![CDATA[云认证]]></summary></entry><entry><title type="html">Git进阶</title><link href="http://localhost:4000/%E5%AE%9E%E8%B7%B5/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/2020/07/12/git-advanced.html" rel="alternate" type="text/html" title="Git进阶" /><published>2020-07-12T00:00:00+08:00</published><updated>2020-07-12T00:00:00+08:00</updated><id>http://localhost:4000/%E5%AE%9E%E8%B7%B5/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/2020/07/12/git-advanced</id><content type="html" xml:base="http://localhost:4000/%E5%AE%9E%E8%B7%B5/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/2020/07/12/git-advanced.html"><![CDATA[<h1 id="git-进阶用法">Git 进阶用法</h1>
+
+<h2 id="i-git-cli-高级用法">I. Git CLI 高级用法</h2>
+
+<h3 id="1-重置头部指针">1. 重置头部指针</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git reset <span class="o">{</span>commitHash<span class="o">}</span>/HEAD~<span class="o">{</span>number<span class="o">}</span> <span class="nt">--hard</span>
+</code></pre></div></div>
+
+<ul>
+  <li>可以使用此命令重置当前提交的指针，将指针放在一个特定的提交上，如果想要远端达到相同的效果则需要 <code class="language-plaintext highlighter-rouge">--force</code> 强制推送远端，此命令生效后，会导致重置的哈稀值之前的提交都不在提交记录中</li>
+  <li><code class="language-plaintext highlighter-rouge">--hard</code>表示强制重置</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git reflog
+</code></pre></div></div>
+
+<ul>
+  <li>使用<code class="language-plaintext highlighter-rouge">reflog</code>命令可以再次看到<code class="language-plaintext highlighter-rouge">reset</code>之前的提交的哈稀值，再次使用<code class="language-plaintext highlighter-rouge">git reset</code>可以重新回到之前的提交点</li>
+</ul>
+
+<h3 id="2-合并多次已同步远端的提交">2. 合并多次已同步远端的提交</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">-i</span> <span class="o">{</span>commitHash<span class="o">}</span>/HEAD~<span class="o">{</span>number<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>使用<code class="language-plaintext highlighter-rouge">rebase -i</code>指定到你想要合并的提交的<strong>前一个</strong>提交的哈稀值上，完成后会进入<code class="language-plaintext highlighter-rouge">vim</code>模式</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pick 2f2fcb4d2 <span class="s2">"{commit message}"</span>
+pick 3f4a9e8e6 <span class="s2">"{commit message}"</span>
+pick 5f4a7e8e6 <span class="s2">"{commit message}"</span>
+</code></pre></div></div>
+
+<ul>
+  <li>提交顺序为倒序，<em>最下面的是最新的提交</em>，此处有两种方式可以合并下面两个提交到第一行的最老的提交上
+    <ul>
+      <li>
+        <p>使用关键词 <code class="language-plaintext highlighter-rouge">squash</code> 或者 <code class="language-plaintext highlighter-rouge">s</code> （<code class="language-plaintext highlighter-rouge">s</code>是缩写形式）替换掉第二行和第三行的 <code class="language-plaintext highlighter-rouge">pick</code>，完成之后<code class="language-plaintext highlighter-rouge">ESC: w</code>保存修改，然后退出，此时在查看 <code class="language-plaintext highlighter-rouge">git log</code> 可以发现出现了一个新的提交，并且描述信息和第一行的相同，而且<strong>原本的三个提交记录仍然存在</strong></p>
+      </li>
+      <li>
+        <p>使用关键词 <code class="language-plaintext highlighter-rouge">fixup</code> 替换掉第二行和第三行的 <code class="language-plaintext highlighter-rouge">pick</code>，完成之后<code class="language-plaintext highlighter-rouge">ESC: w</code>保存修改，然后退出，此时在查看 <code class="language-plaintext highlighter-rouge">git log</code> 可以发现出现了一个新的提交，并且描述信息和第一行的相同，而且<strong>原本的三个提交记录已经不存在了</strong></p>
+
+        <blockquote>
+          <p>pick：保留该commit（缩写:p）
+reword：保留该commit，但我需要修改该commit的注释（缩写:r）
+edit：保留该commit, 但我要停下来修改该提交(不仅仅修改注释)（缩写:e）
+squash：将该commit和前一个commit合并（缩写:s）
+fixup：将该commit和前一个commit合并，但我不要保留该提交的注释信息（缩写:f）
+exec：执行shell命令（缩写:x）
+drop：我要丢弃该commit（缩写:d）</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push <span class="nt">-f</span> origin <span class="o">{</span>branch_name<span class="o">}</span>:<span class="o">{</span>branch_name<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>强制推到远端仓库，与远端仓库同步此次修改</li>
+</ul>
+
+<h3 id="3-清除工作区域和暂存区所有修改和文件">3. 清除工作区域和暂存区所有修改和文件</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clean <span class="nt">-df</span>
+</code></pre></div></div>
+
+<h3 id="4-只将同一文件中的部分修改移动到暂存区">4. 只将同一文件中的部分修改移动到暂存区</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add <span class="nt">--patch</span> 
+</code></pre></div></div>
+
+<ul>
+  <li>使用 <code class="language-plaintext highlighter-rouge">git add --patch</code>  （或者简称 <code class="language-plaintext highlighter-rouge">-p</code>），<code class="language-plaintext highlighter-rouge">git</code> 会开始把你的文件分解成它认为合理的”大块”(文件的一部分)。然后，它将提示以下问题：</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Stage this hunk <span class="o">[</span>y,n,q,a,d,/,g,s,e,?]?
+</code></pre></div></div>
+
+<ul>
+  <li>以下是每个选项的说明：</li>
+</ul>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">Y</code> 为下一次提交准备这个模块
+<code class="language-plaintext highlighter-rouge">n</code>不为下一次提交准备此块
+<code class="language-plaintext highlighter-rouge">q</code> 退出；不要将此块或任何剩余块放入阶段
+<code class="language-plaintext highlighter-rouge">a</code> 将此块和文件中的所有后续块放入阶段
+<code class="language-plaintext highlighter-rouge">d</code> 不准备此块或文件中的任何后期块
+<code class="language-plaintext highlighter-rouge">g</code> 选择要转到的块
+<code class="language-plaintext highlighter-rouge">/</code> 搜索与给定regex匹配的块
+<code class="language-plaintext highlighter-rouge">s</code> 将当前的大块拆分为较小的大块
+<code class="language-plaintext highlighter-rouge">e</code> 手动编辑当前hunk
+<code class="language-plaintext highlighter-rouge">?</code> 打印Hunk帮助</p>
+</blockquote>
+
+<ul>
+  <li>如果文件还不在存储库中，可以先执行 <code class="language-plaintext highlighter-rouge">git add -N</code> 。然后你可以继续使用 <code class="language-plaintext highlighter-rouge">git add -p</code></li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git diff <span class="nt">--staged</span>
+</code></pre></div></div>
+
+<ul>
+  <li>检查是否进行了正确的更改</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git reset <span class="nt">-p</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">reset</code> 到 <code class="language-plaintext highlighter-rouge">unstage</code> 错误地添加了大块</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit <span class="nt">-v</span>
+</code></pre></div></div>
+
+<ul>
+  <li>在编辑提交消息时查看提交</li>
+  <li>注 <code class="language-plaintext highlighter-rouge">git format-patch</code> ，该命令的目的是将提交数据解析为.patch文件。</li>
+</ul>
+
+<h3 id="5-撤销一次非merge的commit">5. 撤销一次非merge的Commit</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git revert <span class="o">{</span>commitHash<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="6-强制拉取当前head的新增修改">6. 强制拉取当前HEAD的新增修改</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull <span class="nt">--rebase</span>
+</code></pre></div></div>
+
+<ul>
+  <li>对于，使用 <code class="language-plaintext highlighter-rouge">git add --amend</code> 和 <code class="language-plaintext highlighter-rouge">git push -f</code> 强制提交到同一commit的提交，如果需要在另一个本地仓库拉取同步使用 <code class="language-plaintext highlighter-rouge">git pull</code> 会要求解决冲突并重新提交，使用 <code class="language-plaintext highlighter-rouge">git pull --rebase</code> 可以直接强制拉取并重新将<code class="language-plaintext highlighter-rouge">HEAD</code> 指向远端最新修改；</li>
+</ul>
+
+<h3 id="7-文件从暂存区回退到工作区">7. 文件从暂存区回退到工作区</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git reset HEAD <span class="o">{</span>file_name<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="8-单独挑选任意一个提交到当前分支">8. 单独挑选任意一个提交到当前分支</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git cherry-pick <span class="o">{</span>commitHash<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>有冲突的情况下，需要单独处理冲突</li>
+</ul>
+
+<h3 id="9-将多个提交并入当前分支">9. 将多个提交并入当前分支</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase   <span class="o">[</span>startpoint]   <span class="o">[</span>endpoint]  <span class="nt">--onto</span>  <span class="o">[</span>branchName]
+git checkout <span class="o">[</span>branchName]
+git reset <span class="nt">--hard</span> <span class="o">[</span>endpoint]
+</code></pre></div></div>
+
+<ul>
+  <li>(startpoint, endpoint] 从开始 <code class="language-plaintext highlighter-rouge">commitHash</code> 到结束 <code class="language-plaintext highlighter-rouge">commitHash</code> 是一个前开后闭的区间，需要考虑当前要并入那些提交</li>
+  <li>完成 <code class="language-plaintext highlighter-rouge">rebase</code> 后，需要reset当前分支的 <code class="language-plaintext highlighter-rouge">HEAD</code> 指针</li>
+</ul>
+
+<h3 id="10-将当前开发分支的base同步为最新的master或ci">10. 将当前开发分支的Base同步为最新的master或CI</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase master
+</code></pre></div></div>
+
+<ul>
+  <li>将当前分支的Base分支更新为最新的master</li>
+</ul>
+
+<h2 id="ii-git-思维方法论---底层代码分析">II. Git 思维方法论 - 底层代码分析</h2>]]></content><author><name>Teddy</name></author><category term="实践" /><category term="开发工具" /><category term="Git" /><summary type="html"><![CDATA[Git 进阶用法]]></summary></entry><entry><title type="html">Workflow</title><link href="http://localhost:4000/%E8%A7%84%E5%88%92/%E5%B7%A5%E4%BD%9C%E6%B5%81/2020/07/12/workflow.html" rel="alternate" type="text/html" title="Workflow" /><published>2020-07-12T00:00:00+08:00</published><updated>2020-07-12T00:00:00+08:00</updated><id>http://localhost:4000/%E8%A7%84%E5%88%92/%E5%B7%A5%E4%BD%9C%E6%B5%81/2020/07/12/workflow</id><content type="html" xml:base="http://localhost:4000/%E8%A7%84%E5%88%92/%E5%B7%A5%E4%BD%9C%E6%B5%81/2020/07/12/workflow.html"><![CDATA[<h1 id="工作流规划">工作流规划</h1>
+
+<h2 id="1">1.</h2>]]></content><author><name>Teddy</name></author><category term="规划" /><category term="工作流" /><category term="WorkFlow" /><summary type="html"><![CDATA[工作流规划]]></summary></entry></feed>

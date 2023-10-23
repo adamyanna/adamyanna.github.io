@@ -1,9 +1,9 @@
 ---
+layout: post
 title: 海量数据程序设计思路
 author: Teddy
-date: 2020-03-29 10:00:00 +0800
-categories: [实践, 面试总结]
-tags: [Iterview]
+categories: 实践 面试总结
+tags: Iterview
 ---
 
 # 海量数据程序设计思路

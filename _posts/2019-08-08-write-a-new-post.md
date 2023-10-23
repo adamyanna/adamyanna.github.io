@@ -1,9 +1,9 @@
 ---
+layout: post
 title: Writing a New Post
 author: Cotes Chung
-date: 2019-08-08 14:10:00 +0800
-categories: [Blogging, Tutorial]
-tags: [writing]
+categories: Blogging Tutorial
+tags: writing
 ---
 
 ## Naming and Path
@@ -16,10 +16,11 @@ Basically, you need to fill the [Front Matter](https://jekyllrb.com/docs/front-m
 
 ```yaml
 ---
+layout: post
 title: TITLE
 date: YYYY-MM-DD HH:MM:SS +/-TTTT
-categories: [TOP_CATEGORIE, SUB_CATEGORIE]
-tags: [TAG]     # TAG names should always be lowercase
+categories: TOP_CATEGORIE SUB_CATEGORIE
+tags: TAG     # TAG names should always be lowercase
 ---
 ```
 
@@ -37,7 +38,7 @@ The list of posts belonging to the same category/tag is recorded on a separate p
 
 let's say there is a post with front matter:
 ```yaml
-categories: [Animal, Insect]
+categories: Animal Insect
 tags: bee
 ```
 

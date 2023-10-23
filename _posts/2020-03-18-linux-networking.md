@@ -1,9 +1,9 @@
 ---
+layout: post
 title: Linux网络基础
 author: Teddy
-date: 2020-03-16 10:00:00 +0800
-categories: [体系结构-基础, Linux]
-tags: [TODO, Linux, Network]
+categories: 体系结构-基础 Linux
+tags: TODO Linux Network
 ---
 
 # Linux Network

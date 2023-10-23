@@ -1,9 +1,10 @@
 ---
-title: Career Planning 
+layout: post
+title: Career Planning
+subtitle: 
 author: Teddy
-date: 2020-05-18 11:30:25 +0800
-categories: [规划, 职业规划]
-tags: [Career-Planning]
+categories: 规划 职业规划
+tags: Career-Planning
 ---
 
 # 职业规划 [Career Planning]

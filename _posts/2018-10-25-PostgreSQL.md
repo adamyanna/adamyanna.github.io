@@ -1,9 +1,9 @@
 ---
+layout: post
 title: PostgreSQL fundamental and operation
 author: Teddy
-date: 2018-10-23 19:00:00 +0800
-categories: [体系结构-基础, 数据库系统概念]
-tags: [Postgresql]
+categories: 体系结构-基础 数据库系统概念
+tags: Postgresql
 ---
 
 

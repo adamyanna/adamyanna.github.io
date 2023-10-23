@@ -1,9 +1,10 @@
 ---
+layout: post
 title: I/O的多路复用算法
+subtitle: 
 author: Teddy
-date: 2020-04-20 10:00:00 +0800
-categories: [体系结构-底层, Linux内核实现]
-tags: [IO-Multiplexing, Select, Poll, Epoll]
+categories: 体系结构-底层 Linux内核实现
+tags: IO-Multiplexing Select Poll Epoll
 ---
 
 # I/O的多路复用算法

@@ -1,9 +1,9 @@
 ---
+layout: post
 title: C/C++ Syntactic sugar 语法糖
 author: Teddy
-date: 2020-04-10 10:00:00 +0800
-categories: [体系结构-语言, C&C++]
-tags: [C&C++, Syntactic-Sugar]
+categories: 体系结构-语言 C&C++
+tags: C&C++ Syntactic-Sugar
 ---
 
 # C/C++ Syntactic sugar 语法糖

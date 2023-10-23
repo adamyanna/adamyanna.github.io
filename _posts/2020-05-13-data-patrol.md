@@ -1,14 +1,15 @@
 ---
+layout: post
 title: 时序数据完整性的方法巡检工具
+subtitle: 
 author: Teddy
-date: 2020-05-13 17:46:51 +0800
-categories: [实践, 需求实现]
-tags: [Go, RabbitMQ, Data-Patrol]
+categories: 实践 需求实现
+tags: Go RabbitMQ Data-Patrol
 ---
 
 # 程序设计时序图
 
-![]({{ "/assets/img/posts/data-patrol.png" | relative_url }})
+![]({{ "/assets/images/posts/data-patrol.png" | relative_url }})
 
 
 

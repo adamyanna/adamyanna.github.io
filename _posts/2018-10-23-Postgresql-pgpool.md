@@ -1,9 +1,9 @@
 ---
+layout: post
 title: Postgresql HA & Loadblance - pgpool II
 author: Teddy
-date: 2018-10-23 19:00:00 +0800
-categories: [实践, 实践记录]
-tags: [Postgresql, Pgpool]
+categories: 实践 实践记录
+tags: Postgresql Pgpool
 ---
 
 
