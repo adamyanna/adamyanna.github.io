@@ -1,1 +1,1 @@
-* Docs from a A motorcycle rider and loving husband.
+* Docs from a motorcycle rider and loving husband.
