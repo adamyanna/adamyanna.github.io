@@ -1,249 +1,191 @@
 # Welcome to Jekyll!
 #
-# About Theme
+# This config file is meant for settings that affect your whole site, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing these this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
 #
-# Yet another theme for elegant writers with modern flat style and beautiful
-# night/dark mode.
-#
-# Website: https://github.com/jeffreytse/jekyll-theme-yat
-#
-# You can do anything you want, including projects for your clients, as long
-# as you mention an attribution back (credit links in footer or project).
-# See the LICENCE file.
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you
-# use 'bundle exec jekyll serve'. If you change this file, please restart
-# the server process.
-#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
 # Site settings
 # These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# you will see them accessed via {{ site.title }}, {{ site.github_repo }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-
-title: Adam Yan Na Blog
-email: adamyanna@outlook.com
-author: Adam Yan Na
-
-# Copyright setting
-# You can use any html code, currently below placeholders are available:
-# * current year: {currentYear}
-# * author: {author} (Value is the same as site.author)
-# * copyright: (c) - ©
-# * copyleft: (cleft)
-# * sound recording copyright: (p) - ℗
-#
-# For example:
-#   "Copyright (c) 2017-{currentYear} <a href="https://example.com">{author}</a>"
-#   "Copyright © 2017-2021 Foobar"
-#
-copyright: "Unpublished Work (cleft) 2017-{currentYear} {author}"
-
-description: >- # this means to ignore newlines until "baseurl:"
-  I am a Senior Cloud Computing ECS/EC2 Engineer specializing in IaaS R&D.
-
+title: Adam Yan Na Docs
+description: Engineering & Philosophy & Life Experience
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. https://example.com
-favicon: "" # the favicon for your site
+url: "https://adamyanna.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+repository: adamyanna/adamyanna.github.io.git # for github-metadata
 
-# Yat date format
-# refer to https://shopify.github.io/liquid/filters/date/ if you want to customize this
-yat:
-  date_format: "%b %d, %Y"
+permalink: pretty
 
-# If you want more debug log, you can set true
-# debug: false
+exclude:
+ # from https://github.com/jekyll/jekyll/blob/master/lib/site_template/_config.yml:
+   - .sass-cache/
+   - .jekyll-cache/
+   - gemfiles/
+   - Gemfile
+   - Gemfile.lock
+   - node_modules/
+   - vendor/bundle/
+   - vendor/cache/
+   - vendor/gems/
+   - vendor/ruby/
+ # specific to the theme website:
+   - bin/
+   - lib/
+   - "*.gemspec"
+   - "*.gem"
+   - LICENSE.txt
+   - package.json
+   - package-lock.json
+   - Rakefile
+   - README.md
+   - CODE_OF_CONDUCT.md
+   - docker-compose.yml
+   - Dockerfile
+ # theme test code
+   - fixtures/
 
-# If you don't want transparent header, you can set false
-# header_transparent: true
+# Set a path/url to a logo that will be displayed instead of the title
+logo: "/assets/images/icon-512x512.png"
+favicon_ico: "/assets/images/favicon.ico"
 
-# If you want to change the content width, you can set to another value
-# content_width: "920px"
+# Enable or disable the site search
+# Supports true (default) or false
+search_enabled: true
+search:
+  # Split pages into sections that can be searched individually
+  # Supports 1 - 6, default: 2
+  heading_level: 2
+  # Maximum amount of previews per search result
+  # Default: 3
+  previews: 2
+  # Maximum amount of words to display before a matched word in the preview
+  # Default: 5
+  preview_words_before: 3
+  # Maximum amount of words to display after a matched word in the preview
+  # Default: 10
+  preview_words_after: 3
+  # Set the search token separator
+  # Default: /[\s\-/]+/
+  # Example: enable support for hyphenated search words
+  tokenizer_separator: /[\s/]+/
+  # Display the relative url in search results
+  # Supports true (default) or false
+  rel_url: true
+  # Enable or disable the search button that appears in the bottom right corner of every page
+  # Supports true or false (default)
+  button: false
 
-# Google analytics - GA4
-# google_analytics: [Measurement ID]
-# enableDNT: "false"
+# For copy button on code
+enable_copy_code_button: true
 
-# If you want to generate website sitemap, you can set true
-# sitemap: false
+# By default, consuming the theme as a gem leaves mermaid disabled; it is opt-in
+mermaid:
+  # Version of mermaid library
+  # Pick an available version from https://cdn.jsdelivr.net/npm/mermaid/
+  version: "9.1.6"
+  # Put any additional configuration, such as setting the theme, in _includes/mermaid_config.js
+  # See also docs/ui-components/code
+  # To load mermaid from a local library, also use the `path` key to specify the location of the library; e.g.
+  # for (v10+):
+  # path: "/assets/js/mermaid.esm.min.mjs"
+  # for (<v10):
+  # path: "/assets/js/mermaid.min.js"
+  # Note: copy both `mermaid.esm.min.mjs` (v10+) or `mermaid.min.js` (<v10) and the associated `.map` file from the specified version of `mermaid/dist` to `/assets/js/`.
 
-# If you want to change site language, you can set lang option
-# lang: "en"  # default lang is en
+# Enable or disable heading anchors
+heading_anchors: true
 
-# Translate languges
-# langs refer to https://cloud.google.com/translate/docs/languages
-# translate_langs:
-#   - lang: en
-#     img: https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png
-#     text: English
-#
-#   - lang: fr
-#     img: https://cdn.countryflags.com/thumbs/france/flag-400.png
-#     text: French
-#
-#   - lang: zh-CN
-#     img: https://cdn.countryflags.com/thumbs/china/flag-400.png
-#     text: Chinese(Simple)
-#
-#   - lang: ja
-#     img: https://cdn.countryflags.com/thumbs/japan/flag-400.png
-#     text: Japanese
-#
-#   - lang: ko
-#     img: https://cdn.countryflags.com/thumbs/south-korea/flag-400.png
-#     text: Korean
-#
-#   - lang: ru
-#     img: https://cdn.countryflags.com/thumbs/russia/flag-400.png
-#     text: Russian
+# Aux links for the upper right navigation
+aux_links:
+  "Adam Yan Na GitHub":
+    - "https://github.com/adamyanna"
+  "Adam Yan Na Linkedin":
+    - "https://www.linkedin.com/in/adam-yan-na"
 
-# You can choose a theme color
-# Default theme colors as below:
-# coolblack: #090a0b
-# spacegrey: #353535
-# snowwhite: #ffffff
-#
-# theme_color: snowwhite
-#
-# Custom color as below:
-# theme_color: "#882250"
+# Makes Aux links open in a new tab. Default is false
+aux_links_new_tab: false
 
-# You can choose a brand color
-# Default brand colors as below:
-# orangered: #ff5100
-# greatgold: #f2cb05
-# greenblue: #389092
-#
-# brand_color: orangered
-#
-# Custom color as below:
-# brand_color: "#1a8e42"
+# Sort order for navigation links
+# nav_sort: case_insensitive # default, equivalent to nil
+nav_sort: case_sensitive # Capital letters sorted before lowercase
 
-# You can custom selection style
-# selection:
-#   color: "#ff00ff"
-#   background_color: "yellow"
+# External navigation links
+nav_external_links:
+  - title: Adam Yan Na GitHub
+    url: https://github.com/adamyanna
+  - title: Adam Yan Na Linkedin
+    url: https://www.linkedin.com/in/adam-yan-na
 
-# Night/Dark mode
-# Default mode is "auto", "auto" is for auto nightshift
-# (19:00 - 07:00), "manual" is for manual toggle, and
-# "on/off" is for default on/off.
-#
-# Whatever the user's choice is, it will supersede the
-# default setting of the site and be kept during the
-# visit (session). Only the dark mode setting is"manual",
-# it will be always kept on every visit (i.e. no matter
-# the browser is closed or not)
-#
-# night_mode: "auto"
+# Footer content
+# appears at the bottom of every page's main content
 
-# Code badge setting
-# You can enable or disable the code badge and so on
-# code_badge:
-#   enabled: "true"
-#   color: "#fff"
-#   background_color: "#ff4e00"
-#   text_transform: "uppercase"  # ("uppercase", "lowercase", "capitalize")
+# Back to top link
+back_to_top: true
+back_to_top_text: "Back to top"
 
-# If you want to link only specific pages in your header, uncomment
-# this and add the path to the pages in order as they should show up
-# header_pages:
-#   - index.html
-#   - archives.html
-#   - categories.html
-#   - tags.html
-#   - about.md
+footer_content: "Engineering & Philosophy & Life Experience - A Motorcycle rider and loving husband."
 
-# Page default value
-# defaults:
-#   home:
-#     heading: "Your awesome heading"
-#     subheading: "Your awesome subheading"
-#     banner: "Your image url"
+# Footer last edited timestamp
+last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
+last_edit_time_format: "%b %e %Y at %I:%M %p" # uses ruby's time format: https://ruby-doc.org/stdlib-2.7.0/libdoc/time/rdoc/Time.html
 
-# Banner default settings
-# These banner settings are for global banner default, but you can also
-# config it by the front matter for one specific post
-# banner:
-#   video: null             # Video banner source
-#   loop: true              # Video loop
-#   volume: 0               # Video volume (100% is 1.0)
-#   start_at: 0             # Video start time
-#   image: null             # Image banner source
-#   opacity: 1.0            # Banner opacity (100% is 1.0)
-#   background: "rgba(0, 0, 0, 0.8)"  # Banner background (Could be a image)
-#   height: "640px"         # Banner default height
-#   min_height: null        # Banner minimum height
-#   heading_style: null     # Custom heading style (e.g. "font-weight: bold; text-decoration: underline")
-#   subheading_style: null  # Custom subheading style (e.g. color: gold)
 
-# Excerpt settings
-# excerpt:
-#   default_image: /assets/images/default-image.jpeg  # Default image when the image style is not none
-#   image_style: z          # Image layout style (It's value could be none, left, right, top, z, z-reverse)
-#   image_width: 38.2%      # Image default width
-#   image_height: 160px     # Image default height
-#   text_size: 350          # Words default size
 
-# Pagination setting
-# paginate: 5
+# Footer "Edit this page on GitHub" link text
+# gh_edit_link: true # show or hide edit this page link
+# gh_edit_link_text: "Edit this page on GitHub"
+# gh_edit_repository: "https://github.com/just-the-docs/just-the-docs" # the github URL for your repo
+# gh_edit_branch: "main" # the branch that your docs is served from
+# gh_edit_source: docs # the source that your files originate from
+# gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into the editor immediately
 
-# Photo previewer settings (PhotoSwipe 5)
-# the options please refer to: https://photoswipe.com/options/
-# photo_previewer:
-#  gallery: "section.main"
-#  children: "a.photo-swipe"
-#  bgOpacity: 0.8
-#  padding:
-#    top: 20
-#    bottom: 40
-#    left: 100
-#    right: 100
+# Color scheme currently only supports "dark", "light"/nil (default), or a custom scheme that you define
+color_scheme: light
 
-# Click to top settings
-# click_to_top:
-#   light:
-#     background_color: "white"
-#     color: "#454545"
-#   dark:
-#     background_color: "#34323d"
-#     color: "#bbb"
+callouts_level: quiet # or loud
+callouts:
+  highlight:
+    color: yellow
+  important:
+    title: Important
+    color: blue
+  new:
+    title: New
+    color: green
+  note:
+    title: Note
+    color: purple
+  warning:
+    title: Warning
+    color: red
 
-# Disqus comments
-# disqus:
-#   shortname: "Your Disqus username"
-
-# Gitment comments
-# gitment:
-#   username: "Your GitHub username"
-#   repo: "The repo to store comments"
-#   client_id: "Your client ID"
-#   client_secret: "Your client secret"
-#   redirect_uri: "Your redirect url"   # If you use a custom domain name
-
-# Utterances comments
-# See https://utteranc.es/
-# set follow_site_theme true to make utterances' theme follow the site's
-
-# utterances:
-#   repo: "owner/repo"
-#   issue_term: "title"
-#   label: "utterances comment"
-#   theme: "github-light"
-#   follow_site_theme: true
-
-# Build settings
-# highlighter: none
-markdown: kramdown
-kramdown:
-  input: GFM
+# Google Analytics Tracking (optional)
+# Supports a CSV of tracking ID strings (eg. "UA-1234567-89,G-1AB234CDE5")
+# Note: the main Just the Docs site does *not* use Google Analytics.
+# ga_tracking: UA-2709176-10,G-5FG1HLH3XQ
+# ga_tracking_anonymize_ip: true # Use GDPR compliant Google Analytics settings (true/nil by default)
 
 plugins:
-  - jekyll-feed
   - jekyll-seo-tag
-  - jekyll-sitemap
-  - jekyll-paginate
-  - jekyll-spaceship
+  - jekyll-github-metadata
+  - jekyll-include-cache
+
+kramdown:
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  startings: []
+  blanklines: false
+  profile: false
+  # ignore:
+  #   envs: all

@@ -1,2 +1,1 @@
-# Adam Yan Na Blog
-> https://www.linkedin.com/in/adam-na-405a3614b/
+* Docs from a A motorcycle rider and loving husband.
