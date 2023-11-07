@@ -1,7 +1,7 @@
 ---
 title: PostgreSQL fundamental and operation
 layout: default
-parent: 2020
+parent: 2018
 grand_parent: Archives
 ---
 

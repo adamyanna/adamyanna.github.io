@@ -1,7 +1,7 @@
 ---
 title: 通过 ulimit 改善系统性能
 layout: default
-parent: 2020
+parent: 2018
 grand_parent: Archives
 ---
 
