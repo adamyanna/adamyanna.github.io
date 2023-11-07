@@ -1,7 +1,7 @@
 ---
 title: Postgresql HA & Loadblance - pgpool II
 layout: default
-parent: 2020
+parent: 2018
 grand_parent: Archives
 ---
 

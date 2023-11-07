@@ -1,7 +1,7 @@
 ---
 title: RabbitMQ & AMQP
 layout: default
-parent: 2020
+parent: 2019
 grand_parent: Archives
 ---
 

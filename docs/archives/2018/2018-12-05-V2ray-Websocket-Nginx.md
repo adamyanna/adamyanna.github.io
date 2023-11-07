@@ -1,7 +1,7 @@
 ---
 title: V2ray Nginx 配置
 layout: default
-parent: 2020
+parent: 2018
 grand_parent: Archives
 ---
 
