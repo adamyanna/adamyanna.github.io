@@ -1,0 +1,223 @@
+<!DOCTYPE html><html lang="en-US"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><link rel="stylesheet" href="/assets/css/just-the-docs-default.css"><link rel="stylesheet" href="/assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet"><style id="jtd-nav-activation"> .site-nav > ul.nav-list:first-child > li > a, .site-nav > ul.nav-list:first-child > li > ul > li > a, .site-nav > ul.nav-list:first-child > li > ul > li > ul > li:not(:nth-child(28)) > a { background-image: none; } .site-nav > ul.nav-list:not(:first-child) a, .site-nav li.external a { background-image: none; } .site-nav > ul.nav-list:first-child > li:nth-child(2) > ul > li:nth-child(3) > ul > li:nth-child(28) > a { font-weight: 600; text-decoration: none; }.site-nav > ul.nav-list:first-child > li:nth-child(2) > button svg, .site-nav > ul.nav-list:first-child > li:nth-child(2) > ul > li:nth-child(3) > button svg { transform: rotate(-90deg); }.site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(2) > ul.nav-list, .site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(2) > ul.nav-list > li.nav-list-item:nth-child(3) > ul.nav-list { display: block; }</style><script src="/assets/js/vendor/lunr.min.js"></script> <script src="/assets/js/just-the-docs.js"></script><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon"><title>Python服务容器化部署 | Adam Yan Na Docs</title><meta name="generator" content="Jekyll v4.3.2" /><meta property="og:title" content="Python服务容器化部署" /><meta property="og:locale" content="en_US" /><meta name="description" content="Engineering &amp; Philosophy &amp; Life Experience" /><meta property="og:description" content="Engineering &amp; Philosophy &amp; Life Experience" /><link rel="canonical" href="http://localhost:4000/docs/archives/2020/2020-05-14-python-service-deployment/" /><meta property="og:url" content="http://localhost:4000/docs/archives/2020/2020-05-14-python-service-deployment/" /><meta property="og:site_name" content="Adam Yan Na Docs" /><meta property="og:type" content="website" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Python服务容器化部署" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"WebPage","description":"Engineering &amp; Philosophy &amp; Life Experience","headline":"Python服务容器化部署","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/images/icon-512x512.png"}},"url":"http://localhost:4000/docs/archives/2020/2020-05-14-python-service-deployment/"}</script><body> <a class="skip-to-main" href="#main-content">Skip to main content</a> <svg xmlns="http://www.w3.org/2000/svg" class="d-none"> <symbol id="svg-link" viewBox="0 0 24 24"><title>Link</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path> </svg> </symbol> <symbol id="svg-menu" viewBox="0 0 24 24"><title>Menu</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line> </svg> </symbol> <symbol id="svg-arrow-right" viewBox="0 0 24 24"><title>Expand</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline> </svg> </symbol> <symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link"><title id="svg-external-link-title">(external link)</title><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line> </symbol> <symbol id="svg-doc" viewBox="0 0 24 24"><title>Document</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline> </svg> </symbol> <symbol id="svg-search" viewBox="0 0 24 24"><title>Search</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"> <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line> </svg> </symbol> <symbol id="svg-copy" viewBox="0 0 16 16"><title>Copy</title><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/> </svg> </symbol> <symbol id="svg-copied" viewBox="0 0 16 16"><title>Copied</title><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16"><path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/> </svg> </symbol> </svg><div class="side-bar"><div class="site-header" role="banner"> <a href="/" class="site-title lh-tight"><div class="site-logo" role="img" aria-label="Adam Yan Na Docs"></div></a> <button id="menu-button" class="site-button btn-reset" aria-label="Toggle menu" aria-pressed="false"> <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg> </button></div><nav aria-label="Main" id="site-nav" class="site-nav"><ul class="nav-list"><li class="nav-list-item"><a href="/" class="nav-list-link">Home</a><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Archives category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/archives/archives/" class="nav-list-link">Archives</a><ul class="nav-list"><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in 2018 category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/archives/2018/2018/" class="nav-list-link">2018</a><ul class="nav-list"></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in 2019 category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/archives/2019/2019/" class="nav-list-link">2019</a><ul class="nav-list"></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in 2020 category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/archives/2020/2020/" class="nav-list-link">2020</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/archives/2020/2020-09-22-roles-of-agile-team/" class="nav-list-link">Agile</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-02-18-Algorithm-Everything/" class="nav-list-link">Algorithm Everything</a><li class="nav-list-item"> <a href="/docs/archives/2018/2018-10-26-Algorithm-matrix/" class="nav-list-link">Algorithm Matrix</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-31-algorithm-heap/" class="nav-list-link">Algorithm-heap 堆排序的实现</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-05-14-ansible-automation/" class="nav-list-link">Ansible自动化</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-01-08-%5BBeginning-of-2020--Algorithm%5D/" class="nav-list-link">BeginningOf2020 - Algorithm</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-16-c-programming-language-recap/" class="nav-list-link">C programming language recap</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-10-c-cpp-syntactic-sugar/" class="nav-list-link">C/C++ Syntactic sugar 语法糖</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-13-cpython-implementation/" class="nav-list-link">CPython源代码分析&虚拟机原理</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-07-26-cloud-qualification/" class="nav-list-link">Cloud Qualification</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-05-13-redis_data_sampling/" class="nav-list-link">Data Sampling [Redis]</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-07-12-git-advanced/" class="nav-list-link">Git进阶</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-05-golang-performance-flame-graph/" class="nav-list-link">Golang性能分析和监控</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-20-select-poll-epoll/" class="nav-list-link">I/O的多路复用算法</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-03-kubernetes-curve/" class="nav-list-link">Kubernetes & Docker</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-05-13-linux-command-tools/" class="nav-list-link">Linux常用工具&内置命令</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-18-linux-networking/" class="nav-list-link">Linux网络基础</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-08-05-macos-configuration/" class="nav-list-link">MacOS Configure</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-05-14-monitor_system_restructure/" class="nav-list-link">Monitor System</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-02-Algorithm-curve/" class="nav-list-link">My Algorithm Curve</a><li class="nav-list-item"> <a href="/docs/archives/2018/2018-10-25-PostgreSQL/" class="nav-list-link">PostgreSQL fundamental and operation</a><li class="nav-list-item"> <a href="/docs/archives/2018/2018-10-23-Postgresql-pgpool/" class="nav-list-link">Postgresql HA & Loadblance - pgpool II</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-06-Prometheus/" class="nav-list-link">Prometheus</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-26-python-core/" class="nav-list-link">Python&CPython核心</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-25-python-memory-management-implementation/" class="nav-list-link">Python内存管理的底层实现&程序内存分析</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-24-Python-dynamic-map/" class="nav-list-link">Python实现动态生成类的http接口-monitor动态监控项</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-05-python-performance-flame-graph/" class="nav-list-link">Python性能分析和火焰图</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-05-14-python-service-deployment/" class="nav-list-link">Python服务容器化部署</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-30-CPython-malloc-python-gc/" class="nav-list-link">Python进程内存分析&大量内存占用的优化方案</a><li class="nav-list-item"> <a href="/docs/archives/2019/2019-02-20-RabbitMQ-pub-sub/" class="nav-list-link">RabbitMQ & AMQP</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-05-14-redhat-6.5-python-dependency/" class="nav-list-link">Red Hat Enterprise Linux Kernel Version 2.6.32 3.8.13 python依赖环境手动部署</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-31-Redis/" class="nav-list-link">Redis学习及源码分析</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-01-08-%5BSum-of-2019--DataInfluxPatrol-Golang%5D/" class="nav-list-link">SumOf2019 - DataInfluxPatrol</a><li class="nav-list-item"> <a href="/docs/archives/2018/2018-12-05-V2ray-Websocket-Nginx/" class="nav-list-link">V2ray Nginx 配置</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-09-man-signal/" class="nav-list-link">linux signal</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-05-13-pg-dead-lock/" class="nav-list-link">pg数据库过程事务执行的锁竞争导致锁表</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-01-01-cs-communication-physical-architecture/" class="nav-list-link">体系结构-树</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-05-18-tech-stack-planning-2020/" class="nav-list-link">技术栈提升规划 [2020]</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-05-13-data-patrol/" class="nav-list-link">时序数据完整性的方法巡检工具</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-12-core-knowledge/" class="nav-list-link">核心知识库</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-01-iter-massive-data-programming/" class="nav-list-link">海量数据程序设计思路</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-27-csapp/" class="nav-list-link">深入理解计算机系统 [Computer-Systems-A-Programmer's-Perspective]</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-20-operating-system/" class="nav-list-link">现代操作系统</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-25-pointer-reference-understanding/" class="nav-list-link">理解C/C++中的指针和引用</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-16-tcp-network-analysis/" class="nav-list-link">生产环境TCP网络问题分析</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-07-capsule/" class="nav-list-link">知识碎片</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-02-b-tree-and-indexing-principle/" class="nav-list-link">红黑树&B树应用及索引原理</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-16-network-curve/" class="nav-list-link">计算机网络</a><li class="nav-list-item"> <a href="/docs/archives/2018/2018-12-05-Linux-Ulimit/" class="nav-list-link">通过 ulimit 改善系统性能</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in 2021 category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/archives/2021/2021/" class="nav-list-link">2021</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/archives/2021/2021-02-15-mac-reset-smc-nvram/" class="nav-list-link">Mac Reset Smc Nvram</a><li class="nav-list-item"> <a href="/docs/archives/2021/2021-02-15-research-of-ergonomics/" class="nav-list-link">Research of Ergonomics</a><li class="nav-list-item"> <a href="/docs/archives/2021/2021-02-15-work-efficiency/" class="nav-list-link">Work Efficiency</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in 2022 category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/archives/2022/2022/" class="nav-list-link">2022</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/archives/2022/2022-11-19-Criticism-of-Hegelianism/" class="nav-list-link">Criticism of Hegelianism</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in 2023 category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/archives/2023/2023/" class="nav-list-link">2023</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/archives/2023/2023-01-02-live_migration_precopy/" class="nav-list-link">Live Migration Precopy Analyze</a></ul></ul></ul><ul class="nav-list"><li class="nav-list-item external"> <a href="https://github.com/adamyanna" class="nav-list-link external" > Adam Yan Na GitHub <svg viewBox="0 0 24 24" aria-labelledby="svg-external-link-title"><use xlink:href="#svg-external-link"></use></svg> </a><li class="nav-list-item external"> <a href="https://www.linkedin.com/in/adam-yan-na" class="nav-list-link external" > Adam Yan Na Linkedin <svg viewBox="0 0 24 24" aria-labelledby="svg-external-link-title"><use xlink:href="#svg-external-link"></use></svg> </a></ul></nav><footer class="site-footer"> This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.</footer></div><div class="main" id="top"><div id="main-header" class="main-header"><div class="search" role="search"><div class="search-input-wrap"> <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search Adam Yan Na Docs" aria-label="Search Adam Yan Na Docs" autocomplete="off"> <label for="search-input" class="search-label"><svg viewBox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label></div><div id="search-results" class="search-results"></div></div><nav aria-label="Auxiliary" class="aux-nav"><ul class="aux-nav-list"><li class="aux-nav-list-item"> <a href="https://github.com/adamyanna" class="site-button" > Adam Yan Na GitHub </a><li class="aux-nav-list-item"> <a href="https://www.linkedin.com/in/adam-yan-na" class="site-button" > Adam Yan Na Linkedin </a></ul></nav></div><div class="main-content-wrap"><nav aria-label="Breadcrumb" class="breadcrumb-nav"><ol class="breadcrumb-nav-list"><li class="breadcrumb-nav-list-item"><a href="/docs/archives/archives/">Archives</a><li class="breadcrumb-nav-list-item"><a href="/docs/archives/2020/2020/">2020</a><li class="breadcrumb-nav-list-item"><span>Python服务容器化部署</span></ol></nav><div id="main-content" class="main-content"><main><p class="label label-blue"><strong>Python</strong></p><p class="label label-green"><strong>Docker</strong></p><p class="label label-yellow"><strong>2020-05-14 15:03:28 +0800</strong></p><h1 id="监控容器微服务部署"> <a href="#监控容器微服务部署" class="anchor-heading" aria-labelledby="监控容器微服务部署"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> 监控容器微服务部署</h1><h6 id="新增节点初始化操作"> <a href="#新增节点初始化操作" class="anchor-heading" aria-labelledby="新增节点初始化操作"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> 新增节点初始化操作</h6><ul><li><ol><li>下载Docker环境部署文件，上传到物理机</ol><li>将以上文件上传至同一目录下，执行如下：<li><ol><li>准备日志</ol><li><ol><li>准备应用文件</ol><li>Step0：获取监控物理机信息<li>Step1：初始化配置监控主机<li>Step2：部署+验证</ul><h6 id="nmsagent镜像部署"> <a href="#nmsagent镜像部署" class="anchor-heading" aria-labelledby="nmsagent镜像部署"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> nmsagent镜像部署</h6><ul><li><ol><li>下载Docker环境部署文件，上传到物理机</ol><li><ol><li>安装docker</ol><li><ol><li>导入镜像, 必须在两台物理机上都执行</ol><li><ol><li>准备日志</ol><li><ol><li>准备应用文件</ol><li><ol><li>部署nspmonitor-xxx.tar.gz,准备docker服务所需文件及虚环境安装lvxmonitor-engine到nginx物理机,以EFA为例子</ol><li><ol><li>部署服务 - 部署nspmonitor和lvxmonitor-porxy的Docker服务</ol><li>更新yunzhi环境信息<li>Debug<li>采用docker三节点HA部署</ul><h6 id="新增节点初始化操作-1"> <a href="#新增节点初始化操作-1" class="anchor-heading" aria-labelledby="新增节点初始化操作-1"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> 新增节点初始化操作</h6><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#允许root ssh登录修改：</span>
+vi /etc/ssh/sshd_config 
+PermitRootLogin no修改为：PermitRootLogin <span class="nb">yes</span>
+<span class="c">#重启sshd服务</span>
+service sshd restart
+</code></pre></div></div><ol><li>nspmonitor验证配置文件所有IP:PORT是否能够访问,alphaops验证hillstone防火墙snmpwalk和22端口</ol><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> snmp安装：
+yum <span class="nb">install</span> <span class="nt">-y</span> net-snmp net-snmp-utils
+ alphaops验证
+</code></pre></div></div><ol><li>执行以下步骤：Step1<li><p>上传镜像文件，初始化docker环境</p><li>下载Docker环境部署文件，上传到物理机</ol><p><a href="http://code.test.com.cn/#/repo/test-monitor/docker-images/master/blob/docker_ce_18%2Fdocker-centos7.2-install_scripts%2Finit_docker_node.sh">init_docker_node.sh</a> <a href="http://code.test.com.cn/#/repo/test-monitor/docker-images/master/blob/netmonitor_image%2Fnet_monitor_add_ssh.tar">镜像包net_monitor_add_ssh.tar.tar</a> <a href="http://127.0.0.1/network_group/nspmonitor/origin/release/">下载最新版本的nspmonitor-xxx.tar.gz</a> <a href="http://code.test.com.cn/#/repo/test-monitor/docker-images/master/blob/docker_ce_18%2Fdocker-package.tar.gz">docker-package.tar.gz</a></p><p>将以上文件上传至同一目录下，执行如下：</p><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash init_docker_node.sh
+
+注意：如果执行以上脚本出错，把内容复制出来，命令逐行执行
+<span class="c">#检查镜像是否导入</span>
+docker images
+</code></pre></div></div><ol><li>准备日志</ol><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> /var/log/nspmonitor
+vim /etc/logrotate.d/nspmonitor
+<span class="c"># 将下面的文本粘贴到 /etc/logrotate.d/nspmonitor 该文件中</span>
+/var/log/nspmonitor/<span class="k">*</span>.log <span class="o">{</span>
+    rotate 10
+    size 50M
+    missingok
+    compress
+    copytruncate
+<span class="o">}</span>
+<span class="nb">mkdir</span> <span class="nt">-p</span> /var/log/lvxmonitor
+vim /etc/logrotate.d/lvxmonitor
+<span class="c"># 将下面的文本粘贴到 /etc/logrotate.d/lvxmonitor 该文件中</span>
+/var/log/lvxmonitor/<span class="k">*</span>.log <span class="o">{</span>
+    rotate 10
+    size 50M
+    missingok
+    compress
+    copytruncate
+<span class="o">}</span>
+</code></pre></div></div><ol><li>准备应用文件<ul><li>创建目录</ul></ol><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> /opt/netmon/agent
+</code></pre></div></div><ul><li>解压agent_updater文件并移动到agent下</ul><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tar</span> <span class="nt">-zxvf</span> nspmonitor-xxx.tar.gz <span class="nt">-C</span> /opt/netmon/agent
+<span class="nb">cp</span> /opt/netmon/agentnspmonitor-xxx/nspmonitor /opt/netmon/agent <span class="nt">-r</span>
+</code></pre></div></div><h6 id="step0获取监控物理机信息"> <a href="#step0获取监控物理机信息" class="anchor-heading" aria-labelledby="step0获取监控物理机信息"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Step0：获取监控物理机信息</h6><ul><li>监控主机为双机高可用模式</ul><h6 id="step1初始化配置监控主机"> <a href="#step1初始化配置监控主机" class="anchor-heading" aria-labelledby="step1初始化配置监控主机"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Step1：初始化配置监控主机</h6><ul><li>修改ulimit linux系统对用户态程序限制</ul><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 查看 open files 的限制数量</span>
+<span class="nb">ulimit</span> <span class="nt">-a</span>
+<span class="c"># 永久修改：</span>
+vim /etc/security/limits.conf
+<span class="k">*</span> - <span class="nb">nproc </span>102400
+<span class="k">*</span> - nofile 102400
+<span class="c"># 修改max-file</span>
+vim /etc/sysctl.conf
+fs.file-max <span class="o">=</span> 6815744
+<span class="c"># 最好对系统进行reboot</span>
+reboot
+</code></pre></div></div><ul><li>配置NTP服务器，并启动NTP时间同步服务，检查时间是否为UTC+8（不同地域可用区不同）</ul><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl status ntpd
+ntptime
+<span class="c"># 参考AZ NSP的 /etc/ntp.conf ntp配置，拷贝到监控物理机</span>
+systemctl restart ntpd
+ntptime <span class="c">#检查时间是否同步UTC+8（不同地域可用区不同）</span>
+<span class="c"># 如果服务没有启动或者时间不对，需要修改/etc/ntp.conf 配置文件，将server修改为该区域可用的ntp server，并启动服务</span>
+</code></pre></div></div><ul><li>配置域名解析服务</ul><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /etc/resolv.conf
+search cloud.pub
+nameserver 127.0.0.1
+nameserver 127.0.0.1
+ 
+<span class="c"># 检查域名是否解析，网络是否可达</span>
+ping gateway-OpenFalcon.cloud.pub
+telnet gateway-OpenFalcon.cloud.pub 12057
+</code></pre></div></div><ul><li>检查Open-Falcon的agent是否安装，端口是否监听</ul><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 检查端口是否监听</span>
+netstat <span class="nt">-antl</span> | <span class="nb">grep </span>12050
+<span class="c"># 检查应用是否部署并启动</span>
+ps <span class="nt">-aux</span> | <span class="nb">grep </span>falcon
+ps <span class="nt">-aux</span> | <span class="nb">grep </span>ops_updater
+<span class="c"># falcon-agent进程不存在，或目录/opt/pamon/不存在</span>
+<span class="c"># 进入 http://fcloud.test.com.cn/d/9a0876f347/ 联系文件提供人，下载并安装</span>
+<span class="c"># 若OpenFalcon-agent未安装，请根据主机类型（传统环境/内部云/公有云）按照以下流程安装：</span>
+<span class="c"># http://yunzhi.test.com.cn/pages/viewpage.action?pageId=24564124</span>
+</code></pre></div></div><ul><li>YUM配置<li>yum clean all &amp;&amp; yum makecache # 如果不发生报错，则YUM配置可用，报错请继续<li>配置路径：/etc/yum.repos.d/ 对应.repo文件可以到AZ NSP物理机相同路径复制到本机目录<li>完成/etc/yum.repos.d/*.repo 文件配置后 yum clean all &amp;&amp; yum makecache 进行验证<li>修改主机密码<li>passwd root 改为网络组新密码</ul><h6 id="step2部署验证"> <a href="#step2部署验证" class="anchor-heading" aria-labelledby="step2部署验证"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Step2：部署+验证</h6><p>nmsagent镜像部署 说明： 下面的安装步骤中 0,1,2,3 必须在两台物理机都进行操作 下面的安装步骤中 4,5,6 只需要在一台物理机都进行操作</p><ol><li>下载Docker环境部署文件，上传到物理机</ol><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>add_manager.sh
+install.sh
+docker-package.tar.gz
+net_monitor_add_ssh.tar
+</code></pre></div></div><p>下载最新版本的nspmonitor-xxx.tar.gz 下载最新版本的agent_updater-xxx.tar.gz</p><ol><li>安装docker<ul><li>将下面三个文件放置在同一级目录下</ul></ol><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>add_manager.sh
+install.sh
+docker-package.tar.gz
+</code></pre></div></div><ul><li>安装主节点</ul><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash install.sh &lt;ip&gt; <span class="c">#此ip为两台物理机中任意一台, 安装完成后会显示 --token xxxx ip:port, 复制--token后面的内容</span>
+</code></pre></div></div><ul><li>添加管理节点</ul><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash add_manager.sh xxxx ip:port <span class="c">#将复制的--token之后的内容加在add_manager.sh后</span>
+</code></pre></div></div><ul><li>检查集群状态</ul><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker node <span class="nb">ls</span>
+</code></pre></div></div><ol><li>导入镜像, 必须在两台物理机上都执行<ul><li>将上传的net_monitor_add_ssh.tar文件导入为docker image, 命名为netmonitor，版本为1.0</ul></ol><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker import net_monitor_add_ssh.tar netmonitor:v1.0
+</code></pre></div></div><ol><li>准备日志</ol><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> /var/log/nspmonitor
+vim /etc/logrotate.d/nspmonitor
+<span class="c"># 将下面的文本粘贴到 /etc/logrotate.d/nspmonitor 该文件中</span>
+/var/log/nspmonitor/<span class="k">*</span>.log <span class="o">{</span>
+    rotate 10
+    size 50M
+    missingok
+    compress
+    copytruncate
+<span class="o">}</span>
+<span class="nb">mkdir</span> <span class="nt">-p</span> /var/log/lvxmonitor
+vim /etc/logrotate.d/lvxmonitor
+<span class="c"># 将下面的文本粘贴到 /etc/logrotate.d/lvxmonitor 该文件中</span>
+/var/log/lvxmonitor/<span class="k">*</span>.log <span class="o">{</span>
+    rotate 10
+    size 50M
+    missingok
+    compress
+    copytruncate
+<span class="o">}</span>
+</code></pre></div></div><ol><li>准备应用文件</ol><ul><li>创建目录</ul><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> /opt/netmon/agent
+</code></pre></div></div><ul><li>解压agent_updater文件并移动到agent下</ul><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tar</span> <span class="nt">-zxvf</span> agent_updater-xxx.tar.gz <span class="nt">-C</span> /opt/netmon/agent
+</code></pre></div></div><ul><li>到agent_updater内创建新的{可用区名称}配置文件夹, 以EFA为例子</ul><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> /opt/netmon/agent/agent_updater/updater/config/EFA/
+<span class="nb">cp</span> /opt/netmon/agent/agent_updater/updater/config/SCA/config.json /opt/netmon/agent/agent_updater/updater/config/EFA/  <span class="c">#拷贝SCA的配置文件为模版</span>
+vim /opt/netmon/agent/agent_updater/updater/config/EFA/config.json <span class="c"># 修改监控物理机ip，nginx物理机ip，密码也需要统一</span>
+</code></pre></div></div><ol><li>部署nspmonitor-xxx.tar.gz,准备docker服务所需文件及虚环境安装lvxmonitor-engine到nginx物理机,以EFA为例子</ol><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp</span> &lt;上传路径&gt;/nspmonitor-xxx.tar.gz /opt/netmon/agent/agent_updater/package
+<span class="nb">cd</span> /opt/netmon/agent/agent_updater/updater
+
+<span class="c"># ansible command not found 的情况下，需要安装ansible</span>
+<span class="nb">cd</span> /opt/netmon/agent/agent_updater/ansible/playbooks/init
+python init.py
+
+python updater.py EFA ansible <span class="c"># 以EFA为例子,检查部署结果</span>
+</code></pre></div></div><ol><li>部署服务 - 部署nspmonitor和lvxmonitor-porxy的Docker服务<ul><li>修改服务compose文件, 修改文件中的可用区名称，例如：把所有的”SCA”替换为”EFA”</ul></ol><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /opt/netmon/agent/agent_updater/package/nspmonitor-<span class="o">{</span>1.2.5.dev57<span class="o">}</span>/docker-compose/
+<span class="c"># File use vim 修改可用区 line：20</span>
+<span class="nt">-rwxr-xr-x</span> 1 root root 691 Jul 31 00:59 lvxmonitor-proxy-compose.yml
+<span class="nt">-rwxr-xr-x</span> 1 root root 687 Jul 31 01:07 nspmonitor-compose.yml
+<span class="nt">-rwxr-xr-x</span> 1 root root 689 Jul 31 01:08 pagwmonitor-compose.yml
+</code></pre></div></div><ul><li>config 文件配置，如果不存在下面两个配置文件或路径，请联系监控开发在代码仓库中添加，并提供最新的nspmonitor的包</ul><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/opt/netmon/agent/nspmonitor/etc/&lt;可用区&gt;/nspmonitor.ini
+<span class="c"># 参考TEMPLATE中做修改</span>
+/opt/netmon/agent/nspmonitor/etc/&lt;可用区&gt;/lvxmonitor_proxy.conf
+<span class="c"># 找到scan_ips， 将scan_ips后的ip改为Nginx物理机ip，以逗号分隔；</span>
+</code></pre></div></div><ul><li>配置修改完成，重新同步代码</ul><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /opt/netmon/agent/
+scp <span class="nt">-r</span> nspmonitor &lt;agent_ip&gt;:/opt/netmon/agent  <span class="c"># 以EFA为例子,检查部署结果,这里的agentip为另一台没有进行操作的主机ip</span>
+</code></pre></div></div><ul><li>Deploy</ul><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /opt/netmon/agent/agent_updater/package/nspmonitor-<span class="o">{</span>1.2.5.dev57<span class="o">}</span>/docker-compose/
+docker stack deploy <span class="nt">-c</span> &lt;compose_file&gt;.yml &lt;service_name&gt;
+<span class="c">#　对应名称</span>
+<span class="c"># compose_file: lvxmonitor-proxy-compose.yml service_name: lvxmonitor_proxy_EFA</span>
+<span class="c"># compose_file: nspmonitor-compose.yml service_name: nspmonitor_EFA</span>
+<span class="c"># compose_file: pagwmonitor-compose.yml service_name: pagwmonitor_EFA  # 对于没有PAGW（vpp）产品的可用区请不要部署该微服务</span>
+</code></pre></div></div><ul><li>检查服务情况，查看当前服务是否成功启动，是否处于running状态</ul><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible lvx_monitor_engine <span class="nt">-m</span> shell <span class="nt">-a</span> <span class="s2">"systemctl status lvxmonitor-engine.service"</span> <span class="nt">--inventory-file</span><span class="o">=</span>/opt/netmon/agent/agent_updater/ansible/hosts
+docker service <span class="nb">ls
+</span>docker service ps &lt;service_name&gt;
+</code></pre></div></div><ul><li>检查日志</ul><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/var/log/nspmonitor <span class="c"># 在此目录下tail -f和tail -f | grep ERROR 检查日志是否有打印，检查是否有大量报错</span>
+更新yunzhi环境信息
+NFV环境信息
+Debug
+<span class="c"># run a test container as TESTPOD</span>
+docker run <span class="nt">-i</span> <span class="nt">-t</span> <span class="nt">-d</span> <span class="nt">--network</span><span class="o">=</span>host <span class="nt">-v</span> /opt/netmon/:/app <span class="nt">-v</span> /var/log/:/var/log/ <span class="nt">-v</span> /etc/localtime:/etc/localtime <span class="nt">--name</span> TESTPOD netmonitor:v1.0 /bin/bash
+
+<span class="c"># start debug process</span>
+<span class="c"># removing --log-file config app will output log directly to console</span>
+<span class="c"># add the '&amp;' to the end of execute command will run this process as linux deamon</span>
+/usr/bin/python /app/agent/nspmonitor/agent/nginx/proxy.py <span class="nt">--config-file</span><span class="o">=</span>/app/agent/nspmonitor/etc/SCA/lvxmonitor_proxy.conf <span class="nt">--log-file</span><span class="o">=</span>/var/log/nspmonitor/proxy.log
+/usr/bin/python /app/agent/nspmonitor/agent/nsp/entry.py <span class="nt">--config-file</span><span class="o">=</span>/app/agent/nspmonitor/etc/SCA/nspmonitor.ini <span class="nt">--log-file</span><span class="o">=</span>/var/log/nspmonitor/nspmonitor.log
+/usr/bin/python /app/agent/nspmonitor/agent/pagw/entry.py <span class="nt">--config-file</span><span class="o">=</span>/app/agent/nspmonitor/etc/EFA/nspmonitor.ini <span class="nt">--log-file</span><span class="o">=</span>/var/log/nspmonitor/pagwmonitor.log
+</code></pre></div></div><h5 id="nspmonitor版本更新操作"> <a href="#nspmonitor版本更新操作" class="anchor-heading" aria-labelledby="nspmonitor版本更新操作"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> nspmonitor版本更新操作</h5><ol><li>将nspmonitor_xxxx.tar.gz 拷贝至 /opt/netmon/agent/下<li>解压：tar -xvf nspmonitor_xxxx.tar.gz ,cp nspmonitor_xxxx/nspmonitor /opt/netmon/agent/ -r<li>重启服务 docker service update nspmonitor_agent –force<li>验证进程是否拉起 docker service ps nspmonitor_agent –no-trunc 以及查看日志：tail /var/log/nspmonitor/nspmonitor.log 采用docker三节点HA部署<li>新节点环境配置</ol><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#根据以上step 0，1，2步骤将新节点配置好</span>
+<span class="c"># step0 全部执行</span>
+<span class="c"># step1 全部执行</span>
+<span class="c"># step2 执行1，2，3步骤</span>
+</code></pre></div></div><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 准备应用文件</span>
+ 
+<span class="c">## 创建目录</span>
+ 
+<span class="nb">mkdir</span> <span class="nt">-p</span> /opt/netmon/agent
+ 
+<span class="c">## 解压nspmonitor-xxx.tar.gz 文件并移动到agent下</span>
+ 
+<span class="nb">tar</span> <span class="nt">-zxvf</span> nspmonitor-xxx.tar.gz <span class="nt">-C</span> /opt/netmon/agent
+<span class="nb">cp</span> /opt/netmon/agent/nspmonitor-xxx/nspmonitor /opt/netmon/agent
+2.删除原二节点集群
+
+<span class="c"># 删除服务，其中一个节点执行即可</span>
+dockers service <span class="nb">ls
+</span>docker service <span class="nb">rm</span> （服务名称） <span class="nt">--force</span>
+ 
+ 
+<span class="c"># 删除集群，两个节点</span>
+docker node <span class="nb">ls
+</span>docker node <span class="nb">rm</span> <span class="nt">--force</span> （节点名称）
+3.创建三节点新集群
+
+<span class="c">#找其中一个节点先作为manager</span>
+docker swarm init <span class="nt">--advertise-addr</span> <span class="o">(</span>ip<span class="o">)</span>
+ 
+ 
+<span class="c">#另外两个节点加入集群</span>
+docker swarm <span class="nb">join</span> <span class="nt">--token</span> <span class="o">(</span>token<span class="o">)</span> ip:port
+<span class="c">#manager节点上执行，将两个worker节点升级为manager</span>
+docker node <span class="nb">ls
+</span>docker promode <span class="o">(</span>节点名称<span class="o">)</span>
+变更文档
+<span class="c">#原节点执行，复制token</span>
+docker swarm join-token manager
+<span class="c">#新加节点执行复制token内容</span>
+docker swarm <span class="nb">join</span> <span class="nt">--token</span> （token str）ip:port
+ 
+ 
+ 
+ 
+其它方案
+ 
+ 
+<span class="c"># 1.1 删除服务，其中一个节点执行即可</span>
+dockers service <span class="nb">ls
+</span>docker service <span class="nb">rm</span> （服务名称） <span class="nt">--force</span>
+ 
+ 
+<span class="c"># 1.2 删除集群，两个节点</span>
+docker node <span class="nb">ls
+</span>docker node demote （节点名称）
+docker node <span class="nb">rm</span> <span class="nt">--force</span> （节点名称）
+ 
+ 
+<span class="c"># 2.1 找其中一个节点先作为manager</span>
+docker swarm init <span class="nt">--advertise-addr</span> <span class="o">(</span>ip<span class="o">)</span>
+ 
+ 
+<span class="c"># 2.2另外两个节点加入集群</span>
+docker swarm <span class="nb">join</span> <span class="nt">--token</span> <span class="o">(</span>token<span class="o">)</span> ip:port
+<span class="c"># 2.3manager节点上执行，将两个worker节点升级为manager</span>
+docker node <span class="nb">ls
+</span>docker promode <span class="o">(</span>节点名称<span class="o">)</span>
+ 
+ 
+<span class="c"># 回滚</span>
+docker node <span class="nb">ls
+</span>docker node <span class="nb">rm</span> <span class="nt">--force</span> （节点名称）
+docker swarm init <span class="nt">--advertise-addr</span> <span class="o">(</span>ip<span class="o">)</span>
+docker swarm <span class="nb">join</span> <span class="nt">--token</span> <span class="o">(</span>token<span class="o">)</span> ip:port
+docker stack deploy <span class="nt">-c</span> nspmonitor-compose.yml  nspmonitor
+</code></pre></div></div></main><hr><footer><p><a href="#top" id="back-to-top">Back to top</a></p><p class="text-small text-grey-dk-100 mb-0">Engineering & Philosophy & Life Experience - A Motorcycle rider and loving husband.</p><div class="d-flex mt-2"></div></footer></div></div><div class="search-overlay"></div></div><script src="https://cdn.jsdelivr.net/npm/mermaid@9.1.6/dist/mermaid.min.js"></script> <script> var config = {} ; mermaid.initialize(config); window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid')); </script>
