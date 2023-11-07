@@ -1,0 +1,757 @@
+<!DOCTYPE html><html lang="en-US"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><link rel="stylesheet" href="/assets/css/just-the-docs-default.css"><link rel="stylesheet" href="/assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet"><style id="jtd-nav-activation"> .site-nav > ul.nav-list:first-child > li > a, .site-nav > ul.nav-list:first-child > li > ul > li > a, .site-nav > ul.nav-list:first-child > li > ul > li > ul > li:not(:nth-child(26)) > a { background-image: none; } .site-nav > ul.nav-list:not(:first-child) a, .site-nav li.external a { background-image: none; } .site-nav > ul.nav-list:first-child > li:nth-child(2) > ul > li:nth-child(3) > ul > li:nth-child(26) > a { font-weight: 600; text-decoration: none; }.site-nav > ul.nav-list:first-child > li:nth-child(2) > button svg, .site-nav > ul.nav-list:first-child > li:nth-child(2) > ul > li:nth-child(3) > button svg { transform: rotate(-90deg); }.site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(2) > ul.nav-list, .site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(2) > ul.nav-list > li.nav-list-item:nth-child(3) > ul.nav-list { display: block; }</style><script src="/assets/js/vendor/lunr.min.js"></script> <script src="/assets/js/just-the-docs.js"></script><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon"><title>Python实现动态生成类的http接口-monitor动态监控项 | Adam Yan Na Docs</title><meta name="generator" content="Jekyll v4.3.2" /><meta property="og:title" content="Python实现动态生成类的http接口-monitor动态监控项" /><meta property="og:locale" content="en_US" /><meta name="description" content="Engineering &amp; Philosophy &amp; Life Experience" /><meta property="og:description" content="Engineering &amp; Philosophy &amp; Life Experience" /><link rel="canonical" href="http://localhost:4000/docs/archives/2020/2020-03-24-Python-dynamic-map/" /><meta property="og:url" content="http://localhost:4000/docs/archives/2020/2020-03-24-Python-dynamic-map/" /><meta property="og:site_name" content="Adam Yan Na Docs" /><meta property="og:type" content="website" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Python实现动态生成类的http接口-monitor动态监控项" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"WebPage","description":"Engineering &amp; Philosophy &amp; Life Experience","headline":"Python实现动态生成类的http接口-monitor动态监控项","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/images/icon-512x512.png"}},"url":"http://localhost:4000/docs/archives/2020/2020-03-24-Python-dynamic-map/"}</script><body> <a class="skip-to-main" href="#main-content">Skip to main content</a> <svg xmlns="http://www.w3.org/2000/svg" class="d-none"> <symbol id="svg-link" viewBox="0 0 24 24"><title>Link</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path> </svg> </symbol> <symbol id="svg-menu" viewBox="0 0 24 24"><title>Menu</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line> </svg> </symbol> <symbol id="svg-arrow-right" viewBox="0 0 24 24"><title>Expand</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline> </svg> </symbol> <symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link"><title id="svg-external-link-title">(external link)</title><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line> </symbol> <symbol id="svg-doc" viewBox="0 0 24 24"><title>Document</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline> </svg> </symbol> <symbol id="svg-search" viewBox="0 0 24 24"><title>Search</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"> <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line> </svg> </symbol> <symbol id="svg-copy" viewBox="0 0 16 16"><title>Copy</title><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/> </svg> </symbol> <symbol id="svg-copied" viewBox="0 0 16 16"><title>Copied</title><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16"><path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/> </svg> </symbol> </svg><div class="side-bar"><div class="site-header" role="banner"> <a href="/" class="site-title lh-tight"><div class="site-logo" role="img" aria-label="Adam Yan Na Docs"></div></a> <button id="menu-button" class="site-button btn-reset" aria-label="Toggle menu" aria-pressed="false"> <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg> </button></div><nav aria-label="Main" id="site-nav" class="site-nav"><ul class="nav-list"><li class="nav-list-item"><a href="/" class="nav-list-link">Home</a><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Archives category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/archives/archives/" class="nav-list-link">Archives</a><ul class="nav-list"><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in 2018 category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/archives/2018/2018/" class="nav-list-link">2018</a><ul class="nav-list"></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in 2019 category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/archives/2019/2019/" class="nav-list-link">2019</a><ul class="nav-list"></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in 2020 category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/archives/2020/2020/" class="nav-list-link">2020</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/archives/2020/2020-09-22-roles-of-agile-team/" class="nav-list-link">Agile</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-02-18-Algorithm-Everything/" class="nav-list-link">Algorithm Everything</a><li class="nav-list-item"> <a href="/docs/archives/2018/2018-10-26-Algorithm-matrix/" class="nav-list-link">Algorithm Matrix</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-31-algorithm-heap/" class="nav-list-link">Algorithm-heap 堆排序的实现</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-05-14-ansible-automation/" class="nav-list-link">Ansible自动化</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-01-08-%5BBeginning-of-2020--Algorithm%5D/" class="nav-list-link">BeginningOf2020 - Algorithm</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-16-c-programming-language-recap/" class="nav-list-link">C programming language recap</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-10-c-cpp-syntactic-sugar/" class="nav-list-link">C/C++ Syntactic sugar 语法糖</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-13-cpython-implementation/" class="nav-list-link">CPython源代码分析&虚拟机原理</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-07-26-cloud-qualification/" class="nav-list-link">Cloud Qualification</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-05-13-redis_data_sampling/" class="nav-list-link">Data Sampling [Redis]</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-07-12-git-advanced/" class="nav-list-link">Git进阶</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-05-golang-performance-flame-graph/" class="nav-list-link">Golang性能分析和监控</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-20-select-poll-epoll/" class="nav-list-link">I/O的多路复用算法</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-03-kubernetes-curve/" class="nav-list-link">Kubernetes & Docker</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-05-13-linux-command-tools/" class="nav-list-link">Linux常用工具&内置命令</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-18-linux-networking/" class="nav-list-link">Linux网络基础</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-08-05-macos-configuration/" class="nav-list-link">MacOS Configure</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-05-14-monitor_system_restructure/" class="nav-list-link">Monitor System</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-02-Algorithm-curve/" class="nav-list-link">My Algorithm Curve</a><li class="nav-list-item"> <a href="/docs/archives/2018/2018-10-25-PostgreSQL/" class="nav-list-link">PostgreSQL fundamental and operation</a><li class="nav-list-item"> <a href="/docs/archives/2018/2018-10-23-Postgresql-pgpool/" class="nav-list-link">Postgresql HA & Loadblance - pgpool II</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-06-Prometheus/" class="nav-list-link">Prometheus</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-26-python-core/" class="nav-list-link">Python&CPython核心</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-25-python-memory-management-implementation/" class="nav-list-link">Python内存管理的底层实现&程序内存分析</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-24-Python-dynamic-map/" class="nav-list-link">Python实现动态生成类的http接口-monitor动态监控项</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-05-python-performance-flame-graph/" class="nav-list-link">Python性能分析和火焰图</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-05-14-python-service-deployment/" class="nav-list-link">Python服务容器化部署</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-30-CPython-malloc-python-gc/" class="nav-list-link">Python进程内存分析&大量内存占用的优化方案</a><li class="nav-list-item"> <a href="/docs/archives/2019/2019-02-20-RabbitMQ-pub-sub/" class="nav-list-link">RabbitMQ & AMQP</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-05-14-redhat-6.5-python-dependency/" class="nav-list-link">Red Hat Enterprise Linux Kernel Version 2.6.32 3.8.13 python依赖环境手动部署</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-31-Redis/" class="nav-list-link">Redis学习及源码分析</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-01-08-%5BSum-of-2019--DataInfluxPatrol-Golang%5D/" class="nav-list-link">SumOf2019 - DataInfluxPatrol</a><li class="nav-list-item"> <a href="/docs/archives/2018/2018-12-05-V2ray-Websocket-Nginx/" class="nav-list-link">V2ray Nginx 配置</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-09-man-signal/" class="nav-list-link">linux signal</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-05-13-pg-dead-lock/" class="nav-list-link">pg数据库过程事务执行的锁竞争导致锁表</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-01-01-cs-communication-physical-architecture/" class="nav-list-link">体系结构-树</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-05-18-tech-stack-planning-2020/" class="nav-list-link">技术栈提升规划 [2020]</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-05-13-data-patrol/" class="nav-list-link">时序数据完整性的方法巡检工具</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-12-core-knowledge/" class="nav-list-link">核心知识库</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-01-iter-massive-data-programming/" class="nav-list-link">海量数据程序设计思路</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-27-csapp/" class="nav-list-link">深入理解计算机系统 [Computer-Systems-A-Programmer's-Perspective]</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-20-operating-system/" class="nav-list-link">现代操作系统</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-25-pointer-reference-understanding/" class="nav-list-link">理解C/C++中的指针和引用</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-16-tcp-network-analysis/" class="nav-list-link">生产环境TCP网络问题分析</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-07-capsule/" class="nav-list-link">知识碎片</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-04-02-b-tree-and-indexing-principle/" class="nav-list-link">红黑树&B树应用及索引原理</a><li class="nav-list-item"> <a href="/docs/archives/2020/2020-03-16-network-curve/" class="nav-list-link">计算机网络</a><li class="nav-list-item"> <a href="/docs/archives/2018/2018-12-05-Linux-Ulimit/" class="nav-list-link">通过 ulimit 改善系统性能</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in 2021 category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/archives/2021/2021/" class="nav-list-link">2021</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/archives/2021/2021-02-15-mac-reset-smc-nvram/" class="nav-list-link">Mac Reset Smc Nvram</a><li class="nav-list-item"> <a href="/docs/archives/2021/2021-02-15-research-of-ergonomics/" class="nav-list-link">Research of Ergonomics</a><li class="nav-list-item"> <a href="/docs/archives/2021/2021-02-15-work-efficiency/" class="nav-list-link">Work Efficiency</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in 2022 category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/archives/2022/2022/" class="nav-list-link">2022</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/archives/2022/2022-11-19-Criticism-of-Hegelianism/" class="nav-list-link">Criticism of Hegelianism</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in 2023 category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/archives/2023/2023/" class="nav-list-link">2023</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/archives/2023/2023-01-02-live_migration_precopy/" class="nav-list-link">Live Migration Precopy Analyze</a></ul></ul></ul><ul class="nav-list"><li class="nav-list-item external"> <a href="https://github.com/adamyanna" class="nav-list-link external" > Adam Yan Na GitHub <svg viewBox="0 0 24 24" aria-labelledby="svg-external-link-title"><use xlink:href="#svg-external-link"></use></svg> </a><li class="nav-list-item external"> <a href="https://www.linkedin.com/in/adam-yan-na" class="nav-list-link external" > Adam Yan Na Linkedin <svg viewBox="0 0 24 24" aria-labelledby="svg-external-link-title"><use xlink:href="#svg-external-link"></use></svg> </a></ul></nav><footer class="site-footer"> This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.</footer></div><div class="main" id="top"><div id="main-header" class="main-header"><div class="search" role="search"><div class="search-input-wrap"> <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search Adam Yan Na Docs" aria-label="Search Adam Yan Na Docs" autocomplete="off"> <label for="search-input" class="search-label"><svg viewBox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label></div><div id="search-results" class="search-results"></div></div><nav aria-label="Auxiliary" class="aux-nav"><ul class="aux-nav-list"><li class="aux-nav-list-item"> <a href="https://github.com/adamyanna" class="site-button" > Adam Yan Na GitHub </a><li class="aux-nav-list-item"> <a href="https://www.linkedin.com/in/adam-yan-na" class="site-button" > Adam Yan Na Linkedin </a></ul></nav></div><div class="main-content-wrap"><nav aria-label="Breadcrumb" class="breadcrumb-nav"><ol class="breadcrumb-nav-list"><li class="breadcrumb-nav-list-item"><a href="/docs/archives/archives/">Archives</a><li class="breadcrumb-nav-list-item"><a href="/docs/archives/2020/2020/">2020</a><li class="breadcrumb-nav-list-item"><span>Python实现动态生成类的http接口-monitor动态监控项</span></ol></nav><div id="main-content" class="main-content"><main><p class="label label-blue"><strong>Python</strong></p><p class="label label-yellow"><strong>2020-03-24 10:00:00 +0800</strong></p><h1 id="项目背景"> <a href="#项目背景" class="anchor-heading" aria-labelledby="项目背景"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> 项目背景</h1><ul><li>采集厂商网络硬件设备基础指标，封装OpenFalcon数据结构<li>参与开发人数：1人</ul><h1 id="监控系统动态监控"> <a href="#监控系统动态监控" class="anchor-heading" aria-labelledby="监控系统动态监控"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> 监控系统动态监控</h1><ul><li>需要实现的目标：<ul><li>数据库监控表项动态管理监控项数据处理、封装接口<li>新增监控项由对于处理规则处理，项目的新监控项开发只需要编写规则函数和录入监控项字段即可</ul></ul><h2 id="1-api-处理和报文解析"> <a href="#1-api-处理和报文解析" class="anchor-heading" aria-labelledby="1-api-处理和报文解析"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> 1. API 处理和报文解析</h2><ul><li>项目启动，导入文件后，解释器会执行 RouteRegister.registerAPI()<li>文件路经 <code class="language-plaintext highlighter-rouge">monitor/monitor-server/monitor/api/metric_api/dynamic_router_api.py</code></ul><ol><li>从数据库获取动态监控表项的字段<li>根据获取回来的字段生成对于HTTP接口和类</ol><ul><li>此文件的执行入口是<code class="language-plaintext highlighter-rouge">RouteRegister.registerAPI()</code>，需要关注<ol><li>使用了项目统一实现的 <code class="language-plaintext highlighter-rouge">@get_mapping</code> 装饰器，实现了RESTfulAPI的路经(路由)注册<li>因为python的type底层为c结构体，此处使用type函数，实现type的new，call，init方法，返回一个类的引用，且该引用会在装饰器中存储在全局的变量中，内存地址在可分配地址段，“堆”；<li>从数据库获取回来的数据保存在每个类的静态变量中<li>tornado API 接收socket调用后，会执行process函数<li>process函数实现原始数据处理的对象，并将从数据库表项获取的字段做初始化<li>调用DynamicMetricDataHandler的对象报文处理函数（此处http接收报文的载荷部分为json format）</ol><li>cpython source _typeobject <code class="language-plaintext highlighter-rouge">https://github.com/python/cpython/blob/master/Objects/typeobject.c</code><div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="n">_typeobject</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">ob_refcnt</span><span class="p">;</span>                        <span class="c1">//引用计数</span>
+  <span class="k">struct</span> <span class="n">_typeobject</span> <span class="o">*</span><span class="n">ob_type</span><span class="p">;</span>         <span class="c1">// 类型对象</span>
+  <span class="kt">int</span> <span class="n">ob_size</span><span class="p">;</span>                          <span class="c1">//变长对象的长度，如len（list）， len(str), len(dict)，int类型没有该属性</span>
+  <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">tp_name</span><span class="p">;</span> <span class="cm">/* For printing, in format "&lt;module&gt;.&lt;name&gt;" */</span>   <span class="c1">// 变量的类型名字 如&lt;class 'int'&gt;    &lt;class 'type'&gt;</span>
+  <span class="n">Py_ssize_t</span> <span class="n">tp_basicsize</span><span class="p">,</span> <span class="n">tp_itemsize</span><span class="p">;</span> <span class="cm">/* For allocation */</span>
+
+  <span class="c1">// .......</span>
+<span class="p">}</span>
+</code></pre></div></div></ul><div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time     : 2019-10-30 15:32
+# @Author   : NAYAN
+# @Site     : 
+# @File     : snmp_metric_api_v2.py
+# @Software : PyCharm
+</span>
+<span class="sh">"""</span><span class="s">
+DES:
+    监控项目数据处理入口
+
+    @API
+    1. 从数据库t_snmp_task中全量拉取监控项
+    2. 根据拉取得数据生成对应的数据上报API
+    3. API关联到相应的数据处理函数
+</span><span class="sh">"""</span>
+
+<span class="n">MONITOR_ITEM_TB</span> <span class="o">=</span> <span class="sh">"</span><span class="s">t_monitor_item</span><span class="sh">"</span>
+
+
+<span class="kn">from</span> <span class="n">tornado</span> <span class="kn">import</span> <span class="n">escape</span>
+<span class="kn">from</span> <span class="n">monitor.core.handlers</span> <span class="kn">import</span> <span class="n">get_mapping</span><span class="p">,</span> <span class="n">BaseHandler</span>
+<span class="kn">from</span> <span class="n">monitor.pkg.utils.logger</span> <span class="kn">import</span> <span class="n">LOG</span>
+<span class="kn">from</span> <span class="n">monitor.core.metric.dynamic.dynamic</span> <span class="kn">import</span> <span class="n">DynamicMetricDataHandler</span>
+<span class="kn">from</span> <span class="n">monitor.core.handlers.agent_error_handler</span> <span class="kn">import</span> <span class="n">MetricErrorHandler</span>
+<span class="kn">from</span> <span class="n">monitor.db</span> <span class="kn">import</span> <span class="n">api</span>
+
+
+<span class="k">class</span> <span class="nc">RouteRegister</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="n">metric_taks</span> <span class="o">=</span> <span class="p">{</span>
+
+    <span class="p">}</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">bindRouteToMetircDataHandler</span><span class="p">(</span><span class="n">__route</span><span class="p">,</span> <span class="n">__des</span><span class="p">,</span> <span class="n">monitor_item</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+
+        :param __route:
+        :param __des:
+        :param monitor_item:
+        :return:
+        </span><span class="sh">"""</span>
+        <span class="nd">@get_mapping</span><span class="p">(</span><span class="n">__route</span><span class="p">,</span> <span class="n">__des</span><span class="p">)</span>
+        <span class="k">class</span> <span class="nc">MonitorMetricAPI</span><span class="p">(</span><span class="n">BaseHandler</span><span class="p">):</span>
+
+            <span class="n">_metric</span> <span class="o">=</span> <span class="sh">""</span>
+
+            <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+                <span class="sh">"""</span><span class="s">
+
+                :return:
+                </span><span class="sh">"""</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">body</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">body</span>
+                    <span class="n">content_type</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">headers</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">Content-Type</span><span class="sh">"</span><span class="p">,</span> <span class="sh">""</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">content_type</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">application/json</span><span class="sh">'</span><span class="p">):</span>
+                        <span class="n">data</span> <span class="o">=</span> <span class="n">escape</span><span class="p">.</span><span class="nf">json_decode</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">dynamic</span><span class="o">=</span> <span class="nc">DynamicMetricDataHandler</span><span class="p">(</span><span class="n">monitor_item</span><span class="o">=</span><span class="n">MonitorMetricAPI</span><span class="p">.</span><span class="n">_metric</span><span class="p">)</span>
+                            <span class="n">did_send_metric</span> <span class="o">=</span> <span class="n">dynamic</span><span class="p">.</span><span class="nf">handler_distributor</span><span class="p">(</span><span class="n">metric_raw</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">did_send_metric</span><span class="p">:</span>
+                                <span class="k">return</span> <span class="mi">1</span><span class="p">,</span> <span class="sh">'</span><span class="s">success</span><span class="sh">'</span><span class="p">,</span> <span class="p">{}</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="sh">'</span><span class="s">failed</span><span class="sh">'</span><span class="p">,</span> <span class="p">{}</span>
+                        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                            <span class="n">LOG</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="sh">"</span><span class="s">Dynamic metric data handler bind filed! error=%s</span><span class="sh">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">e</span><span class="p">))</span>
+                            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="sh">'</span><span class="s">failed</span><span class="sh">'</span><span class="p">,</span> <span class="p">{}</span>
+                <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="sh">'</span><span class="s">failed</span><span class="sh">'</span><span class="p">,</span> <span class="p">{</span><span class="sh">"</span><span class="s">Message</span><span class="sh">"</span><span class="p">:</span> <span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">monitor_item</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="n">MonitorMetricAPI</span><span class="p">.</span><span class="n">_metric</span> <span class="o">=</span> <span class="n">monitor_item</span>
+        <span class="n">new_class_name</span> <span class="o">=</span> <span class="sh">""</span><span class="p">.</span><span class="nf">join</span><span class="p">([</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">upper</span><span class="p">()</span> <span class="o">+</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">__route</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">"</span><span class="s">/</span><span class="sh">"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="nf">split</span><span class="p">(</span><span class="sh">"</span><span class="s">_</span><span class="sh">"</span><span class="p">)])</span>
+        <span class="k">return</span> <span class="nf">type</span><span class="p">(</span><span class="n">new_class_name</span><span class="p">,</span> <span class="p">(</span><span class="n">MonitorMetricAPI</span><span class="p">,),</span> <span class="p">{})</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">registerAPI</span><span class="p">():</span>
+        <span class="n">raw_tasks</span> <span class="o">=</span> <span class="n">RouteRegister</span><span class="p">.</span><span class="nf">loadAllAPIFromInventory</span><span class="p">()</span>
+        <span class="n">LOG</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="sh">"</span><span class="s">[Register Monitor Item API From DB...]</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">raw</span> <span class="ow">in</span> <span class="n">raw_tasks</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">raw</span> <span class="ow">and</span> <span class="n">raw</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">OpenFalcon_upload</span><span class="sh">'</span><span class="p">):</span> <span class="c1">#
+</span>                <span class="n">__route</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">raw</span><span class="p">[</span><span class="sh">"</span><span class="s">upload_api</span><span class="sh">"</span><span class="p">])</span>
+                <span class="n">__des</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">raw</span><span class="p">[</span><span class="sh">"</span><span class="s">desc</span><span class="sh">"</span><span class="p">])</span>
+                <span class="n">LOG</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="sh">"</span><span class="s">[Upload API]: %s</span><span class="sh">"</span> <span class="o">%</span> <span class="n">__route</span><span class="p">)</span>
+                <span class="n">RouteRegister</span><span class="p">.</span><span class="nf">bindRouteToMetircDataHandler</span><span class="p">(</span><span class="n">__route</span><span class="p">,</span> <span class="n">__des</span><span class="p">,</span> <span class="n">raw</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">loadAllAPIFromInventory</span><span class="p">():</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">api</span><span class="p">.</span><span class="nf">pg_query</span><span class="p">(</span><span class="n">MONITOR_ITEM_TB</span><span class="p">)</span>
+        <span class="n">LOG</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="sh">"</span><span class="s">[ITEM DATA] %s</span><span class="sh">"</span> <span class="o">%</span> <span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span>
+
+
+<span class="nd">@get_mapping</span><span class="p">(</span><span class="sh">'</span><span class="s">/monitor_upload/metric_error_handler.do</span><span class="sh">'</span><span class="p">,</span> <span class="sh">''</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ErrorHandler</span><span class="p">(</span><span class="n">BaseHandler</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">body</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">body</span>
+            <span class="n">content_type</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">headers</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">Content-Type</span><span class="sh">"</span><span class="p">,</span> <span class="sh">""</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">content_type</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">application/json</span><span class="sh">'</span><span class="p">):</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">escape</span><span class="p">.</span><span class="nf">json_decode</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+                <span class="n">MetricErrorHandler</span><span class="p">.</span><span class="nf">process_metric_error</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">,</span> <span class="sh">'</span><span class="s">success</span><span class="sh">'</span><span class="p">,</span> <span class="p">{}</span>
+        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="sh">'</span><span class="s">failed</span><span class="sh">'</span><span class="p">,</span> <span class="p">{</span><span class="sh">"</span><span class="s">Message</span><span class="sh">"</span><span class="p">:</span> <span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
+
+<span class="n">RouteRegister</span><span class="p">.</span><span class="nf">registerAPI</span><span class="p">()</span>
+
+</code></pre></div></div><h2 id="2-规则映射数据处理"> <a href="#2-规则映射数据处理" class="anchor-heading" aria-labelledby="2-规则映射数据处理"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> 2. 规则映射数据处理</h2><ul><li>实现了对不同类型规则的处理逻辑；<ol><li>单OID处理：一个OID为采集对象，采集结果为单一类型数据，例如整型、浮点类型、字符、字符串、数组<li>多OID处理：一个OID为采集对象，采集结果为多行数据，数据类型一致，例如带索引的分组交换机接口或硬件端口<li>多OID多处理：多个OID为采集对象，采集结果可能为每个OID一个单一结果，或者每个OID多个结果，具体规则函数会对这样的报文做处理；</ol></ul><h3 id="动态监控项表的字段结构"> <a href="#动态监控项表的字段结构" class="anchor-heading" aria-labelledby="动态监控项表的字段结构"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> 动态监控项表的字段结构</h3><pre><code class="language-pgsql">+-------------+---------------------+------+-----+---------+---------------------------------+
+| Field       | Type                | Null | Key | description 	   							 |
++-------------+---------------------+------+-----+---------+---------------------------------+
+| id  	      | varchar 			| NO   | PRI | 主键，唯一监控项名称，包含小写字母和下划线       |
+| vendor      | varchar 			| NO   | 	 | 厂商								         |
+| type        | varchar 			| NO   | 	 | 设备类型 （链路交换机，路由器，防火墙）         |
+| model       | jsonb   			| YES  | 	 | 设备型号 厂商定义       			         |
+| series      | jsonb               | YES  | 	 | 设备系列 厂商定义						     |
+| metric 	  | varchar 			| NO   | 	 | 采集数据名称，元数据描述			 	         |
+| metric_type | int4		        | NO   |     | 采集数据类型（处理） 0表示普通数据，1表示增量数据 |
+| upload_api  | varchar 	        | NO   |     | 原始数据上报RESTful接口						 |
+| task        | jsonb               | NO   |     | agent端执行的采集任务定义			         |
+| desc        | varchar             | YES  | 	 | 描述								         |
+| OpenFalcon_upload| bool                | NO   |     | 是否将数据发送到 OpenFalcon 平台			         |
+| update_time | timestamp	        | NO   |     | 记录更新时间								 |
+| interval    | int4                | YES  |     | agent执行采集的时间间隔				         |
++-------------+---------------------+------+-----+---------+---------------------------------+
+</code></pre><div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time     : 2019-10-31 14:57
+# @Author   : NAYAN
+# @Site     : 
+# @File     : dynamic.py
+# @Software : PyCharm
+</span>
+<span class="sh">"""</span><span class="s">
+动态监控项处理
+    1. 从数据库t_monitor_item表拉取监控项
+    2. 由监控项生成API和监控处理对象(class)
+    3. 监控处理对象将调用相应的动态处理函数
+    4. 动态处理函数会根据 task_operation 判断数据处理函数的类型，包括单数据处理，批量数据处理，表达式处理三种
+    5. 监控数据部分会有两个处理函数，第一个是tags的配置，第二个是value的处理
+
+
+</span><span class="sh">"""</span>
+
+<span class="kn">from</span> <span class="n">monitor.core.handlers.device_info_handler</span> <span class="kn">import</span> <span class="n">DeviceInfo</span>
+<span class="kn">from</span> <span class="n">monitor.pkg.utils.import_util</span> <span class="kn">import</span> <span class="n">LOG</span>
+<span class="kn">from</span> <span class="n">monitor.core.model.monitor_data_model</span> <span class="kn">import</span> <span class="n">MonitorItemDataModel</span>
+<span class="kn">from</span> <span class="n">monitor.core.model</span> <span class="kn">import</span> <span class="n">monitor_data_model</span> <span class="k">as</span> <span class="n">DModle</span>
+<span class="kn">from</span> <span class="n">monitor.core.metric.dynamic.dynamic_rules</span> <span class="kn">import</span> <span class="n">ValueRules</span>
+<span class="kn">from</span> <span class="n">monitor.core.metric.dynamic.dynamic_rules</span> <span class="kn">import</span> <span class="n">TagRules</span>
+<span class="kn">from</span> <span class="n">monitor.core.metric.dynamic.dynamic_rules</span> <span class="kn">import</span> <span class="n">OperationRules</span>
+<span class="kn">from</span> <span class="n">monitor.core.metric.publisher</span> <span class="kn">import</span> <span class="n">Falcon</span>
+
+<span class="n">LogPrefix</span> <span class="o">=</span> <span class="sh">"</span><span class="s">[Dynamic Monitor]</span><span class="sh">"</span>
+<span class="n">DefaultValue</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="n">Metric_Value_Type</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="sh">"</span><span class="s">int</span><span class="sh">"</span><span class="p">,</span>
+    <span class="mi">0</span><span class="p">:</span> <span class="sh">"</span><span class="s">float</span><span class="sh">"</span><span class="p">,</span>
+    <span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="sh">"</span><span class="s">counter</span><span class="sh">"</span>
+<span class="p">}</span>
+
+<span class="n">Metric_Type</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="sh">"</span><span class="s">GAUGE</span><span class="sh">"</span><span class="p">,</span>
+    <span class="mi">0</span><span class="p">:</span> <span class="sh">"</span><span class="s">GAUGE</span><span class="sh">"</span><span class="p">,</span>
+    <span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="sh">"</span><span class="s">COUNTER</span><span class="sh">"</span>
+<span class="p">}</span>
+
+
+<span class="k">class</span> <span class="nc">DynamicMetricDataHandler</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    @metric_item
+        监控项数据结构，用来生成监控项上报API和处理函数
+
+    @metric_raw
+        Agent上报的原始监控数据
+    </span><span class="sh">"""</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">monitor_item</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+
+        :param monitor_item:
+        </span><span class="sh">"""</span>
+
+        <span class="n">mon_object</span> <span class="o">=</span> <span class="nc">MonitorItemDataModel</span><span class="p">(</span><span class="o">**</span><span class="n">monitor_item</span><span class="p">)</span>
+
+        <span class="n">self</span><span class="p">.</span><span class="n">_mon_object</span> <span class="o">=</span> <span class="n">mon_object</span>  <span class="c1"># @监控对象
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">_vendor</span> <span class="o">=</span> <span class="n">mon_object</span><span class="p">.</span><span class="n">vendor</span>  <span class="c1"># @设备厂商
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">_type</span> <span class="o">=</span> <span class="n">mon_object</span><span class="p">.</span><span class="nb">type</span>  <span class="c1"># @设备类型
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">_model</span> <span class="o">=</span> <span class="n">mon_object</span><span class="p">.</span><span class="n">model</span>  <span class="c1"># @设备型号
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">_series</span> <span class="o">=</span> <span class="n">mon_object</span><span class="p">.</span><span class="n">series</span>  <span class="c1"># @设备型号所属系列
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">_metric</span> <span class="o">=</span> <span class="n">mon_object</span><span class="p">.</span><span class="n">metric</span>  <span class="c1"># @监控项名称m
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">_metric_type</span> <span class="o">=</span> <span class="n">mon_object</span><span class="p">.</span><span class="n">metric_type</span>  <span class="c1"># @是否计数器
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">_upload_api</span> <span class="o">=</span> <span class="n">mon_object</span><span class="p">.</span><span class="n">upload_api</span>  <span class="c1"># @上报接口
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">_OpenFalcon_upload</span> <span class="o">=</span> <span class="n">mon_object</span><span class="p">.</span><span class="n">OpenFalcon_upload</span>  <span class="c1"># @是否上报OpenFalcon
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">_des</span> <span class="o">=</span> <span class="n">mon_object</span><span class="p">.</span><span class="n">description</span>  <span class="c1"># @监控项描述
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">_task</span> <span class="o">=</span> <span class="n">mon_object</span><span class="p">.</span><span class="n">task</span>  <span class="c1"># @监控项对应监控任务
+</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">manage_ip</span> <span class="o">=</span> <span class="n">DModle</span><span class="p">.</span><span class="n">DEFAULT_STRING</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">raw_data</span> <span class="o">=</span> <span class="n">DModle</span><span class="p">.</span><span class="n">DEFAULT_JSON_DIC</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">DModle</span><span class="p">.</span><span class="n">DEFAULT_INTEGER</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">sysname</span> <span class="o">=</span> <span class="n">DModle</span><span class="p">.</span><span class="n">DEFAULT_STRING</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">step</span> <span class="o">=</span> <span class="n">DModle</span><span class="p">.</span><span class="n">DEFAULT_INTEGER</span>
+
+        <span class="n">self</span><span class="p">.</span><span class="n">oid_data</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">_parse_metric_raw</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">metric_raw</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+        @@@ Handle Agent upload original DATA
+        :param metric_raw:
+        @example:
+        {
+            </span><span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="s">: null,
+            </span><span class="sh">"</span><span class="s">host</span><span class="sh">"</span><span class="s">: null,
+            </span><span class="sh">"</span><span class="s">protocol</span><span class="sh">"</span><span class="s">: null,
+            </span><span class="sh">"</span><span class="s">scheduler</span><span class="sh">"</span><span class="s">: null,
+            </span><span class="sh">"</span><span class="s">timestamp</span><span class="sh">"</span><span class="s">: 1572574430,
+            </span><span class="sh">"</span><span class="s">company</span><span class="sh">"</span><span class="s">: null,
+            </span><span class="sh">"</span><span class="s">interval</span><span class="sh">"</span><span class="s">: null,
+            </span><span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="s">: null,
+            </span><span class="sh">"</span><span class="s">response</span><span class="sh">"</span><span class="s">: {
+                </span><span class="sh">"</span><span class="s">get</span><span class="sh">"</span><span class="s">: {
+                    </span><span class="sh">"</span><span class="s">1.3.6.1.4.1.2636.3.1.13.1.8.9.1.0.0</span><span class="sh">"</span><span class="s">: {
+                        </span><span class="sh">"</span><span class="s">oid_index</span><span class="sh">"</span><span class="s">: </span><span class="sh">""</span><span class="s">,
+                        </span><span class="sh">"</span><span class="s">oid</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">enterprises.2636.3.1.13.1.8.9.1.0.0</span><span class="sh">"</span><span class="s">,
+                        </span><span class="sh">"</span><span class="s">snmp_type</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">GAUGE</span><span class="sh">"</span><span class="s">,
+                        </span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">1</span><span class="sh">"</span><span class="s">
+                    }
+                }
+            }
+        }
+
+        @@ Agent采集数据结构
+            </span><span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="s">:  @采集job内容
+            </span><span class="sh">"</span><span class="s">host</span><span class="sh">"</span><span class="s">:     @采集对象管理ip
+            </span><span class="sh">"</span><span class="s">protocol</span><span class="sh">"</span><span class="s">: @采集使用的网络协议
+            </span><span class="sh">"</span><span class="s">scheduler</span><span class="sh">"</span><span class="s">: @采集是否为周期interval || once
+            </span><span class="sh">"</span><span class="s">timestamp</span><span class="sh">"</span><span class="s">: @采集数据的时间戳
+            </span><span class="sh">"</span><span class="s">company</span><span class="sh">"</span><span class="s">:   @采集设备的厂商
+            </span><span class="sh">"</span><span class="s">interval</span><span class="sh">"</span><span class="s">:  @采集的时间间隔
+            </span><span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="s">:        @采集任务的唯一ID
+        :return:
+        </span><span class="sh">"""</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">self</span><span class="p">.</span><span class="n">_metric</span><span class="p">:</span>  <span class="c1">##TODO Value Check and LOG IT!!!!!!!!!!!!!!!!!!!!!!!!
+</span>                <span class="n">LOG</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="sh">"</span><span class="s">%s metric item data parse failed, error=</span><span class="sh">"</span> <span class="o">%</span> <span class="n">LogPrefix</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">metric_raw</span><span class="p">:</span>
+                <span class="n">LOG</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="sh">"</span><span class="s">%s metric raw parse failed, error=</span><span class="sh">"</span> <span class="o">%</span> <span class="n">LogPrefix</span><span class="p">)</span>
+                <span class="k">return</span>
+
+            <span class="n">self</span><span class="p">.</span><span class="n">manage_ip</span> <span class="o">=</span> <span class="n">metric_raw</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">host</span><span class="sh">"</span><span class="p">)</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">raw_data</span> <span class="o">=</span> <span class="n">metric_raw</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">response</span><span class="sh">"</span><span class="p">)</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">metric_raw</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">timestamp</span><span class="sh">"</span><span class="p">)</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">step</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">metric_raw</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">interval</span><span class="sh">"</span><span class="p">))</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">sysname</span> <span class="o">=</span> <span class="n">DeviceInfo</span><span class="p">.</span><span class="n">devs</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">manage_ip</span><span class="p">].</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">sysname</span><span class="sh">'</span><span class="p">)</span>
+            <span class="c1"># self.sysname = "abcd"
+</span>            <span class="k">if</span> <span class="ow">not</span> <span class="n">self</span><span class="p">.</span><span class="n">sysname</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="nc">Exception</span><span class="p">(</span><span class="sh">"</span><span class="s">get sysname failed!</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">LOG</span><span class="p">.</span><span class="nf">exception</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">_error_handler</span><span class="p">(</span><span class="n">err_des</span><span class="o">=</span><span class="sh">"</span><span class="s">parse raw metric error</span><span class="sh">"</span><span class="p">,</span> <span class="n">exp</span><span class="o">=</span><span class="n">e</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">_error_handler</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">err_des</span><span class="o">=</span><span class="sh">""</span><span class="p">,</span> <span class="n">exp</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+        @@@ Error handler
+        :param e:
+        :return: Error msg
+        # LOG.error(self._error_handler(err_des=</span><span class="sh">""</span><span class="s">, exp=e))
+        </span><span class="sh">"""</span>
+        <span class="n">e_msg</span> <span class="o">=</span> <span class="sh">'</span><span class="s">%s monitor item data process error, device=[ip=%s, sysname=%s, vendor=%s, type=%s, model=%s, series=%s, metric=%s], err_msg=%s, exp=%s</span><span class="sh">'</span> \
+                <span class="o">%</span> <span class="p">(</span><span class="n">LogPrefix</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">manage_ip</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">sysname</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">_vendor</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">_type</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">_model</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">_series</span><span class="p">,</span>
+                   <span class="n">self</span><span class="p">.</span><span class="n">_metric</span><span class="p">,</span> <span class="n">err_des</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">e_msg</span>
+
+    <span class="k">def</span> <span class="nf">_is_value_valid</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+        @@@ SNMP error handler
+            @TIMEOUT
+            @UNKNOWN
+            @NO_SUCH_INSTANCE
+            @UNDETERMINED_TYPE_ERROR
+            @Connection_Error
+            @Undetermined_Type_Error
+        :param value:
+        :return:
+        </span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">or</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">elif</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">unicode</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="bp">True</span>
+            <span class="c1"># TODO check snmp error value   TIMEOUT   UNKNOWN OBJECTID  NO_SUCH_INSTANCE   NO_SUCH_OBJECTID
+</span>            <span class="c1"># except EasySNMPTimeoutError:
+</span>            <span class="c1"># LOG.error("%s request snmp error TIMEOUT.oid=%s" % (self.hostname, oids))
+</span>            <span class="c1"># except EasySNMPUnknownObjectIDError:
+</span>            <span class="c1"># LOG.error("%s request snmp error UNKNOWN OBJECTID.oid=%s" % (self.hostname, oids))
+</span>            <span class="c1">#
+</span>            <span class="c1"># except (EasySNMPNoSuchObjectError, EasySNMPNoSuchInstanceError):
+</span>            <span class="c1"># LOG.error("%s request snmp error NO_SUCH_INSTANCE OR NO_SUCH_OBJECTID.oid=%s" % (self.hostname, oids))
+</span>            <span class="c1">#
+</span>            <span class="c1"># except EasySNMPUndeterminedTypeError:
+</span>            <span class="c1"># LOG.error("%s request snmp error UNDETERMINED_TYPE_ERROR.oid=%s" % (self.hostname, oids))
+</span>            <span class="c1"># except EasySNMPConnectionError:
+</span>            <span class="c1"># LOG.error("%s request snmp error Connection_Error.oid=%s" % (self.hostname, oids))
+</span>            <span class="c1"># except EasySNMPUndeterminedTypeError:
+</span>            <span class="c1"># LOG.error("%s request snmp error Undetermined_Type_Error.oid=%s" % (self.hostname, oids))
+</span>        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">_process_value_rule</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">rule_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+        @@@ Matching the value process rule
+        :param rule_name:
+        :param kwargs:
+        :return:
+        </span><span class="sh">"""</span>
+        <span class="c1">## ToDO NO SUCN rule
+</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="nc">ValueRules</span><span class="p">()</span>
+        <span class="n">func</span> <span class="o">=</span> <span class="nf">getattr</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">rule_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nf">func</span><span class="p">(</span><span class="n">manage_ip</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">manage_ip</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_process_tag_rule</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">rule_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+        @@@ Tags handler
+            @ Tags get attr from raw content
+        :param tags:
+        :return:
+        </span><span class="sh">"""</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="nc">TagRules</span><span class="p">()</span>
+        <span class="n">func</span> <span class="o">=</span> <span class="nf">getattr</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">rule_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nf">func</span><span class="p">(</span><span class="n">manage_ip</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">manage_ip</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_process_opera_rule</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">rule_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+        @@@ Matching the operation process rule
+        :param rule_name:
+        :param kwargs:
+        :return:
+        </span><span class="sh">"""</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="nc">OperationRules</span><span class="p">()</span>
+        <span class="n">func</span> <span class="o">=</span> <span class="nf">getattr</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">rule_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nf">func</span><span class="p">(</span><span class="n">manage_ip</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">manage_ip</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_raw_data_wrapper</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+        :wrapper: wrap raw data to a dic, oid as key
+        :return:
+        {
+            </span><span class="sh">"</span><span class="s">1.3.6.1.4.1.2636.3.1.13.1.8.9.1.0.0</span><span class="sh">"</span><span class="s">: [
+                {
+                    </span><span class="sh">"</span><span class="s">oid_index</span><span class="sh">"</span><span class="s">: </span><span class="sh">""</span><span class="s">,
+                    </span><span class="sh">"</span><span class="s">oid</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">enterprises.2636.3.1.13.1.8.9.1.0.0</span><span class="sh">"</span><span class="s">,
+                    </span><span class="sh">"</span><span class="s">snmp_type</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">GAUGE</span><span class="sh">"</span><span class="s">,
+                    </span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">1</span><span class="sh">"</span><span class="s">
+                }...
+            ],
+            </span><span class="sh">""</span><span class="s">1.3.6.1.4.1.2636.3.1.13.1.8.9.1.0.1</span><span class="sh">"</span><span class="s">: [
+                {
+                    </span><span class="sh">"</span><span class="s">oid_index</span><span class="sh">"</span><span class="s">: </span><span class="sh">""</span><span class="s">,
+                    </span><span class="sh">"</span><span class="s">oid</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">enterprises.2636.3.1.13.1.8.9.1.0.1</span><span class="sh">"</span><span class="s">,
+                    </span><span class="sh">"</span><span class="s">snmp_type</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">GAUGE</span><span class="sh">"</span><span class="s">,
+                    </span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">1</span><span class="sh">"</span><span class="s">
+                }...
+            ]...
+        }
+        </span><span class="sh">"""</span>
+        <span class="n">oid_data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">method</span><span class="p">,</span> <span class="n">oid_dic</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">raw_data</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">oid</span><span class="p">,</span> <span class="n">oid_value</span> <span class="ow">in</span> <span class="n">oid_dic</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">oid_value</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">)):</span>
+                    <span class="n">oid_value</span> <span class="o">=</span> <span class="p">[</span><span class="n">oid_value</span><span class="p">]</span>
+                <span class="n">oid_data</span><span class="p">.</span><span class="nf">update</span><span class="p">({</span><span class="n">oid</span><span class="p">:</span> <span class="n">oid_value</span><span class="p">})</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">oid_data</span> <span class="o">=</span> <span class="n">oid_data</span>
+
+    <span class="k">def</span> <span class="nf">handler_distributor</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">metric_raw</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+        @self._task
+        {
+            </span><span class="sh">"</span><span class="s">snmp_task</span><span class="sh">"</span><span class="s">:{
+                </span><span class="sh">"</span><span class="s">oid</span><span class="sh">"</span><span class="s">: {
+                    </span><span class="sh">'</span><span class="s">get</span><span class="sh">'</span><span class="s">: [],
+                    </span><span class="sh">'</span><span class="s">bulk</span><span class="sh">'</span><span class="s">: [],
+                    </span><span class="sh">'</span><span class="s">walk</span><span class="sh">'</span><span class="s">: [],
+                    </span><span class="sh">'</span><span class="s">getnext</span><span class="sh">'</span><span class="s">: []
+                },
+                </span><span class="sh">"</span><span class="s">value_rule</span><span class="sh">"</span><span class="s">: </span><span class="sh">""</span><span class="s">,
+                </span><span class="sh">"</span><span class="s">tag_rule</span><span class="sh">"</span><span class="s">: </span><span class="sh">""</span><span class="s">,
+                </span><span class="sh">"</span><span class="s">opera_rule</span><span class="sh">"</span><span class="s">: </span><span class="sh">""</span><span class="s">
+            }
+        }
+        @@@ Rules
+        :rule:三种采集数据处理规则，规则都在task_content中
+        1. value_rule           值处理规则，对上报数值进行处理，比如从字符串中截取监控指标
+        2. tag_rule             标签处理规则，如对根据接口索引获取接口速率和名称并添加到上报tags中
+        3. opera_rule           运算操作规则，对多个oid取回值进行运算处理获取监控指标，比如对metric_raw中的值进行加减乘除
+
+        @@@ Handlers
+        :handler: 三种OID处理规则
+        1. snmp_single          单值处理，task中只有一个操作方法和一个oid，采集结果也只有单一值(例如：get操作单一oid)
+        2. snmp_batch           批量处理，task中只有一个操作方法和一个oid，采集结果会有索引(例如：walk操作单一oid)
+        3. snmp_multi           多值处理，task中有多个操作方法或多个oid，采集结果会有多种值或多种索引(例如：风别walk操作三个oid)
+
+        :param metric_raw:
+        :return:
+            @@True      数据处理成功发送OpenFalcon
+            @@False     数据处理失败写入日志
+        </span><span class="sh">"""</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">did_parse_data</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_parse_metric_raw</span><span class="p">(</span><span class="n">metric_raw</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">did_parse_data</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">self</span><span class="p">.</span><span class="n">_task</span><span class="p">:</span>
+                <span class="n">LOG</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">_error_handler</span><span class="p">(</span><span class="n">err_des</span><span class="o">=</span><span class="sh">"</span><span class="s">monitor item task empty</span><span class="sh">"</span><span class="p">))</span>
+                <span class="k">return</span> <span class="bp">False</span>
+            <span class="c1"># @ task handler caller
+</span>            <span class="k">for</span> <span class="n">task_type</span><span class="p">,</span> <span class="n">task_content</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">_task</span><span class="p">.</span><span class="nf">iteritems</span><span class="p">():</span>
+
+                <span class="c1"># @SNMP task
+</span>                <span class="k">if</span> <span class="n">task_type</span> <span class="o">==</span> <span class="sh">"</span><span class="s">snmp_task</span><span class="sh">"</span><span class="p">:</span>
+
+                    <span class="n">self</span><span class="p">.</span><span class="nf">_raw_data_wrapper</span><span class="p">()</span>
+
+                    <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">oid_data</span><span class="p">.</span><span class="nf">values</span><span class="p">()):</span>
+                        <span class="c1"># 多oid多值
+</span>                        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">oid_data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                            <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">snmp_multi_monitor_item_handler</span><span class="p">(</span><span class="n">task_content</span><span class="p">)</span>
+                        <span class="c1"># 单oid多值
+</span>                        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">oid_data</span><span class="p">.</span><span class="nf">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                            <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">snmp_batch_monitor_item_handler</span><span class="p">(</span><span class="n">task_content</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">snmp_single_monitor_item_handler</span><span class="p">(</span><span class="n">task_content</span><span class="p">)</span>
+
+                <span class="c1"># @Netconf task
+</span>                <span class="k">elif</span> <span class="n">task_type</span> <span class="o">==</span> <span class="sh">"</span><span class="s">netconf_task</span><span class="sh">"</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">LOG</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="sh">"</span><span class="s">%s monitor task type not supported!</span><span class="sh">"</span> <span class="o">%</span> <span class="n">LogPrefix</span><span class="p">)</span>
+        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">LOG</span><span class="p">.</span><span class="nf">exception</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">_error_handler</span><span class="p">(</span><span class="n">exp</span><span class="o">=</span><span class="n">e</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">snmp_single_monitor_item_handler</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">task_content</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+
+        :param metric_raw:
+        @metric_raw[</span><span class="sh">"</span><span class="s">response</span><span class="sh">"</span><span class="s">]
+        </span><span class="sh">"</span><span class="s">response</span><span class="sh">"</span><span class="s">: {
+                </span><span class="sh">"</span><span class="s">get</span><span class="sh">"</span><span class="s">: {
+                    </span><span class="sh">"</span><span class="s">1.3.6.1.4.1.2636.3.1.13.1.8.9.1.0.0</span><span class="sh">"</span><span class="s">: {
+                        </span><span class="sh">"</span><span class="s">oid_index</span><span class="sh">"</span><span class="s">: </span><span class="sh">""</span><span class="s">,
+                        </span><span class="sh">"</span><span class="s">oid</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">enterprises.2636.3.1.13.1.8.9.1.0.0</span><span class="sh">"</span><span class="s">,
+                        </span><span class="sh">"</span><span class="s">snmp_type</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">GAUGE</span><span class="sh">"</span><span class="s">,
+                        </span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">1</span><span class="sh">"</span><span class="s">
+                    }
+                }
+            }
+        :return: Bool
+        </span><span class="sh">"""</span>
+        <span class="n">task_value_rule</span> <span class="o">=</span> <span class="n">task_content</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">value_rule</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">task_tag_rule</span> <span class="o">=</span> <span class="n">task_content</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">tag_rule</span><span class="sh">"</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">raw_data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">raw_data</span><span class="p">.</span><span class="nf">values</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="nc">Exception</span><span class="p">(</span><span class="sh">"</span><span class="s">upload data is not single value</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">oid_dic</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">raw_data</span><span class="p">.</span><span class="nf">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">oid_content_dic</span> <span class="o">=</span> <span class="n">oid_dic</span><span class="p">.</span><span class="nf">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">oid_content_dic</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">oid_content_dic</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">oid_content_dic</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nf">len</span><span class="p">(</span><span class="n">oid_content_dic</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">oid_content_dic</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">)</span>
+                    <span class="n">oid_content_dic</span> <span class="o">=</span> <span class="n">oid_content_dic</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="n">tags</span> <span class="o">=</span> <span class="bp">None</span>
+
+                <span class="k">if</span> <span class="n">value</span> <span class="ow">and</span> <span class="n">self</span><span class="p">.</span><span class="nf">_is_value_valid</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+
+                    <span class="c1"># process rules
+</span>                    <span class="c1"># 1. value rule
+</span>                    <span class="k">if</span> <span class="n">task_value_rule</span><span class="p">:</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_process_value_rule</span><span class="p">(</span><span class="n">task_value_rule</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="n">sysname</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">sysname</span><span class="p">)</span>
+
+                    <span class="c1"># 2. tag rule
+</span>                    <span class="k">if</span> <span class="n">task_tag_rule</span><span class="p">:</span>
+                        <span class="n">tags</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_process_tag_rule</span><span class="p">(</span><span class="n">task_tag_rule</span><span class="p">,</span> <span class="n">oid_content</span><span class="o">=</span><span class="n">oid_content_dic</span><span class="p">)</span>
+
+                    <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">metrics_sender</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">LOG</span><span class="p">.</span><span class="nf">exception</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">_error_handler</span><span class="p">(</span><span class="n">err_des</span><span class="o">=</span><span class="sh">"</span><span class="s">single value process failed</span><span class="sh">"</span><span class="p">,</span> <span class="n">exp</span><span class="o">=</span><span class="n">e</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">snmp_batch_monitor_item_handler</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">task_content</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+        :rule:三个处理规则，规则都在task_content中
+        1. value_rule           值处理规则，对上报数值进行处理，比如从字符串中截取监控指标
+        2. tag_rule             标签处理规则，如对根据接口索引获取接口速率和名称并添加到上报tags中
+        3. operation_rule       运算操作规则，对多个oid取回值进行运算处理获取监控指标，比如对metric_raw中的值进行加减乘除
+
+        @@ 基于metric索引批量处理监控数据
+        :param metric_raw:
+        @example
+        @metric_raw[</span><span class="sh">"</span><span class="s">response</span><span class="sh">"</span><span class="s">]
+        </span><span class="sh">"</span><span class="s">response</span><span class="sh">"</span><span class="s">: {
+            </span><span class="sh">"</span><span class="s">walk</span><span class="sh">"</span><span class="s">: {
+                </span><span class="sh">"</span><span class="s">1.3.6.1.2.1.2.2.1.14</span><span class="sh">"</span><span class="s">: [
+                    {
+                        </span><span class="sh">"</span><span class="s">oid_index</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">1</span><span class="sh">"</span><span class="s">,
+                        </span><span class="sh">"</span><span class="s">oid</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">ifInErrors</span><span class="sh">"</span><span class="s">,
+                        </span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">0</span><span class="sh">"</span><span class="s">,
+                        </span><span class="sh">"</span><span class="s">snmp_type</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">COUNTER</span><span class="sh">"</span><span class="s">
+                    },
+                    {
+                        </span><span class="sh">"</span><span class="s">oid_index</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">4</span><span class="sh">"</span><span class="s">,
+                        </span><span class="sh">"</span><span class="s">oid</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">ifInErrors</span><span class="sh">"</span><span class="s">,
+                        </span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">0</span><span class="sh">"</span><span class="s">,
+                        </span><span class="sh">"</span><span class="s">snmp_type</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">COUNTER</span><span class="sh">"</span><span class="s">
+                    },
+                    {
+                        </span><span class="sh">"</span><span class="s">oid_index</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">5</span><span class="sh">"</span><span class="s">,
+                        </span><span class="sh">"</span><span class="s">oid</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">ifInErrors</span><span class="sh">"</span><span class="s">,
+                        </span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">0</span><span class="sh">"</span><span class="s">,
+                        </span><span class="sh">"</span><span class="s">snmp_type</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">COUNTER</span><span class="sh">"</span><span class="s">
+                    }
+                ]
+            }
+        }
+        :param task_content:
+        :return:
+        </span><span class="sh">"""</span>
+
+        <span class="n">task_value_rule</span> <span class="o">=</span> <span class="n">task_content</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">value_rule</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">task_tag_rule</span> <span class="o">=</span> <span class="n">task_content</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">tag_rule</span><span class="sh">"</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">raw_data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="nc">Exception</span><span class="p">(</span><span class="sh">"</span><span class="s">upload data format error</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">oid_dic</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">raw_data</span><span class="p">.</span><span class="nf">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">oid_content_list</span> <span class="o">=</span> <span class="n">oid_dic</span><span class="p">.</span><span class="nf">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="n">ret_res</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">oid_content_dic</span> <span class="ow">in</span> <span class="n">oid_content_list</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">oid_content_dic</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="n">oid_content_dic</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="sh">"</span><span class="s">2147483647</span><span class="sh">"</span><span class="p">:</span>
+                            <span class="n">value</span> <span class="o">=</span> <span class="sh">"</span><span class="s">0</span><span class="sh">"</span>
+                        <span class="n">tags</span> <span class="o">=</span> <span class="sh">"</span><span class="s">index={}</span><span class="sh">"</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">oid_content_dic</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">oid_index</span><span class="sh">"</span><span class="p">))</span>
+                        <span class="k">if</span> <span class="n">value</span> <span class="ow">and</span> <span class="n">self</span><span class="p">.</span><span class="nf">_is_value_valid</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+                            <span class="c1"># process rules
+</span>                            <span class="c1"># 1. value rule
+</span>                            <span class="k">if</span> <span class="n">task_value_rule</span><span class="p">:</span>
+                                <span class="n">value</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_process_value_rule</span><span class="p">(</span><span class="n">task_value_rule</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="n">sysname</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">sysname</span><span class="p">)</span>
+                            <span class="c1"># 2. tag rule
+</span>                            <span class="k">if</span> <span class="n">task_tag_rule</span><span class="p">:</span>
+                                <span class="n">tags</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_process_tag_rule</span><span class="p">(</span><span class="n">task_tag_rule</span><span class="p">,</span> <span class="n">oid_content</span><span class="o">=</span><span class="n">oid_content_dic</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="ow">not</span> <span class="n">tags</span><span class="p">:</span>
+                                <span class="k">continue</span>
+                            <span class="n">res</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">metrics_sender</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
+                            <span class="n">ret_res</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+                  
+                <span class="k">if</span> <span class="bp">False</span> <span class="ow">in</span> <span class="n">ret_res</span> <span class="ow">or</span> <span class="nf">len</span><span class="p">(</span><span class="n">ret_res</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">False</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">LOG</span><span class="p">.</span><span class="nf">exception</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">_error_handler</span><span class="p">(</span><span class="n">err_des</span><span class="o">=</span><span class="sh">"</span><span class="s">batch value process failed</span><span class="sh">"</span><span class="p">,</span> <span class="n">exp</span><span class="o">=</span><span class="n">e</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">snmp_multi_monitor_item_handler</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">task_content</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+
+        :param metric_raw:
+        @example
+        @metric_raw[</span><span class="sh">"</span><span class="s">response</span><span class="sh">"</span><span class="s">]
+        </span><span class="sh">"</span><span class="s">response</span><span class="sh">"</span><span class="s">: {
+            </span><span class="sh">"</span><span class="s">walk</span><span class="sh">"</span><span class="s">: {
+                </span><span class="sh">"</span><span class="s">1.3.6.1.2.1.2.2.1.14</span><span class="sh">"</span><span class="s">: [
+                    {
+                        </span><span class="sh">"</span><span class="s">oid_index</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">1</span><span class="sh">"</span><span class="s">,
+                        </span><span class="sh">"</span><span class="s">oid</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">ifInErrors</span><span class="sh">"</span><span class="s">,
+                        </span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">0</span><span class="sh">"</span><span class="s">,
+                        </span><span class="sh">"</span><span class="s">snmp_type</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">COUNTER</span><span class="sh">"</span><span class="s">
+                    }...
+                ],
+                </span><span class="sh">""</span><span class="s">1.3.6.1.2.1.2.2.1.15</span><span class="sh">"</span><span class="s">: [
+                    {
+                        </span><span class="sh">"</span><span class="s">oid_index</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">1</span><span class="sh">"</span><span class="s">,
+                        </span><span class="sh">"</span><span class="s">oid</span><span class="sh">"</span><span class="s">: </span><span class="sh">""</span><span class="s">,
+                        </span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">0</span><span class="sh">"</span><span class="s">,
+                        </span><span class="sh">"</span><span class="s">snmp_type</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">COUNTER</span><span class="sh">"</span><span class="s">
+                    }...
+                ], ...
+            }
+        }
+        :param task_content:
+        :return:
+            [{</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="s">: </span><span class="sh">""</span><span class="s">, </span><span class="sh">"</span><span class="s">tags</span><span class="sh">"</span><span class="s">: </span><span class="sh">""</span><span class="s">}, {</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="s">: </span><span class="sh">""</span><span class="s">, </span><span class="sh">"</span><span class="s">tags</span><span class="sh">"</span><span class="s">: </span><span class="sh">""</span><span class="s">}, ...]
+        </span><span class="sh">"""</span>
+
+        <span class="n">task_opera_rule</span> <span class="o">=</span> <span class="n">task_content</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">opera_rule</span><span class="sh">"</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">task_opera_rule</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_process_opera_rule</span><span class="p">(</span><span class="n">task_opera_rule</span><span class="p">,</span> <span class="n">raw_data</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">raw_data</span><span class="p">.</span><span class="nf">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="c1">#LOG.debug("multi task name=" + task_opera_rule + ",result metric length=" + str(len(result)))
+</span>                <span class="n">did_send</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+                    <span class="n">did_send</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">metrics_sender</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="sh">"</span><span class="s">tags</span><span class="sh">"</span><span class="p">])</span>
+                <span class="k">return</span> <span class="n">did_send</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">LOG</span><span class="p">.</span><span class="nf">exception</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">_error_handler</span><span class="p">(</span><span class="n">err_des</span><span class="o">=</span><span class="sh">"</span><span class="s">get multi value process failed</span><span class="sh">"</span><span class="p">,</span> <span class="n">exp</span><span class="o">=</span><span class="n">e</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">metrics_sender</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">tags</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+
+        @@Tags
+            1. 检查tag字段，如果有值则调用 _match_tags_handler
+            2. 如果为空，侧检查index_tag是否有值
+            3. 如果有值，侧使用tags=</span><span class="sh">"</span><span class="s">%s/%s</span><span class="sh">"</span><span class="s"> %(index_tag, index)
+            4. 如果为空，侧无tags
+
+        :param metric:
+        :param title:
+        :return:
+        </span><span class="sh">"""</span>
+        <span class="n">__OpenFalcon_metric_type</span> <span class="o">=</span> <span class="n">Metric_Type</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">_metric_type</span><span class="p">]</span>
+        <span class="n">__v_type</span> <span class="o">=</span> <span class="n">Metric_Value_Type</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">_metric_type</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">__v_type</span> <span class="o">==</span> <span class="sh">"</span><span class="s">float</span><span class="sh">"</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="sh">"</span><span class="s">endpoint</span><span class="sh">"</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">sysname</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">metric</span><span class="sh">"</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">_metric</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">timestamp</span><span class="sh">"</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">timestamp</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">step</span><span class="sh">"</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">step</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">:</span> <span class="n">value</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">counterType</span><span class="sh">"</span><span class="p">:</span> <span class="n">__OpenFalcon_metric_type</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">tags</span><span class="sh">"</span><span class="p">:</span> <span class="n">tags</span>
+            <span class="p">}</span>
+            <span class="c1"># LOG.info("[DEBUG Send] %s" % m)
+</span>            <span class="n">Falcon</span><span class="p">.</span><span class="nf">send</span><span class="p">([</span><span class="n">m</span><span class="p">])</span>
+        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">LOG</span><span class="p">.</span><span class="nf">exception</span><span class="p">(</span><span class="sh">"</span><span class="s">parser OpenFalcon metric failed, e=%s</span><span class="sh">"</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">common_data_handler</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+
+        :param func:
+        :return:
+        </span><span class="sh">"""</span>
+
+        <span class="k">def</span> <span class="nf">monitor_wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="sh">"""</span><span class="s">
+
+            :param args:
+            :param kwargs:
+            :return:
+            </span><span class="sh">"""</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nf">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">data_dic</span> <span class="o">=</span> <span class="nf">dict</span><span class="p">()</span>
+                <span class="n">data_dic</span><span class="p">[</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">value</span> <span class="k">if</span> <span class="n">value</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+                <span class="n">data_dic</span><span class="p">[</span><span class="sh">"</span><span class="s">val</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span> <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span> <span class="k">else</span> <span class="nf">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">data_dic</span>
+            <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">LOG</span><span class="p">.</span><span class="nf">exception</span><span class="p">(</span><span class="sh">'</span><span class="s">get error, e=%s</span><span class="sh">'</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">e</span>
+
+        <span class="k">return</span> <span class="n">monitor_wrapper</span>
+
+</code></pre></div></div><h2 id="3-执行任务和处理规则"> <a href="#3-执行任务和处理规则" class="anchor-heading" aria-labelledby="3-执行任务和处理规则"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> 3. 执行任务和处理规则</h2><ul><li>agent所要执行的任务定义和处理规则定义</ul><div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">MonitorTaskJsonDic</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">snmp_task</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>              <span class="c1">#@SNMP采集任务
+</span>            <span class="sh">"</span><span class="s">oid</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>                <span class="c1">#@采集OID和执行方式-同步到job.content中并关联设备
+</span>                <span class="sh">'</span><span class="s">get</span><span class="sh">'</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="sh">'</span><span class="s">bulk</span><span class="sh">'</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="sh">'</span><span class="s">walk</span><span class="sh">'</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="sh">'</span><span class="s">getnext</span><span class="sh">'</span><span class="p">:</span> <span class="p">[]</span>
+            <span class="p">},</span>
+            <span class="sh">"</span><span class="s">tag_rule</span><span class="sh">"</span><span class="p">:</span> <span class="sh">""</span><span class="p">,</span>        <span class="c1">#@数标签处理规则
+</span>            <span class="sh">"</span><span class="s">opera_rule</span><span class="sh">"</span><span class="p">:</span> <span class="sh">""</span><span class="p">,</span>       <span class="c1">#@多数据处理规则
+</span>            <span class="sh">"</span><span class="s">value_rule</span><span class="sh">"</span><span class="p">:</span> <span class="sh">""</span>        <span class="c1">#@采集值处理规则-如：从字符串中匹配整形并转为百分比
+</span>        <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre></div></div><ul><li>此处定义一个snmp_task，agent根据此task来执行采集和上报数据<li>规则处理函数会接收 agent采集返回报文的json对象的 response 部分<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"walk"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"1.3.6.1.2.1.2.2.1.14"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                  </span><span class="p">{</span><span class="w">
+                      </span><span class="nl">"oid_index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                      </span><span class="nl">"oid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ifInErrors"</span><span class="p">,</span><span class="w">
+                      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                      </span><span class="nl">"snmp_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COUNTER"</span><span class="w">
+                  </span><span class="p">},</span><span class="w">
+                  </span><span class="p">{</span><span class="w">
+                      </span><span class="nl">"oid_index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="p">,</span><span class="w">
+                      </span><span class="nl">"oid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ifInErrors"</span><span class="p">,</span><span class="w">
+                      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                      </span><span class="nl">"snmp_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COUNTER"</span><span class="w">
+                  </span><span class="p">},</span><span class="w">
+                  </span><span class="p">{</span><span class="w">
+                      </span><span class="nl">"oid_index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+                      </span><span class="nl">"oid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ifInErrors"</span><span class="p">,</span><span class="w">
+                      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                      </span><span class="nl">"snmp_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COUNTER"</span><span class="w">
+                  </span><span class="p">}</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+</span></code></pre></div></div><li>规则定义<ol><li>在task中定义tag_rule, value_rule, opera_rule，处理函数会自动将数据和处理规则进行动态匹配，当有新报文段交付后，会触发对应的规则函数；<li>规则匹配顺序为：ValueRules， TagRules， OperationRules<li>规则选用建议</ol><ol><li>如果采集结果为单一结果，例如”value”: “35”，使用ValueRules，将该字符串进行处理，比如”35%”,或0.35；<li>如果采集结果携带索引，对其值的处理结果可以参考1，对索引值可以使用TagRules，将索引处理为特定的标签，标识一条唯一的数据，并且该标签还可以携带其他和数据相关的属性；<li>对于多种采集OID对象和多种结果的类型，只使用自定义的OperationRules<blockquote><p>部分ValueRules，TagRules可以对数据做通用处理</p><div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ValueRules</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">TagRules</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">OperationRules</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</code></pre></div></div></blockquote></ol></ul><h2 id="4-新监控项开发"> <a href="#4-新监控项开发" class="anchor-heading" aria-labelledby="4-新监控项开发"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> 4. 新监控项开发</h2><ul><li>如何添加一个新的监控项 （测试环境）<ol><li>添加数据记录到动态监控表，根据每个字段名称定义相应的字段；</ol><ul><li>vendor，type，model，series 设备相关，用来定义那些厂商哪些类型哪些型号的设备要”被agent执行新增的监控项任务“<li>id，metric，metric_type，upload_api，用来定义一个唯一的监控项，和监控项在dashboard和rrd数据库中的名称，且包含唯一一个为此监控项创建的上传RESTful接口<li>task 定义采集任务，agent执行什么样的任务；定义处理规则，采集回来的数据要被映射到哪些自定义的规则函数上<li>interval agent对设备多久进行一次采集，”UDP“报文段交互</ul></ul><ol><li>数据都定义完成后，编写你的规则函数<ul><li>函数名称要和task中定义的函数名称一致<li>函数所属要的类，要和task中给定的一致<li>函数入参固定<ul><li>ValueRules manage_ip=None, value=None, sysname=None<li>TagRules manage_ip=None, oid_content=None<li>OperationRules manage_ip=None, raw_data=None</ul><li>处理逻辑，manage_ip为设备在各自AS的子网中的管理IP地址，采集回来的数据为其他参数<ul><li>value 采集唯一值<li>sysname 设备名称<li>oidcontent python列表类型，列表中包含多个采集结果字典，例如<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="p">[</span>
+          <span class="p">{</span>
+              <span class="sh">"</span><span class="s">oid_index</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">1</span><span class="sh">"</span><span class="p">,</span>
+              <span class="sh">"</span><span class="s">oid</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">ifInErrors</span><span class="sh">"</span><span class="p">,</span>
+              <span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">0</span><span class="sh">"</span><span class="p">,</span>
+              <span class="sh">"</span><span class="s">snmp_type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">COUNTER</span><span class="sh">"</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+              <span class="sh">"</span><span class="s">oid_index</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">4</span><span class="sh">"</span><span class="p">,</span>
+              <span class="sh">"</span><span class="s">oid</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">ifInErrors</span><span class="sh">"</span><span class="p">,</span>
+              <span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">0</span><span class="sh">"</span><span class="p">,</span>
+              <span class="sh">"</span><span class="s">snmp_type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">COUNTER</span><span class="sh">"</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+              <span class="sh">"</span><span class="s">oid_index</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">5</span><span class="sh">"</span><span class="p">,</span>
+              <span class="sh">"</span><span class="s">oid</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">ifInErrors</span><span class="sh">"</span><span class="p">,</span>
+              <span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">0</span><span class="sh">"</span><span class="p">,</span>
+              <span class="sh">"</span><span class="s">snmp_type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">COUNTER</span><span class="sh">"</span>
+          <span class="p">}</span>
+      <span class="p">]</span>
+</code></pre></div></div><li>raw_data 报文中json对象的response部分的全部数据</ul><li>处理规则的返回值<ul><li>ValueRules 返回处理后的value<li>TagsRules 返回固定格式的Tags字符串，字符串中的标签字符用”=”和”,”分隔<li>OperationRules 返回处理完成后的所有数据的列表，列表中为相同结构的字典 包含”value”和”tags”，例如<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="p">[{</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">:</span> <span class="p">,</span> <span class="sh">"</span><span class="s">tags</span><span class="sh">"</span><span class="p">},{</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">:</span> <span class="p">,</span> <span class="sh">"</span><span class="s">tags</span><span class="sh">"</span><span class="p">},{</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">:</span> <span class="p">,</span> <span class="sh">"</span><span class="s">tags</span><span class="sh">"</span><span class="p">}]</span>
+</code></pre></div></div><blockquote><p>其中tags格式依然固定，value可以是整型或者浮点类型</p></blockquote></ul></ul><li>完成规则函数编写后，数据上报部分有独立线程来自动完成，无需关注；</ol><h2 id="5-调试"> <a href="#5-调试" class="anchor-heading" aria-labelledby="5-调试"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> 5. 调试</h2><ul><li>agent和server的调试，请移步单元测试文档</ul></main><hr><footer><p><a href="#top" id="back-to-top">Back to top</a></p><p class="text-small text-grey-dk-100 mb-0">Engineering & Philosophy & Life Experience - A Motorcycle rider and loving husband.</p><div class="d-flex mt-2"></div></footer></div></div><div class="search-overlay"></div></div><script src="https://cdn.jsdelivr.net/npm/mermaid@9.1.6/dist/mermaid.min.js"></script> <script> var config = {} ; mermaid.initialize(config); window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid')); </script>
