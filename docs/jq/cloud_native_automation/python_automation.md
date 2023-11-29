@@ -15,7 +15,7 @@ grand_parent: Jq
 * multiple platforms support
 * also support use as procedural
 
-> 面相对象 & 解释器无需编译 & 实时运行结果 & 可以当作过程语言使用，例如非过程脚本
+> 面相对象 & 解释器无需编译 & 实时运行结果 & 可以当作过程语言使用 (例如过程脚本, 不考虑类和对象，只需要实现简单的函数调用)
 
 * Deep Dive: [Understand the CPython interpreter implementation](https://adamyanna.github.io/docs/archives/2020/2020-04-13-cpython-implementation/#%E8%BF%9B%E5%85%A5%E6%BA%90%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E4%B9%8B%E5%89%8D)
 
@@ -36,7 +36,7 @@ object.var
 object.this_is_a_method()
 ```
 
-#### Python Indentation `Python uses indentation to indicate a block of code.`
+#### 2. Python Indentation `Python uses indentation to indicate a block of code.`
 > Tabs or Spaces? Spaces are the preferred indentation method. Tabs should be used solely to remain consistent with code that is already indented with tabs. Python disallows mixing tabs and spaces for indentation.
 
 > 冒号 + tab / 四个空行，来标识代码区块，如果使用 tab 需要全部项目内保持一直，一般建议使用 tab 输出四个空格的编辑器
@@ -45,7 +45,7 @@ if 10 > 1:
     print("Hello")
 ```
 
-#### Object-oriented
+#### 3. Object-oriented
 
 > Class: A Class is like an object constructor or template, or a "blueprint" for creating objects.
 > 
@@ -97,27 +97,162 @@ print("=> %d" % result)
 
 * Deep Dive: [Python Classes and Objects](https://www.w3schools.com/python/python_classes.asp)
 
+---
+
 ## The Python Standard Library
 https://docs.python.org/3/library/index.html
-* os - Miscellaneous operating system interfaces
-  * Often use:
-    * os.name
-    * os.getcwd()
-    * 
+### os - Miscellaneous operating system interfaces
+* Often use
+> just import `library` no need handle path with `from` state
+
+```python
+import os
+# get separator from OS, windows return \ linux & unix return / 
+os.sep
+
+# get os kernel name, windows return nt, linux & unix return posix
+os.name
+
+# get current work directory or current work path (initial directory is current py file's path)
+os.getcwd()
+
+# get current environment variable, for EXAMPLE: os.getenv('path')
+os.getenv()
+os.getenv('path')
+
+# get & alter current environment variable
+os.environ
+print(os.environ['PATH'])
+os.environ += '/usr/bin/zsh'
+print(os.environ['PATH'])
+
+os.environ # is type of python dict
+
+# list for directory and file names for current work directory or input path
+os.listdir()
+os.listdir('/root')
+
+# remove files
+os.remove()
+os.remove('/root/test.txt')
+
+# run cmd or command line for system
+os.system('ip addr')
+
+# get current platform end with line, windows is \r \n, linux is \n, mac is \r
+os.linesep
+
+# split a path for file name and directory
+path = '/root/test/test.txt'
+print(os.path.split(path)[0])
+print(os.path.split(path)[1])
+
+# check is a string is file, return type of bool (boolean True or False)
+os.path.isfile('root/test/test.txt')
+
+# check if a string is path, return type of bool
+os.path.isdir('/root')
+
+# check if path exists, return type of bool
+os.path.exists('/root')
+
+# equivalent to: cd, change current working directory
+os.chdir()
+
+# get file size with byte, return float
+os.path.getsize('/root/test.txt')
+
+# get absolute path of a file
+os.path.abspath()
+os.path.abspath('test.txt')
+
+# normalize file path, convert sep & etc
+# get a clean string of path 
+os.path.normpath()
+print(os.path.normpath("/users/test//"))
+
+# get a tuple of file and file extension, (go to #extra info 1)
+print(os.path.splitext('/user/test/test.txt'))
+# result >>>
+('/user/test/test', '.txt')
+
+# 
+```
+
+---
+
+> *extra info 1*
+
+|list| tuple |
+|:---|:------|
+|List are mutable| Tuples are immutable |
+|Iterations are time-consuming| Iterations are comparatively Faster |
+|Inserting and deleting items is easier with a list.| Accessing the elements is best accomplished with a tuple data type. |
+
+---
+
+### open - open file convert to python object to write and read
+> open() function takes up to 3 parameters – the filename, the mode, and the encoding.
+
+* `with`
+> This is because the with statement calls 2 built-in methods behind the scene – __enter()__ and __exit()__.
+
+> The __exit()__ method closes the file when the operation you specify is done.
+
+```python
+# open a file
+this_file = open('text.txt')
+print(this_file.read())
+this_file.close()
+
+with open('test.txt') as this_file:
+    pass
+    # do any reading or writing for the file
+
+####################################################################
+# with statement closes the file for you without you telling it to #
+####################################################################
+
+with open("hello.txt", "w") as my_file:
+    my_file.write("Hello world \n")
+    my_file.write("I hope you're doing well today \n")
+    my_file.write("This is a text file \n")
+    my_file.write("Have a nice time \n")
+
+with open("hello.txt") as my_file:
+    print(my_file.read())
+
+# Output: 
+# Hello world 
+# I hope you're doing well today
+# This is a text file
+# Have a nice time
+```
+
+
 
 
 
 ## Automation 3rd part Library
-* requests - API test
-* flash - lightweight API server 
-* json - json serializer (convert byte flow to json object)
-* pymongo - mongoDB (ORM)
+### Web Server & Restful API
+#### requests - API request
+
+#### flask - lightweight API server
 
 
-## Used For
-* Web Server & Restful API
-* RPC
-* DataBase Access
-  * ORM: Object–relational mapping, convert database relational data to objects of python
-* Linux Command Access
-* Cacheing System Access
+#### json - json serializer (convert byte flow to json object)
+
+### DataBase Access - ORM
+> ORM: Object–relational mapping, convert database relational data to objects of python
+#### pymongo - mongoDB (ORM)
+
+#### 
+
+
+### RPC
+
+
+### Cacheing System Access
+
+
+### Linux Command Access
