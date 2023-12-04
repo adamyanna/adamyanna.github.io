@@ -229,30 +229,23 @@ with open("hello.txt") as my_file:
 # Have a nice time
 ```
 
-
-
-
-
 ## Automation 3rd part Library
-### Web Server & Restful API
-#### requests - API request
+### 1. Web Server & Restful API
+* requests
+  - API request
+* flask
+  - lightweight API server
+* json
+  - json serializer (convert byte flow to json object)
 
-#### flask - lightweight API server
-
-
-#### json - json serializer (convert byte flow to json object)
-
-### DataBase Access - ORM
+### 2. DataBase Access - ORM
 > ORM: Object–relational mapping, convert database relational data to objects of python
-#### pymongo - mongoDB (ORM)
+* pymongo
+  - mongoDB (ORM) 
 
-#### 
+### 3. Cacheing System Access
+* memcache
+* redis
 
-
-### RPC
-
-
-### Cacheing System Access
-
-
-### Linux Command Access
+### 4. Linux Command Access
+* ansible
