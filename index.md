@@ -6,13 +6,9 @@ description: "Engineering & Philosophy & Life Experience - A Motorcycle rider an
 permalink: /
 ---
 
-**露と落ち露と消えにし我が身かな浪速のことも夢のまた夢**
+**未经审视的人生是不值得过的**
 {: .label .label-green }
 
-*As dew appears,*<br />
-*As dew vanishes,*<br />
-*Such is my life,*<br />
-*Everything in this world,*<br />
-*Is but a dream within a dream.*<br />
+*"The unexamined life is not worth living" by Socrates*<br />
 
 *- A motorcycle rider and loving husband.*<br />
