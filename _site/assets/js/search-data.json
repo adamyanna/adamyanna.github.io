@@ -2736,18 +2736,186 @@
     
     "relUrl": "/docs/archives/2023/2023/"
   },"391": {
+    "doc": "1.1 Algorithm",
+    "title": "1.1 Algorithm",
+    "content": " ",
+    "url": "/docs/engineering/foundament/algorithm/algorithm/",
+    
+    "relUrl": "/docs/engineering/foundament/algorithm/algorithm/"
+  },"392": {
     "doc": "Archives",
     "title": "Archives",
     "content": " ",
     "url": "/docs/archives/archives/",
     
     "relUrl": "/docs/archives/archives/"
-  },"392": {
+  },"393": {
+    "doc": "Arrays & Hashing",
+    "title": "Arrays &amp; Hashing",
+    "content": "Übung macht den Meister . Roadmap . ",
+    "url": "/docs/engineering/foundament/algorithm/arrays_and_hashing_231115151706/#arrays--hashing",
+    
+    "relUrl": "/docs/engineering/foundament/algorithm/arrays_and_hashing_231115151706/#arrays--hashing"
+  },"394": {
+    "doc": "Arrays & Hashing",
+    "title": "1. Contains Duplicate",
+    "content": "Given an integer array nums, return true if any value appears at least twice in the array . using hash . Python . class Solution: def containsDuplicate(self, nums: list[int]) -&gt; bool: hashset = set() for n in nums: if n in hashset: return True hashset.add(n) return False if __name__ == '__main__': result = Solution().containsDuplicate([1,2,3,4,555,6,222,89,689435,12498,96783,123488,9098,6]) print(\"=&gt; %s\" % result) . Golang . without using hash . Python . # 1. loop initial nums and save value to another list # 2. use binary search to find the same value # 3. if has same value return true # 4. if not just insert to binary search result index, between i &amp; j # 5. looping until last value, return False when finish all # this is sorting problem, time =&gt; Nlogn . Golang . ",
+    "url": "/docs/engineering/foundament/algorithm/arrays_and_hashing_231115151706/#1-contains-duplicate",
+    
+    "relUrl": "/docs/engineering/foundament/algorithm/arrays_and_hashing_231115151706/#1-contains-duplicate"
+  },"395": {
+    "doc": "Arrays & Hashing",
+    "title": "2. Two Sum",
+    "content": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. Python . Golang . ",
+    "url": "/docs/engineering/foundament/algorithm/arrays_and_hashing_231115151706/#2-two-sum",
+    
+    "relUrl": "/docs/engineering/foundament/algorithm/arrays_and_hashing_231115151706/#2-two-sum"
+  },"396": {
+    "doc": "Arrays & Hashing",
+    "title": "3.",
+    "content": "{desc} . Python . Golang . ",
+    "url": "/docs/engineering/foundament/algorithm/arrays_and_hashing_231115151706/#3",
+    
+    "relUrl": "/docs/engineering/foundament/algorithm/arrays_and_hashing_231115151706/#3"
+  },"397": {
+    "doc": "Arrays & Hashing",
+    "title": "Arrays & Hashing",
+    "content": " ",
+    "url": "/docs/engineering/foundament/algorithm/arrays_and_hashing_231115151706/",
+    
+    "relUrl": "/docs/engineering/foundament/algorithm/arrays_and_hashing_231115151706/"
+  },"398": {
+    "doc": "Cloud Native Automation",
+    "title": "Cloud Native Automation",
+    "content": " ",
+    "url": "/docs/jq/cloud_native_automation/cloud_native_automation/",
+    
+    "relUrl": "/docs/jq/cloud_native_automation/cloud_native_automation/"
+  },"399": {
+    "doc": "Engineering",
+    "title": "Engineering",
+    "content": " ",
+    "url": "/docs/engineering/engineering/",
+    
+    "relUrl": "/docs/engineering/engineering/"
+  },"400": {
+    "doc": "III. Experience",
+    "title": "III. Experience",
+    "content": " ",
+    "url": "/docs/engineering/experience/experience/",
+    
+    "relUrl": "/docs/engineering/experience/experience/"
+  },"401": {
+    "doc": "I. Foundament",
+    "title": "I. Foundament",
+    "content": " ",
+    "url": "/docs/engineering/foundament/foundament/",
+    
+    "relUrl": "/docs/engineering/foundament/foundament/"
+  },"402": {
     "doc": "Home",
     "title": "Home",
     "content": "露と落ち露と消えにし我が身かな浪速のことも夢のまた夢 . As dew appears, As dew vanishes, Such is my life, Everything in this world, Is but a dream within a dream. - A motorcycle rider and loving husband. ",
     "url": "/",
     
     "relUrl": "/"
+  },"403": {
+    "doc": "Jq",
+    "title": "Jq",
+    "content": " ",
+    "url": "/docs/jq/jq/",
+    
+    "relUrl": "/docs/jq/jq/"
+  },"404": {
+    "doc": "Kickstart & Recap",
+    "title": "Kickstart &amp; Recap",
+    "content": "Kickstart next phase of Engineering life &amp; Recap past 7 years experience . The key is connecting the dots! . ",
+    "url": "/docs/engineering/kickstart_and_recap_231112205754/#kickstart--recap",
+    
+    "relUrl": "/docs/engineering/kickstart_and_recap_231112205754/#kickstart--recap"
+  },"405": {
+    "doc": "Kickstart & Recap",
+    "title": "Section 1: Three foundamental aspect",
+    "content": "1. Foundament &amp; Basics . | Linux | Programming language | Algorithm . | 75 leetcode questions | Learning roadmap | My algorithm training | . | Networking | . 2. System Design . Transfer a complicated problem into technical requirement . | Design pattern | Design detail | Solution Selection | System elements | Problem Solving | . 3. Experience . Recap &amp; Reexplore all technical solution and architecture . | Projects | . ",
+    "url": "/docs/engineering/kickstart_and_recap_231112205754/#section-1-three-foundamental-aspect",
+    
+    "relUrl": "/docs/engineering/kickstart_and_recap_231112205754/#section-1-three-foundamental-aspect"
+  },"406": {
+    "doc": "Kickstart & Recap",
+    "title": "Section2: Be a PRO",
+    "content": " ",
+    "url": "/docs/engineering/kickstart_and_recap_231112205754/#section2-be-a-pro",
+    
+    "relUrl": "/docs/engineering/kickstart_and_recap_231112205754/#section2-be-a-pro"
+  },"407": {
+    "doc": "Kickstart & Recap",
+    "title": "Section3: Explore cognitive boundaries",
+    "content": " ",
+    "url": "/docs/engineering/kickstart_and_recap_231112205754/#section3-explore-cognitive-boundaries",
+    
+    "relUrl": "/docs/engineering/kickstart_and_recap_231112205754/#section3-explore-cognitive-boundaries"
+  },"408": {
+    "doc": "Kickstart & Recap",
+    "title": "Kickstart & Recap",
+    "content": "Engineering . SystemDesign . Foundament . Experience . ConnectTheDots . ",
+    "url": "/docs/engineering/kickstart_and_recap_231112205754/",
+    
+    "relUrl": "/docs/engineering/kickstart_and_recap_231112205754/"
+  },"409": {
+    "doc": "Python automation",
+    "title": "Python automation",
+    "content": " ",
+    "url": "/docs/jq/cloud_native_automation/python_automation/",
+    
+    "relUrl": "/docs/jq/cloud_native_automation/python_automation/"
+  },"410": {
+    "doc": "Python automation",
+    "title": "Basic",
+    "content": "What is Python . | object-oriented | interpreter code at run time, no compile | multiple platforms support | also support use as procedural | . 面相对象 &amp; 解释器无需编译 &amp; 实时运行结果 &amp; 可以当作过程语言使用，例如非过程脚本 . | Deep Dive: Understand the CPython interpreter implementation | . Syntax . 1. Dot notation [object we want to access][dot][attribute or method] . Dot notation is a feature in object-oriented programming languages like Python that allows you to search an extensive database for an object’s attributes and methods. In Python, dot notation is written as: [object we want to access][dot][attribute or method] . 点计法语法 . 每一个模块，通过点后加变量名来获取变量值，例如 os.name . 每一个模块，通过点后加函数名称（必须加括号，无入参的情况下括号内为空）来获取函数结果，例如：os.getcwd() . # get value from variable object.var # call method object.this_is_a_method() . Python Indentation Python uses indentation to indicate a block of code. Tabs or Spaces? Spaces are the preferred indentation method. Tabs should be used solely to remain consistent with code that is already indented with tabs. Python disallows mixing tabs and spaces for indentation. 冒号 + tab / 四个空行，来标识代码区块，如果使用 tab 需要全部项目内保持一直，一般建议使用 tab 输出四个空格的编辑器 . if 10 &gt; 1: print(\"Hello\") . Object-oriented . Class: A Class is like an object constructor or template, or a “blueprint” for creating objects. Object: Almost everything in Python is an object, with its properties and methods. (including Class) . Instance: A implementation of Class, with all class properties but has specific values. Self: The self parameter is a reference to the current instance of the class, and is used to access variables that belongs to the class. Method: Give input values to output result, with a Class, used by all instances. Variable: Hold a specific type of value; . 类：class HelloWorld . 实例（类的实例）：定义一个类型表示定义了一种抽象，将这种抽象具体成一个可访问的内存对象的过程就是类的实例化：ob = HelloWorld() . 对象：object 任何类的实例，以及实例的方法、变量都可以被称作对象，python 根类就是 object，通常无需继承 . 方法 method：在类中 def 的一种接收入参和输出参数的函数，将其称为方法：method . 函数 function：直接在 py 文件中定义的 def 函数，不属于任何类型和对象，直接就叫做 function . # This is a Class definition class ThisIsMyClass(): def __init__(self, first_input_var): \"\"\" three quota is Doc string for document purpose init: default method for Class to init a specific instance self: current instance itself first_var: initial variable from instance init self.first_var: class property \"\"\" self.first_var = first_input_var def get_sum(self, second_var): \"\"\" This is a method, with an input return: sum of current instance property first_var and new input \"\"\" return self.first_var + second_var ins = ThisIsMyClass(10) result = ins.get_sum(100) print(\"=&gt; %d\" % result) . | Deep Dive: Python Classes and Objects | . ",
+    "url": "/docs/jq/cloud_native_automation/python_automation/#basic",
+    
+    "relUrl": "/docs/jq/cloud_native_automation/python_automation/#basic"
+  },"411": {
+    "doc": "Python automation",
+    "title": "The Python Standard Library",
+    "content": "https://docs.python.org/3/library/index.html . | os - Miscellaneous operating system interfaces . | Often use: . | os.name | os.getcwd() | | . | . | . ",
+    "url": "/docs/jq/cloud_native_automation/python_automation/#the-python-standard-library",
+    
+    "relUrl": "/docs/jq/cloud_native_automation/python_automation/#the-python-standard-library"
+  },"412": {
+    "doc": "Python automation",
+    "title": "Automation 3rd part Library",
+    "content": ". | requests - API test | flash - lightweight API server | json - json serializer (convert byte flow to json object) | pymongo - mongoDB (ORM) | . ",
+    "url": "/docs/jq/cloud_native_automation/python_automation/#automation-3rd-part-library",
+    
+    "relUrl": "/docs/jq/cloud_native_automation/python_automation/#automation-3rd-part-library"
+  },"413": {
+    "doc": "Python automation",
+    "title": "Used For",
+    "content": ". | Web Server &amp; Restful API | RPC | DataBase Access . | ORM: Object–relational mapping, convert database relational data to objects of python | . | Linux Command Access | Cacheing System Access | . ",
+    "url": "/docs/jq/cloud_native_automation/python_automation/#used-for",
+    
+    "relUrl": "/docs/jq/cloud_native_automation/python_automation/#used-for"
+  },"414": {
+    "doc": "Roadmap",
+    "title": "Roadmap",
+    "content": "Übung macht den Meister Roadmap . ",
+    "url": "/docs/engineering/foundament/algorithm/roadmap_231115151330/",
+    
+    "relUrl": "/docs/engineering/foundament/algorithm/roadmap_231115151330/"
+  },"415": {
+    "doc": "Roadmap",
+    "title": "Arrays &amp; Hashing",
+    "content": "1. Contains Duplicate . Given an integer array nums, return true if any value appears at least twice in the array . | using hash . | python | golang | . | without using hash . | python | golang | . | . 2. Valid Anagram . | python | golang 3. Two Sum . | python | golang 4. Group Anagrams . | python | golang 5. Top K Frequent Elements . | python | golang 6. Product of Array Except Self . | python | golang 7. Valid Sudoku . | python | golang 8. Encode and Decode Strings . | python | golang 9. Longest Consecutive Sequence . | python | golang | . ",
+    "url": "/docs/engineering/foundament/algorithm/roadmap_231115151330/#arrays--hashing",
+    
+    "relUrl": "/docs/engineering/foundament/algorithm/roadmap_231115151330/#arrays--hashing"
+  },"416": {
+    "doc": "II. System Design",
+    "title": "II. System Design",
+    "content": " ",
+    "url": "/docs/engineering/system_design/system_design/",
+    
+    "relUrl": "/docs/engineering/system_design/system_design/"
   }
 }
