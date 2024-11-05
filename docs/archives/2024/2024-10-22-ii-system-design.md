@@ -14,5 +14,5 @@ grand_parent: Archives
 
 # II - System Design
 
-[**Roadmap**](https://github.com/adamyanna/StayCompetitiveAlgorithm)
+[**Roadmap**](https://github.com/adamyanna/StayCompetitiveSystemDesign)
 
