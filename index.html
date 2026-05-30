@@ -456,7 +456,7 @@ function buildTimeline(raw){
 function fetchAndRenderDoc(doc){
 addMessage('user','Open: <b>'+escHtml(doc.title)+'</b>');
 showTyping();
-fetch('content/'+(doc.path||doc.file||''))
+fetch('content/'+(doc.path||doc.file||'')+'.md')
 .then(function(r){if(!r.ok)throw Error('404');return r.text();})
 .then(function(md){
 hideTyping();
