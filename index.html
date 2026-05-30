@@ -20,6 +20,7 @@
     --input-shadow: 0 2px 20px rgba(0,0,0,0.25);
     --code-block-bg: #0d1117;
     --inline-code-bg: rgba(255,255,255,0.08);
+    --timeline-bg: rgba(255,255,255,0.02);
 }
 [data-theme="light"] {
     --bg: #faf8f5;
@@ -34,6 +35,7 @@
     --input-shadow: 0 2px 20px rgba(0,0,0,0.06);
     --code-block-bg: #f6f8fa;
     --inline-code-bg: rgba(0,0,0,0.05);
+    --timeline-bg: rgba(0,0,0,0.025);
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
@@ -67,7 +69,7 @@ body {
 
 /* timeline */
 .timeline-wrap {
-    border-bottom:1px solid var(--border); background:rgba(128,128,128,0.02);
+    border-bottom:1px solid var(--border); background:var(--timeline-bg);
     padding:0; overflow-x:auto; overflow-y:hidden; flex-shrink:0;
     height:auto; min-height:6rem; scrollbar-width:thin; scrollbar-color:var(--border) transparent;
     display:flex; flex-direction:column;
