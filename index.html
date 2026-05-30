@@ -564,6 +564,7 @@ addMessage('user',escHtml(query.trim()));showTyping();
 setTimeout(function(){
 hideTyping();
 var ql=query.toLowerCase().trim();
+if(ql==='vie'){window.location.href='https://adamyanna.github.io/vie/';return;}
 if(ql==='about'||ql==='resume'||ql==='cv'){
 fetch('content/about.md')
 .then(function(r){if(!r.ok)throw new Error('not found');return r.text();})
