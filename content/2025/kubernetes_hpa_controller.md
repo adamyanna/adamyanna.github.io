@@ -6,6 +6,8 @@ A deep-dive review of the Kubernetes Horizontal Pod Autoscaler (HPA) — its con
 
 ## Architecture Overview
 
+![Kubernetes HPA](../../images/kubernetes_kube_hpa.svg)
+
 The HPA controller runs as a **single-worker goroutine** within the kube-controller-manager. It processes each HPA resource every 15 seconds by default, configurable via `--horizontal-pod-autoscaler-sync-period`.
 
 ```

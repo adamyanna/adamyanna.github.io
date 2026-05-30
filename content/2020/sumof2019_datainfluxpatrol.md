@@ -14,4 +14,6 @@ Q: What is the method of analyzing high influx data coverage ?
 
 The implementation of high influx data coverage analyzer
 
+![Deployment Architecture](../../images/DataInfluxPatrol-architecture.png)
+
 1. Foundament of Architecture
