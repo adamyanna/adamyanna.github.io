@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adam Yan Na</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230d1117'/><text dominant-baseline='central' text-anchor='middle' x='50' y='52' font-size='44' font-family='-apple-system,BlinkMacSystemFont,sans-serif' font-weight='700' fill='%2358a6ff'>YN</text></svg>">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css">
+<style>
+:root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: rgba(255,255,255,0.07);
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --user-bubble: #1f6feb;
+    --dropdown-bg: #1c2128;
+    --hover-row: rgba(255,255,255,0.04);
+}
+[data-theme="light"] {
+    --bg: #ffffff;
+    --surface: #f6f8fa;
+    --border: rgba(0,0,0,0.08);
+    --text: #1f2328;
+    --muted: #656d76;
+    --accent: #0969da;
+    --user-bubble: #0969da;
+    --dropdown-bg: #ffffff;
+    --hover-row: rgba(0,0,0,0.04);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+    background: var(--bg); color: var(--text);
+    height: 100dvh; display: flex; flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* header */
+.header {
+    padding: 0.6rem 1.5rem; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--bg); z-index: 20; flex-shrink: 0;
+}
+.header-left { display:flex; align-items:center; gap:0.55rem; }
+.header-dot { width:7px; height:7px; background:#3fb950; border-radius:50%; animation:pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+.header-title { font-weight:600; font-size:0.9rem; letter-spacing:-0.01em; }
+.header-right { display:flex; align-items:center; gap:0.85rem; }
+.header-right a { color:var(--muted); text-decoration:none; font-size:0.8rem; transition:color .15s; }
+.header-right a:hover { color:var(--text); }
+.theme-btn {
+    width:32px; height:32px; border-radius:50%; border:1px solid var(--border);
+    background:var(--surface); cursor:pointer; display:flex; align-items:center; justify-content:center;
+    color:var(--muted); transition:all .15s; font-size:.95rem; line-height:1;
+}
+.theme-btn:hover { border-color:var(--accent); color:var(--accent); }
+
+/* timeline */
+.timeline-wrap {
+    border-bottom:1px solid var(--border); background:rgba(128,128,128,0.02);
+    padding:0; overflow-x:auto; overflow-y:hidden; flex-shrink:0;
+    height:auto; min-height:6rem; scrollbar-width:thin; scrollbar-color:var(--border) transparent;
+    display:flex; flex-direction:column;
+}
+.timeline-wrap::-webkit-scrollbar { height:3px; }
+.timeline-wrap::-webkit-scrollbar-track { background:transparent; }
+.timeline-wrap::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+.timeline-scroll {
+    display:flex; gap:0.5rem; padding:0.6rem 1.5rem 0.4rem; min-width:fit-content; flex:1;
+}
+.timeline-year { display:flex; flex-direction:column; flex-shrink:0; gap:0.15rem; }
+.timeline-year-label {
+    font-size:0.55rem; font-weight:600; color:var(--muted);
+    letter-spacing:0.07em; text-transform:uppercase;
+    padding:0 0.05rem; margin-bottom:0.1rem; opacity:0.5;
+}
+.timeline-months { display:flex; gap:0.15rem; }
+.timeline-cell {
+    width:11px; height:11px; border-radius:2px; cursor:pointer;
+    background:var(--hover-row); border:1px solid transparent;
+    transition:all .15s; position:relative; flex-shrink:0;
+}
+.timeline-cell:hover { transform:scale(1.5); z-index:2; border-color:var(--accent); }
+.timeline-cell[data-level="0"] { background:var(--hover-row); }
+.timeline-cell[data-level="1"] { background:rgba(88,166,255,0.2); }
+.timeline-cell[data-level="2"] { background:rgba(88,166,255,0.4); }
+.timeline-cell[data-level="3"] { background:rgba(88,166,255,0.65); }
+.timeline-cell[data-level="4"] { background:var(--accent); }
+.timeline-info {
+    padding:0.3rem 1.5rem 0.5rem; font-size:0.68rem;
+    color:var(--accent); white-space:nowrap; overflow:hidden;
+    text-overflow:ellipsis; display:flex; align-items:center; gap:0.5rem; flex-shrink:0;
+    min-height:1.4rem;
+}
+.timeline-info .ti-date { color:var(--muted); font-size:0.6rem; opacity:0.7; }
+.timeline-legend {
+    display:flex; align-items:center; gap:0.25rem; margin-left:auto;
+    font-size:0.55rem; color:var(--muted); opacity:0.5;
+}
+.timeline-legend .tl-cell {
+    width:10px; height:10px; border-radius:2px; flex-shrink:0;
+}
+
+
+/* chat */
+.chat {
+    flex:1; overflow-y:auto; padding:1.5rem;
+    display:flex; flex-direction:column; gap:1rem; scroll-behavior:smooth;
+}
+.msg { max-width:78%; animation:fadeIn .3s ease-out; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+.msg.assistant { align-self:flex-start; }
+.msg.user { align-self:flex-end; }
+.msg-content {
+    padding:0.85rem 1.1rem; border-radius:14px; line-height:1.55; font-size:0.9rem;
+}
+.msg.assistant .msg-content { background:var(--surface); border:1px solid var(--border); border-bottom-left-radius:4px; }
+.msg.user .msg-content { background:var(--user-bubble); color:#fff; border-bottom-right-radius:4px; }
+.msg-label { font-size:0.68rem; color:var(--muted); margin-bottom:0.15rem; padding:0 0.3rem; text-transform:uppercase; letter-spacing:0.05em; }
+
+/* Markdown — pro rendering */
+.msg.assistant .msg-content h1 { font-size:1.35rem; font-weight:700; margin:1rem 0 0.5rem; color:var(--text); border-bottom:1px solid var(--border); padding-bottom:0.35rem; }
+.msg.assistant .msg-content h2 { font-size:1.15rem; font-weight:600; margin:0.85rem 0 0.4rem; color:var(--text); border-bottom:1px solid var(--border); padding-bottom:0.25rem; }
+.msg.assistant .msg-content h3 { font-size:1.02rem; font-weight:600; margin:0.7rem 0 0.3rem; color:var(--text); }
+.msg.assistant .msg-content h4 { font-size:0.93rem; font-weight:600; margin:0.5rem 0 0.2rem; color:var(--text); }
+.msg.assistant .msg-content p { margin:0.45rem 0; line-height:1.65; }
+.msg.assistant .msg-content ul, .msg.assistant .msg-content ol { margin:0.4rem 0; padding-left:1.6rem; line-height:1.6; }
+.msg.assistant .msg-content li { margin:0.2rem 0; }
+.msg.assistant .msg-content li::marker { color:var(--muted); }
+.msg.assistant .msg-content strong { color:var(--text); font-weight:600; }
+.msg.assistant .msg-content em { color:var(--text); opacity:0.85; }
+.msg.assistant .msg-content code {
+    background:rgba(128,128,128,0.15); padding:0.18em 0.4em; border-radius:4px;
+    font-size:0.85em; font-family:"SF Mono",ui-monospace,monospace;
+    color:#e6edf3;
+}
+[data-theme="light"] .msg.assistant .msg-content code { color:#1f2328; }
+.msg.assistant .msg-content pre {
+    background:#0d1117; border:1px solid var(--border);
+    border-radius:10px; padding:1rem 1.1rem; overflow-x:auto;
+    font-size:0.8em; margin:0.6rem 0; position:relative;
+}
+.msg.assistant .msg-content pre code { background:none; padding:0; font-size:inherit; }
+.msg.assistant .msg-content pre code.hljs { background:none; padding:0; }
+.msg.assistant .msg-content blockquote {
+    border-left:3px solid var(--accent); padding:0.5rem 1rem; margin:0.6rem 0;
+    color:var(--muted); background:rgba(128,128,128,0.03); border-radius:0 6px 6px 0;
+}
+.msg.assistant .msg-content blockquote p:first-child { margin-top:0; }
+.msg.assistant .msg-content blockquote p:last-child { margin-bottom:0; }
+.msg.assistant .msg-content a { color:var(--accent); text-decoration:none; border-bottom:1px solid transparent; transition:border-color .15s; }
+.msg.assistant .msg-content a:hover { border-bottom-color:var(--accent); }
+.msg.assistant .msg-content table {
+    border-collapse:collapse; width:100%; margin:0.6rem 0; font-size:0.85em;
+    border-radius:8px; overflow:hidden; border:1px solid var(--border);
+}
+.msg.assistant .msg-content thead { border-bottom:2px solid var(--border); }
+.msg.assistant .msg-content th, .msg.assistant .msg-content td {
+    padding:0.5rem 0.75rem; text-align:left;
+}
+.msg.assistant .msg-content th { background:var(--hover-row); font-weight:600; color:var(--text); }
+.msg.assistant .msg-content td { border-top:1px solid var(--border); }
+.msg.assistant .msg-content tr:nth-child(even) td { background:rgba(128,128,128,0.02); }
+.msg.assistant .msg-content hr { border:none; border-top:1px solid var(--border); margin:1rem 0; }
+.msg.assistant .msg-content img { max-width:100%; border-radius:8px; border:1px solid var(--border); }
+.msg.assistant .msg-content input[type="checkbox"] { margin-right:0.4rem; accent-color:var(--accent); }
+
+/* about / resume */
+.about-header { text-align:center; margin-bottom:0.8rem; }
+.about-name { font-size:1.5rem; font-weight:700; letter-spacing:-0.02em; color:var(--text); }
+.about-role { font-size:0.9rem; color:var(--accent); font-weight:500; margin:0.3rem 0 0.6rem; }
+.about-badges { display:flex; justify-content:center; flex-wrap:wrap; gap:0.4rem; }
+.about-badges span {
+    display:inline-block; background:rgba(88,166,255,0.12); color:var(--accent);
+    border:1px solid rgba(88,166,255,0.2); border-radius:20px;
+    padding:0.25rem 0.75rem; font-size:0.78rem; font-weight:500;
+}
+.about-contact {
+    display:flex; flex-wrap:wrap; justify-content:center; gap:0.5rem 1.2rem;
+    font-size:0.82rem; color:var(--muted); margin-bottom:0.4rem;
+}
+.about-contact a { color:var(--accent); border-bottom:none !important; }
+
+.exp-item { margin-bottom:0.8rem; }
+.exp-item .exp-head { display:flex; align-items:baseline; flex-wrap:wrap; gap:0.4rem; }
+.exp-item .exp-head h3 { margin:0; font-size:0.95rem; }
+.exp-item .exp-head h3 + .exp-role, .exp-item .exp-head .exp-role { font-size:0.82rem; color:var(--accent); font-weight:500; }
+.exp-item .exp-head h3 .exp-role { font-size:0.82rem; color:var(--accent); font-weight:500; }
+.exp-meta { font-size:0.75rem; color:var(--muted); margin-bottom:0.35rem; }
+
+.skill-grid { display:flex; flex-direction:column; gap:0.55rem; }
+.skill-group { display:flex; align-items:flex-start; gap:0.75rem; }
+.skill-label { font-size:0.78rem; font-weight:600; color:var(--text); min-width:130px; padding-top:0.2rem; }
+.skill-tags { display:flex; flex-wrap:wrap; gap:0.35rem; }
+.skill-tags span {
+    display:inline-block; background:var(--hover-row); border:1px solid var(--border);
+    border-radius:6px; padding:0.2rem 0.55rem; font-size:0.76rem; color:var(--text);
+}
+
+/* result cards */
+.result-cards { display:flex; flex-direction:column; gap:0.45rem; margin:0.5rem 0; }
+.result-card {
+    background:var(--hover-row); border:1px solid var(--border); border-radius:10px;
+    padding:0.7rem 0.95rem; transition:border-color .15s,background .15s;
+    cursor:pointer; text-decoration:none; color:inherit; display:block;
+}
+.result-card:hover { border-color:rgba(128,128,128,0.25); }
+.result-card-title { font-weight:600; font-size:0.85rem; color:var(--accent); margin-bottom:0.1rem; }
+.result-card-date { font-size:0.68rem; color:var(--muted); opacity:0.6; margin-bottom:0.2rem; }
+.result-card-snippet { font-size:0.78rem; color:var(--muted); line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.result-card-file { font-size:0.65rem; color:var(--muted); opacity:0.45; margin-top:0.2rem; }
+.no-results { color:var(--muted); font-style:italic; }
+
+/* typing indicator */
+.typing { align-self:flex-start; display:none; }
+.typing.active { display:block; }
+.typing .msg-content { background:var(--surface); border:1px solid var(--border); border-bottom-left-radius:4px; display:flex; gap:4px; padding:1rem 1.2rem; }
+.typing .msg-content span { width:6px; height:6px; background:var(--muted); border-radius:50%; animation:bounce 1.4s ease-in-out infinite; }
+.typing .msg-content span:nth-child(2) { animation-delay:.15s; }
+.typing .msg-content span:nth-child(3) { animation-delay:.3s; }
+@keyframes bounce { 0%,80%,100%{transform:scale(.6)} 40%{transform:scale(1)} }
+
+/* input area */
+.input-area { padding:0.7rem 1.5rem 1.2rem; border-top:1px solid var(--border); background:var(--bg); position:relative; flex-shrink:0; }
+.autocomplete {
+    position:absolute; bottom:calc(100% + 4px); left:1.5rem; right:1.5rem;
+    background:var(--dropdown-bg); border:1px solid var(--border); border-radius:12px;
+    box-shadow:0 8px 32px rgba(0,0,0,0.35); max-height:300px; overflow-y:auto;
+    display:none; z-index:40;
+}
+.autocomplete.active { display:block; }
+.autocomplete-item {
+    padding:0.6rem 0.95rem; cursor:pointer; border-bottom:1px solid var(--border);
+    transition:background .1s; display:flex; flex-direction:column; gap:0.05rem;
+}
+.autocomplete-item:last-child { border-bottom:none; }
+.autocomplete-item:hover, .autocomplete-item.focused { background:var(--hover-row); }
+.autocomplete-item .ac-title { font-size:0.82rem; font-weight:500; color:var(--text); }
+.autocomplete-item .ac-date { font-size:0.68rem; color:var(--muted); opacity:0.6; }
+.autocomplete-item .ac-snippet { font-size:0.7rem; color:var(--muted); opacity:0.55; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+.suggestions { display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:0.65rem; }
+.chip {
+    padding:0.32rem 0.75rem; border-radius:16px; border:1px solid var(--border);
+    background:transparent; color:var(--muted); font-size:0.75rem;
+    font-family:inherit; cursor:pointer; transition:all .15s; white-space:nowrap;
+}
+.chip:hover { border-color:rgba(128,128,128,0.25); color:var(--text); background:var(--hover-row); }
+.input-row { display:flex; gap:0.45rem; align-items:center; }
+.input-row input {
+    flex:1; padding:0.65rem 0.9rem; border-radius:20px;
+    border:1px solid var(--border); background:var(--surface);
+    color:var(--text); font-size:0.88rem; font-family:inherit;
+    outline:none; transition:border-color .2s,box-shadow .2s;
+}
+.input-row input:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(88,166,255,0.1); }
+.input-row input::placeholder { color:var(--muted); opacity:0.5; }
+.send-btn {
+    width:36px; height:36px; border-radius:50%; border:1px solid var(--border);
+    background:var(--surface); color:var(--muted); cursor:pointer;
+    display:flex; align-items:center; justify-content:center; transition:all .15s; flex-shrink:0;
+}
+.send-btn:hover { border-color:var(--accent); color:var(--accent); background:rgba(88,166,255,0.08); }
+.send-btn svg { width:15px; height:15px; }
+
+@media (max-width:640px) {
+    .chat { padding:1rem; } .msg { max-width:90%; }
+    .header { padding:0.55rem 1rem; } .input-area { padding:0.55rem 1rem 1.1rem; }
+    .autocomplete { left:1rem; right:1rem; }
+    .header-right a { display:none; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-left">
+        <span class="header-dot"></span>
+        <span class="header-title">Adam Yan Na</span>
+    </div>
+    <div class="header-right">
+        <a href="javascript:void(0)" onclick="showAbout()">About</a>
+        <a href="https://github.com/adamyanna">GitHub</a>
+        <a href="https://www.linkedin.com/in/adam-yan-na">LinkedIn</a>
+        <button class="theme-btn" id="themeBtn" title="Toggle theme">&#9728;&#65039;</button>
+    </div>
+</header>
+
+<div class="timeline-wrap">
+    <div class="timeline-scroll" id="timeline"><span style="color:var(--muted);font-size:0.72rem;white-space:nowrap;opacity:0.5">Indexing&hellip;</span></div>
+    <div class="timeline-info" id="timeline-info"><span class="ti-date"></span>
+        <div class="timeline-legend">Less<span class="tl-cell" style="background:var(--hover-row)"></span><span class="tl-cell" style="background:rgba(88,166,255,0.2)"></span><span class="tl-cell" style="background:rgba(88,166,255,0.4)"></span><span class="tl-cell" style="background:rgba(88,166,255,0.65)"></span><span class="tl-cell" style="background:var(--accent)"></span>More</div>
+    </div>
+</div>
+
+<div class="chat" id="chat">
+    <div class="msg assistant">
+        <div class="msg-label">Adam</div>
+        <div class="msg-content">
+            Hey, I'm Adam. Senior SRE &amp; Platform Engineer — 10+ years in cloud, Kubernetes, AI infra.<br><br>
+            Browse by the <b>timeline above</b> or <b>ask me anything</b> below.
+        </div>
+    </div>
+</div>
+
+<div class="typing" id="typing">
+    <div class="msg-content"><span></span><span></span><span></span></div>
+</div>
+
+<div class="input-area">
+    <div class="autocomplete" id="autocomplete"></div>
+    <div class="suggestions" id="suggestions">
+        <button class="chip" data-query="Kubernetes">Kubernetes</button>
+        <button class="chip" data-query="Python">Python</button>
+        <button class="chip" data-query="algorithm">Algorithm</button>
+        <button class="chip" data-query="network">Network</button>
+        <button class="chip" data-query="Redis">Redis</button>
+        <button class="chip" data-query="operating system">OS</button>
+        <button class="chip" data-query="about">About</button>
+        <button class="chip" data-query="experience">Experience</button>
+    </div>
+    <div class="input-row">
+        <input type="text" id="query" placeholder="Search or ask anything..." autofocus autocomplete="off">
+        <button class="send-btn" id="send" aria-label="Send">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/>
+            </svg>
+        </button>
+    </div>
+</div>
+
+<script src="lunr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<script src="marked.min.js"></script>
+<script>
+// === THEME ===
+(function(){
+var h=document.documentElement,b=document.getElementById('themeBtn'),
+s=localStorage.getItem('vie-theme')||'dark';
+h.setAttribute('data-theme',s);b.innerHTML=s==='light'?'&#9790;':'&#9728;&#65039;';
+b.addEventListener('click',function(){
+var n=h.getAttribute('data-theme')==='dark'?'light':'dark';
+h.setAttribute('data-theme',n);localStorage.setItem('vie-theme',n);
+b.innerHTML=n==='light'?'&#9790;':'&#9728;&#65039;';});})();
+
+// === MARKED SETUP ===
+marked.setOptions({breaks:true,gfm:true,
+highlight:function(code,lang){
+if(lang&&hljs.getLanguage(lang)){
+try{return hljs.highlight(code,{language:lang}).value;}catch(e){}
+}
+try{return hljs.highlightAuto(code).value;}catch(e){}
+return code;
+}});
+
+// === PREBUILT ===
+var PREBUILT={
+"experience":'**Work History:**\n\n| Company | Role | Years |\n|---|---|---|\n| **Bell** | Senior SRE | 2024–Present |\n| **ByteDance** | Sr IAAS R&D | 2023–2024 |\n| **Tencent** | Sr IAAS R&D | 2020–2023 |\n| **Ping An Bank** | DevOps Eng | 2017–2020 |\n| **HSBC** | Assoc SE II | 2016–2017 |\n\nBuilt enterprise vulnerability management platforms, AI-powered compute optimization (22% revenue increase), and 99.999% reliable cloud monitoring.',
+"skills":"**Languages:** Python, Golang, Java, C++\n\n**Cloud:** Kubernetes, OpenStack, Terraform, Ansible\n\n**Data:** MySQL, PostgreSQL, Redis, MongoDB, Kafka\n\n**Observe:** Prometheus, ELK, Grafana",
+"contact":"📧 adamyanna@outlook.com · [LinkedIn](https://www.linkedin.com/in/adam-yan-na) · [GitHub](https://github.com/adamyanna) · 📍 Saint-Laurent, QC",
+"education":"**Xidian University** — B.S. Electronic Science & Technology (2012–2016)",
+"about":"**Adam Yan Na** — Senior SRE & Platform Engineer in Saint-Laurent, Quebec. Currently at Bell: Kubernetes platform dev & AI agent R&D. Previously ByteDance, Tencent, Ping An Bank, HSBC. 10+ years building reliable distributed systems."
+};
+function getPrebuilt(q){
+q=q.toLowerCase().trim();
+for(var k in PREBUILT){if(q.indexOf(k)!==-1||k.indexOf(q)!==-1)return PREBUILT[k];}
+return null;
+}
+
+// === SEARCH ===
+var idx=null,docs={},allDocs=[],idxReady=false,pendingQuery='';
+
+function loadIndex(){
+if(typeof lunr==='undefined'){
+document.getElementById('timeline').innerHTML='<span style="color:var(--muted);font-size:0.72rem;padding:0 1.5rem">Search engine failed to load. Refresh.</span>';
+idxReady=true;return;
+}
+return fetch('search-index.json')
+.then(function(r){return r.json();})
+.then(function(raw){
+allDocs=raw;
+idx=lunr(function(){
+var builder=this;
+builder.ref('id');builder.field('title');builder.field('body');builder.field('date');
+raw.forEach(function(e,i){docs[i]=e;builder.add({id:i,title:e.title||'',body:e.body||'',date:e.date||''});});
+});
+idxReady=true;
+buildTimeline(raw);
+if(pendingQuery){showAutocomplete(search(pendingQuery,6),pendingQuery);pendingQuery='';}
+document.getElementById('timeline').scrollLeft=0;
+})
+.catch(function(err){
+console.error('Index load failed:',err);
+document.getElementById('timeline').innerHTML='<span style="color:var(--muted);font-size:0.72rem;padding:0 1.5rem">Failed to load index. <a href="javascript:loadIndex()" style="color:var(--accent)">Retry</a></span>';
+idxReady=true;
+});
+}
+
+function search(query,limit){
+if(!idx)return[];
+try{
+var q=query.replace(/[^\w\s]/g,' ').split(/\s+/).filter(Boolean).map(function(w){return w+'*';}).join(' ');
+return idx.search(q).slice(0,limit||6).map(function(r){return docs[r.ref];});
+}catch(e){return[];}
+}
+
+// === TIMELINE ===
+var MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function buildTimeline(raw){
+	var heat={};
+	raw.forEach(function(d){
+		var y=(d.date||'').substring(0,4);
+		if(!y||y==='unknown')return;
+		var m=parseInt((d.date||'').substring(5,7))||0;
+		if(!heat[y]){heat[y]=[];for(var i=0;i<12;i++)heat[y][i]=[];}
+		if(m>=1&&m<=12)heat[y][m-1].push(d);
+	});
+	var c=document.getElementById('timeline');c.innerHTML='';
+	Object.keys(heat).sort().forEach(function(y){
+		var g=document.createElement('div');g.className='timeline-year';
+		g.innerHTML='<div class="timeline-year-label">'+y+'</div><div class="timeline-months"></div>';
+		var months=g.querySelector('.timeline-months');
+		heat[y].forEach(function(docs,m){
+			var cell=document.createElement('div');cell.className='timeline-cell';
+			var cnt=docs.length,lvl=cnt>=5?4:cnt>=3?3:cnt>=2?2:cnt>=1?1:0;
+			cell.setAttribute('data-level',lvl);
+			cell.title=MONTHS[m]+' '+y+': '+(cnt?cnt+' post'+(cnt>1?'s':''):'no posts');
+			if(cnt){
+				var tooltip=docs.map(function(dd){return dd.title;}).join(' | ');
+				cell.title=MONTHS[m]+' '+y+': '+cnt+' post'+(cnt>1?'s':'')+'\\n'+tooltip;
+				cell.addEventListener('click',function(){
+					if(docs.length===1){fetchAndRenderDoc(docs[0]);}
+					else{addResults(docs[0].title+' (and more)',docs);}
+				});
+				cell.addEventListener('mouseenter',function(){
+					var ti=document.getElementById('timeline-info');
+					if(docs.length===1){
+						ti.innerHTML='<span class="ti-date">'+escHtml(docs[0].date||'')+'</span> '+escHtml(docs[0].title);
+					}else{
+						ti.innerHTML='<span class="ti-date">'+MONTHS[m]+' '+y+'</span> '+cnt+' posts';
+					}
+				});
+				cell.addEventListener('mouseleave',function(){
+					document.getElementById('timeline-info').innerHTML='<span class="ti-date"></span>';
+				});
+			}
+			months.appendChild(cell);
+		});
+		c.appendChild(g);
+	});
+}
+
+function fetchAndRenderDoc(doc){
+addMessage('user','Open: <b>'+escHtml(doc.title)+'</b>');
+showTyping();
+fetch('content/'+(doc.path||doc.file||''))
+.then(function(r){if(!r.ok)throw Error('404');return r.text();})
+.then(function(md){
+hideTyping();
+var html=marked.parse(md);
+addMessage('assistant',html);
+})
+.catch(function(){
+hideTyping();
+addMessage('assistant','<span class="no-results">Could not load <b>'+escHtml(doc.title)+'</b>.</span>');
+});
+}
+
+function showAbout(){
+	addMessage('user','About');showTyping();
+	fetch('content/about.md')
+	.then(function(r){if(!r.ok)throw new Error('not found');return r.text();})
+	.then(function(md){
+	hideTyping();
+	addMessage('assistant','<div class="md-content">'+marked.parse(md)+'</div>');
+	})
+	.catch(function(){
+	hideTyping();
+	addMessage('assistant','<span class="no-results">Could not load resume.</span>');
+	});
+}
+
+// === AUTOCOMPLETE ===
+var ac=document.getElementById('autocomplete'),qi=document.getElementById('query'),
+acFocused=-1,acTimer;
+function showAutocomplete(results,query){
+if(!idxReady){pendingQuery=query;
+ac.innerHTML='<div class="autocomplete-item"><span class="ac-title" style="color:var(--muted)">Loading index&hellip;</span></div>';
+ac.classList.add('active');return;}
+if(!results.length){ac.classList.remove('active');return;}
+ac.innerHTML='';acFocused=-1;
+results.forEach(function(r,i){
+var d=document.createElement('div');d.className='autocomplete-item';
+d.innerHTML='<span class="ac-title">'+highlight(r.title||'',query)+'</span><span class="ac-date">'+(r.date||'')+'</span><span class="ac-snippet">'+escHtml((r.body||'').substring(0,100))+'</span>';
+d.addEventListener('click',function(){selectAc(r);});
+d.addEventListener('mouseenter',function(){acFocused=i;updateAcFocus();});
+ac.appendChild(d);
+});
+ac.classList.add('active');
+}
+function updateAcFocus(){
+var items=ac.querySelectorAll('.autocomplete-item');
+items.forEach(function(it,i){it.classList.toggle('focused',i===acFocused);});
+if(acFocused>=0&&items[acFocused])items[acFocused].scrollIntoView({block:'nearest'});
+}
+function selectAc(r){ac.classList.remove('active');qi.value=r.title||'';handleQuery(qi.value,true);}
+function highlight(text,query){
+if(!query)return escHtml(text);
+var words=query.split(/\s+/).filter(function(w){return w.length>1;}),result=escHtml(text);
+words.forEach(function(w){
+var e=w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+result=result.replace(new RegExp('('+e+')','gi'),'<mark style="background:rgba(88,166,255,0.2);color:inherit;border-radius:2px;padding:0 1px">$1</mark>');
+});
+return result;
+}
+function escHtml(s){var d=document.createElement('div');d.textContent=s||'';return d.innerHTML;}
+
+qi.addEventListener('input',function(){
+clearTimeout(acTimer);var q=qi.value.trim();
+if(!q||q.length<2){ac.classList.remove('active');return;}
+acTimer=setTimeout(function(){showAutocomplete(search(q,6),q);},150);
+});
+qi.addEventListener('keydown',function(e){
+var items=ac.querySelectorAll('.autocomplete-item');
+if(ac.classList.contains('active')&&items.length){
+if(e.key==='ArrowDown'){e.preventDefault();acFocused=Math.min(acFocused+1,items.length-1);updateAcFocus();return;}
+if(e.key==='ArrowUp'){e.preventDefault();acFocused=Math.max(acFocused-1,0);updateAcFocus();return;}
+if(e.key==='Enter'){e.preventDefault();
+if(acFocused>=0&&acFocused<items.length){var r=search(qi.value.trim(),acFocused+1);if(r[acFocused])selectAc(r[acFocused]);}
+else{handleQuery(qi.value);qi.value='';ac.classList.remove('active');}
+return;}
+if(e.key==='Escape'){ac.classList.remove('active');return;}
+return;}
+if(e.key==='Enter'){handleQuery(qi.value);qi.value='';}
+});
+document.addEventListener('click',function(e){if(!ac.contains(e.target)&&e.target!==qi)ac.classList.remove('active');});
+
+// === CHAT ===
+var chat=document.getElementById('chat'),typingEl=document.getElementById('typing');
+function addMessage(role,html){
+var d=document.createElement('div');d.className='msg '+role;
+if(role==='assistant')d.innerHTML='<div class="msg-label">Adam</div><div class="msg-content">'+html+'</div>';
+else d.innerHTML='<div class="msg-label">You</div><div class="msg-content">'+html+'</div>';
+chat.appendChild(d);chat.scrollTop=chat.scrollHeight;return d;
+}
+function addResults(query,results){
+if(!results.length){addMessage('assistant','<span class="no-results">Nothing for &ldquo;<b>'+escHtml(query)+'</b>&rdquo;.</span>');return;}
+var html='Found '+results.length+' doc'+(results.length>1?'s':'')+' for &ldquo;<b>'+escHtml(query)+'</b>&rdquo;:<div class="result-cards">';
+results.forEach(function(r){
+var s=(r.body||'').substring(0,180).trim();
+html+='<div class="result-card" onclick="fetchAndRenderDoc({title:\''+escHtml(r.title||'').replace(/'/g,"\\'")+'\',path:\''+escHtml(r.path||'').replace(/'/g,"\\'")+'\'})"><div class="result-card-title">'+escHtml(r.title||'')+'</div><div class="result-card-date">'+(r.date||'')+'</div><div class="result-card-snippet">'+escHtml(s)+'</div></div>';
+});
+html+='</div>';addMessage('assistant',html);
+}
+function showTyping(){typingEl.classList.add('active');chat.scrollTop=chat.scrollHeight;}
+function hideTyping(){typingEl.classList.remove('active');}
+function handleQuery(query,isAc){
+if(!query.trim())return;
+if(!isAc)ac.classList.remove('active');
+addMessage('user',escHtml(query.trim()));showTyping();
+setTimeout(function(){
+hideTyping();
+var ql=query.toLowerCase().trim();
+if(ql==='about'||ql==='resume'||ql==='cv'){
+fetch('content/about.md')
+.then(function(r){if(!r.ok)throw new Error('not found');return r.text();})
+.then(function(md){addMessage('assistant','<div class="md-content">'+marked.parse(md)+'</div>');})
+.catch(function(){addMessage('assistant','<span class="no-results">Could not load resume.</span>');});
+return;}
+var pb=getPrebuilt(query);
+if(pb){addMessage('assistant','<div class="md-content">'+marked.parse(pb)+'</div>');return;}
+addResults(query,search(query,5));
+},350+Math.random()*450);
+}
+document.getElementById('send').addEventListener('click',function(){handleQuery(qi.value);qi.value='';});
+document.getElementById('suggestions').addEventListener('click',function(e){
+if(e.target.classList.contains('chip')){var q=e.target.getAttribute('data-query');qi.value=q;handleQuery(q);}
+});
+
+// === INIT ===
+loadIndex();
+</script>
+</body>
+</html>
